@@ -11,7 +11,7 @@ import SwiftUI
 struct LiveRadioAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }

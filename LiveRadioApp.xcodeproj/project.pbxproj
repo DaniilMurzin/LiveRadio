@@ -8,18 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D012C86101400B59386 /* LiveRadioAppApp.swift */; };
-		92E07D042C86101400B59386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D032C86101400B59386 /* ContentView.swift */; };
 		92E07D062C86101500B59386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D052C86101500B59386 /* Assets.xcassets */; };
 		92E07D0A2C86101500B59386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D092C86101500B59386 /* Preview Assets.xcassets */; };
+		92E07D232C86109000B59386 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D102C86109000B59386 /* BackgroundView.swift */; };
+		92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D112C86109000B59386 /* OnboardingContentView.swift */; };
+		92E07D252C86109000B59386 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D122C86109000B59386 /* OnboardingView.swift */; };
+		92E07D262C86109000B59386 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D132C86109000B59386 /* OnboardingViewModel.swift */; };
+		92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D152C86109000B59386 /* RootCoordinator.swift */; };
+		92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D162C86109000B59386 /* RootCoordinatorView.swift */; };
+		92E07D292C86109000B59386 /* RootFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D172C86109000B59386 /* RootFactory.swift */; };
+		92E07D2A2C86109000B59386 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D192C86109000B59386 /* AuthorizationView.swift */; };
+		92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1B2C86109000B59386 /* PopularCell.swift */; };
+		92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1C2C86109000B59386 /* PopularContentView.swift */; };
+		92E07D2D2C86109000B59386 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1D2C86109000B59386 /* PopularView.swift */; };
+		92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1F2C86109000B59386 /* PopularViewModel.swift */; };
+		92E07D2F2C86109000B59386 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D202C86109000B59386 /* Station.swift */; };
+		92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D302C8610BE00B59386 /* CustomFontModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		92E07CFE2C86101400B59386 /* LiveRadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveRadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E07D012C86101400B59386 /* LiveRadioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRadioAppApp.swift; sourceTree = "<group>"; };
-		92E07D032C86101400B59386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		92E07D052C86101500B59386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92E07D072C86101500B59386 /* LiveRadioApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiveRadioApp.entitlements; sourceTree = "<group>"; };
 		92E07D092C86101500B59386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		92E07D102C86109000B59386 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		92E07D112C86109000B59386 /* OnboardingContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
+		92E07D122C86109000B59386 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		92E07D132C86109000B59386 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		92E07D152C86109000B59386 /* RootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		92E07D162C86109000B59386 /* RootCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCoordinatorView.swift; sourceTree = "<group>"; };
+		92E07D172C86109000B59386 /* RootFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFactory.swift; sourceTree = "<group>"; };
+		92E07D192C86109000B59386 /* AuthorizationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
+		92E07D1B2C86109000B59386 /* PopularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
+		92E07D1C2C86109000B59386 /* PopularContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularContentView.swift; sourceTree = "<group>"; };
+		92E07D1D2C86109000B59386 /* PopularView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularView.swift; sourceTree = "<group>"; };
+		92E07D1F2C86109000B59386 /* PopularViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
+		92E07D202C86109000B59386 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		92E07D302C8610BE00B59386 /* CustomFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFontModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +79,11 @@
 			isa = PBXGroup;
 			children = (
 				92E07D012C86101400B59386 /* LiveRadioAppApp.swift */,
-				92E07D032C86101400B59386 /* ContentView.swift */,
+				92E07D312C8610BE00B59386 /* Fonts */,
+				92E07D1A2C86109000B59386 /* Authorization */,
+				92E07D142C86109000B59386 /* Onboarding */,
+				92E07D222C86109000B59386 /* Popular */,
+				92E07D182C86109000B59386 /* Root */,
 				92E07D052C86101500B59386 /* Assets.xcassets */,
 				92E07D072C86101500B59386 /* LiveRadioApp.entitlements */,
 				92E07D082C86101500B59386 /* Preview Content */,
@@ -67,6 +97,71 @@
 				92E07D092C86101500B59386 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		92E07D142C86109000B59386 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D102C86109000B59386 /* BackgroundView.swift */,
+				92E07D112C86109000B59386 /* OnboardingContentView.swift */,
+				92E07D122C86109000B59386 /* OnboardingView.swift */,
+				92E07D132C86109000B59386 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		92E07D182C86109000B59386 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D152C86109000B59386 /* RootCoordinator.swift */,
+				92E07D162C86109000B59386 /* RootCoordinatorView.swift */,
+				92E07D172C86109000B59386 /* RootFactory.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		92E07D1A2C86109000B59386 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D192C86109000B59386 /* AuthorizationView.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		92E07D1E2C86109000B59386 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D1B2C86109000B59386 /* PopularCell.swift */,
+				92E07D1C2C86109000B59386 /* PopularContentView.swift */,
+				92E07D1D2C86109000B59386 /* PopularView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92E07D212C86109000B59386 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D1F2C86109000B59386 /* PopularViewModel.swift */,
+				92E07D202C86109000B59386 /* Station.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		92E07D222C86109000B59386 /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D1E2C86109000B59386 /* View */,
+				92E07D212C86109000B59386 /* ViewModel */,
+			);
+			path = Popular;
+			sourceTree = "<group>";
+		};
+		92E07D312C8610BE00B59386 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D302C8610BE00B59386 /* CustomFontModifier.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +234,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92E07D042C86101400B59386 /* ContentView.swift in Sources */,
+				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
+				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
+				92E07D2F2C86109000B59386 /* Station.swift in Sources */,
+				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
+				92E07D2D2C86109000B59386 /* PopularView.swift in Sources */,
+				92E07D232C86109000B59386 /* BackgroundView.swift in Sources */,
+				92E07D262C86109000B59386 /* OnboardingViewModel.swift in Sources */,
+				92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
+				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
+				92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */,
+				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
+				92E07D292C86109000B59386 /* RootFactory.swift in Sources */,
+				92E07D2A2C86109000B59386 /* AuthorizationView.swift in Sources */,
+				92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

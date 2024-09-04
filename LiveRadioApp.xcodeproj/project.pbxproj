@@ -24,6 +24,10 @@
 		92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1F2C86109000B59386 /* PopularViewModel.swift */; };
 		92E07D2F2C86109000B59386 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D202C86109000B59386 /* Station.swift */; };
 		92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D302C8610BE00B59386 /* CustomFontModifier.swift */; };
+		92E07D362C884D6900B59386 /* CustomAuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D352C884D6900B59386 /* CustomAuthTextField.swift */; };
+		92E07D3A2C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */; };
+		92E07D3B2C8888DD00B59386 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D392C8888DD00B59386 /* Montserrat-VariableFont_wght.ttf */; };
+		92E07D3E2C888FCF00B59386 /* CustomButtonAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,11 @@
 		92E07D1F2C86109000B59386 /* PopularViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
 		92E07D202C86109000B59386 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		92E07D302C8610BE00B59386 /* CustomFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFontModifier.swift; sourceTree = "<group>"; };
+		92E07D352C884D6900B59386 /* CustomAuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthTextField.swift; sourceTree = "<group>"; };
+		92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		92E07D392C8888DD00B59386 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		92E07D3C2C888A6300B59386 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,13 +87,13 @@
 		92E07D002C86101400B59386 /* LiveRadioApp */ = {
 			isa = PBXGroup;
 			children = (
+				92E07D3C2C888A6300B59386 /* Info.plist */,
 				92E07D012C86101400B59386 /* LiveRadioAppApp.swift */,
-				92E07D312C8610BE00B59386 /* Fonts */,
 				92E07D1A2C86109000B59386 /* Authorization */,
 				92E07D142C86109000B59386 /* Onboarding */,
 				92E07D222C86109000B59386 /* Popular */,
 				92E07D182C86109000B59386 /* Root */,
-				92E07D052C86101500B59386 /* Assets.xcassets */,
+				92E07D372C8888C600B59386 /* Resources */,
 				92E07D072C86101500B59386 /* LiveRadioApp.entitlements */,
 				92E07D082C86101500B59386 /* Preview Content */,
 			);
@@ -124,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				92E07D192C86109000B59386 /* AuthorizationView.swift */,
+				92E07D352C884D6900B59386 /* CustomAuthTextField.swift */,
+				92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -159,9 +170,20 @@
 		92E07D312C8610BE00B59386 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */,
+				92E07D392C8888DD00B59386 /* Montserrat-VariableFont_wght.ttf */,
 				92E07D302C8610BE00B59386 /* CustomFontModifier.swift */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		92E07D372C8888C600B59386 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D312C8610BE00B59386 /* Fonts */,
+				92E07D052C86101500B59386 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,7 +244,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E07D3B2C8888DD00B59386 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				92E07D0A2C86101500B59386 /* Preview Assets.xcassets in Resources */,
+				92E07D3A2C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */,
 				92E07D062C86101500B59386 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,7 +268,9 @@
 				92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
 				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
+				92E07D362C884D6900B59386 /* CustomAuthTextField.swift in Sources */,
 				92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */,
+				92E07D3E2C888FCF00B59386 /* CustomButtonAuth.swift in Sources */,
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
 				92E07D292C86109000B59386 /* RootFactory.swift in Sources */,
 				92E07D2A2C86109000B59386 /* AuthorizationView.swift in Sources */,
@@ -382,6 +408,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveRadioApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -420,6 +448,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveRadioApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

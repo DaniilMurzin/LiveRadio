@@ -14,8 +14,6 @@ private enum LocalConstants {
     static let getStartedFrame = CGSize(width: 241, height: 126)
     static let appDescriptionFrame = CGSize(width: 204, height: 82)
     static let buttonFrame = CGSize(width: 300, height: 60)
-    static let leadingPadding: CGFloat = 50
-    static let topPadding: CGFloat = 200
     static let bottomPadding: CGFloat = 100
     static let spacerHeight: CGFloat = 150
 }
@@ -64,9 +62,6 @@ struct OnboardingView: View {
         }
     }
 }
-
-
-
 
 #Preview {
     OnboardingView()

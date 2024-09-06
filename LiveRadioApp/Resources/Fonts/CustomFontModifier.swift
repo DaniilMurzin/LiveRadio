@@ -12,7 +12,7 @@ import SwiftUI
 //    static let bodyText = Font.system(size: 16, weight: .regular)
 //    static let buttonText = Font.system(size: 20, weight: .bold)
 //}
-
+#warning("Ревью")
 struct CustomFontModifier: ViewModifier {
     
     enum AppFonts {
@@ -21,6 +21,7 @@ struct CustomFontModifier: ViewModifier {
         case buttonText
         case textFiledText
         case montserratSmall
+        case lightSystemText
     }
     
     var font: AppFonts
@@ -43,7 +44,10 @@ struct CustomFontModifier: ViewModifier {
             Font.system(size: 16, weight: .light, design: .default)
         case .montserratSmall:
             Font.custom("Montserrat-Italic", size: 11)
+        case .lightSystemText:
+            Font.system(size: 20, weight: .light)
         }
+    
         
     }
 }

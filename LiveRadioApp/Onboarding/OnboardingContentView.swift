@@ -17,6 +17,6 @@ struct OnboardingContentView: View {
     }
     
     var body: some View {
-        OnboardingView()
+        SignInView()
     }
 }

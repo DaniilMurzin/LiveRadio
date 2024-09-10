@@ -15,6 +15,7 @@ struct SignInView: View {
     //MARK: - Properties
     @State private var emailText = ""
     @State private var passwordText = ""
+    @EnvironmentObject var viewModel: AuthorizationViewModel
     
     //MARK: - Drawing
     private enum Drawing {
@@ -100,7 +101,7 @@ struct SignInView: View {
     
     private var forgotPasswordButton: some View {
         Button( action: {
-            
+            viewModel.currentAuthorizationState = .forgotPass
         } ) {
             Text(Drawing.forgotPassword)
                 .foregroundStyle(.gray)
@@ -139,7 +140,9 @@ struct SignInView: View {
     }
     
     private var signInButton: some View {
-        Button(action: {}) {
+        Button(action: {
+            viewModel.currentAuthorizationState = .signUp
+        }) {
             Rectangle()
                 .frame(width: Drawing.signInButtonFrame.width,
                        height: Drawing.signInButtonFrame.height)
@@ -151,7 +154,9 @@ struct SignInView: View {
     }
     
     private var signUpButton: some View {
-        Button( action: {} ) {
+        Button( action: {
+            viewModel.currentAuthorizationState = .signUp
+        } ) {
             Text(Drawing.signUp)
                 .applyFonts(for: .lightSystemText)
 

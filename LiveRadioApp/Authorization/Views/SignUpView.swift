@@ -91,7 +91,8 @@ struct SignUpView: View {
     }
     
     private var signInButton: some View {
-        Button(action: {}) {
+        Button(action: {
+        }) {
             Rectangle()
                 .frame(width: Drawing.signInButtonFrame.width,
                        height: Drawing.signInButtonFrame.height)

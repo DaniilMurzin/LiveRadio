@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct LiveRadioAppApp: App {
+    
+    let coordinator: RootCoordinator
+    
+    init() {
+        coordinator = FRoot.makeRootCoordinator()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            RootCoordinatorView()
+                .environmentObject(coordinator)
+                .onAppear(perform: coordinator.showOnboarding)
         }
     }
 }

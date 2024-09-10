@@ -14,7 +14,7 @@ private enum LocalConstants {
     static let getStartedFrame = CGSize(width: 241, height: 126)
     static let appDescriptionFrame = CGSize(width: 204, height: 82)
     static let buttonFrame = CGSize(width: 300, height: 60)
-    static let bottomPadding: CGFloat = 100
+    static let bottomPadding: CGFloat = 150
     static let spacerHeight: CGFloat = 150
 }
 
@@ -22,6 +22,8 @@ private enum LocalConstants {
 import SwiftUI
 
 struct OnboardingView: View {
+    @EnvironmentObject var coordinator: RootCoordinator
+    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -44,7 +46,7 @@ struct OnboardingView: View {
                 Spacer(minLength: LocalConstants.spacerHeight)
 
                 Button(action: {
-                    
+                    coordinator.showAuthorization()
                 }) {
                     Text(LocalConstants.buttonText)
                         .applyFonts(for: .buttonText)

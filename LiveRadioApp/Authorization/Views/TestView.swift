@@ -1,10 +1,3 @@
-//
-//  TextFieldForEmailView.swift
-//  RadioApp
-//
-//  Created by Денис Гиндулин on 11.08.2024.
-//
-
 import SwiftUI
 
 struct TextFieldForEmailView: View {

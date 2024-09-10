@@ -20,6 +20,10 @@ final class RootCoordinator: ObservableObject {
     func showOnboarding() {
         state = .onboarding(factory.makeOnboarding())
     }
+    
+    func showAuthorization() {
+        state = .authorization(factory.makeAuthorization())
+    }
 }
 
 extension RootCoordinator {
@@ -27,7 +31,7 @@ extension RootCoordinator {
         case loading
         case error
         case onboarding(OnboardingViewModel)
-        case login
+        case authorization(AuthorizationViewModel)
         case tabbar
     }
 }

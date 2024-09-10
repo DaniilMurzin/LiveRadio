@@ -32,7 +32,8 @@ struct SignInView: View {
         static let circleFrame = CGSize(width: 40, height: 40)
         static let signInButtonFrame = CGSize(width: 153, height: 62)
         
-        static let mainVStackPadding: CGFloat = 40
+        static let VStamainckHorizontalPadding: CGFloat = 40
+        static let bottomPadding: CGFloat = 30
         static let signUpButtonPadding: CGFloat = 5
     }
     
@@ -41,8 +42,10 @@ struct SignInView: View {
         
         ZStack {
             Image(.authBG)
+                .resizable()
+                .ignoresSafeArea()
             VStack(alignment: .leading) {
-                Spacer()
+//                Spacer()
                 appLogo
                 titleText
                 textFields
@@ -50,11 +53,12 @@ struct SignInView: View {
                 separator
                 signInButton
                 signUpButton
-                Spacer()
+//                Spacer()
             }
-            .padding(.horizontal, Drawing.mainVStackPadding)
+            .padding(.horizontal, Drawing.VStamainckHorizontalPadding)
         }
         .background(Color.mainBg)
+        
     }
     
     //MARK: - Subviews
@@ -62,7 +66,7 @@ struct SignInView: View {
         Image(.playLabel).resizable()
             .frame(width: Drawing.playIconFrame.width,
                    height: Drawing.playIconFrame.height)
-            .padding(.bottom)
+            .padding(.top)
     }
     
     private var titleText: some View {
@@ -95,7 +99,9 @@ struct SignInView: View {
     }
     
     private var forgotPasswordButton: some View {
-        Button( action: {} ) {
+        Button( action: {
+            
+        } ) {
             Text(Drawing.forgotPassword)
                 .foregroundStyle(.gray)
                 .padding(.bottom)
@@ -117,7 +123,7 @@ struct SignInView: View {
                     .foregroundStyle(.ellipse9)
             }
             .padding(.bottom)
-            .padding(.horizontal,Drawing.mainVStackPadding)
+            .padding(.horizontal,Drawing.VStamainckHorizontalPadding)
             
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                 Circle()
@@ -150,6 +156,7 @@ struct SignInView: View {
                 .applyFonts(for: .lightSystemText)
 
         }
+        .padding(.bottom, Drawing.bottomPadding)
     }
 }
 

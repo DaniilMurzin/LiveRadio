@@ -22,12 +22,11 @@ struct RootCoordinatorView: View {
         case let .onboarding(viewModel):
             OnboardingContentView(viewModel)
             
-        case .login:
-            EmptyView()
+        case let .authorization(viewModel):
+            AuthorizationContentView(viewModel)
             
         case .tabbar:
             EmptyView()
         }
     }
 }
-

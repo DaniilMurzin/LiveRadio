@@ -9,6 +9,7 @@ import Foundation
 
 protocol RootFactory {
     func makeOnboarding() -> OnboardingViewModel
+    func makeAuthorization() -> AuthorizationViewModel 
 }
 
 final class FRoot: RootFactory {
@@ -19,6 +20,10 @@ final class FRoot: RootFactory {
     
     func makeOnboarding() -> OnboardingViewModel {
         OnboardingViewModel()
+    }
+    
+    func makeAuthorization() -> AuthorizationViewModel {
+        AuthorizationViewModel()
     }
     
 }

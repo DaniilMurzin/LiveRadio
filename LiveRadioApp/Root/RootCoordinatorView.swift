@@ -24,6 +24,7 @@ struct RootCoordinatorView: View {
             
         case let .authorization(viewModel):
             AuthorizationContentView(viewModel)
+                .environmentObject(viewModel)
             
         case .tabbar:
             EmptyView()

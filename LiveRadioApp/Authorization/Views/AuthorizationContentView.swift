@@ -11,15 +11,24 @@ struct AuthorizationContentView: View {
     
     @StateObject var viewModel: AuthorizationViewModel
     
+    
     init(_ viewModel: AuthorizationViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-      SignInView()
-    }
-}
+           switch viewModel.currentAuthorizationState {
+           case .signIn:
+               SignInView()
+           case .signUp:
+               SignUpView()
+           case .forgotPass:
+               ForgotPasswordView()
+           case .forgotPass2:
+               ForgotPasswordView2()
+           }
+       }}
 
 #Preview {
-    SignInView()
+    AuthorizationContentView(AuthorizationViewModel())
 }

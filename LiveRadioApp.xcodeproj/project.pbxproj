@@ -30,7 +30,7 @@
 		92E07D3E2C888FCF00B59386 /* CustomButtonAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */; };
 		92E07D402C8AE96700B59386 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D3F2C8AE96700B59386 /* TestView.swift */; };
 		92E07D432C8B077C00B59386 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D422C8B077C00B59386 /* SignUpView.swift */; };
-		92E07D452C8B2CB300B59386 /* ForgotPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D442C8B2CB300B59386 /* ForgotPassView.swift */; };
+		92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D442C8B2CB300B59386 /* ForgotPasswordView.swift */; };
 		92E07D482C8B35E700B59386 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D472C8B35E700B59386 /* BackButton.swift */; };
 		92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D4B2C8B39D600B59386 /* ForgotPasswordView2.swift */; };
 		92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D9E2C8DFD1400B59386 /* AuthorizationViewModel.swift */; };
@@ -64,11 +64,12 @@
 		92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonAuth.swift; sourceTree = "<group>"; };
 		92E07D3F2C8AE96700B59386 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		92E07D422C8B077C00B59386 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		92E07D442C8B2CB300B59386 /* ForgotPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassView.swift; sourceTree = "<group>"; };
+		92E07D442C8B2CB300B59386 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		92E07D472C8B35E700B59386 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		92E07D4B2C8B39D600B59386 /* ForgotPasswordView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView2.swift; sourceTree = "<group>"; };
 		92E07D9E2C8DFD1400B59386 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationContentView.swift; sourceTree = "<group>"; };
+		92E07DA62C905FB200B59386 /* Questions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Questions.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		92E07D002C86101400B59386 /* LiveRadioApp */ = {
 			isa = PBXGroup;
 			children = (
+				92E07DA62C905FB200B59386 /* Questions.md */,
 				92E07D072C86101500B59386 /* LiveRadioApp.entitlements */,
 				92E07D012C86101400B59386 /* LiveRadioAppApp.swift */,
 				92E07D3C2C888A6300B59386 /* Info.plist */,
@@ -215,7 +217,7 @@
 				92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */,
 				92E07D192C86109000B59386 /* SignInView.swift */,
 				92E07D422C8B077C00B59386 /* SignUpView.swift */,
-				92E07D442C8B2CB300B59386 /* ForgotPassView.swift */,
+				92E07D442C8B2CB300B59386 /* ForgotPasswordView.swift */,
 				92E07D4B2C8B39D600B59386 /* ForgotPasswordView2.swift */,
 				92E07D3F2C8AE96700B59386 /* TestView.swift */,
 			);
@@ -330,7 +332,7 @@
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
 				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
-				92E07D452C8B2CB300B59386 /* ForgotPassView.swift in Sources */,
+				92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */,
 				92E07D2F2C86109000B59386 /* Station.swift in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
 				92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */,

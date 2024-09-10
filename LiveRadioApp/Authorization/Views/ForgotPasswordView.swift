@@ -1,5 +1,5 @@
 //
-//  ForgotPassView.swift
+//  ForgotPasswordView.swift
 //  LiveRadioApp
 //
 //  Created by Daniil Murzin on 06.09.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ForgotPassView: View {
+struct ForgotPasswordView: View {
         
         //MARK: - Properties
         @State private var emailText = ""
@@ -80,5 +80,5 @@ struct ForgotPassView: View {
     }
 
 #Preview {
-    ForgotPassView()
+    ForgotPasswordView()
 }

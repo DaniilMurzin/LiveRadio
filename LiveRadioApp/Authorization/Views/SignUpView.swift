@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct SignUpView: View {
+    typealias Action = () -> Void
     
     //MARK: - Properties
-    @State private var emailText = ""
-    @State private var passwordText = ""
+    @Binding var name: String
+    @Binding var email: String
+    @Binding var password: String
+    
+    let didTapRegisterButton: Action
+    let didTapSignInButton: Action
     
     //MARK: - Drawing
     private enum Drawing {
@@ -26,90 +31,59 @@ struct SignUpView: View {
         static let signUp = "Or Sign In"
         
         static let playIconFrame = CGSize(width: /*@START_MENU_TOKEN@*/58.0/*@END_MENU_TOKEN@*/, height: 58)
-        static let signInButtonFrame = CGSize(width: 153, height: 62)
-        static let mainVStackPadding: CGFloat = 40
     }
     
     //MARK: - Body
     var body: some View {
-        
-        ZStack {
-            Image(.authBG)
-            VStack(alignment: .leading) {
-                Spacer()
-                appLogo
-                titleText
-                textFields
-                signInButton
-                signUpButton
-                Spacer()
-            }
-            .padding(.horizontal, Drawing.mainVStackPadding)
-        }
-        .background(Color.mainBg)
-    }
-    
-    //MARK: - Subviews
-    private var appLogo: some View {
-        Image(.playLabel).resizable()
-            .frame(width: Drawing.playIconFrame.width,
-                   height: Drawing.playIconFrame.height)
-            .padding(.bottom)
-    }
-    
-    private var titleText: some View {
-        VStack(alignment: .leading, spacing: 2) {
+
+            Image(.playLabel).resizable()
+                .frame(
+                    width: Drawing.playIconFrame.width,
+                    height: Drawing.playIconFrame.height)
+            
             Text(Drawing.SignIn)
                 .applyFonts(for: .largeTitle)
             Text(Drawing.startPlay)
                 .applyFonts(for: .buttonText)
                 .padding(.bottom)
-        }
-    }
-    
-    private var subtitleText: some View {
-        Text(Drawing.startPlay)
-            .applyFonts(for: .bodyText)
-    }
-    
-    private var textFields: some View {
-        VStack {
+            
             CustomAuthTextField(
-                text: $emailText,
+                text: $email,
                 placeholder: Drawing.yourName,
                 labelText: Drawing.name)
-                .padding(.bottom)
+            .padding(.bottom)
+            
             CustomAuthTextField(
-                text: $emailText,
+                text: $email,
                 placeholder: Drawing.yourEmail,
                 labelText: Drawing.email)
-                .keyboardType(.emailAddress)
+            .keyboardType(.emailAddress)
+            .padding(.bottom)
+            
+            CustomAuthTextField(
+                text: $password,
+                placeholder: Drawing.yourPassword,
+                labelText: Drawing.password,
+                isSecured: true)
                 .padding(.bottom)
-            CustomAuthTextField(text: $passwordText, placeholder: Drawing.yourPassword, labelText: Drawing.password, isSecured: true)
-        }
-        .padding(.bottom)
-    }
-    
-    private var signInButton: some View {
-        Button(action: {
-        }) {
-            Rectangle()
-                .frame(width: Drawing.signInButtonFrame.width,
-                       height: Drawing.signInButtonFrame.height)
-                .overlay {
-                    Image(.vector).aspectRatio(contentMode: .fit)
-                }
+            
+            ArrowButton(action: didTapRegisterButton)
+            
+            Button( action: didTapSignInButton ) {
+                Text(Drawing.signUp)
+                    .applyFonts(for: .lightSystemText)
+            }
         }
     }
-    
-    private var signUpButton: some View {
-        Button( action: {} ) {
-            Text(Drawing.signUp)
-                .applyFonts(for: .lightSystemText)
-        }
-    }
-}
 
 #Preview {
-    SignUpView()
+    OnboardingBackground {
+        SignUpView(
+            name: .constant("Ivan"),
+            email: .constant("email@mail.ru"),
+            password: .constant("qwerty"),
+            didTapRegisterButton: {},
+            didTapSignInButton: {}
+        )
+    }
 }

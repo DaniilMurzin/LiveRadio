@@ -11,6 +11,7 @@ final class AuthorizationViewModel: ObservableObject {
     @Published var state: State = .signIn
     @Published var email: String = .init()
     @Published var password: String = .init()
+    @Published var name: String = .init()
     
     func forgotPassword() {
         state = .forgotPass

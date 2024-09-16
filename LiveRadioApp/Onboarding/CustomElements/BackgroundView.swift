@@ -20,8 +20,6 @@ struct BackgroundView: View {
         .ignoresSafeArea()
         .scaledToFill()
         .opacity(0.8)
-        
-        
     }
 }
 

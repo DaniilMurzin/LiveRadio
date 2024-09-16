@@ -16,22 +16,30 @@ struct RootCoordinatorView: View {
     }
     
     var body: some View {
-        // Презентация, анимации
-        switch coordinator.state {
-        case .loading:
-            ProgressView()
+        ZStack {
+            switch coordinator.state {
+            case .loading:
+                ProgressView()
+                    .transition(.opacity)
             
-        case .error:
-            EmptyView()
+            case .error:
+                Text("Ошибка")
+                    .transition(.slide)
             
-        case .onboarding:
-            factory.makeOnboarding()
+            case .onboarding:
+                factory.makeOnboarding()
+    
+                    .transition(.move(edge: .leading))
+            case .authorization:
+                factory.makeAuthorization()
+                    .transition(.move(edge: .leading))
             
-        case .authorization:
-            factory.makeAuthorization()
-            
-        case .tabbar:
-            EmptyView()
+            case .tabbar:
+                factory.makeTabBar()
+                    .transition(.move(edge: .leading))
+            }
         }
+        .animation(.easeInOut, value: coordinator.state)
     }
 }
+

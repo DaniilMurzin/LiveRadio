@@ -13,7 +13,7 @@ struct PopularContentView: View {
     @StateObject var viewModel: PopularViewModel
     
     //MARK: - init(_:)
-    init(viewModel: PopularViewModel) {
+    init(_ viewModel: PopularViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     

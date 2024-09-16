@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CustomButtonAuth: View {
-    
     var title: String
     
     var body: some View {
@@ -17,12 +16,13 @@ struct CustomButtonAuth: View {
         }) {
             Text(title)
                 .applyFonts(for: .buttonText)
-                .frame(width: 335, height: 72)
                 .foregroundColor(.white)
-                .background(.ellipse6)
+                .frame(width: 335, height: 72)
                 .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
+                .background(.ellipse6)
         }
     }
+    
 }
 
 struct CustomButton_Previews: PreviewProvider {
@@ -30,7 +30,7 @@ struct CustomButton_Previews: PreviewProvider {
         CustomButtonAuth(title: "Sent")
             .previewLayout(.sizeThatFits)
             .padding()
-            .background(Color.black)  // Цвет фона для визуализации
+            .background(Color.black)
     }
 }
 

@@ -10,6 +10,8 @@ import SwiftUI
 protocol RootFactory {
     func makeOnboarding() -> OnboardingContentView
     func makeAuthorization() -> AuthorizationContentView
+    func makePopularView() -> PopularContentView
+    func makeTabBar() -> TabBarView
 }
 
 final class RootCoordinator: ObservableObject {
@@ -28,6 +30,10 @@ final class RootCoordinator: ObservableObject {
     
     func showAuthorization() {
         state = .authorization
+    }
+    
+    func showTabBar() {
+        state = .tabbar
     }
 }
 

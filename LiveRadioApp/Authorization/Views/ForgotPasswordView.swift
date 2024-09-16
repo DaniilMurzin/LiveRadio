@@ -29,27 +29,28 @@ struct ForgotPasswordView: View {
     
     //MARK: - Body
     var body: some View {
-                BackButton(action: didTapBackButton)
-                
-                Text(Drawing.forgotPassword)
-                    .applyFonts(for: .largeTitle)
-                    .padding(.bottom)
-                
-                CustomAuthTextField(
-                    text: $email,
-                    placeholder: Drawing.yourEmail,
-                    labelText: Drawing.email)
-                .keyboardType(.emailAddress)
+        OnboardingBackground {
+            BackButton(action: didTapBackButton)
+            
+            Text(Drawing.forgotPassword)
+                .applyFonts(for: .largeTitle)
                 .padding(.bottom)
-                
-                CustomButtonAuth(title: Drawing.sent)
-                    .padding(.top)
-                
-                Spacer()
-            }
-           
+            
+            CustomAuthTextField(
+                text: $email,
+                placeholder: Drawing.yourEmail,
+                labelText: Drawing.email)
+            .keyboardType(.emailAddress)
+            .padding(.bottom)
+            
+            CustomButtonAuth(title: Drawing.sent)
+                .padding(.top)
+            
+            Spacer()
         }
-    
+    }
+}
+
 
 #Preview {
     OnboardingBackground {

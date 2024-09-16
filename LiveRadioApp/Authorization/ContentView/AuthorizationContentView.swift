@@ -17,7 +17,7 @@ struct AuthorizationContentView: View {
     }
 
     var body: some View {
-        Group {
+        ZStack {
             switch viewModel.state {
             case .signIn:
                 SignInView(
@@ -28,7 +28,9 @@ struct AuthorizationContentView: View {
                     didTapSignIn: coordinator.showTabBar,
                     didTapSignUp: viewModel.signUp,
                     localization: .develop
+                    
                 )
+                .transition(.opacity)
             case .signUp:
                 SignUpView(
                     name:  $viewModel.name,
@@ -37,17 +39,21 @@ struct AuthorizationContentView: View {
                     didTapRegisterButton: coordinator.showTabBar,
                     didTapSignInButton: viewModel.signIn
                     )
+                .transition(.opacity)
             case .forgotPass:
                 ForgotPasswordView(
                     email: $viewModel.email,
                     password: $viewModel.password,
                     didTapBackButton: viewModel.signIn)
+                .transition(.opacity)
             case .forgotPass2:
                 ForgotPasswordView2(
                     password: $viewModel.password,
                     confirmPassword: $viewModel.password,
                     didTapChangePasswordButton: coordinator.showTabBar)
+                .transition(.opacity)
             }
         }
+        .animation(.easeInOut, value: viewModel.state)
     }
 }

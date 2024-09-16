@@ -35,7 +35,7 @@ struct SignUpView: View {
     
     //MARK: - Body
     var body: some View {
-
+        OnboardingBackground {
             Image(.playLabel).resizable()
                 .frame(
                     width: Drawing.playIconFrame.width,
@@ -65,7 +65,7 @@ struct SignUpView: View {
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.password,
                 isSecured: true)
-                .padding(.bottom)
+            .padding(.bottom)
             
             ArrowButton(action: didTapRegisterButton)
             
@@ -75,6 +75,7 @@ struct SignUpView: View {
             }
         }
     }
+}
 
 #Preview {
     OnboardingBackground {

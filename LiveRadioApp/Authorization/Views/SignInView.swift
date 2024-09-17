@@ -5,8 +5,6 @@
 //  Created by Daniil Murzin on 27.08.2024.
 //
 
-#warning("Дебаггинг пэдингов - консоль")
-
 import SwiftUI
 
 struct SignInView: View {

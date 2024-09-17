@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthorizationContentView: View {
-    #warning("правильно добавил координатор для взаимодействия с экранами вне Authorization экранов?")
+    #warning("правильно добавил координатор для взаимодействия с экранами вне Authorization?")
     @StateObject var viewModel: AuthorizationViewModel
     @EnvironmentObject var coordinator: RootCoordinator
     

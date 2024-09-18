@@ -39,9 +39,14 @@ extension FRoot: RootFactory {
         return AuthorizationContentView(viewModel)
     }
     
-    func makePopularView() -> PopularContentView {
+    func makePopular() -> PopularContentView {
         let viewModel = PopularViewModel()
         return PopularContentView(viewModel)
+    }
+    
+    func makeDetails() -> DetailsContentView {
+        let viewModel = DetailsViewModel()
+        return DetailsContentView(viewModel)
     }
 }
 
@@ -54,10 +59,14 @@ struct FactorySpy {
 
 // MARK: - FactorySpy + RootFactory
 extension FactorySpy: RootFactory {
-    
-    func makePopularView() -> PopularContentView {
+    func makeDetails() -> DetailsContentView {
         logger.trace(#function)
-        return factory.makePopularView()
+        return factory.makeDetails()
+    }
+    
+    func makePopular() -> PopularContentView {
+        logger.trace(#function)
+        return factory.makePopular()
     }
     
     

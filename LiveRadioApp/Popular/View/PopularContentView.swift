@@ -19,6 +19,6 @@ struct PopularContentView: View {
     
     //MARK: - body
     var body: some View {
-        EmptyView()
+        PopularView(title: "Plat", stations: [Station(title: "Rock")])
     }
 }

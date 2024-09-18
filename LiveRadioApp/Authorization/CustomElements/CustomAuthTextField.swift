@@ -5,7 +5,6 @@
 //  Created by Daniil Murzin on 04.09.2024.
 //
 #warning("Не знаю, как от вложенности избавиться")
-#warning("Ошибки в консоль по нажатию на показать пароль")
 import SwiftUI
 
 struct CustomAuthTextField: View {

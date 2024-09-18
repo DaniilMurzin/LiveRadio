@@ -37,6 +37,9 @@ struct RootCoordinatorView: View {
             case .tabbar:
                 factory.makeTabBar()
                     .transition(.move(edge: .leading))
+            case .details:
+                factory.makeDetails()
+                    .transition(.move(edge: .leading))
             }
         }
         .animation(.easeInOut, value: coordinator.state)

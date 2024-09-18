@@ -13,7 +13,7 @@ struct TabBarView: View {
     
     var body: some View {
         TabView {
-            factory.makePopularView()
+            factory.makePopular()
                 .tabItem { Text("Popular") }
             EmptyView()
                 .tabItem { Text("Favorites") }

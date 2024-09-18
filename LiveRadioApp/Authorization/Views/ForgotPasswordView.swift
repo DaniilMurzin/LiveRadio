@@ -29,7 +29,7 @@ struct ForgotPasswordView: View {
     
     //MARK: - Body
     var body: some View {
-        OnboardingBackground {
+        MainBackground {
             BackButton(action: didTapBackButton)
             
             Text(Drawing.forgotPassword)
@@ -53,7 +53,7 @@ struct ForgotPasswordView: View {
 
 
 #Preview {
-    OnboardingBackground {
+    MainBackground {
         ForgotPasswordView(
             email: .constant("email@mail.ru"),
             password: .constant("qwerty"),

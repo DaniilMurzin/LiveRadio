@@ -37,7 +37,10 @@
 		92E07DA22C8DFDDC00B59386 /* AuthorizationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */; };
 		92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DDC2C9842F200B59386 /* ArrowButton.swift */; };
 		92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DDF2C98600D00B59386 /* TabBarView.swift */; };
-		EEECC6C82C91FADB00BA6EB4 /* OnboardingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */; };
+		92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE52C9AF98F00B59386 /* DetailsView.swift */; };
+		92E07DE82C9AFAB900B59386 /* DetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */; };
+		92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE92C9AFAC600B59386 /* DetailsViewModel.swift */; };
+		EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEECC6C72C91FADB00BA6EB4 /* MainBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +78,10 @@
 		92E07DA62C905FB200B59386 /* Questions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Questions.md; sourceTree = "<group>"; };
 		92E07DDC2C9842F200B59386 /* ArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
 		92E07DDF2C98600D00B59386 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingBackground.swift; sourceTree = "<group>"; };
+		92E07DE52C9AF98F00B59386 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsContentView.swift; sourceTree = "<group>"; };
+		92E07DE92C9AFAC600B59386 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		EEECC6C72C91FADB00BA6EB4 /* MainBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				92E07D3C2C888A6300B59386 /* Info.plist */,
 				92E07DDE2C985FFA00B59386 /* TabBar */,
 				92E07D182C86109000B59386 /* Root */,
+				92E07DE42C9AD51200B59386 /* Details */,
 				92E07D1A2C86109000B59386 /* Authorization */,
 				92E07D142C86109000B59386 /* Onboarding */,
 				92E07D222C86109000B59386 /* Popular */,
@@ -213,7 +220,7 @@
 		92E07D412C8AF4B000B59386 /* CustomElements */ = {
 			isa = PBXGroup;
 			children = (
-				EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */,
+				EEECC6C72C91FADB00BA6EB4 /* MainBackground.swift */,
 				92E07D352C884D6900B59386 /* CustomAuthTextField.swift */,
 				92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */,
 				92E07DDC2C9842F200B59386 /* ArrowButton.swift */,
@@ -290,6 +297,16 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		92E07DE42C9AD51200B59386 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				92E07DE52C9AF98F00B59386 /* DetailsView.swift */,
+				92E07DE92C9AFAC600B59386 /* DetailsViewModel.swift */,
+				92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -363,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
+				92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */,
 				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
 				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
@@ -378,14 +396,16 @@
 				92E07D232C86109000B59386 /* BackgroundView.swift in Sources */,
 				92E07D262C86109000B59386 /* OnboardingViewModel.swift in Sources */,
 				92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */,
+				92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
 				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
+				92E07DE82C9AFAB900B59386 /* DetailsContentView.swift in Sources */,
 				92E07D362C884D6900B59386 /* CustomAuthTextField.swift in Sources */,
 				92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */,
 				92E07D3E2C888FCF00B59386 /* CustomButtonAuth.swift in Sources */,
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
 				92E07D402C8AE96700B59386 /* TestView.swift in Sources */,
-				EEECC6C82C91FADB00BA6EB4 /* OnboardingBackground.swift in Sources */,
+				EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */,
 				92E07D292C86109000B59386 /* RootFactory.swift in Sources */,
 				92E07D2A2C86109000B59386 /* SignInView.swift in Sources */,
 				92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */,

@@ -18,6 +18,6 @@ struct OnboardingContentView: View {
     
     var body: some View {
         OnboardingView()
-            .task(viewModel.onAppear)
+
     }
 }

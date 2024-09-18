@@ -24,7 +24,7 @@ struct SignInView: View {
     
     //MARK: - Body
     var body: some View {
-        OnboardingBackground {
+        MainBackground {
             Image(.playLabel)
                 .resizable()
                 .frame(width: Drawing.playLabel.width, height: Drawing.playLabel.height)
@@ -92,8 +92,7 @@ struct SignInView: View {
         }
     }
 }
-    
-    
+
     extension SignInView {
         struct Localization {
             let SignIn: String
@@ -130,5 +129,4 @@ struct SignInView: View {
         didTapSignUp: {},
         localization: .develop
     )
-        
 }

@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct AuthorizationContentView: View {
-    #warning("правильно добавил координатор для взаимодействия с экранами вне Authorization?")
+    #warning("""
+1) правильно добавил координатор для взаимодействия с экранами вне Authorization?
+2) анимацию переходов сюда добавил. Может тут лучше без UI? Зависимости только? 
+""")
     @StateObject var viewModel: AuthorizationViewModel
     @EnvironmentObject var coordinator: RootCoordinator
     
     init(_ viewModel: AuthorizationViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-
+// алерты  через OnboardingBackgrView
     var body: some View {
         ZStack {
             switch viewModel.state {
@@ -37,7 +40,8 @@ struct AuthorizationContentView: View {
                     email: $viewModel.email,
                     password: $viewModel.password,
                     didTapRegisterButton: coordinator.showTabBar,
-                    didTapSignInButton: viewModel.signIn
+                    didTapSignInButton: viewModel.signIn, 
+                    localization: .russianDevelop
                     )
                 .transition(.opacity)
             case .forgotPass:

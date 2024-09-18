@@ -22,7 +22,6 @@ struct TextFieldForEmailView: View {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.pink, lineWidth: 2).shadow(color: .pink, radius: 3)
             }
-        
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .keyboardType(.emailAddress)

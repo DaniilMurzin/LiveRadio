@@ -9,25 +9,37 @@ import SwiftUI
 
 struct RootCoordinatorView: View {
     @EnvironmentObject var coordinator: RootCoordinator
+    let factory: RootFactory
+    
+    init(factory: RootFactory) {
+        self.factory = factory
+    }
     
     var body: some View {
-        // Презентация, анимации
-        switch coordinator.state {
-        case .loading:
-            ProgressView()
+        ZStack {
+            switch coordinator.state {
+            case .loading:
+                ProgressView()
+                    .transition(.opacity)
             
-        case .error:
-            EmptyView()
+            case .error:
+                Text("Ошибка")
+                    .transition(.slide)
             
-        case let .onboarding(viewModel):
-            OnboardingContentView(viewModel)
+            case .onboarding:
+                factory.makeOnboarding()
+    
+                    .transition(.move(edge: .leading))
+            case .authorization:
+                factory.makeAuthorization()
+                    .transition(.move(edge: .leading))
             
-        case let .authorization(viewModel):
-            AuthorizationContentView(viewModel)
-                .environmentObject(viewModel)
-            
-        case .tabbar:
-            EmptyView()
+            case .tabbar:
+                factory.makeTabBar()
+                    .transition(.move(edge: .leading))
+            }
         }
+        .animation(.easeInOut, value: coordinator.state)
     }
 }
+

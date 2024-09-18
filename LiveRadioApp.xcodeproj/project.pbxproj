@@ -35,6 +35,9 @@
 		92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D4B2C8B39D600B59386 /* ForgotPasswordView2.swift */; };
 		92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D9E2C8DFD1400B59386 /* AuthorizationViewModel.swift */; };
 		92E07DA22C8DFDDC00B59386 /* AuthorizationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */; };
+		92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DDC2C9842F200B59386 /* ArrowButton.swift */; };
+		92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DDF2C98600D00B59386 /* TabBarView.swift */; };
+		EEECC6C82C91FADB00BA6EB4 /* OnboardingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		92E07D9E2C8DFD1400B59386 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationContentView.swift; sourceTree = "<group>"; };
 		92E07DA62C905FB200B59386 /* Questions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Questions.md; sourceTree = "<group>"; };
+		92E07DDC2C9842F200B59386 /* ArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
+		92E07DDF2C98600D00B59386 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,7 @@
 				92E07D072C86101500B59386 /* LiveRadioApp.entitlements */,
 				92E07D012C86101400B59386 /* LiveRadioAppApp.swift */,
 				92E07D3C2C888A6300B59386 /* Info.plist */,
+				92E07DDE2C985FFA00B59386 /* TabBar */,
 				92E07D182C86109000B59386 /* Root */,
 				92E07D1A2C86109000B59386 /* Authorization */,
 				92E07D142C86109000B59386 /* Onboarding */,
@@ -128,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				92E07DA42C8DFF5300B59386 /* ViewModel */,
+				92E07DCC2C92D7CA00B59386 /* ContentView */,
 				92E07DA52C8DFF6000B59386 /* View */,
 				92E07DA32C8DFF4300B59386 /* CustomElements */,
 			);
@@ -148,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				92E07DA02C8DFD4E00B59386 /* ViewModel */,
+				92E07DCB2C92D7A400B59386 /* ContentView */,
 				92E07D462C8B2CC600B59386 /* Views */,
 				92E07D412C8AF4B000B59386 /* CustomElements */,
 			);
@@ -204,8 +213,10 @@
 		92E07D412C8AF4B000B59386 /* CustomElements */ = {
 			isa = PBXGroup;
 			children = (
+				EEECC6C72C91FADB00BA6EB4 /* OnboardingBackground.swift */,
 				92E07D352C884D6900B59386 /* CustomAuthTextField.swift */,
 				92E07D3D2C888FCF00B59386 /* CustomButtonAuth.swift */,
+				92E07DDC2C9842F200B59386 /* ArrowButton.swift */,
 				92E07D472C8B35E700B59386 /* BackButton.swift */,
 			);
 			path = CustomElements;
@@ -214,7 +225,6 @@
 		92E07D462C8B2CC600B59386 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */,
 				92E07D192C86109000B59386 /* SignInView.swift */,
 				92E07D422C8B077C00B59386 /* SignUpView.swift */,
 				92E07D442C8B2CB300B59386 /* ForgotPasswordView.swift */,
@@ -251,10 +261,33 @@
 		92E07DA52C8DFF6000B59386 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				92E07D112C86109000B59386 /* OnboardingContentView.swift */,
 				92E07D122C86109000B59386 /* OnboardingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		92E07DCB2C92D7A400B59386 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				92E07DA12C8DFDDC00B59386 /* AuthorizationContentView.swift */,
+			);
+			path = ContentView;
+			sourceTree = "<group>";
+		};
+		92E07DCC2C92D7CA00B59386 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D112C86109000B59386 /* OnboardingContentView.swift */,
+			);
+			path = ContentView;
+			sourceTree = "<group>";
+		};
+		92E07DDE2C985FFA00B59386 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				92E07DDF2C98600D00B59386 /* TabBarView.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,8 +363,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
+				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
 				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
+				92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */,
 				92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */,
 				92E07D2F2C86109000B59386 /* Station.swift in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
@@ -350,6 +385,7 @@
 				92E07D3E2C888FCF00B59386 /* CustomButtonAuth.swift in Sources */,
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
 				92E07D402C8AE96700B59386 /* TestView.swift in Sources */,
+				EEECC6C82C91FADB00BA6EB4 /* OnboardingBackground.swift in Sources */,
 				92E07D292C86109000B59386 /* RootFactory.swift in Sources */,
 				92E07D2A2C86109000B59386 /* SignInView.swift in Sources */,
 				92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */,
@@ -482,7 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LiveRadioApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4YW4KD9KAN;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -506,7 +542,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = abc.LiveRadioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -522,7 +559,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LiveRadioApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4YW4KD9KAN;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -546,7 +583,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = abc.LiveRadioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

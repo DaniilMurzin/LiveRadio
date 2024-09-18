@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct LiveRadioAppApp: App {
-    
     let coordinator: RootCoordinator
     
     init() {
@@ -18,7 +17,7 @@ struct LiveRadioAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootCoordinatorView()
+            RootCoordinatorView(factory: coordinator.factory)
                 .environmentObject(coordinator)
                 .onAppear(perform: coordinator.showOnboarding)
         }

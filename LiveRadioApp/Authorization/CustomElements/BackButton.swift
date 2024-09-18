@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct BackButton: View {
+    let action: () -> Void
+    
     var body: some View {
-        Button(action: {
-            print("Tap")
-        } ) {
+        Button(action: action) {
             Image(.chevronCustomLeft)
+                
         }
-        .padding()
     }
 }
 
 #Preview {
-    BackButton()
+    BackButton(action: {})
+        .background(Color.mainBg)
 }

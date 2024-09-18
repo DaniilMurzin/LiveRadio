@@ -5,167 +5,130 @@
 //  Created by Daniil Murzin on 27.08.2024.
 //
 
-#warning("Naming пропертис?")
-#warning("Дебаггинг пэдингов - консоль")
-
 import SwiftUI
 
 struct SignInView: View {
-    
-    //MARK: - Properties
-    @State private var emailText = ""
-    @State private var passwordText = ""
-    @EnvironmentObject var viewModel: AuthorizationViewModel
-    
-    //MARK: - Drawing
+    typealias Action = () -> Void
     private enum Drawing {
-        static let SignIn = "Sign in"
-        static let startPlay = "To start play"
-        static let yourPassword = "Your password"
-        static let yourEmail = "Your email"
-        static let email = "Email"
-        static let password = "Password"
-        static let forgotPassword = "Forgot password?"
-        static let connect = "Or connect with"
-        static let signUp = "Or Sign Up"
         
-        static let playIconFrame = CGSize(width: /*@START_MENU_TOKEN@*/58.0/*@END_MENU_TOKEN@*/, height: 58)
-        static let circleFrame = CGSize(width: 40, height: 40)
-        static let signInButtonFrame = CGSize(width: 153, height: 62)
-        
-        static let VStamainckHorizontalPadding: CGFloat = 40
-        static let bottomPadding: CGFloat = 30
-        static let signUpButtonPadding: CGFloat = 5
+        static let playLabel = CGSize(width: 58, height: 58)
     }
+    //MARK: - Properties
+    @Binding  var email: String
+    @Binding  var password: String
+    
+    let didTapForgotPassword: Action
+    let didTapSignIn: Action
+    let didTapSignUp: Action
+    let localization: Localization
     
     //MARK: - Body
     var body: some View {
-        
-        ZStack {
-            Image(.authBG)
+        OnboardingBackground {
+            Image(.playLabel)
                 .resizable()
-                .ignoresSafeArea()
-            VStack(alignment: .leading) {
-//                Spacer()
-                appLogo
-                titleText
-                textFields
-                forgotPasswordButton
-                separator
-                signInButton
-                signUpButton
-//                Spacer()
-            }
-            .padding(.horizontal, Drawing.VStamainckHorizontalPadding)
-        }
-        .background(Color.mainBg)
-        
-    }
-    
-    //MARK: - Subviews
-    private var appLogo: some View {
-        Image(.playLabel).resizable()
-            .frame(width: Drawing.playIconFrame.width,
-                   height: Drawing.playIconFrame.height)
-            .padding(.top)
-    }
-    
-    private var titleText: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(Drawing.SignIn)
+                .frame(width: Drawing.playLabel.width, height: Drawing.playLabel.height)
+                .padding(.top)
+            
+            Text(localization.SignIn)
                 .applyFonts(for: .largeTitle)
-            Text(Drawing.startPlay)
+            Text(localization.startPlay)
                 .applyFonts(for: .buttonText)
                 .padding(.bottom)
-        }
-    }
-    
-    private var subtitleText: some View {
-        Text(Drawing.startPlay)
-            .applyFonts(for: .bodyText)
-    }
-    
-    private var textFields: some View {
-        VStack {
+            
             CustomAuthTextField(
-                text: $emailText,
-                placeholder: Drawing.yourEmail,
-                labelText: Drawing.email)
-                .keyboardType(.emailAddress)
-                .padding(.bottom)
-            
-            CustomAuthTextField(text: $passwordText, placeholder: Drawing.yourPassword, labelText: Drawing.password, isSecured: true)
-                .padding(.bottom)
-        }
-    }
-    
-    private var forgotPasswordButton: some View {
-        Button( action: {
-            viewModel.currentAuthorizationState = .forgotPass
-        } ) {
-            Text(Drawing.forgotPassword)
-                .foregroundStyle(.gray)
-                .padding(.bottom)
-        }
-    }
-    
-    private var separator: some View {
-        VStack {
-            
-            HStack(spacing: 10) {
-                
-                Rectangle().frame(height: 1)
-                    .foregroundStyle(.ellipse9)
-                Text(Drawing.connect)
-                    .foregroundStyle(.ellipse9)
-                    .lineLimit(1)
-                    .applyFonts(for: .montserratSmall)
-                Rectangle().frame( height: 1)
-                    .foregroundStyle(.ellipse9)
-            }
+                text: $email,
+                placeholder: localization.yourEmail,
+                labelText: localization.email
+            )
+            .keyboardType(.emailAddress)
             .padding(.bottom)
-            .padding(.horizontal,Drawing.VStamainckHorizontalPadding)
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Circle()
-                    .frame(width: Drawing.circleFrame.width,
-                           height: Drawing.circleFrame.height)
-                    .foregroundStyle(.googleIcon)
-                    .overlay (
-                        Image(.googlePlus)
-                    )
+            CustomAuthTextField(
+                text: $password,
+                placeholder: localization.yourPassword,
+                labelText: localization.password,
+                isSecured: true
+            )
+            .padding(.bottom)
+            
+            
+            Button(action: didTapForgotPassword) {
+                Text(localization.forgotPassword)
+                    .foregroundStyle(.gray)
                     .padding(.bottom)
             }
-        }
-    }
-    
-    private var signInButton: some View {
-        Button(action: {
-            viewModel.currentAuthorizationState = .signUp
-        }) {
-            Rectangle()
-                .frame(width: Drawing.signInButtonFrame.width,
-                       height: Drawing.signInButtonFrame.height)
-                .overlay {
-                    Image(.vector).aspectRatio(contentMode: .fit)
+            
+            VStack {
+                HStack(spacing: 10) {
+                    Rectangle().frame(height: 1)
+                        .foregroundStyle(.ellipse9)
+                    Text(localization.connect)
+                        .foregroundStyle(.ellipse9)
+                        .lineLimit(1)
+                        .applyFonts(for: .montserratSmall)
+                    Rectangle().frame(height: 1)
+                        .foregroundStyle(.ellipse9)
                 }
-                .padding(.bottom, Drawing.signUpButtonPadding)
+                .padding(.bottom)
+                .padding(.horizontal, 40)
+                
+                Button(action: {}) {
+                    Circle()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.googleIcon)
+                        .overlay(Image(.googlePlus))
+                        .padding(.bottom)
+                }
+            }
+            
+            ArrowButton(action: didTapSignIn)
+            
+            Button(action: didTapSignUp) {
+                Text(localization.signUp)
+                    .applyFonts(for: .lightSystemText)
+            }
+            .padding(.bottom, 30)
         }
-    }
-    
-    private var signUpButton: some View {
-        Button( action: {
-            viewModel.currentAuthorizationState = .signUp
-        } ) {
-            Text(Drawing.signUp)
-                .applyFonts(for: .lightSystemText)
-
-        }
-        .padding(.bottom, Drawing.bottomPadding)
     }
 }
+    
+    
+    extension SignInView {
+        struct Localization {
+            let SignIn: String
+            let startPlay: String
+            let yourPassword: String
+            let yourEmail: String
+            let email: String
+            let password: String
+            let forgotPassword: String
+            let connect: String
+            let signUp: String
+            
+            static let develop = Self(
+                SignIn: "Sign in",
+                startPlay: "To start play",
+                yourPassword: "Your password",
+                yourEmail: "Your email",
+                email: "Email",
+                password: "Password",
+                forgotPassword: "Forgot password?",
+                connect: "Or connect with",
+                signUp: "Or Sign Up"
+            )
+        }
+    }
 
 //MARK: - Preview
 #Preview {
-    SignInView()
+    SignInView(
+        email: .constant("email@mail.ru"),
+        password: .constant("qwerty"),
+        didTapForgotPassword: {},
+        didTapSignIn: {},
+        didTapSignUp: {},
+        localization: .develop
+    )
+        
 }

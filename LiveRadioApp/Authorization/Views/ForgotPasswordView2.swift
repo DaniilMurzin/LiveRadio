@@ -10,8 +10,10 @@ import SwiftUI
 struct ForgotPasswordView2:  View {
     
     //MARK: - Properties
-    @State private var passwordText = ""
-    @State private var confirmPasswordText = ""
+    @Binding var password: String
+    @Binding var confirmPassword: String
+    
+    let didTapChangePasswordButton: () -> Void
     
     //MARK: - Drawing
     private enum Drawing {
@@ -22,66 +24,44 @@ struct ForgotPasswordView2:  View {
         static let confirm = "Confirm password"
         static let changePassword = "Change password"
         
-        static let signInButtonFrame = CGSize(width: 153, height: 62)
-        
-        static let mainVStackPadding: CGFloat = 40
-        static let labelPadding: CGFloat = 0
+        static let labelPadding: CGFloat = 40
     }
     
     //MARK: - Body
     var body: some View {
-        
-        ZStack {
-            Image(.authBG)
-            VStack(alignment: .leading) {
-                Spacer()
-                BackButton()
-                titleText
-                textFields
-                Spacer()
-                signInButton
-                Spacer()
-                
-            }
-            .padding(.horizontal, Drawing.mainVStackPadding)
-        }
-        .background(Color.mainBg)
-    }
-    
-    //MARK: - Subviews
-
-    private var titleText: some View {
-        VStack(alignment: .leading, spacing: 2) {
-           
+        OnboardingBackground {
+            BackButton(action: didTapChangePasswordButton)
+            
             Text(Drawing.forgotPassword)
                 .applyFonts(for: .largeTitle)
-                .padding(.bottom, 40)
-        }
-    }
-    
-    
-    private var textFields: some View {
-        VStack {
+                .padding(.bottom, Drawing.labelPadding)
+            
             CustomAuthTextField(
-                text: $passwordText,
+                text: $password,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.password,
                 isSecured: true)
-                .padding(.bottom)
+            .padding(.bottom)
             CustomAuthTextField(
-                text: $confirmPasswordText,
+                text: $confirmPassword,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.confirm,
                 isSecured: true)
-        }
-    }
-    
-    private var signInButton: some View {
-        CustomButtonAuth(title: Drawing.changePassword)
+            .padding(.bottom)
             
+            CustomButtonAuth(title: Drawing.changePassword)
+                .padding(.top)
+            
+            Spacer()
+        }
     }
 }
 
 #Preview {
-    ForgotPasswordView2()
+    OnboardingBackground {
+        ForgotPasswordView2(
+            password: .constant("qwerty"),
+            confirmPassword: .constant("qwerty"),
+            didTapChangePasswordButton: {})
+    }
 }

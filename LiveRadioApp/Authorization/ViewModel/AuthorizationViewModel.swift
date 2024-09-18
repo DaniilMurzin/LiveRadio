@@ -7,12 +7,28 @@
 
 import Foundation
 
-
 final class AuthorizationViewModel: ObservableObject {
+    @Published var state: State = .signIn
+    @Published var email: String = .init()
+    @Published var password: String = .init()
+    @Published var name: String = .init()
     
-    enum AuthorizationState {
-        case signIn, signUp, forgotPass, forgotPass2
+    func forgotPassword() {
+        state = .forgotPass
     }
     
-    @Published var currentAuthorizationState: AuthorizationState = .signIn
+    func signIn() {
+        state = .signIn
+    }
+    
+    func signUp() {
+        state = .signUp
+    }
+}
+
+extension AuthorizationViewModel {
+    //MARK: - State
+    enum State {
+        case signIn, signUp, forgotPass, forgotPass2
+    }
 }

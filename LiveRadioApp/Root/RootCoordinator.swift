@@ -5,10 +5,17 @@
 //  Created by Шаповалов Илья on 30.08.2024.
 //
 
-import Foundation
+import SwiftUI
+
+protocol RootFactory {
+    func makeOnboarding() -> OnboardingContentView
+    func makeAuthorization() -> AuthorizationContentView
+    func makePopularView() -> PopularContentView
+    func makeTabBar() -> TabBarView
+}
 
 final class RootCoordinator: ObservableObject {
-    private let factory: RootFactory
+    let factory: RootFactory
     
     @Published var state: Path
     
@@ -18,11 +25,15 @@ final class RootCoordinator: ObservableObject {
     }
     
     func showOnboarding() {
-        state = .onboarding(factory.makeOnboarding())
+        state = .onboarding
     }
     
     func showAuthorization() {
-        state = .authorization(factory.makeAuthorization())
+        state = .authorization
+    }
+    
+    func showTabBar() {
+        state = .tabbar
     }
 }
 
@@ -30,8 +41,8 @@ extension RootCoordinator {
     enum Path {
         case loading
         case error
-        case onboarding(OnboardingViewModel)
-        case authorization(AuthorizationViewModel)
+        case onboarding
+        case authorization
         case tabbar
     }
 }

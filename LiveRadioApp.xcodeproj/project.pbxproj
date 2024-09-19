@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */; };
 		92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D012C86101400B59386 /* LiveRadioAppApp.swift */; };
 		92E07D062C86101500B59386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D052C86101500B59386 /* Assets.xcassets */; };
 		92E07D0A2C86101500B59386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D092C86101500B59386 /* Preview Assets.xcassets */; };
@@ -40,10 +41,12 @@
 		92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE52C9AF98F00B59386 /* DetailsView.swift */; };
 		92E07DE82C9AFAB900B59386 /* DetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */; };
 		92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DE92C9AFAC600B59386 /* DetailsViewModel.swift */; };
+		92E07DED2C9B1C8900B59386 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07DEC2C9B1C8900B59386 /* PlayerView.swift */; };
 		EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEECC6C72C91FADB00BA6EB4 /* MainBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButtonsShape.swift; sourceTree = "<group>"; };
 		92E07CFE2C86101400B59386 /* LiveRadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveRadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E07D012C86101400B59386 /* LiveRadioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRadioAppApp.swift; sourceTree = "<group>"; };
 		92E07D052C86101500B59386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		92E07DE52C9AF98F00B59386 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsContentView.swift; sourceTree = "<group>"; };
 		92E07DE92C9AFAC600B59386 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		92E07DEC2C9B1C8900B59386 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		EEECC6C72C91FADB00BA6EB4 /* MainBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				92E07DDF2C98600D00B59386 /* TabBarView.swift */,
+				92E07DEB2C9B194700B59386 /* CustomElements */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -305,6 +310,15 @@
 				92E07DE72C9AFAB900B59386 /* DetailsContentView.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		92E07DEB2C9B194700B59386 /* CustomElements */ = {
+			isa = PBXGroup;
+			children = (
+				92E07DEC2C9B1C8900B59386 /* PlayerView.swift */,
+				92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */,
+			);
+			path = CustomElements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */,
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
 				92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */,
 				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
@@ -406,6 +421,7 @@
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
 				92E07D402C8AE96700B59386 /* TestView.swift in Sources */,
 				EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */,
+				92E07DED2C9B1C8900B59386 /* PlayerView.swift in Sources */,
 				92E07D292C86109000B59386 /* RootFactory.swift in Sources */,
 				92E07D2A2C86109000B59386 /* SignInView.swift in Sources */,
 				92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */,

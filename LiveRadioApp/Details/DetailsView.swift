@@ -15,11 +15,17 @@ struct DetailsView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            HStack {
-                BackButton(action: didTapbackButton)
-                Text(localization.playingNow)
-                    .foregroundStyle(.white)
-            }
+            HStack(alignment: .center) {
+                  BackButton(action: didTapbackButton)
+                  Spacer()
+                  Text(localization.playingNow)
+                      .foregroundStyle(.white)
+                  Spacer()
+                  Circle()
+                      .frame(width: 45, height: 45)
+              }
+            
+            
         }
         
     }

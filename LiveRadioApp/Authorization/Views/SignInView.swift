@@ -25,6 +25,7 @@ struct SignInView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
+            
             Image(.playLabel)
                 .resizable()
                 .frame(width: Drawing.playLabel.width, height: Drawing.playLabel.height)

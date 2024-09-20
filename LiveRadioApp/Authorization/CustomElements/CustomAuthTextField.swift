@@ -86,9 +86,6 @@ struct CustomAuthTextField: View {
             }
         }
     }
-    
-#warning("Почему превью только так работает?")
-
 }
 
 struct CustomAuthTextField_Previews: PreviewProvider {

@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct DetailsView: View {
+    typealias Action = () -> Void
+    
     //MARK: - Properties
     let localization: Localization
-    let didTapbackButton: () -> Void
+    let didTapbackButton: Action
+    let didTapBackwardButton: Action
+    let didTapForwardButton: Action
+    let didTapPlayButton: Action
     
     //MARK: - Body
     var body: some View {
         MainBackground {
-            HStack(alignment: .center) {
+            HStack {
                   BackButton(action: didTapbackButton)
                   Spacer()
                   Text(localization.playingNow)
@@ -25,9 +30,12 @@ struct DetailsView: View {
                       .frame(width: 45, height: 45)
               }
             
-            
+            PlayerView(
+                backwardButtonAction: didTapBackwardButton,
+                forwardButtonAction: didTapForwardButton,
+                playButtonAction: didTapPlayButton
+            )
         }
-        
     }
 }
 
@@ -47,5 +55,5 @@ extension DetailsView {
 }
 
 #Preview {
-    DetailsView(localization: .develop, didTapbackButton: {})
+    DetailsView(localization: .develop, didTapbackButton: {} , didTapBackwardButton: {}, didTapForwardButton: {}, didTapPlayButton: {})
 }

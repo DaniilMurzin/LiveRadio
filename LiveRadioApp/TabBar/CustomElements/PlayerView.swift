@@ -9,13 +9,18 @@ import SwiftUI
 
 
 struct PlayerView: View {
+    typealias Action = () -> Void
+    
+    let backwardButtonAction: Action
+    let forwardButtonAction: Action
+    let playButtonAction: Action
     
     var body: some View {
         HStack(spacing: 20) {
-            TrackButtonsView(action: {}, direction: .backward)
+            TrackButtonsView(action: backwardButtonAction, direction: .backward)
               
-            PlayButtonView(action: {})
-            TrackButtonsView(action: {}, direction: .forward)
+            PlayButtonView(action: forwardButtonAction)
+            TrackButtonsView(action: playButtonAction, direction: .forward)
         }
     }
 }
@@ -78,7 +83,10 @@ struct TrackButtonsView: View {
 
 #Preview {
     MainBackground {
-        PlayerView()
+        PlayerView(
+            backwardButtonAction: {},
+            forwardButtonAction: {},
+            playButtonAction: {})
     }
 }
 

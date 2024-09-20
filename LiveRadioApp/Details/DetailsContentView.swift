@@ -17,6 +17,10 @@ struct DetailsContentView: View {
     }
     #warning("Убрать таб бар")
     var body: some View {
-        DetailsView(localization: .develop, didTapbackButton: coordinator.showTabBar)
+        DetailsView(localization: .develop,
+                    didTapbackButton: coordinator.showTabBar,
+                    didTapBackwardButton: viewModel.didTapBackwardButton,
+                    didTapForwardButton: viewModel.didTapForwardButton,
+                    didTapPlayButton: viewModel.didTapPlayButton)
     }
 }

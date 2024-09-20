@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+#warning("Circle допилить")
 struct TabBarView: View {
     
     let factory: RootFactory
@@ -14,7 +14,14 @@ struct TabBarView: View {
     var body: some View {
         TabView {
             factory.makePopular()
-                .tabItem { Text("Popular") }
+                .tabItem { VStack {
+                    Text("Popular")
+                    Circle()
+                        .frame(width: 15, height: 15)
+                        .background(.red)
+                }
+                    
+                }
             EmptyView()
                 .tabItem { Text("Favorites") }
             EmptyView()

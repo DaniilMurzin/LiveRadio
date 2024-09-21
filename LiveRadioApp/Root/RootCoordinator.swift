@@ -9,7 +9,7 @@ import SwiftUI
 
 protocol RootFactory {
     func makeOnboarding() -> OnboardingContentView
-    func makeAuthorization() -> AuthorizationContentView
+    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
     func makePopular() -> PopularContentView
     func makeDetails() -> DetailsContentView
     func makeTabBar() -> TabBarView
@@ -40,6 +40,13 @@ final class RootCoordinator: ObservableObject {
     func showDetails() {
         state = .details
     }
+}
+
+extension RootCoordinator: AppCoordinator {
+    func goTabbar(_ user: User) {
+        showTabBar()
+    }
+    
 }
 
 extension RootCoordinator {

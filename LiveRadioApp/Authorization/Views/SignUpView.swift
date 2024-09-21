@@ -28,7 +28,8 @@ struct SignUpView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            Image(.playLabel).resizable()
+            Image(.playLabel)
+                .resizable()
                 .frame(
                     width: Drawing.playIconFrame.width,
                     height: Drawing.playIconFrame.height)
@@ -61,7 +62,7 @@ struct SignUpView: View {
             
             ArrowButton(action: didTapRegisterButton)
             
-            Button( action: didTapSignInButton ) {
+            Button(action: didTapSignInButton) {
                 Text(localization.signUp)
                     .applyFonts(for: .lightSystemText)
             }

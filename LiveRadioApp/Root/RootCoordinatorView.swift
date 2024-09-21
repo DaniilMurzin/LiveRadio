@@ -31,12 +31,13 @@ struct RootCoordinatorView: View {
     
                     .transition(.move(edge: .leading))
             case .authorization:
-                factory.makeAuthorization()
+                factory.makeAuthorization(coordinator: coordinator)
                     .transition(.move(edge: .leading))
             
             case .tabbar:
                 factory.makeTabBar()
                     .transition(.move(edge: .leading))
+                
             case .details:
                 factory.makeDetails()
                     .transition(.move(edge: .leading))

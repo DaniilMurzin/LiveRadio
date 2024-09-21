@@ -14,13 +14,13 @@ struct TabBarView: View {
     var body: some View {
         TabView {
             factory.makePopular()
-                .tabItem { VStack {
-                    Text("Popular")
-                    Circle()
-                        .frame(width: 15, height: 15)
-                        .background(.red)
-                }
-                    
+                .tabItem {
+                    VStack {
+                        Text("Popular")
+                        Circle()
+                            .frame(width: 15, height: 15)
+                            .background(.red)
+                    }
                 }
             EmptyView()
                 .tabItem { Text("Favorites") }

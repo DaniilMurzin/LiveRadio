@@ -9,9 +9,18 @@ import Foundation
 import SwiftUI
 import OSLog
 
+final class NetworkService: AuthorizationService {
+    func signIn(with: Credentials) async -> Result<User, any Error> {
+        .failure(URLError(.badURL))
+    }
+    
+    
+}
+
 // MARK: - FRoot
 final class FRoot {
     private let repository = AppRepository()
+    private let networkService = NetworkService()
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -34,8 +43,11 @@ extension FRoot: RootFactory {
         return OnboardingContentView(viewModel)
     }
     
-    func makeAuthorization() -> AuthorizationContentView {
-        let viewModel = AuthorizationViewModel()
+    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
+        let viewModel = AuthorizationViewModel(
+            authorizationService: networkService,
+            coordinator: coordinator
+        )
         return AuthorizationContentView(viewModel)
     }
     
@@ -80,9 +92,9 @@ extension FactorySpy: RootFactory {
         return factory.makeOnboarding()
     }
     
-    func makeAuthorization() -> AuthorizationContentView {
+    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
         logger.trace(#function)
-        return factory.makeAuthorization()
+        return factory.makeAuthorization(coordinator: coordinator)
     }
 }
 

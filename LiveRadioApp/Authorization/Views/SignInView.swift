@@ -7,18 +7,32 @@
 
 import SwiftUI
 
+extension Button {
+    init(
+        asyncAction: @escaping () async throws -> Sendable,
+        @ViewBuilder label: () -> Label
+    ) {
+        self.init(
+            action: { Task(operation: asyncAction) },
+            label: label
+        )
+    }
+}
+
 struct SignInView: View {
     typealias Action = () -> Void
+    typealias AsyncAction = () async -> Sendable
+    
     private enum Drawing {
-        
         static let playLabel = CGSize(width: 58, height: 58)
     }
     //MARK: - Properties
     @Binding  var email: String
     @Binding  var password: String
     
+    let signInAction: SignInAction
+    
     let didTapForgotPassword: Action
-    let didTapSignIn: Action
     let didTapSignUp: Action
     let localization: Localization
     
@@ -83,8 +97,9 @@ struct SignInView: View {
                 }
             }
             
-            ArrowButton(action: didTapSignIn)
-            
+            ArrowButton(asyncAction: didTapSignIn)
+                .opacity(signInAction.isAvailable ? 1 : 0.8)
+
             Button(action: didTapSignUp) {
                 Text(localization.signUp)
                     .applyFonts(for: .lightSystemText)
@@ -92,41 +107,60 @@ struct SignInView: View {
             .padding(.bottom, 30)
         }
     }
+    
+    private func didTapSignIn() async {
+        guard case .available(let action) = signInAction else {
+            return
+        }
+        _ = await action()
+    }
 }
 
-    extension SignInView {
-        struct Localization {
-            let SignIn: String
-            let startPlay: String
-            let yourPassword: String
-            let yourEmail: String
-            let email: String
-            let password: String
-            let forgotPassword: String
-            let connect: String
-            let signUp: String
-            
-            static let develop = Self(
-                SignIn: "Sign in",
-                startPlay: "To start play",
-                yourPassword: "Your password",
-                yourEmail: "Your email",
-                email: "Email",
-                password: "Password",
-                forgotPassword: "Forgot password?",
-                connect: "Or connect with",
-                signUp: "Or Sign Up"
-            )
+extension SignInView {
+    //MARK: - SignIn
+    enum SignInAction {
+        case available(AsyncAction)
+        case unavailable
+        
+        var isAvailable: Bool {
+            if case .available = self { return true }
+            return false
         }
     }
+    
+    //MARK: - Localization
+    struct Localization {
+        let SignIn: String
+        let startPlay: String
+        let yourPassword: String
+        let yourEmail: String
+        let email: String
+        let password: String
+        let forgotPassword: String
+        let connect: String
+        let signUp: String
+        
+        static let develop = Self(
+            SignIn: "Sign in",
+            startPlay: "To start play",
+            yourPassword: "Your password",
+            yourEmail: "Your email",
+            email: "Email",
+            password: "Password",
+            forgotPassword: "Forgot password?",
+            connect: "Or connect with",
+            signUp: "Or Sign Up"
+        )
+    }
+}
 
 //MARK: - Preview
 #Preview {
     SignInView(
         email: .constant("email@mail.ru"),
         password: .constant("qwerty"),
+        signInAction: .unavailable,
         didTapForgotPassword: {},
-        didTapSignIn: {},
         didTapSignUp: {},
         localization: .develop
     )

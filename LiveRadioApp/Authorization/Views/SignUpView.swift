@@ -69,7 +69,7 @@ struct SignUpView: View {
         }
     }
 }
-#warning("Локализацию такую оставить?")
+
 extension SignUpView {
     struct Localization {
         let SignIn: String

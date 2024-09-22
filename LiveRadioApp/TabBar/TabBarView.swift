@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-#warning("Circle допилить")
+
 struct TabBarView: View {
     
     let factory: RootFactory

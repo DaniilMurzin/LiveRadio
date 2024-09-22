@@ -40,6 +40,7 @@ struct CustomAuthTextField: View {
                         if isPasswordHide {
                             SecureField("", text: $text)
                                 .padding()
+                                
                         } else {
                             TextField("", text: $text)
                                 .padding()
@@ -74,6 +75,7 @@ struct CustomAuthTextField: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.ellipse8, lineWidth: 2)
                                 .shadow(color: .ellipse8, radius: 5, x: 2, y: 2)
+                                
                         )
                         .applyFonts(for: .textFiledText)
                         .foregroundColor(Color.white.opacity(0.5))
@@ -81,8 +83,8 @@ struct CustomAuthTextField: View {
                         .frame(width: 330, height: 53)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        
                 }
-
             }
         }
     }
@@ -96,7 +98,3 @@ struct CustomAuthTextField_Previews: PreviewProvider {
             .background(Color.mainBg)
     }
 }
-//#Preview {
-//    @State var emailText = "Email"
-//    CustomAuthTextField(text: $emailText, placeholder: "Your Email")
-//}

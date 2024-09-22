@@ -28,10 +28,6 @@ extension Localization {
 }
 
 struct AuthorizationContentView: View {
-    #warning("""
-1) правильно добавил координатор для взаимодействия с экранами вне Authorization?
-2) анимацию переходов сюда добавил. Может тут лучше без UI? Зависимости только? 
-""")
     @StateObject var viewModel: AuthorizationViewModel
     @EnvironmentObject var coordinator: RootCoordinator
 //    @EnvironmentObject var localization: Localization
@@ -47,7 +43,7 @@ struct AuthorizationContentView: View {
                 SignInView(
                     email: $viewModel.email,
                     password: $viewModel.password,
-                    signInAction: viewModel.signInAvtive
+                    signInAction: viewModel.signInActive
                     ? .available(viewModel.signIn)
                     : .unavailable,
                     didTapForgotPassword:

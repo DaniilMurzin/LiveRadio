@@ -80,7 +80,7 @@ final class AuthorizationViewModel: ObservableObject {
         state = .forgotPass
     }
     
-    var signInAvtive: Bool {
+    var signInActive: Bool {
         email.contains("@")
         && email.count > 7
         && password.count > 8

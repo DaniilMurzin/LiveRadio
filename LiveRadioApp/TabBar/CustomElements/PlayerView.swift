@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct PlayerView: View {
     typealias Action = () -> Void
     

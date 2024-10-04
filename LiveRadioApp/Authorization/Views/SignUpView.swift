@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct SignUpView: View {
+    
+    //MARK: - Typealias
     typealias Action = () -> Void
+    typealias AsyncAction = () async -> Sendable
     
     //MARK: - Properties
     @Binding var name: String
     @Binding var email: String
     @Binding var password: String
     
-    let didTapRegisterButton: Action
+    let signUpAction: SignUpAction
     let didTapSignInButton: Action
     
     let localization: Localization
@@ -41,7 +44,7 @@ struct SignUpView: View {
                 .padding(.bottom)
             
             CustomAuthTextField(
-                text: $email,
+                text: $name,
                 placeholder: localization.yourName,
                 labelText: localization.name)
             .padding(.bottom)
@@ -60,7 +63,8 @@ struct SignUpView: View {
                 isSecured: true)
             .padding(.bottom)
             
-            ArrowButton(action: didTapRegisterButton)
+            ArrowButton(asyncAction: didTapSignUp)
+                .opacity(signUpAction.isAvailable ? 1 : 0.8)
             
             Button(action: didTapSignInButton) {
                 Text(localization.signUp)
@@ -68,8 +72,15 @@ struct SignUpView: View {
             }
         }
     }
+    
+    private func didTapSignUp() async {
+        guard case .available(let action) = signUpAction else {
+            return
+        }
+        _ = await action()
+    }
 }
-
+//MARK: - SignUpView + Localization
 extension SignUpView {
     struct Localization {
         let SignIn: String
@@ -109,15 +120,31 @@ extension SignUpView {
     }
 }
 
-#Preview {
-    MainBackground {
-        SignUpView(
-            name: .constant("Ivan"),
-            email: .constant("email@mail.ru"),
-            password: .constant("qwerty"),
-            didTapRegisterButton: {},
-            didTapSignInButton: {}, 
-            localization: .develop
-        )
+extension SignUpView {
+    //MARK: - SignIn
+    enum SignUpAction {
+        case available(AsyncAction)
+        case unavailable
+        
+        var isAvailable: Bool {
+            if case .available = self { return true }
+            
+            return false
+        }
+    }
+    
+    
+    //MARK: - Preview
+    #Preview {
+        MainBackground {
+            SignUpView(
+                name: .constant("Ivan"),
+                email: .constant("email@mail.ru"),
+                password: .constant("qwerty"),
+                signUpAction: .unavailable,
+                didTapSignInButton: {},
+                localization: .develop
+            )
+        }
     }
 }

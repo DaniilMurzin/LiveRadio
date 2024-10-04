@@ -48,7 +48,7 @@ struct AuthorizationContentView: View {
                     : .unavailable,
                     didTapForgotPassword:
                     viewModel.forgotPassword,
-                    didTapSignUp: viewModel.signUp,
+                    didTapSignUp: viewModel.showSignUp,
                     localization: .develop
                 )
                 .transition(.opacity)
@@ -58,7 +58,9 @@ struct AuthorizationContentView: View {
                     name:  $viewModel.name,
                     email: $viewModel.email,
                     password: $viewModel.password,
-                    didTapRegisterButton: coordinator.showTabBar,
+                    signUpAction: viewModel.signUpActive 
+                    ? .available(viewModel.signUp)
+                    : .unavailable,
                     didTapSignInButton: viewModel.showSignIn,
                     localization: .russianDevelop //localization.signUpScreen()
                 )

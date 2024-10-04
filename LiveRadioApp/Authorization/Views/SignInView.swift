@@ -86,7 +86,6 @@ struct SignInView: View {
                         .foregroundStyle(.ellipse9)
                 }
                 .padding(.bottom)
-                .padding(.horizontal, 40)
                 
                 Button(action: {}) {
                     Circle()
@@ -124,6 +123,7 @@ extension SignInView {
         
         var isAvailable: Bool {
             if case .available = self { return true }
+            
             return false
         }
     }

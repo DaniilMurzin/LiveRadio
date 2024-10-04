@@ -4,7 +4,7 @@
 //
 //  Created by Daniil Murzin on 04.09.2024.
 //
-#warning("Не знаю, как от вложенности избавиться")
+
 import SwiftUI
 
 struct CustomAuthTextField: View {

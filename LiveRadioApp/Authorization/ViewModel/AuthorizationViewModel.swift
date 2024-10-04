@@ -7,50 +7,9 @@
 
 import Foundation
 
-struct User {
-    private init() {}
-}
-
-// Only Valid email!!!
-struct Email: Equatable {
-    let wrapped: String
-    
-    init?(_ email: String) {
-        guard email.contains("@") && email.count > 7 else {
-            return nil
-        }
-        self.wrapped = email
-    }
-    
-    static func parce(_ email: String) -> Result<Email, EmailError> {
-        .failure(.toShort)
-    }
-}
-
-enum EmailError: Error {
-    case toShort
-    case nonEmail
-}
-
-struct Password: Equatable {
-    let wrapped: String
-    
-    init?(_ password: String) {
-        guard password.count > 8 else {
-            return nil
-        }
-        self.wrapped = password
-    }
-}
-
-// Valid!!!
-struct Credentials: Equatable {
-    let email: Email
-    let password: Password
-}
-
 protocol AuthorizationService {
     func signIn(with: Credentials) async -> Result<User, Error>
+    func signUp(with: Credentials) async -> Result<User, Error>
 }
 
 protocol AppCoordinator {
@@ -58,6 +17,8 @@ protocol AppCoordinator {
 }
 
 final class AuthorizationViewModel: ObservableObject {
+    
+    //MARK: - Properties
     private let authorizationService: AuthorizationService
     private let coordinator: AppCoordinator
     
@@ -68,6 +29,20 @@ final class AuthorizationViewModel: ObservableObject {
     
     @Published var name: String = .init()
     
+    //MARK: - Authentication properties
+    var signInActive: Bool {
+        email.contains("@")
+        && email.count > 7
+        && password.count > 6
+    }
+    
+    var signUpActive: Bool {
+        name.count > 3
+        && email.contains("@")
+        && email.count > 7
+        && password.count > 6
+    }
+    //MARK: - Init
     init(
         authorizationService: AuthorizationService,
         coordinator: AppCoordinator
@@ -76,16 +51,7 @@ final class AuthorizationViewModel: ObservableObject {
         self.coordinator = coordinator
     }
     
-    func forgotPassword() {
-        state = .forgotPass
-    }
-    
-    var signInActive: Bool {
-        email.contains("@")
-        && email.count > 7
-        && password.count > 8
-    }
-    
+    //MARK: - Navigation methods
     func signIn() async {
         guard
             let email = Email(email),
@@ -108,15 +74,41 @@ final class AuthorizationViewModel: ObservableObject {
         }
     }
     
-    func signUp() {
-        state = .signUp
+    func signUp() async {
+        guard
+        let email = Email(email),
+        let password = Password(password)
+    else {
+        return
+    }
+    
+    let credentials = Credentials(email: email, password: password)
+    let result = await authorizationService.signUp(with: credentials)
+    
+    await MainActor.run {
+        switch result {
+        case .success(let user):
+            coordinator.goTabbar(user)
+            
+        case .failure(let error):
+            state = .error(error)
+        }
+    }
     }
     
     func showSignIn() {
         state = .signIn
     }
+    
+    func showSignUp() {
+        state = .signUp
+    }
+    
+    func forgotPassword() {
+        state = .forgotPass
+    }
 }
-
+//MARK: - AuthorizationViewModel + enum State
 extension AuthorizationViewModel {
     //MARK: - State
     enum State: Equatable {
@@ -129,6 +121,5 @@ extension AuthorizationViewModel {
         static func == (lhs: Self, rhs: Self) -> Bool {
             String(describing: lhs) == String(describing: rhs)
         }
-        
     }
 }

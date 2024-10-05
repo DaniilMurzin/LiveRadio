@@ -74,27 +74,7 @@ struct SignInView: View {
                     .padding(.bottom)
             }
             
-            VStack {
-                HStack(spacing: 10) {
-                    Rectangle().frame(height: 1)
-                        .foregroundStyle(.ellipse9)
-                    Text(localization.connect)
-                        .foregroundStyle(.ellipse9)
-                        .lineLimit(1)
-                        .applyFonts(for: .montserratSmall)
-                    Rectangle().frame(height: 1)
-                        .foregroundStyle(.ellipse9)
-                }
-                .padding(.bottom)
-                
-                Button(action: {}) {
-                    Circle()
-                        .frame(width: 40, height: 40)
-                        .foregroundStyle(.googleIcon)
-                        .overlay(Image(.googlePlus))
-                        .padding(.bottom)
-                }
-            }
+            ConnectWithCustomView(text: localization.connect)
             
             ArrowButton(asyncAction: didTapSignIn)
                 .opacity(signInAction.isAvailable ? 1 : 0.8)

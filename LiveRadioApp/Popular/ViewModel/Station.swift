@@ -9,11 +9,13 @@ import Foundation
 
 struct Station: Hashable {
     
-    let title: String
+    let stationName: String
+    let genre: String
+    let numberOfVotes: Int
     
     static let preview = [
-        Self(title: "Station n1"),
-        Self(title: "Station n2"),
-        Self(title: "Station n3")
+        Self(stationName: "Station n2", genre: "POP", numberOfVotes: 2),
+        Self(stationName: "Station n3", genre: "ROCK", numberOfVotes: 2),
+        Self(stationName: "Station n3", genre: "COUNTRY", numberOfVotes: 2)
     ]
 }

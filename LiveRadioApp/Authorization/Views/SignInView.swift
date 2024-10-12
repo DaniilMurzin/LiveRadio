@@ -7,25 +7,17 @@
 
 import SwiftUI
 
-extension Button {
-    init(
-        asyncAction: @escaping () async throws -> Sendable,
-        @ViewBuilder label: () -> Label
-    ) {
-        self.init(
-            action: { Task(operation: asyncAction) },
-            label: label
-        )
-    }
-}
-
 struct SignInView: View {
+
+    //MARK: - Typealias
     typealias Action = () -> Void
     typealias AsyncAction = () async -> Sendable
     
+    //MARK: - Drawing
     private enum Drawing {
         static let playLabel = CGSize(width: 58, height: 58)
     }
+    
     //MARK: - Properties
     @Binding  var email: String
     @Binding  var password: String
@@ -42,7 +34,8 @@ struct SignInView: View {
             
             Image(.playLabel)
                 .resizable()
-                .frame(width: Drawing.playLabel.width, height: Drawing.playLabel.height)
+                .frame(width: Drawing.playLabel.width,
+                    height: Drawing.playLabel.height)
                 .padding(.top)
             
             Text(localization.SignIn)
@@ -93,10 +86,10 @@ struct SignInView: View {
         }
         _ = await action()
     }
+    
 }
-
+//MARK: - SignInView + SignInAction
 extension SignInView {
-    //MARK: - SignIn
     enum SignInAction {
         case available(AsyncAction)
         case unavailable

@@ -23,4 +23,5 @@ struct DetailsContentView: View {
                     didTapForwardButton: viewModel.didTapForwardButton,
                     didTapPlayButton: viewModel.didTapPlayButton)
     }
+    
 }

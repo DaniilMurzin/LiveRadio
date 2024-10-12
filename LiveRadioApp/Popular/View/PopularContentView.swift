@@ -19,6 +19,14 @@ struct PopularContentView: View {
     
     //MARK: - body
     var body: some View {
-        PopularView(title: "Plat", stations: [Station(title: "Rock")])
+        PopularView(didTapbackButton: {},
+                    didTapBackwardButton: {},
+                    didTapForwardButton: {},
+                    didTapPlayButton: {},
+                    stations: [
+                        Station(stationName: "Radio1", genre: "POP", numberOfVotes: 40),
+                        Station(stationName: "Radio1", genre: "POP", numberOfVotes: 40)
+                    ]
+        )
     }
 }

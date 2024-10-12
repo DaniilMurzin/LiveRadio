@@ -8,41 +8,62 @@
 import SwiftUI
 
 struct PopularView: View {
+    
+    //MARK: - Drawing
     private enum Drawing {
         static let titleSize: CGFloat = 30
     }
+    
+    //MARK: - Properties
+    typealias Action = () -> Void
+    let didTapbackButton: Action
+    let didTapBackwardButton: Action
+    let didTapForwardButton: Action
+    let didTapPlayButton: Action
+    
+    let stations: [Station]
     
     private let columns = [
         GridItem(.flexible(), spacing: 5),
         GridItem(.flexible(), spacing: 5)
     ]
-
-    let title: String
-    let stations: [Station]
     
+    //MARK: - Body
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            Color(.mainBg).ignoresSafeArea()
-            LazyVStack(alignment: .leading) {
-                Text(title)
-                    .font(.system(size: Drawing.titleSize))
-                    .foregroundStyle(Color.white)
-                    .padding()
-                
-                LazyVGrid(columns: columns) {
-                    ForEach(stations, id:\.self) { station in
-                        PopularCell(station)
+        
+        ZStack {
+    
+            Color(.mainBg)
+                .ignoresSafeArea()
+            
+            VStack {
+                LazyVStack(alignment: .leading) {
+                    Text("Popular")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.horizontal)
+                    
+                    LazyVGrid(columns: columns) {
+                        ForEach(stations, id:\.self) { station in
+                            PopularCell(station)
+                        }
                     }
+                    .padding()
                 }
+                
+                PlayerView(backwardButtonAction: didTapbackButton, forwardButtonAction: didTapForwardButton, playButtonAction: didTapPlayButton)
             }
-            .padding(.horizontal)
+//            .padding()
         }
     }
 }
 
 #Preview {
     PopularView(
-        title: "Popular",
+        didTapbackButton: {},
+        didTapBackwardButton: {},
+        didTapForwardButton: {},
+        didTapPlayButton: {},
         stations: Station.preview
     )
 }

@@ -76,17 +76,11 @@ struct TrackButtonsView: View {
             }
         }
     }
-    
-    
 }
 
 #Preview {
-    MainBackground {
         PlayerView(
             backwardButtonAction: {},
             forwardButtonAction: {},
             playButtonAction: {})
-    }
 }
-
-

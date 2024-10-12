@@ -22,6 +22,9 @@ struct CustomFontModifier: ViewModifier {
         case textFiledText
         case montserratSmall
         case lightSystemText
+        case subtitle
+        case regular
+        case votes
     }
     
     var font: AppFonts
@@ -46,6 +49,12 @@ struct CustomFontModifier: ViewModifier {
             Font.custom("Montserrat-Italic", size: 11)
         case .lightSystemText:
             Font.system(size: 20, weight: .light)
+        case .subtitle:
+            Font.system(size: 30, weight: .light)
+        case .regular:
+            Font.system(size: 15, weight: .regular)
+        case .votes:
+            Font.system(size: 10, weight: .bold)
         }
     
         

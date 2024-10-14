@@ -16,9 +16,9 @@ struct PopularCell: View {
         static let favoriteButtonPadding: CGFloat = -8
     }
     
-    var station: Station
+    var station: StationTest
     
-    init(_ station: Station) {
+    init(_ station: StationTest) {
         self.station = station }
     
     var body: some View {
@@ -52,12 +52,14 @@ struct PopularCell: View {
             Image(.cell)
                 .padding(.top)
         }
+        .frame(width: 139, height: 139)
         .padding()
         .background(
             Color.white.opacity(0.3),
             in: RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 2)
         )
     }
+    
 }
 
 #Preview {

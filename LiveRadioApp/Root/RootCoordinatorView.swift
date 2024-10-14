@@ -28,8 +28,8 @@ struct RootCoordinatorView: View {
             
             case .onboarding:
                 factory.makeOnboarding()
-    
                     .transition(.move(edge: .leading))
+                
             case .authorization:
                 factory.makeAuthorization(coordinator: coordinator)
                     .transition(.move(edge: .leading))

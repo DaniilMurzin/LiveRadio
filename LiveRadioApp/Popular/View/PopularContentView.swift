@@ -24,8 +24,8 @@ struct PopularContentView: View {
                     didTapForwardButton: {},
                     didTapPlayButton: {},
                     stations: [
-                        Station(stationName: "Radio1", genre: "POP", numberOfVotes: 40),
-                        Station(stationName: "Radio1", genre: "POP", numberOfVotes: 40)
+                        StationTest(stationName: "Radio1", genre: "POP", numberOfVotes: 40),
+                        StationTest(stationName: "Radio1", genre: "POP", numberOfVotes: 40)
                     ]
         )
     }

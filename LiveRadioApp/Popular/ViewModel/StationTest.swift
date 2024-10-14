@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Station: Hashable {
+struct StationTest: Hashable {
     
     let stationName: String
     let genre: String

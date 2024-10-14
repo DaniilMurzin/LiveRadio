@@ -21,11 +21,11 @@ struct PopularView: View {
     let didTapForwardButton: Action
     let didTapPlayButton: Action
     
-    let stations: [Station]
+    let stations: [StationTest]
     
     private let columns = [
-        GridItem(.flexible(), spacing: 5),
-        GridItem(.flexible(), spacing: 5)
+        GridItem(.flexible(), spacing: 30),
+        GridItem(.flexible(), spacing: 30)
     ]
     
     //MARK: - Body
@@ -53,7 +53,7 @@ struct PopularView: View {
                 
                 PlayerView(backwardButtonAction: didTapbackButton, forwardButtonAction: didTapForwardButton, playButtonAction: didTapPlayButton)
             }
-//            .padding()
+            .padding()
         }
     }
 }
@@ -64,6 +64,6 @@ struct PopularView: View {
         didTapBackwardButton: {},
         didTapForwardButton: {},
         didTapPlayButton: {},
-        stations: Station.preview
+        stations: StationTest.preview
     )
 }

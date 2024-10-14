@@ -8,7 +8,24 @@
 import Foundation
 import FirebaseAuth
 
-final class NetworkService: AuthorizationService {
+#warning(
+"""
+1)может на анкорах добавить реализацию?
+2) Result или  throws ?  разница есть? или вкусовшина?
+""")
+
+final class NetworkService  {
+    let url  = "http://all.api.radio-browser.info/json/stations/topvote?limit=10"
+//    func fetchPopular(from url: String) async -> Result<[StationTest], any Error> {
+//        
+//        
+//    }
+    
+    
+}
+
+//MARK: - NetworkService + AuthorizationService
+extension NetworkService: AuthorizationService {
     
     //MARK: - Authorization methods
     func signUp(with credentials: Credentials) async -> Result<User, any Error> {
@@ -40,4 +57,5 @@ final class NetworkService: AuthorizationService {
     private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
         User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
     }
+    
 }

@@ -12,14 +12,29 @@ import FirebaseAuth
 """
 1)может на анкорах добавить реализацию?
 2) Result или  throws ?  разница есть? или вкусовшина?
+3) API.scheme покрывать протоколом и делать DI избыточно? 
 """)
 
 final class NetworkService  {
-    let url  = "http://all.api.radio-browser.info/json/stations/topvote?limit=10"
-//    func fetchPopular(from url: String) async -> Result<[StationTest], any Error> {
-//        
-//        
-//    }
+    //MARK: - properties
+    private let session: URLSession
+    private let apiСonfiguration: APIConfiguration
+    
+    init(session: URLSession, APIConfiguration: APIConfiguration) {
+        self.session = session
+        self.apiСonfiguration = APIConfiguration
+    }
+
+    
+  private func createURLRequest(for endpoint: Endpoint) -> URL?  {
+        
+      var components = URLComponents()
+      components.scheme = apiСonfiguration.scheme
+      components.host = apiСonfiguration.host
+      components.path = endpoint.path
+      
+      return components.url
+    }
     
     
 }

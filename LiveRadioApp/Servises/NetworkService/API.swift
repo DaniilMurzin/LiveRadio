@@ -5,10 +5,14 @@
 //  Created by Daniil Murzin on 14.10.2024.
 //
 
-
 import Foundation
 
-struct API {
-    static let scheme = "https"
-    static let host = "all.api.radio-browser.info/json/"
+protocol APIConfiguration {
+    var scheme: String { get }
+    var host: String { get }
+}
+
+struct API: APIConfiguration {
+    let scheme = "https"
+    let host = "all.api.radio-browser.info/json/"
 }

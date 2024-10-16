@@ -6,7 +6,8 @@
 //
 
 import Foundation
-//import FirebaseAuth
+import FirebaseAuth
+
 
 #warning(
 """
@@ -20,9 +21,9 @@ final class NetworkService  {
     private let session: URLSession
     private let apiСonfiguration: APIConfiguration
     
-    init(session: URLSession, APIConfiguration: APIConfiguration) {
+    init(session: URLSession = .shared, apiConfiguration: APIConfiguration) {
         self.session = session
-        self.apiСonfiguration = APIConfiguration
+        self.apiСonfiguration = apiConfiguration
     }
 
     
@@ -32,12 +33,10 @@ final class NetworkService  {
       components.scheme = apiСonfiguration.scheme
       components.host = apiСonfiguration.host
       components.path = endpoint.path
-      
       components.queryItems = makeParameters(endpoint: endpoint).compactMap {
               
           URLQueryItem(name: $0.key, value: $0.value)
       }
-      
       return components.url
     }
     
@@ -57,7 +56,9 @@ final class NetworkService  {
         for url: URL,
         using session: URLSession = .shared
     ) async throws -> T {
+        
         let request = URLRequest(url: url)
+        print(request.url)
         
         let (data,response) = try await session.data(for: request)
         
@@ -83,56 +84,47 @@ final class NetworkService  {
         }
     }
     
-    func fetchTop(for request: String) async throws -> [Station] {
+    func fetchTop() async throws -> [Station] {
         guard let url = createURL(for: .popular) else {
                throw NetworkError.invalidURL
            }
-           
+        print("URL создан: \(url.absoluteString)")
            return try await makeRequest(for: url)
-       }
-//
-//    func fetchPopular(for request: String) async throws -> [Station] {
-//        guard let url = createURL(for: .popular) else { throw
-//            NetworkError.invalidURL
-//        }
-
-        
+       }        
     }
-    
-//}
 
-////MARK: - NetworkService + AuthorizationService
-//extension NetworkService: AuthorizationService {
-//
-//    //MARK: - Authorization methods
-//    func signUp(with credentials: Credentials) async -> Result<User, any Error> {
-//        do {
-//            let authResult = try await Auth.auth().createUser(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
-//
-//            let user = mapFirebaseUser(authResult.user)
-//            return .success(user)
-//        } catch {
-//
-//            return .failure(error)
-//        }
-//    }
-//
-//
-//    func signIn(with credentials: Credentials) async -> Result<User, any Error> {
-//
-//        do {
-//            let authResult = try await Auth.auth().signIn(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
-//
-//            let user = mapFirebaseUser(authResult.user)
-//            return .success(user)
-//        } catch {
-//
-//            return .failure(error)
-//        }
-//    }
-//
-//    private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
-//        User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
-//    }
-//
-//}
+//MARK: - NetworkService + AuthorizationService
+extension NetworkService: AuthorizationService {
+
+    //MARK: - Authorization methods
+    func signUp(with credentials: Credentials) async -> Result<User, any Error> {
+        do {
+            let authResult = try await Auth.auth().createUser(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
+
+            let user = mapFirebaseUser(authResult.user)
+            return .success(user)
+        } catch {
+
+            return .failure(error)
+        }
+    }
+
+
+    func signIn(with credentials: Credentials) async -> Result<User, any Error> {
+
+        do {
+            let authResult = try await Auth.auth().signIn(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
+
+            let user = mapFirebaseUser(authResult.user)
+            return .success(user)
+        } catch {
+
+            return .failure(error)
+        }
+    }
+
+    private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
+        User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
+    }
+
+}

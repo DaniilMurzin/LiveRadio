@@ -10,5 +10,7 @@ import Foundation
 enum NetworkError: Error {
     case invalidURL
     case noData
-    case decodingError
+    case decodingError(Error)
+    case serverError(statusCode: Int, message: String)
+    case unknown(Error)
 }

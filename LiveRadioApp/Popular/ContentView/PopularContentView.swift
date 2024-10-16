@@ -23,10 +23,10 @@ struct PopularContentView: View {
                     didTapBackwardButton: {},
                     didTapForwardButton: {},
                     didTapPlayButton: {},
-                    stations: [
-                        StationTest(stationName: "Radio1", genre: "POP", numberOfVotes: 40),
-                        StationTest(stationName: "Radio1", genre: "POP", numberOfVotes: 40)
-                    ]
+                    stations: viewModel.fetchedStations
         )
+        .onAppear {
+            viewModel.fetchPopularStations()
+        }
     }
 }

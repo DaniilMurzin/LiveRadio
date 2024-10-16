@@ -143,6 +143,14 @@
 			path = FactorySpy;
 			sourceTree = "<group>";
 		};
+		927482A32CBF94E900291908 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				92E07D1C2C86109000B59386 /* PopularContentView.swift */,
+			);
+			path = ContentView;
+			sourceTree = "<group>";
+		};
 		9281A45D2CB190AD00F42612 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				92E07D1B2C86109000B59386 /* PopularCell.swift */,
-				92E07D1C2C86109000B59386 /* PopularContentView.swift */,
 				92E07D1D2C86109000B59386 /* PopularView.swift */,
 			);
 			path = View;
@@ -269,6 +276,7 @@
 		92E07D222C86109000B59386 /* Popular */ = {
 			isa = PBXGroup;
 			children = (
+				927482A32CBF94E900291908 /* ContentView */,
 				92E07D1E2C86109000B59386 /* View */,
 				92E07D212C86109000B59386 /* ViewModel */,
 			);

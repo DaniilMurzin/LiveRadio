@@ -26,7 +26,6 @@ final class AuthorizationViewModel: ObservableObject {
     
     @Published var email: String = .init()
     @Published var password: String = .init()
-    
     @Published var name: String = .init()
     
     //MARK: - Authentication properties

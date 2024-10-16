@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - FRoot
 final class FRoot {
     private let repository = AppRepository()
-    private let networkService = NetworkService()
+    private let networkService = NetworkService(apiConfiguration: API())
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -42,7 +42,7 @@ extension FRoot: RootFactory {
     }
     
     func makePopular() -> PopularContentView {
-        let viewModel = PopularViewModel()
+        let viewModel = PopularViewModel(networkService: networkService)
         return PopularContentView(viewModel)
     }
     

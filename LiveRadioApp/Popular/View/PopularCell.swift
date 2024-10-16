@@ -16,9 +16,9 @@ struct PopularCell: View {
         static let favoriteButtonPadding: CGFloat = -8
     }
     
-    var station: StationTest
+    var station: Station
     
-    init(_ station: StationTest) {
+    init(_ station: Station) {
         self.station = station }
     
     var body: some View {
@@ -31,7 +31,7 @@ struct PopularCell: View {
                         .frame(width: Drawing.playButton.width, height: Drawing.playButton.height)
                 }
         #warning("прокинуть локализацию")
-                Text("Votes \(station.numberOfVotes)")
+                Text("Votes \(station.votes)")
                     .foregroundStyle(.white)
                     .applyFonts(for: .votes)
                     .frame(width: Drawing.votesText.width, height: Drawing.votesText.height)
@@ -44,10 +44,10 @@ struct PopularCell: View {
                 .padding(.leading, Drawing.favoriteButtonPadding)
             }
             
-            Text(station.genre)
+            Text(station.tags ?? "POP")
                 .applyFonts(for: .subtitle)
                 .foregroundStyle(Color.white)
-            Text(station.stationName)
+            Text(station.name ?? "Radio Live")
                 .applyFonts(for: .regular)
             Image(.cell)
                 .padding(.top)
@@ -65,6 +65,6 @@ struct PopularCell: View {
 #Preview {
     ZStack {
         Color.mainBg
-        PopularCell(.preview[0])
+        PopularCell(Station(name: "Test",tags: "POPULAR", votes: 4 ))
     }
 }

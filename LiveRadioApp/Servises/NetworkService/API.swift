@@ -14,5 +14,5 @@ protocol APIConfiguration {
 
 struct API: APIConfiguration {
     let scheme = "https"
-    let host = "all.api.radio-browser.info/json/"
+    let host = "nl1.api.radio-browser.info"
 }

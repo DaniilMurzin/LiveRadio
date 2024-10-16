@@ -21,7 +21,7 @@ struct PopularView: View {
     let didTapForwardButton: Action
     let didTapPlayButton: Action
     
-    let stations: [StationTest]
+    let stations: [Station]
     
     private let columns = [
         GridItem(.flexible(), spacing: 30),
@@ -64,6 +64,6 @@ struct PopularView: View {
         didTapBackwardButton: {},
         didTapForwardButton: {},
         didTapPlayButton: {},
-        stations: StationTest.preview
+        stations: [Station(name: "radio", tags: "POP", votes: 10)]
     )
 }

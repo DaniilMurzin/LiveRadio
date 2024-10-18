@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#warning("нужно инициализировать или оставить nil?")
+#warning("Как правильно инициализороть Station?")
 struct Station: Codable, Sendable, Hashable {
     let changeuuid: String?
     let stationuuid: String?

@@ -8,32 +8,33 @@
 import Foundation
 import FirebaseAuth
 
-
+protocol StationDataService {
+    func fetchTop() async throws -> [Station]
+}
 #warning(
 """
 1)может на анкорах добавить реализацию?
-2) Result или  throws ?  разница есть? или вкусовшина?
-3) API.scheme покрывать протоколом и делать DI избыточно?
+2) API покрывать протоколом и делать DI избыточно? 
 """)
 
 final class NetworkService  {
     //MARK: - properties
     private let session: URLSession
     private let apiСonfiguration: APIConfiguration
+    private let decoder = JSONDecoder()
     
     init(session: URLSession = .shared, apiConfiguration: APIConfiguration) {
         self.session = session
         self.apiСonfiguration = apiConfiguration
     }
 
-    
   private func createURL(for endpoint: Endpoint) -> URL?  {
         
       var components = URLComponents()
       components.scheme = apiСonfiguration.scheme
       components.host = apiСonfiguration.host
       components.path = endpoint.path
-      components.queryItems = makeParameters(endpoint: endpoint).compactMap {
+      components.queryItems = makeParameters(endpoint: endpoint).map {
               
           URLQueryItem(name: $0.key, value: $0.value)
       }
@@ -58,7 +59,6 @@ final class NetworkService  {
     ) async throws -> T {
         
         let request = URLRequest(url: url)
-        print(request.url)
         
         let (data,response) = try await session.data(for: request)
         
@@ -75,7 +75,6 @@ final class NetworkService  {
         }
         
         do {
-            let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let decodedData = try decoder.decode(T.self, from: data)
             return decodedData
@@ -83,24 +82,33 @@ final class NetworkService  {
             throw NetworkError.decodingError(error)
         }
     }
+}
+
+//MARK: - NetworkService + StationDataService
+extension NetworkService: StationDataService {
     
     func fetchTop() async throws -> [Station] {
         guard let url = createURL(for: .popular) else {
                throw NetworkError.invalidURL
            }
-        print("URL создан: \(url.absoluteString)")
+        
            return try await makeRequest(for: url)
-       }        
-    }
+       }
+}
+
 
 //MARK: - NetworkService + AuthorizationService
 extension NetworkService: AuthorizationService {
 
     //MARK: - Authorization methods
     func signUp(with credentials: Credentials) async -> Result<User, any Error> {
+        
         do {
-            let authResult = try await Auth.auth().createUser(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
-
+            let authResult = try await Auth.auth().createUser(
+                withEmail: credentials.email.wrapped,
+                password: credentials.password.wrapped
+            )
+            
             let user = mapFirebaseUser(authResult.user)
             return .success(user)
         } catch {
@@ -126,5 +134,4 @@ extension NetworkService: AuthorizationService {
     private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
         User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
     }
-
 }

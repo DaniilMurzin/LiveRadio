@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomAuthTextField: View {
+struct AuthTextField: View {
     
     @Binding var text: String
     var placeholder: String
@@ -94,7 +94,7 @@ struct CustomAuthTextField_Previews: PreviewProvider {
     static var previews: some View {
         @State var emailText = ""
         
-        CustomAuthTextField(text: $emailText, placeholder: "Your Email", labelText: "Email", isSecured: true)
+        AuthTextField(text: $emailText, placeholder: "Your Email", labelText: "Email", isSecured: true)
             .background(Color.mainBg)
     }
 }

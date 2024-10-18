@@ -43,20 +43,20 @@ struct SignUpView: View {
                 .applyFonts(for: .buttonText)
                 .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $name,
                 placeholder: localization.yourName,
                 labelText: localization.name)
             .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $email,
                 placeholder: localization.yourEmail,
                 labelText: localization.email)
             .keyboardType(.emailAddress)
             .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $password,
                 placeholder: localization.yourPassword,
                 labelText: localization.password,

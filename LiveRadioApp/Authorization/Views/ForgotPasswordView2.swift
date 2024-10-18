@@ -36,20 +36,20 @@ struct ForgotPasswordView2:  View {
                 .applyFonts(for: .largeTitle)
                 .padding(.bottom, Drawing.labelPadding)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $password,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.password,
                 isSecured: true)
             .padding(.bottom)
-            CustomAuthTextField(
+            AuthTextField(
                 text: $confirmPassword,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.confirm,
                 isSecured: true)
             .padding(.bottom)
             
-            CustomButtonAuth(title: Drawing.changePassword)
+            ButtonAuth(title: Drawing.changePassword)
                 .padding(.top)
             
             Spacer()

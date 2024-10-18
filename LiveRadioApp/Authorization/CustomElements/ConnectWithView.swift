@@ -1,5 +1,5 @@
 //
-//  ConnectWithCustomView.swift
+//  ConnectWithView.swift
 //  LiveRadioApp
 //
 //  Created by Daniil Murzin on 05.10.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ConnectWithCustomView: View {
+struct ConnectWithView: View {
     let text: String
     
     var body: some View {
@@ -36,5 +36,5 @@ struct ConnectWithCustomView: View {
 }
 
 #Preview {
-    ConnectWithCustomView(text: "Connect with")
+    ConnectWithView(text: "Connect with")
 }

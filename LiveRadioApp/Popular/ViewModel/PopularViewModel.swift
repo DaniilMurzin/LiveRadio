@@ -10,13 +10,14 @@ import Foundation
 final class PopularViewModel: ObservableObject {
     
     //MARK: - Properties
-    let networkService: NetworkService
+    let networkService: StationDataService
     @Published var fetchedStations: [Station] = .init()
     
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
+    //MARK: - Network
     func fetchPopularStations() {
         Task {
             do {

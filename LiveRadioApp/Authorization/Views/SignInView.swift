@@ -44,7 +44,7 @@ struct SignInView: View {
                 .applyFonts(for: .buttonText)
                 .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $email,
                 placeholder: localization.yourEmail,
                 labelText: localization.email
@@ -52,7 +52,7 @@ struct SignInView: View {
             .keyboardType(.emailAddress)
             .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $password,
                 placeholder: localization.yourPassword,
                 labelText: localization.password,
@@ -67,7 +67,7 @@ struct SignInView: View {
                     .padding(.bottom)
             }
             
-            ConnectWithCustomView(text: localization.connect)
+            ConnectWithView(text: localization.connect)
             
             ArrowButton(asyncAction: didTapSignIn)
                 .opacity(signInAction.isAvailable ? 1 : 0.8)

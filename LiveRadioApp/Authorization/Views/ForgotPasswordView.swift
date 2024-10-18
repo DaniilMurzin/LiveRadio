@@ -36,14 +36,14 @@ struct ForgotPasswordView: View {
                 .applyFonts(for: .largeTitle)
                 .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $email,
                 placeholder: Drawing.yourEmail,
                 labelText: Drawing.email)
             .keyboardType(.emailAddress)
             .padding(.bottom)
             
-            CustomButtonAuth(title: Drawing.sent)
+            ButtonAuth(title: Drawing.sent)
                 .padding(.top)
             
             Spacer()

@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-protocol RootFactory {
-    func makeOnboarding() -> OnboardingContentView
-    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
-    func makePopular() -> PopularContentView
-    func makeDetails() -> DetailsContentView
-    func makeTabBar() -> TabBarView
-}
-
 final class RootCoordinator: ObservableObject {
     let factory: RootFactory
     

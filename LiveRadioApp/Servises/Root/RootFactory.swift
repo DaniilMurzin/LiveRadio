@@ -7,10 +7,17 @@
 
 import SwiftUI
 
-// MARK: - FRoot
+protocol RootFactory {
+    func makeOnboarding() -> OnboardingContentView
+    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
+    func makePopular() -> PopularContentView
+    func makeDetails() -> DetailsContentView
+    func makeTabBar() -> TabBarView
+}
+
 final class FRoot {
     private let repository = AppRepository()
-    private let networkService = NetworkService(apiConfiguration: API())
+    private let networkService = NetworkService()
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -51,7 +58,6 @@ extension FRoot: RootFactory {
         return DetailsContentView(viewModel)
     }
 }
-
 
 final class AppRepository: Repository {
     func fetchOnboarding() -> [String] {

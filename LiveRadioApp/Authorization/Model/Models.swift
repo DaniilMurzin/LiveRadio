@@ -19,7 +19,7 @@ struct Email: Equatable {
     }
     
     static func parce(_ email: String) -> Result<Email, EmailError> {
-        .failure(.toShort)
+        .failure(.tooShort)
     }
 }
 
@@ -40,7 +40,7 @@ struct Credentials: Equatable {
     let password: Password
 }
 
-#warning("Не понял зачем здесь прайвет инит? чтобы через статик методы создавать юзера?")
+#warning("Не понял зачем здесь прайвет инит?")
 struct User {
     init(id: String, email: String) {
         self.id = id
@@ -52,6 +52,6 @@ struct User {
 }
 
 enum EmailError: Error {
-    case toShort
+    case tooShort
     case nonEmail
 }

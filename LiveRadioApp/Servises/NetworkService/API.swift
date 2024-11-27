@@ -7,12 +7,7 @@
 
 import Foundation
 
-protocol APIConfiguration {
-    var scheme: String { get }
-    var host: String { get }
-}
-
-struct API: APIConfiguration {
+struct API {
     let scheme = "https"
     let host = "nl1.api.radio-browser.info"
 }

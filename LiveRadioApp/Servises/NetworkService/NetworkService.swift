@@ -14,31 +14,25 @@ protocol StationDataService {
 #warning(
 """
 1)может на анкорах добавить реализацию?
-2) API покрывать протоколом и делать DI избыточно? 
 """)
 
 final class NetworkService  {
     //MARK: - properties
-    private let session: URLSession
-    private let apiСonfiguration: APIConfiguration
+    private let session: URLSession = .shared
+    private let apiСonfiguration = API()
     private let decoder = JSONDecoder()
     
-    init(session: URLSession = .shared, apiConfiguration: APIConfiguration) {
-        self.session = session
-        self.apiСonfiguration = apiConfiguration
-    }
-
-  private func createURL(for endpoint: Endpoint) -> URL?  {
+    private func createURL(for endpoint: Endpoint) -> URL?  {
         
-      var components = URLComponents()
-      components.scheme = apiСonfiguration.scheme
-      components.host = apiСonfiguration.host
-      components.path = endpoint.path
-      components.queryItems = makeParameters(endpoint: endpoint).map {
-              
-          URLQueryItem(name: $0.key, value: $0.value)
-      }
-      return components.url
+        var components = URLComponents()
+        components.scheme = apiСonfiguration.scheme
+        components.host = apiСonfiguration.host
+        components.path = endpoint.path
+        components.queryItems = makeParameters(endpoint: endpoint).map {
+            
+            URLQueryItem(name: $0.key, value: $0.value)
+        }
+        return components.url
     }
     
     private func makeParameters(endpoint: Endpoint) -> [String:String] {
@@ -64,7 +58,7 @@ final class NetworkService  {
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.noData
-              }
+        }
         
         if !(200...299).contains(httpResponse.statusCode) {
             throw NetworkError.serverError(statusCode: httpResponse.statusCode, message: "Server error occurred")
@@ -89,17 +83,17 @@ extension NetworkService: StationDataService {
     
     func fetchTop() async throws -> [Station] {
         guard let url = createURL(for: .popular) else {
-               throw NetworkError.invalidURL
-           }
+            throw NetworkError.invalidURL
+        }
         
-           return try await makeRequest(for: url)
-       }
+        return try await makeRequest(for: url)
+    }
 }
 
 
 //MARK: - NetworkService + AuthorizationService
 extension NetworkService: AuthorizationService {
-
+    
     //MARK: - Authorization methods
     func signUp(with credentials: Credentials) async -> Result<User, any Error> {
         
@@ -112,25 +106,25 @@ extension NetworkService: AuthorizationService {
             let user = mapFirebaseUser(authResult.user)
             return .success(user)
         } catch {
-
+            
             return .failure(error)
         }
     }
-
-
+    
+    
     func signIn(with credentials: Credentials) async -> Result<User, any Error> {
-
+        
         do {
             let authResult = try await Auth.auth().signIn(withEmail: credentials.email.wrapped, password: credentials.password.wrapped)
-
+            
             let user = mapFirebaseUser(authResult.user)
             return .success(user)
         } catch {
-
+            
             return .failure(error)
         }
     }
-
+    
     private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
         User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
     }

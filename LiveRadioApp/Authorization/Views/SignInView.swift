@@ -19,8 +19,8 @@ struct SignInView: View {
     }
     
     //MARK: - Properties
-    @Binding  var email: String
-    @Binding  var password: String
+    @Binding var email: String
+    @Binding var password: String
     
     let signInAction: SignInAction
     
@@ -60,7 +60,6 @@ struct SignInView: View {
             )
             .padding(.bottom)
             
-            
             Button(action: didTapForgotPassword) {
                 Text(localization.forgotPassword)
                     .foregroundStyle(.gray)
@@ -96,7 +95,6 @@ extension SignInView {
         
         var isAvailable: Bool {
             if case .available = self { return true }
-            
             return false
         }
     }

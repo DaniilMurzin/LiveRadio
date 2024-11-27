@@ -172,6 +172,7 @@
 		92BACF402CAFF4C300DC3C34 /* Servises */ = {
 			isa = PBXGroup;
 			children = (
+				92E07D182C86109000B59386 /* Root */,
 				923D56642CBD5EAC00797F67 /* NetworkService */,
 				923D566E2CBD70C000797F67 /* FactorySpy */,
 			);
@@ -204,7 +205,6 @@
 				92E07D3C2C888A6300B59386 /* Info.plist */,
 				92BACF402CAFF4C300DC3C34 /* Servises */,
 				92E07DDE2C985FFA00B59386 /* TabBar */,
-				92E07D182C86109000B59386 /* Root */,
 				92E07DE42C9AD51200B59386 /* Details */,
 				92E07D1A2C86109000B59386 /* Authorization */,
 				92E07D142C86109000B59386 /* Onboarding */,

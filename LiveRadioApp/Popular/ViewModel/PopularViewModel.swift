@@ -12,6 +12,8 @@ final class PopularViewModel: ObservableObject {
     //MARK: - Properties
     let networkService: StationDataService
     @Published var fetchedStations: [Station] = .init()
+    @Published var name: String = .init()
+    @Published var volume: Double = 0
     
     init(networkService: StationDataService) {
         self.networkService = networkService

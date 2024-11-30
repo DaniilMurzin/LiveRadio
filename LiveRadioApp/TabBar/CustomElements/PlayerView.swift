@@ -34,15 +34,15 @@ struct PlayButtonView: View {
                 PlayerButtonsShape()
                     .stroke(lineWidth: 1)
                     .frame(width: 127, height: 127)
-                    .foregroundColor(.ellipse8)
+                    .foregroundColor(.eclipse8)
                 
                 PlayerButtonsShape()
                     .stroke(lineWidth: 1)
                     .frame(width: 111, height: 111)
-                    .foregroundColor(.ellipse6)
+                    .foregroundColor(.eclipse6)
                 
                 PlayerButtonsShape()
-                    .fill(.ellipse8)
+                    .fill(.eclipse8)
                     .frame(width: 89, height: 89)
                 
                 Image(systemName: "play.fill")

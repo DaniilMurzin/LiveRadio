@@ -41,7 +41,7 @@ final class NetworkService  {
         
         switch endpoint {
         case .popular:
-            parameters["limit"] = "20"
+            parameters["limit"] = "6"
             parameters["hidebroken"] = "true"
         }
         return parameters

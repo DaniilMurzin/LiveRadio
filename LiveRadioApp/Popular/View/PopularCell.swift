@@ -44,15 +44,15 @@ struct PopularCell: View {
                 .padding(.leading, Drawing.favoriteButtonPadding)
             }
             
-            Text(station.tags ?? "POP")
+            Text(station.name ?? "POP")
                 .applyFonts(for: .subtitle)
                 .foregroundStyle(Color.white)
-            Text(station.name ?? "Radio Live")
+            Text(station.tags ?? "Radio Live")
                 .applyFonts(for: .regular)
             Image(.cell)
                 .padding(.top)
         }
-        .frame(width: 139, height: 139)
+        .frame(width: 119, height: 119)
         .padding()
         .background(
             Color.white.opacity(0.3),

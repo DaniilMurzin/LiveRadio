@@ -19,7 +19,7 @@ struct ButtonAuth: View {
                 .foregroundColor(.white)
                 .frame(width: 335, height: 72)
                 .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
-                .background(.ellipse6)
+                .background(.eclipse6)
         }
     }
     

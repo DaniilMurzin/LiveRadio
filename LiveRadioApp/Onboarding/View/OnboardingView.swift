@@ -54,7 +54,7 @@ struct OnboardingView: View {
                     .applyFonts(for: .buttonText)
                     .foregroundColor(.white)
                     .frame(width: LocalConstants.buttonFrame.width, height: LocalConstants.buttonFrame.height)
-                    .background(Color.ellipse8)
+                    .background(Color.eclipse8)
                     .cornerRadius(10)
                     .padding(.top, LocalConstants.buttonTopPadding)
                     .padding(.leading, LocalConstants.buttonLeadingPadding)

@@ -14,13 +14,13 @@ struct ConnectWithView: View {
         VStack {
             HStack(spacing: 10) {
                 Rectangle().frame(height: 1)
-                    .foregroundStyle(.ellipse9)
+                    .foregroundStyle(.eclipse9)
                 Text(text)
-                    .foregroundStyle(.ellipse9)
+                    .foregroundStyle(.eclipse9)
                     .lineLimit(1)
                     .applyFonts(for: .montserratSmall)
                 Rectangle().frame(height: 1)
-                    .foregroundStyle(.ellipse9)
+                    .foregroundStyle(.eclipse9)
             }
             .padding(.bottom)
             

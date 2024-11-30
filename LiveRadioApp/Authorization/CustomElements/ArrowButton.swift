@@ -25,7 +25,7 @@ struct ArrowButton: View {
                 .overlay {
                     Image(.vector).aspectRatio(contentMode: .fit)
                 }
-                .foregroundStyle(.ellipse6)
+                .foregroundStyle(.eclipse6)
                 .padding(.bottom, 5)
                 
         }

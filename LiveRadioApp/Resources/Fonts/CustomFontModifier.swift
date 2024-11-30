@@ -25,6 +25,7 @@ struct CustomFontModifier: ViewModifier {
         case subtitle
         case regular
         case votes
+        case header
     }
     
     var font: AppFonts
@@ -55,6 +56,8 @@ struct CustomFontModifier: ViewModifier {
             Font.system(size: 15, weight: .regular)
         case .votes:
             Font.system(size: 10, weight: .bold)
+        case .header:
+            Font.system(size: 25, weight: .medium)
         }
     
         

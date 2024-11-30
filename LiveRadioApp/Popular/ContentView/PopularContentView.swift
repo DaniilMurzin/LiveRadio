@@ -19,7 +19,9 @@ struct PopularContentView: View {
     
     //MARK: - body
     var body: some View {
-        PopularView(didTapbackButton: {},
+        PopularView(name: $viewModel.name,
+                    volume: $viewModel.volume,
+                    didTapbackButton: {},
                     didTapBackwardButton: {},
                     didTapForwardButton: {},
                     didTapPlayButton: {},

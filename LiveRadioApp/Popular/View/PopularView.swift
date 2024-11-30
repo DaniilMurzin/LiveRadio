@@ -16,6 +16,8 @@ struct PopularView: View {
     
     //MARK: - Properties
     typealias Action = () -> Void
+    @Binding var name: String
+    @Binding var volume: Double
     let didTapbackButton: Action
     let didTapBackwardButton: Action
     let didTapForwardButton: Action
@@ -24,40 +26,46 @@ struct PopularView: View {
     let stations: [Station]
     
     private let columns = [
-        GridItem(.flexible(), spacing: 30),
-        GridItem(.flexible(), spacing: 30)
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20)
     ]
     
     //MARK: - Body
     var body: some View {
-        
         TabBarBackground {
-            ScrollView {
-                VStack {
-                    LazyVStack(alignment: .leading) {
+            HStack(alignment: .top, spacing: 16) {
+                VolumeSlider(volume: $volume)
+                    .padding(.top, 200)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        HeaderView(name: $name)
                         Text("Popular")
-                            .font(.headline)
+                            .applyFonts(for: .subtitle)
                             .foregroundColor(.white)
                             .padding(.horizontal)
                         
-                        LazyVGrid(columns: columns) {
-                            ForEach(stations, id:\.self) { station in
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(stations, id: \.self) { station in
                                 PopularCell(station)
                             }
+                        
                         }
-                        .padding()
                     }
-                    
                     PlayerView(
-                        backwardButtonAction: didTapbackButton, forwardButtonAction: didTapForwardButton, playButtonAction: didTapPlayButton)
+                        backwardButtonAction: didTapbackButton,
+                        forwardButtonAction: didTapForwardButton,
+                        playButtonAction: didTapPlayButton
+                    )
                 }
-                .padding()
             }
         }
     }
 }
+
 #Preview {
     PopularView(
+        name: .constant("Mark"),
+        volume: .constant(30),
         didTapbackButton: {},
         didTapBackwardButton: {},
         didTapForwardButton: {},
@@ -67,10 +75,6 @@ struct PopularView: View {
                     Station(name: "Classic FM", tags: "classical", votes: 210),
                     Station(name: "Rock Station", tags: "rock", votes: 500),
                     Station(name: "Dance Mix", tags: "dance", votes: 420),
-                    Station(name: "Chill Vibes", tags: "chill", votes: 150),
-                    Station(name: "Hip-Hop Beats", tags: "hip-hop", votes: 310),
-                    Station(name: "Country Roads", tags: "country", votes: 230),
-                    Station(name: "News 24", tags: "news", votes: 180),
-                    Station(name: "Sports Live", tags: "sports", votes: 260)  ]
+                    Station(name: "Chill Vibes", tags: "chill", votes: 150)]
     )
 }

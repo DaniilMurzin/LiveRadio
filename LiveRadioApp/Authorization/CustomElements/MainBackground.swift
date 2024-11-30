@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainBackground<V: View>: View {
-    private let padding: CGFloat = 40
+    private let padding: CGFloat = 30
     
     let content: () -> V
     

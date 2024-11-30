@@ -35,7 +35,7 @@ struct AuthorizationContentView: View {
     init(_ viewModel: AuthorizationViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-// алерты  через OnboardingBackgrView
+// алерты  через OnboardingBackgroundView
     var body: some View {
         ZStack {
             switch viewModel.state {

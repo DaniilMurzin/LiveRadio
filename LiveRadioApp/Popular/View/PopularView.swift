@@ -2,7 +2,7 @@
 //  PopularView.swift
 //  LiveRadioApp
 //
-//  Created by Шаповалов Илья on 30.08.2024.
+//  Created by Daniil Murzin on 30.08.2024.
 //
 
 import SwiftUI
@@ -33,30 +33,33 @@ struct PopularView: View {
     //MARK: - Body
     var body: some View {
         TabBarBackground {
-            HStack(alignment: .top, spacing: 16) {
-                VolumeSlider(volume: $volume)
-                    .padding(.top, 200)
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        HeaderView(name: $name)
-                        Text("Popular")
-                            .applyFonts(for: .subtitle)
-                            .foregroundColor(.white)
-                            .padding(.horizontal)
-                        
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(stations, id: \.self) { station in
-                                PopularCell(station)
+            VStack {
+                HeaderView(name: $name)
+                    .padding(.horizontal)
+                HStack {
+                    VolumeSlider(volume: $volume)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 30) {
+                            
+                            Text("Popular")
+                                .applyFonts(for: .subtitle)
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                            
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(stations, id: \.self) { station in
+                                    PopularCell(station)
+                                }
                             }
-                        
                         }
                     }
-                    PlayerView(
-                        backwardButtonAction: didTapbackButton,
-                        forwardButtonAction: didTapForwardButton,
-                        playButtonAction: didTapPlayButton
-                    )
+                    .padding(.trailing)
                 }
+                PlayerView(
+                    backwardButtonAction: didTapbackButton,
+                    forwardButtonAction: didTapForwardButton,
+                    playButtonAction: didTapPlayButton
+                )
             }
         }
     }

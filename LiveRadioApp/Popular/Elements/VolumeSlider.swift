@@ -13,7 +13,7 @@ struct VolumeSlider: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("\(Int(volume))%")
-                .font(.system(size: 12, weight: .regular))
+                .font(.system(size: 10, weight: .regular))
                 .foregroundColor(.white)
 
             ZStack {
@@ -32,7 +32,7 @@ struct VolumeSlider: View {
                 .padding(.top, 8)
         }
         .padding(.vertical, 16)
-        .frame(width: 50, height: 320)
+        .frame(width: 25, height: 320)
     }
 }
 

@@ -22,7 +22,6 @@ struct MainBackground<V: View>: View {
                 .resizable()
                 .ignoresSafeArea()
             VStack(alignment: .leading, content: content)
-                .padding(.horizontal, padding)
         }
         .background(Color.mainBg)
     }

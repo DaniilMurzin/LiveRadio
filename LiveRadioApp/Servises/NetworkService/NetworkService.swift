@@ -11,16 +11,18 @@ import FirebaseAuth
 protocol StationDataService {
     func fetchTop() async throws -> [Station]
 }
-#warning(
-"""
-1)может на анкорах добавить реализацию?
-""")
 
 final class NetworkService  {
+    
+    typealias NetworkRequest = (URLRequest) async throws -> (Data, URLResponse)
     //MARK: - properties
-    private let session: URLSession = .shared
+    private let networkRequest: NetworkRequest
     private let apiСonfiguration = API()
     private let decoder = JSONDecoder()
+    
+    init(networkRequest: @escaping NetworkRequest = URLSession.shared.data) {
+        self.networkRequest = networkRequest
+    }
     
     private func createURL(for endpoint: Endpoint) -> URL?  {
         
@@ -47,14 +49,11 @@ final class NetworkService  {
         return parameters
     }
     
-    private func makeRequest<T:Codable>(
-        for url: URL,
-        using session: URLSession = .shared
-    ) async throws -> T {
+    private func makeRequest<T:Codable>(for url: URL) async throws -> T {
         
         let request = URLRequest(url: url)
         
-        let (data,response) = try await session.data(for: request)
+        let (data,response) = try await networkRequest(request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.noData
@@ -96,7 +95,6 @@ extension NetworkService: AuthorizationService {
     
     //MARK: - Authorization methods
     func signUp(with credentials: Credentials) async -> Result<User, any Error> {
-        
         do {
             let authResult = try await Auth.auth().createUser(
                 withEmail: credentials.email.wrapped,
@@ -128,4 +126,11 @@ extension NetworkService: AuthorizationService {
     private func mapFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
         User(id: firebaseUser.uid, email: firebaseUser.email ?? "")
     }
+}
+
+fileprivate extension User {
+    init(_ firebaseUser: FirebaseAuth.User) {
+        self.init(id: firebaseUser.uid, email: firebaseUser.email ?? "")
+    }
+    
 }

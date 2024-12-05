@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#warning("Модель по разным файлам распределить")
 // Only Valid email!!!
 struct Email: Equatable {
     let wrapped: String

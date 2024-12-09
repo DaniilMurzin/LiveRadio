@@ -59,8 +59,6 @@ struct CustomFontModifier: ViewModifier {
         case .header:
             Font.system(size: 25, weight: .medium)
         }
-    
-        
     }
 }
 

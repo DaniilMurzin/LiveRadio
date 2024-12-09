@@ -30,7 +30,7 @@ struct PopularCell: View {
                         .foregroundStyle(Color.red)
                         .frame(width: Drawing.playButton.width, height: Drawing.playButton.height)
                 }
-        #warning("прокинуть локализацию")
+        //TODO: прокинуть локализацию")
                 Text("Votes \(Int(station.votes ?? 100))")
                     .foregroundStyle(.white)
                     .applyFonts(for: .votes)

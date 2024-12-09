@@ -12,15 +12,23 @@ import Foundation
 
 struct NetworkServiceTests {
     
-    //MARK: - StationDataService test
+    let userMock = UserMock(uid: "123", email: "test@example.com")
+    lazy var authResultMock = AuthDataResultMock(user: userMock)
+    
+    //MARK: - StationDataService tests
     @Test
     func fetchTop_success() async throws {
         // given - дано
         let expected = [Station()]
         let data = try JSONEncoder().encode(expected)
-        let sut = NetworkService { req in
-            (data, makeResponse(req))
-        }
+        
+        let dependencies = NetworkService.Dependencies(
+            request: { req in (data, makeResponse(req)) },
+            createUser: { _, _ in fatalError("Not implemented") },
+            signIn: { _, _ in fatalError("Not implemented") }
+        )
+        
+        let sut = NetworkService(dependencies)
         
         // when - взаимодействие
         let stations = try await sut.fetchTop()
@@ -31,31 +39,37 @@ struct NetworkServiceTests {
     
     @Test
     func fetchTop_badStatusCode() async throws {
-        
         // given - дано
-        let sut = NetworkService { req in
-            (Data(), makeResponse(req, statusCode: 400))
-        }
+        let expected = [Station()]
+        let data = try JSONEncoder().encode(expected)
+        let dependencies = NetworkService.Dependencies(
+            request: { req in (data, makeResponse(req, statusCode: 503)) },
+            createUser: { _, _ in fatalError("Not implemented") },
+            signIn: { _, _ in fatalError("Not implemented") }
+        )
         
-        // when - взаимодействие
+        let sut = NetworkService(dependencies)
+        
+        // when - проверка
         await #expect(performing: sut.fetchTop, throws: { error in
-            // then - проверка результата
+            // then - проверяем тип и содержание ошибки
             guard let networkErr = error as? NetworkError else {
-                throw NSError(domain: "test", code: 1)
+                throw NSError(domain: "test", code: 1, userInfo: ["message": "Unexpected error type"])
             }
-            return networkErr == NetworkError.serverError(
-                statusCode: 400,
-                message: "Server error occurred"
-            )
+            return networkErr == .serviceUnavailable
         })
     }
     
-    @Test func fetchTop_emptyData() async throws {
-        
+    @Test
+    func fetchTop_emptyData() async throws {
         // given - дано
-        let sut = NetworkService { req in
-            (Data(), makeResponse(req))
-        }
+        let dependencies = NetworkService.Dependencies(
+            request: { req in (Data(), makeResponse(req)) },
+            createUser: { _, _ in fatalError("Not implemented") },
+            signIn: { _, _ in fatalError("Not implemented") }
+        )
+        
+        let sut = NetworkService(dependencies)
         
         // when - взаимодействие
         await #expect(performing: sut.fetchTop, throws: { error in
@@ -67,12 +81,16 @@ struct NetworkServiceTests {
         })
     }
     
-    @Test func fetchTop_requestThrowError() async throws {
-       
+    @Test
+    func fetchTop_requestThrowError() async throws {
         // given - дано
-        let sut = NetworkService { _ in
-            throw URLError(.badURL)
-        }
+        let dependencies = NetworkService.Dependencies(
+            request: { _ in throw URLError(.badURL) },
+            createUser: { _, _ in fatalError("Not implemented") },
+            signIn: { _, _ in fatalError("Not implemented") }
+        )
+        
+        let sut = NetworkService(dependencies)
         
         // when - взаимодействие
         await #expect(performing: sut.fetchTop, throws: { error in
@@ -80,10 +98,6 @@ struct NetworkServiceTests {
             error is URLError
         })
     }
-}
-
-private extension NetworkServiceTests {
-    
     func makeResponse(_ req: URLRequest, statusCode: Int = 200) -> URLResponse {
         HTTPURLResponse(
             url: req.url!,
@@ -92,4 +106,21 @@ private extension NetworkServiceTests {
             headerFields: nil
         )!
     }
-}
+//    @Test
+//    func signup() async throws {
+//        // given - дано
+//        guard let email = Email("test@test.com"),
+//              let password = Password("test123") else {
+//            #expect(false, "Failed to create valid Email or Password")
+//            return
+//        }
+//        
+//        let credentials = Credentials(email: email, password: password)
+//        let dependencies = NetworkService.Dependencies(
+//            request: { _ in fatalError("Not implemented") },
+//            createUser: { _, _ in  },
+//            signIn: { _, _ in fatalError("Not implemented")
+//            })
+    }
+    //Когда замыкание захватывает self, а self — это изменяемая структура (struct), Swift запрещает такие действия. Это связано с тем, что структуры в Swift являются значимыми типами, и замыкание может захватить устаревшую копию self.
+        

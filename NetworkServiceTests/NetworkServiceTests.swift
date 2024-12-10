@@ -7,13 +7,14 @@
 
 import Testing
 import Foundation
+import FirebaseAuth
 
 @testable import LiveRadioApp
 
 struct NetworkServiceTests {
     
     let userMock = UserMock(uid: "123", email: "test@example.com")
-    lazy var authResultMock = AuthDataResultMock(user: userMock)
+//    lazy var authResultMock = AuthDataResultMock(user: userMock)
     
     //MARK: - StationDataService tests
     @Test
@@ -106,21 +107,41 @@ struct NetworkServiceTests {
             headerFields: nil
         )!
     }
+    
 //    @Test
-//    func signup() async throws {
-//        // given - дано
-//        guard let email = Email("test@test.com"),
-//              let password = Password("test123") else {
-//            #expect(false, "Failed to create valid Email or Password")
-//            return
-//        }
-//        
-//        let credentials = Credentials(email: email, password: password)
-//        let dependencies = NetworkService.Dependencies(
-//            request: { _ in fatalError("Not implemented") },
-//            createUser: { _, _ in  },
-//            signIn: { _, _ in fatalError("Not implemented")
-//            })
-    }
+//    func signUp_success() async throws {
+//         // given - дано
+//         guard let email = Email("test@example.com"),
+//               let password = Password("password123") else {
+//             #expect(false, "Failed to create valid Email or Password")
+//             return
+//         }
+//         
+//         let credentials = Credentials(email: email, password: password)
+//         let expectedUser = User(id: userMock.uid, email: userMock.email ?? "")
+//
+////         let authResultMock = AuthDataResultMock(user: userMock)
+//         
+//         let dependencies = NetworkService.Dependencies(
+//             request: { _ in fatalError("Not implemented") },
+//             createUser: { email, password in
+//                 return authResultMock
+//             signIn: { _, _ in fatalError("Not implemented") }
+//         )
+//         
+//         let sut = NetworkService(dependencies)
+//         
+//         // when - взаимодействие
+//         let result = await sut.signUp(with: credentials)
+//         
+//         // then - проверка результата
+//         switch result {
+//         case .success(let user):
+//             #expect(user == expectedUser, "The returned user does not match the expected user")
+//         case .failure(let error):
+//             throw NSError(domain: "test", code: 1, userInfo: ["message": "Unexpected failure: \(error)"])
+//         }
+//     }
+//    
     //Когда замыкание захватывает self, а self — это изменяемая структура (struct), Swift запрещает такие действия. Это связано с тем, что структуры в Swift являются значимыми типами, и замыкание может захватить устаревшую копию self.
-        
+}

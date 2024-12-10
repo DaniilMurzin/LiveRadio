@@ -106,7 +106,6 @@ private extension NetworkService {
         while retries < maxRetries {
             do {
                 let request = URLRequest(url: url)
-            #warning("Если инит делать только через зависимости, не могу понять как сюда прокидывать свой-во dependency")
                 let (data, response) = try await dependencies.request(request)
                 
                 guard !data.isEmpty else {

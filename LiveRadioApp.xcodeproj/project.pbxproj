@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		922906D52CFB27F200A4C59E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922906D42CFB27F200A4C59E /* HeaderView.swift */; };
 		922906D72CFB3C0E00A4C59E /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922906D62CFB3C0E00A4C59E /* VolumeSlider.swift */; };
+		9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C0702D097D6100C93F79 /* Extension + Result.swift */; };
 		92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */; };
 		92360FD12CA0191D009BAFF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD02CA0191D009BAFF6 /* FirebaseAuth */; };
 		92360FD32CA0191D009BAFF6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD22CA0191D009BAFF6 /* FirebaseFirestore */; };
@@ -16,7 +17,6 @@
 		923D56662CBD5F3200797F67 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D56652CBD5F3200797F67 /* Station.swift */; };
 		923D56692CBD6D4E00797F67 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D56682CBD6D4E00797F67 /* NetworkError.swift */; };
 		923D566B2CBD6FCC00797F67 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D566A2CBD6FCC00797F67 /* Endpoint.swift */; };
-		923D566D2CBD70A800797F67 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D566C2CBD70A800797F67 /* API.swift */; };
 		927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927482A42CBFBC2000291908 /* TabBarBackground.swift */; };
 		9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */; };
 		9281A45F2CB190C900F42612 /* Button+AsyncAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */; };
@@ -74,12 +74,12 @@
 		920A01652CFEE8280068EDD0 /* NetworkServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		922906D42CFB27F200A4C59E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		922906D62CFB3C0E00A4C59E /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
+		9233C0702D097D6100C93F79 /* Extension + Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Result.swift"; sourceTree = "<group>"; };
 		92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButtonsShape.swift; sourceTree = "<group>"; };
 		92360FD42CA01A77009BAFF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		923D56652CBD5F3200797F67 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		923D56682CBD6D4E00797F67 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		923D566A2CBD6FCC00797F67 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		923D566C2CBD70A800797F67 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		927482A42CBFBC2000291908 /* TabBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackground.swift; sourceTree = "<group>"; };
 		9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWithView.swift; sourceTree = "<group>"; };
 		9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+AsyncAction.swift"; sourceTree = "<group>"; };
@@ -163,9 +163,9 @@
 		923D56642CBD5EAC00797F67 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				9233C0702D097D6100C93F79 /* Extension + Result.swift */,
 				92BACF412CAFF4F800DC3C34 /* NetworkService.swift */,
 				923D566A2CBD6FCC00797F67 /* Endpoint.swift */,
-				923D566C2CBD70A800797F67 /* API.swift */,
 				923D56652CBD5F3200797F67 /* Station.swift */,
 				923D56682CBD6D4E00797F67 /* NetworkError.swift */,
 			);
@@ -575,6 +575,7 @@
 				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
 				92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */,
 				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
+				9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
 				92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */,
 				92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */,
@@ -591,7 +592,6 @@
 				92E07D262C86109000B59386 /* OnboardingViewModel.swift in Sources */,
 				927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */,
 				92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */,
-				923D566D2CBD70A800797F67 /* API.swift in Sources */,
 				92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
 				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
@@ -637,9 +637,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = abc.NetworkServiceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveRadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LiveRadioApp";
 			};
 			name = Debug;
@@ -657,9 +661,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = abc.NetworkServiceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveRadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LiveRadioApp";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -819,7 +827,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -861,7 +869,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

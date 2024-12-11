@@ -33,7 +33,6 @@ enum Endpoint {
                 URLQueryItem(name: "hidebroken", value: "true")
             ]
         }
-        
         return components.url
     }
 }

@@ -12,7 +12,7 @@ struct Station: Codable, Sendable, Hashable {
     let stationuuid: String
     let name: String
     let url: String
-    let urlResolved: String
+    let urlResolved: String?
     let homepage: String
     let favicon: String
     let tags: String

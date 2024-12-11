@@ -18,18 +18,28 @@ final class NetworkService {
     //MARK: - Dependencies
     struct Dependencies {
         var request: (URLRequest) async throws -> (Data, URLResponse)
-        var createUser: (String, String) async throws -> AuthDataResult
-        var signIn: (String, String) async throws -> AuthDataResult
+        var createUser: (String, String) async throws -> User
+        var signIn: (String, String) async throws -> User
         
         static var live: Self {
             
             return Dependencies(
                 request: URLSession.shared.data,
                 createUser: { email, password in
-                    try await Auth.auth().createUser(withEmail: email, password: password)
+                    try await Result {
+                        try await Auth.auth().createUser(withEmail: email, password: password)
+                    }
+                    .map(\.user)
+                    .map(User.init)
+                    .get()
                 },
                 signIn: { email, password in
-                    try await Auth.auth().signIn(withEmail: email, password: password)
+                    try await Result {
+                        try await Auth.auth().signIn(withEmail: email, password: password)
+                    }
+                    .map(\.user)
+                    .map(User.init)
+                    .get()
                 }
             )
         }
@@ -42,6 +52,7 @@ final class NetworkService {
     //MARK: - init(_:)
     init(_ dependencies: Dependencies = .live) {
         self.dependencies = dependencies
+        decoder.dateDecodingStrategy = .iso8601
     }
 }
 
@@ -52,7 +63,6 @@ extension NetworkService: StationDataService {
         guard let url = Endpoint.popular.createURL() else {
             throw NetworkError.invalidURL
         }
-        
         return try await makeRequest(for: url)
     }
 }
@@ -61,7 +71,6 @@ extension NetworkService: StationDataService {
 //MARK: - NetworkService + AuthorizationService
 extension NetworkService: AuthorizationService {
     
-    //MARK: - Authorization methods
     func signUp(with credentials: Credentials) async -> Result<User, Error> {
         await Result<Credentials, Error>
             .success(credentials)
@@ -79,23 +88,8 @@ extension NetworkService: AuthorizationService {
             .map(\.user)
             .map(User.init)
     }
-    
 }
-extension Result {
-    @inlinable
-    func asyncTryMap1<NewSuccess>(
-        _ transform: (Success) async throws -> NewSuccess
-    ) async -> Result<NewSuccess, Error> {
-        switch self {
-        case .success(let success):
-            return await Result<NewSuccess, Error> {
-                try await transform(success)
-            }
-        case .failure(let failure):
-            return .failure(failure)
-        }
-    }
-}
+
 private extension NetworkService {
     //MARK: - Private methods
     
@@ -112,8 +106,7 @@ private extension NetworkService {
                     throw NetworkError.noData
                 }
                 
-                try handleResponse(response)
-                decoder.dateDecodingStrategy = .iso8601
+                try checkResponse(response)
                 return try decoder.decode(T.self, from: data)
                 
             } catch NetworkError.serviceUnavailable where retries < maxRetries {
@@ -126,61 +119,16 @@ private extension NetworkService {
         }
         throw NetworkError.serviceUnavailable
     }
-    
-      func handleResponse(_ response: URLResponse) throws {
-          guard let httpResponse = response as? HTTPURLResponse else {
-              throw NetworkError.invalidResponse
-          }
-          
-          switch httpResponse.statusCode {
-          case 200...299:
-              return
-          case 503:
-              throw NetworkError.serviceUnavailable
-          case 500...599:
-              throw NetworkError.serverError(statusCode: httpResponse.statusCode, message: "Server error occurred")
-          case 400:
-              throw NetworkError.badRequest(message: "Bad Request")
-          case 401:
+}
 
-              throw NetworkError.unauthorized(message: "Unauthorized Access")
-          case 403:
-              throw NetworkError.forbidden(message: "Forbidden")
-          case 404:
-              throw NetworkError.notFound(message: "Resource Not Found")
-          default:
-              throw NetworkError.unknown
+      func checkResponse(_ response: URLResponse) throws {
+          guard let httpResponse = response as? HTTPURLResponse else {
+              throw NetworkError.invalidResponse(response)
+          }
+          if let error  = NetworkError(statusCode: httpResponse.statusCode) {
+              throw error
           }
       }
-    }
-
-extension Result where Failure == Error {
-    @inlinable
-    init(asyncCatch: () async throws -> Success) async {
-        do {
-            let success = try await asyncCatch()
-            self = .success(success)
-        } catch {
-            self = .failure(error)
-        }
-    }
-}
-
-extension Result {
-    @inlinable
-    func asyncTryMap<NewSuccess>(
-        _ transform: (Success) async throws -> NewSuccess
-    ) async -> Result<NewSuccess, Error> {
-        switch self {
-        case .success(let success):
-            return await Result<NewSuccess, Error> {
-                try await transform(success)
-            }
-        case .failure(let failure):
-            return .failure(failure)
-        }
-    }
-}
 
 fileprivate extension User {
     init(_ firebaseUser: FirebaseAuth.User) {

@@ -7,14 +7,16 @@
 
 import Testing
 import Foundation
-import FirebaseAuth
 
 @testable import LiveRadioApp
 
 struct NetworkServiceTests {
     
-    let userMock = UserMock(uid: "123", email: "test@example.com")
-//    lazy var authResultMock = AuthDataResultMock(user: userMock)
+    static let user = User(id: "123", email: "test12@example.com")
+    static let credentials = Credentials(
+        email: Email("test12@example.com")!,
+        password: Password("pasword123")!
+    )
     
     //MARK: - StationDataService tests
     @Test
@@ -108,40 +110,55 @@ struct NetworkServiceTests {
         )!
     }
     
-//    @Test
-//    func signUp_success() async throws {
-//         // given - дано
-//         guard let email = Email("test@example.com"),
-//               let password = Password("password123") else {
-//             #expect(false, "Failed to create valid Email or Password")
-//             return
-//         }
-//         
-//         let credentials = Credentials(email: email, password: password)
-//         let expectedUser = User(id: userMock.uid, email: userMock.email ?? "")
-//
-////         let authResultMock = AuthDataResultMock(user: userMock)
-//         
-//         let dependencies = NetworkService.Dependencies(
-//             request: { _ in fatalError("Not implemented") },
-//             createUser: { email, password in
-//                 return authResultMock
-//             signIn: { _, _ in fatalError("Not implemented") }
-//         )
-//         
-//         let sut = NetworkService(dependencies)
-//         
-//         // when - взаимодействие
-//         let result = await sut.signUp(with: credentials)
-//         
-//         // then - проверка результата
-//         switch result {
-//         case .success(let user):
-//             #expect(user == expectedUser, "The returned user does not match the expected user")
-//         case .failure(let error):
-//             throw NSError(domain: "test", code: 1, userInfo: ["message": "Unexpected failure: \(error)"])
-//         }
-//     }
-//    
-    //Когда замыкание захватывает self, а self — это изменяемая структура (struct), Swift запрещает такие действия. Это связано с тем, что структуры в Swift являются значимыми типами, и замыкание может захватить устаревшую копию self.
+    @Test
+    func createUser() async throws {
+        // given
+        let expected = NetworkServiceTests.user
+        let sut = NetworkService(
+            .init(request: { _ in
+                fatalError("Not implemented")
+            }, createUser: { _, _ in
+                expected
+            }, signIn: { _, _ in
+                fatalError("Not implemented")
+            })
+        )
+        //when
+        let user = await sut.signUp(with: NetworkServiceTests.credentials)
+        
+        switch user {
+        case .success(let user):
+          
+            #expect(user.email == expected.email)
+          case .failure(let error):
+              print("Sign-up failed with error: \(error)")
+              throw NSError(domain: "tests", code: 1)
+          }
+    }
+    
+    @Test
+    func loginUser() async throws {
+        // given
+        let expected = NetworkServiceTests.user
+        let sut = NetworkService(
+            .init(request: { _ in
+                fatalError("Not implemented")
+            }, createUser: { _, _ in
+                fatalError("Not implemented")
+            }, signIn: { _, _ in
+                expected
+            })
+        )
+        //when
+        let user = await sut.signIn(with: NetworkServiceTests.credentials)
+        
+        switch user {
+        case .success(let user):
+          
+            #expect(user.email  == expected.email)
+          case .failure(let error):
+              print("Sign-up failed with error: \(error)")
+              throw NSError(domain: "tests", code: 1)
+          }
+    }
 }

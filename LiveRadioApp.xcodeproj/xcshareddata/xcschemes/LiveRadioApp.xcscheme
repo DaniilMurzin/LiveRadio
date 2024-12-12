@@ -44,6 +44,9 @@
                <Test
                   Identifier = "NetworkServiceTests/createUser()">
                </Test>
+               <Test
+                  Identifier = "NetworkServiceTests/createUser()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

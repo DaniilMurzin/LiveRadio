@@ -22,7 +22,7 @@ struct NetworkServiceTests {
     @Test
     func fetchTop_success() async throws {
         // given - дано
-        let expected = [Station()]
+        let expected = [Station.mock]
         let data = try JSONEncoder().encode(expected)
         
         let dependencies = NetworkService.Dependencies(
@@ -43,7 +43,7 @@ struct NetworkServiceTests {
     @Test
     func fetchTop_badStatusCode() async throws {
         // given - дано
-        let expected = [Station()]
+        let expected = [Station.mock]
         let data = try JSONEncoder().encode(expected)
         let dependencies = NetworkService.Dependencies(
             request: { req in (data, makeResponse(req, statusCode: 503)) },

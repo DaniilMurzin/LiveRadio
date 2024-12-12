@@ -31,52 +31,93 @@ struct Station: Codable, Sendable, Hashable {
     let lastlocalchecktime: String
     let geoLat: Double?
     let geoLong: Double?
+}
 
-    init(changeuuid: String = "",
-         stationuuid: String = "",
-         name: String = "",
-         url: String = "",
-         urlResolved: String = "",
-         homepage: String = "",
-         favicon: String = "",
-         tags: String = "",
-         country: String = "",
-         countrycode: String = "",
-         state: String = "",
-         language: String = "",
-         languagecodes: String = "",
-         votes: Int = 0,
-         lastchangetime: String = "",
-         codec: String = "",
-         bitrate: Int = 0,
-         hls: Int = 0,
-         lastcheckok: Int = 0,
-         lastchecktime: String = "",
-         lastlocalchecktime: String = "",
-         geoLat: Double? = nil,
-         geoLong: Double? = nil) {
-        self.changeuuid = changeuuid
-        self.stationuuid = stationuuid
-        self.name = name
-        self.url = url
-        self.urlResolved = urlResolved
-        self.homepage = homepage
-        self.favicon = favicon
-        self.tags = tags
-        self.country = country
-        self.countrycode = countrycode
-        self.state = state
-        self.language = language
-        self.languagecodes = languagecodes
-        self.votes = votes
-        self.lastchangetime = lastchangetime
-        self.codec = codec
-        self.bitrate = bitrate
-        self.hls = hls
-        self.lastcheckok = lastcheckok
-        self.lastchecktime = lastchecktime
-        self.lastlocalchecktime = lastlocalchecktime
-        self.geoLat = geoLat
-        self.geoLong = geoLong
+// Mock for preview/tests
+extension Station {
+    init(   changeuuid: String,
+            stationuuid: String,
+            name: String,
+            url: String,
+            votes: Int
+    ) {
+        self.init(
+            changeuuid: changeuuid,
+            stationuuid: stationuuid,
+            name: name,
+            url: url,
+            urlResolved: nil,
+            homepage: "",
+            favicon: "",
+            tags: "",
+            country: "",
+            countrycode: "",
+            state: "",
+            language: "",
+            languagecodes: "",
+            votes: votes,
+            lastchangetime: "",
+            codec: "",
+            bitrate: 0,
+            hls: 0,
+            lastcheckok: 0,
+            lastchecktime: "",
+            lastlocalchecktime: "",
+            geoLat: nil,
+            geoLong: nil
+        )
+    }
+    static var mock: Station {
+        return Station(
+            changeuuid: "1234",
+            stationuuid: "5678",
+            name: "Test Station",
+            url: "https://example.com",
+            urlResolved: "https://example.com/stream",
+            homepage: "https://example.com/home",
+            favicon: "https://example.com/favicon.png",
+            tags: "pop, rock",
+            country: "USA",
+            countrycode: "US",
+            state: "California",
+            language: "English",
+            languagecodes: "en",
+            votes: 100,
+            lastchangetime: "2024-01-01T12:00:00Z",
+            codec: "mp3",
+            bitrate: 128,
+            hls: 1,
+            lastcheckok: 1,
+            lastchecktime: "2024-01-01T12:00:00Z",
+            lastlocalchecktime: "2024-01-01T12:00:00Z",
+            geoLat: 37.7749,
+            geoLong: -122.4194
+        )
+    }
+    
+    static var mockList: [Station] {
+        return [
+            Station(
+                changeuuid: "1111",
+                stationuuid: "aaaa",
+                name: "Pop Hits",
+                url: "https://example1.com",
+                votes: 200
+            ),
+            Station(
+                changeuuid: "2222",
+                stationuuid: "bbbb",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
+            Station(
+                changeuuid: "3333",
+                stationuuid: "cccc",
+                name: "Jazz & Blues",
+                url: "https://example3.com",
+                votes: 150
+            )
+        ]
     }
 }

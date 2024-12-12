@@ -31,7 +31,7 @@ struct PopularCell: View {
                         .frame(width: Drawing.playButton.width, height: Drawing.playButton.height)
                 }
         //TODO: прокинуть локализацию")
-                Text("Votes \(Int(station.votes ?? 100))")
+                Text("Votes \(Int(station.votes))")
                     .foregroundStyle(.white)
                     .applyFonts(for: .votes)
                     .frame(width: Drawing.votesText.width, height: Drawing.votesText.height)
@@ -44,10 +44,10 @@ struct PopularCell: View {
                 .padding(.leading, Drawing.favoriteButtonPadding)
             }
             
-            Text(station.name ?? "POP")
+            Text(station.name)
                 .applyFonts(for: .subtitle)
                 .foregroundStyle(Color.white)
-            Text(station.tags ?? "Radio Live")
+            Text(station.tags)
                 .applyFonts(for: .regular)
             Image(.cell)
                 .padding(.top)
@@ -65,6 +65,6 @@ struct PopularCell: View {
 #Preview {
     ZStack {
         Color.mainBg
-        PopularCell(Station(name: "Test",tags: "POPULAR", votes: 4 ))
+        PopularCell(Station.mock)
     }
 }

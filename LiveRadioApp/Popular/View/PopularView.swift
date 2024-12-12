@@ -18,10 +18,11 @@ struct PopularView: View {
     typealias Action = () -> Void
     @Binding var name: String
     @Binding var volume: Double
+    @State private var selectedStation: Station?
     let didTapbackButton: Action
     let didTapBackwardButton: Action
     let didTapForwardButton: Action
-    let didTapPlayButton: Action
+    let didTapCell: (Station) -> Void
     
     let stations: [Station]
     
@@ -47,8 +48,13 @@ struct PopularView: View {
                                 .padding(.horizontal)
                             
                             LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(stations, id: \.self) { station in
-                                    PopularCell(station)
+                                ForEach(stations, id: \.stationuuid) { station in
+                                    PopularCell(
+                                        station,
+                                        isSelected: station == selectedStation) {
+                                        didTapCell(station)
+                                        selectedStation = station
+                                    } didTapFavorites: {}
                                 }
                             }
                         }
@@ -58,7 +64,7 @@ struct PopularView: View {
                 PlayerView(
                     backwardButtonAction: didTapbackButton,
                     forwardButtonAction: didTapForwardButton,
-                    playButtonAction: didTapPlayButton
+                    playButtonAction: {}
                 )
             }
         }
@@ -72,7 +78,7 @@ struct PopularView: View {
         didTapbackButton: {},
         didTapBackwardButton: {},
         didTapForwardButton: {},
-        didTapPlayButton: {},
+        didTapCell: {_ in },
         stations: Station.mockList
     )
 }

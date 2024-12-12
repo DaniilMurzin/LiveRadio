@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 final class PopularViewModel: ObservableObject {
     
@@ -14,9 +15,11 @@ final class PopularViewModel: ObservableObject {
     @Published var fetchedStations: [Station] = .init()
     @Published var name: String = .init()
     @Published var volume: Double = 0
+    @Published var avPlayer: RadioPlayer
     
-    init(networkService: StationDataService) {
+    init(networkService: StationDataService, avPlayer: RadioPlayer) {
         self.networkService = networkService
+        self.avPlayer = avPlayer
     }
 
     //MARK: - Network
@@ -33,4 +36,9 @@ final class PopularViewModel: ObservableObject {
             }
         }
     }
+    //MARK: - Player
+    func play(station: Station) {
+        avPlayer.playStream(station: station)
+    }
+
 }

@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             uuid = "88879DCD-D270-48E1-8C43-D2B49ABC2311"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             symbolName = ""
@@ -21,7 +21,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             uuid = "E543DB9E-B874-4881-8CDF-468E48DCB33B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             nameForDebugger = "FireBase"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -42,7 +42,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             uuid = "85F77A2B-0828-46E9-88E8-157EF82BD9EE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             nameForDebugger = "Firebase"
             ignoreCount = "0"
             continueAfterRunningActions = "No"

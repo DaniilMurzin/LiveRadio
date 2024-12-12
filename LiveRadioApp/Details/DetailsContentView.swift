@@ -15,7 +15,7 @@ struct DetailsContentView: View {
     init(_ viewModel: DetailsViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-    #warning("Убрать таб бар")
+    //TODO: Убрать таб бар
     var body: some View {
         DetailsView(localization: .develop,
                     didTapbackButton: coordinator.showTabBar,

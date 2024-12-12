@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#warning("Модель по разным файлам распределить")
 // Only Valid email!!!
 struct Email: Equatable {
     let wrapped: String
@@ -40,8 +39,7 @@ struct Credentials: Equatable {
     let password: Password
 }
 
-#warning("Не понял зачем здесь прайвет инит?")
-struct User {
+struct User: Equatable {
     init(id: String, email: String) {
         self.id = id
         self.email = email

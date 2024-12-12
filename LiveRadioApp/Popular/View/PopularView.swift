@@ -73,11 +73,6 @@ struct PopularView: View {
         didTapBackwardButton: {},
         didTapForwardButton: {},
         didTapPlayButton: {},
-        stations: [ Station(name: "Radio Jazz", tags: "jazz", votes: 120),
-                    Station(name: "Pop Hits", tags: "pop", votes: 340),
-                    Station(name: "Classic FM", tags: "classical", votes: 210),
-                    Station(name: "Rock Station", tags: "rock", votes: 500),
-                    Station(name: "Dance Mix", tags: "dance", votes: 420),
-                    Station(name: "Chill Vibes", tags: "chill", votes: 150)]
+        stations: Station.mockList
     )
 }

@@ -19,6 +19,16 @@ struct PopularContentView: View {
     
     //MARK: - body
     var body: some View {
-        EmptyView()
+        PopularView(name: $viewModel.name,
+                    volume: $viewModel.volume,
+                    didTapbackButton: {},
+                    didTapBackwardButton: {},
+                    didTapForwardButton: {},
+                    didTapPlayButton: {},
+                    stations: viewModel.fetchedStations
+        )
+        .onAppear {
+            viewModel.fetchPopularStations()
+        }
     }
 }

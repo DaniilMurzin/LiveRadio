@@ -29,27 +29,27 @@ struct ForgotPasswordView2:  View {
     
     //MARK: - Body
     var body: some View {
-        OnboardingBackground {
+        MainBackground {
             BackButton(action: didTapChangePasswordButton)
             
             Text(Drawing.forgotPassword)
                 .applyFonts(for: .largeTitle)
                 .padding(.bottom, Drawing.labelPadding)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $password,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.password,
                 isSecured: true)
             .padding(.bottom)
-            CustomAuthTextField(
+            AuthTextField(
                 text: $confirmPassword,
                 placeholder: Drawing.yourPassword,
                 labelText: Drawing.confirm,
                 isSecured: true)
             .padding(.bottom)
             
-            CustomButtonAuth(title: Drawing.changePassword)
+            ButtonAuth(title: Drawing.changePassword)
                 .padding(.top)
             
             Spacer()
@@ -58,7 +58,7 @@ struct ForgotPasswordView2:  View {
 }
 
 #Preview {
-    OnboardingBackground {
+    MainBackground {
         ForgotPasswordView2(
             password: .constant("qwerty"),
             confirmPassword: .constant("qwerty"),

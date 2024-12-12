@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct LiveRadioAppApp: App {
@@ -13,13 +14,22 @@ struct LiveRadioAppApp: App {
     
     init() {
         coordinator = FRoot.makeRootCoordinator()
+        FirebaseApp.configure()
     }
+    
+//    var body: some Scene {
+//        WindowGroup {
+//            RootCoordinatorView(factory: coordinator.factory)
+//                .environmentObject(coordinator)
+//                .onAppear(perform: coordinator.showOnboarding)
+//        }
+//    }
     
     var body: some Scene {
         WindowGroup {
             RootCoordinatorView(factory: coordinator.factory)
                 .environmentObject(coordinator)
-                .onAppear(perform: coordinator.showOnboarding)
+                .onAppear(perform: coordinator.showTabBar)
         }
     }
 }

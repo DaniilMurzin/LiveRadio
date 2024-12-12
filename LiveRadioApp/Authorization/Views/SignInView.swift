@@ -8,26 +8,34 @@
 import SwiftUI
 
 struct SignInView: View {
+
+    //MARK: - Typealias
     typealias Action = () -> Void
+    typealias AsyncAction = () async -> Sendable
+    
+    //MARK: - Drawing
     private enum Drawing {
-        
         static let playLabel = CGSize(width: 58, height: 58)
     }
+    
     //MARK: - Properties
-    @Binding  var email: String
-    @Binding  var password: String
+    @Binding var email: String
+    @Binding var password: String
+    
+    let signInAction: SignInAction
     
     let didTapForgotPassword: Action
-    let didTapSignIn: Action
     let didTapSignUp: Action
     let localization: Localization
     
     //MARK: - Body
     var body: some View {
-        OnboardingBackground {
+        MainBackground {
+            
             Image(.playLabel)
                 .resizable()
-                .frame(width: Drawing.playLabel.width, height: Drawing.playLabel.height)
+                .frame(width: Drawing.playLabel.width,
+                    height: Drawing.playLabel.height)
                 .padding(.top)
             
             Text(localization.SignIn)
@@ -36,7 +44,7 @@ struct SignInView: View {
                 .applyFonts(for: .buttonText)
                 .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $email,
                 placeholder: localization.yourEmail,
                 labelText: localization.email
@@ -44,7 +52,7 @@ struct SignInView: View {
             .keyboardType(.emailAddress)
             .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $password,
                 placeholder: localization.yourPassword,
                 labelText: localization.password,
@@ -52,38 +60,17 @@ struct SignInView: View {
             )
             .padding(.bottom)
             
-            
             Button(action: didTapForgotPassword) {
                 Text(localization.forgotPassword)
                     .foregroundStyle(.gray)
                     .padding(.bottom)
             }
             
-            VStack {
-                HStack(spacing: 10) {
-                    Rectangle().frame(height: 1)
-                        .foregroundStyle(.ellipse9)
-                    Text(localization.connect)
-                        .foregroundStyle(.ellipse9)
-                        .lineLimit(1)
-                        .applyFonts(for: .montserratSmall)
-                    Rectangle().frame(height: 1)
-                        .foregroundStyle(.ellipse9)
-                }
-                .padding(.bottom)
-                .padding(.horizontal, 40)
-                
-                Button(action: {}) {
-                    Circle()
-                        .frame(width: 40, height: 40)
-                        .foregroundStyle(.googleIcon)
-                        .overlay(Image(.googlePlus))
-                        .padding(.bottom)
-                }
-            }
+            ConnectWithView(text: localization.connect)
             
-            ArrowButton(action: didTapSignIn)
-            
+            ArrowButton(asyncAction: didTapSignIn)
+                .opacity(signInAction.isAvailable ? 1 : 0.8)
+
             Button(action: didTapSignUp) {
                 Text(localization.signUp)
                     .applyFonts(for: .lightSystemText)
@@ -91,44 +78,61 @@ struct SignInView: View {
             .padding(.bottom, 30)
         }
     }
+    
+    private func didTapSignIn() async {
+        guard case .available(let action) = signInAction else {
+            return
+        }
+        _ = await action()
+    }
+    
 }
-    
-    
-    extension SignInView {
-        struct Localization {
-            let SignIn: String
-            let startPlay: String
-            let yourPassword: String
-            let yourEmail: String
-            let email: String
-            let password: String
-            let forgotPassword: String
-            let connect: String
-            let signUp: String
-            
-            static let develop = Self(
-                SignIn: "Sign in",
-                startPlay: "To start play",
-                yourPassword: "Your password",
-                yourEmail: "Your email",
-                email: "Email",
-                password: "Password",
-                forgotPassword: "Forgot password?",
-                connect: "Or connect with",
-                signUp: "Or Sign Up"
-            )
+//MARK: - SignInView + SignInAction
+extension SignInView {
+    enum SignInAction {
+        case available(AsyncAction)
+        case unavailable
+        
+        var isAvailable: Bool {
+            if case .available = self { return true }
+            return false
         }
     }
+    
+    //MARK: - Localization
+    struct Localization {
+        let SignIn: String
+        let startPlay: String
+        let yourPassword: String
+        let yourEmail: String
+        let email: String
+        let password: String
+        let forgotPassword: String
+        let connect: String
+        let signUp: String
+        
+        static let develop = Self(
+            SignIn: "Sign in",
+            startPlay: "To start play",
+            yourPassword: "Your password",
+            yourEmail: "Your email",
+            email: "Email",
+            password: "Password",
+            forgotPassword: "Forgot password?",
+            connect: "Or connect with",
+            signUp: "Or Sign Up"
+        )
+    }
+}
 
 //MARK: - Preview
 #Preview {
     SignInView(
         email: .constant("email@mail.ru"),
         password: .constant("qwerty"),
+        signInAction: .unavailable,
         didTapForgotPassword: {},
-        didTapSignIn: {},
         didTapSignUp: {},
         localization: .develop
     )
-        
 }

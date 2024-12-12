@@ -2,17 +2,10 @@
 //  RootCoordinator.swift
 //  LiveRadioApp
 //
-//  Created by Шаповалов Илья on 30.08.2024.
+//  Created by Daniil Murzin on 30.08.2024.
 //
 
 import SwiftUI
-
-protocol RootFactory {
-    func makeOnboarding() -> OnboardingContentView
-    func makeAuthorization() -> AuthorizationContentView
-    func makePopularView() -> PopularContentView
-    func makeTabBar() -> TabBarView
-}
 
 final class RootCoordinator: ObservableObject {
     let factory: RootFactory
@@ -35,6 +28,17 @@ final class RootCoordinator: ObservableObject {
     func showTabBar() {
         state = .tabbar
     }
+    
+    func showDetails() {
+        state = .details
+    }
+}
+
+extension RootCoordinator: AppCoordinator {
+    func goTabbar(_ user: User) {
+        showTabBar()
+    }
+    
 }
 
 extension RootCoordinator {
@@ -44,5 +48,6 @@ extension RootCoordinator {
         case onboarding
         case authorization
         case tabbar
+        case details
     }
 }

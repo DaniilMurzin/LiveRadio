@@ -1,5 +1,5 @@
 //
-//  OnboardingBackground.swift
+//  MainBackground.swift
 //  LiveRadioApp
 //
 //  Created by Шаповалов Илья on 11.09.2024.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct OnboardingBackground<V: View>: View {
-    private let padding: CGFloat = 40
+struct MainBackground<V: View>: View {
+    private let padding: CGFloat = 30
     
     let content: () -> V
     
@@ -22,14 +22,13 @@ struct OnboardingBackground<V: View>: View {
                 .resizable()
                 .ignoresSafeArea()
             VStack(alignment: .leading, content: content)
-                .padding(.horizontal, padding)
         }
         .background(Color.mainBg)
     }
 }
 
 #Preview {
-    OnboardingBackground {
+    MainBackground {
         EmptyView()
     }
 }

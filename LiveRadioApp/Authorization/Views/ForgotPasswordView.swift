@@ -29,21 +29,21 @@ struct ForgotPasswordView: View {
     
     //MARK: - Body
     var body: some View {
-        OnboardingBackground {
+        MainBackground {
             BackButton(action: didTapBackButton)
             
             Text(Drawing.forgotPassword)
                 .applyFonts(for: .largeTitle)
                 .padding(.bottom)
             
-            CustomAuthTextField(
+            AuthTextField(
                 text: $email,
                 placeholder: Drawing.yourEmail,
                 labelText: Drawing.email)
             .keyboardType(.emailAddress)
             .padding(.bottom)
             
-            CustomButtonAuth(title: Drawing.sent)
+            ButtonAuth(title: Drawing.sent)
                 .padding(.top)
             
             Spacer()
@@ -53,7 +53,7 @@ struct ForgotPasswordView: View {
 
 
 #Preview {
-    OnboardingBackground {
+    MainBackground {
         ForgotPasswordView(
             email: .constant("email@mail.ru"),
             password: .constant("qwerty"),

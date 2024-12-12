@@ -1,5 +1,5 @@
 //
-//  CustomButtonAuth.swift
+//  ButtonAuth.swift
 //  LiveRadioApp
 //
 //  Created by Daniil Murzin on 04.09.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomButtonAuth: View {
+struct ButtonAuth: View {
     var title: String
     
     var body: some View {
@@ -19,7 +19,7 @@ struct CustomButtonAuth: View {
                 .foregroundColor(.white)
                 .frame(width: 335, height: 72)
                 .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
-                .background(.ellipse6)
+                .background(.eclipse6)
         }
     }
     
@@ -27,7 +27,7 @@ struct CustomButtonAuth: View {
 
 struct CustomButton_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButtonAuth(title: "Sent")
+        ButtonAuth(title: "Sent")
             .previewLayout(.sizeThatFits)
             .padding()
             .background(Color.black)

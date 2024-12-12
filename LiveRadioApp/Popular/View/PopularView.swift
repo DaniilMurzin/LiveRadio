@@ -2,47 +2,77 @@
 //  PopularView.swift
 //  LiveRadioApp
 //
-//  Created by Шаповалов Илья on 30.08.2024.
+//  Created by Daniil Murzin on 30.08.2024.
 //
 
 import SwiftUI
 
 struct PopularView: View {
+    
+    //MARK: - Drawing
     private enum Drawing {
         static let titleSize: CGFloat = 30
     }
     
-    private let columns = [
-        GridItem(.flexible(), spacing: 5),
-        GridItem(.flexible(), spacing: 5)
-    ]
-
-    let title: String
+    //MARK: - Properties
+    typealias Action = () -> Void
+    @Binding var name: String
+    @Binding var volume: Double
+    let didTapbackButton: Action
+    let didTapBackwardButton: Action
+    let didTapForwardButton: Action
+    let didTapPlayButton: Action
+    
     let stations: [Station]
     
+    private let columns = [
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20)
+    ]
+    
+    //MARK: - Body
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            Color(.mainBg).ignoresSafeArea()
-            LazyVStack(alignment: .leading) {
-                Text(title)
-                    .font(.system(size: Drawing.titleSize))
-                    .foregroundStyle(Color.white)
-                    .padding()
-                
-                LazyVGrid(columns: columns) {
-                    ForEach(stations, id:\.self) { station in
-                        PopularCell(station)
+        TabBarBackground {
+            VStack {
+                HeaderView(name: $name)
+                    .padding(.horizontal)
+                HStack {
+                    VolumeSlider(volume: $volume)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 30) {
+                            
+                            Text("Popular")
+                                .applyFonts(for: .subtitle)
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                            
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(stations, id: \.self) { station in
+                                    PopularCell(station)
+                                }
+                            }
+                        }
                     }
+                    .padding(.trailing)
                 }
+                PlayerView(
+                    backwardButtonAction: didTapbackButton,
+                    forwardButtonAction: didTapForwardButton,
+                    playButtonAction: didTapPlayButton
+                )
             }
-            .padding(.horizontal)
         }
     }
 }
 
 #Preview {
     PopularView(
-        title: "Popular",
-        stations: Station.preview
+        name: .constant("Mark"),
+        volume: .constant(30),
+        didTapbackButton: {},
+        didTapBackwardButton: {},
+        didTapForwardButton: {},
+        didTapPlayButton: {},
+        stations: Station.mockList
     )
 }

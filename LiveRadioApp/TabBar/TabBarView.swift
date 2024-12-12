@@ -12,13 +12,19 @@ struct TabBarView: View {
     let factory: RootFactory
     
     var body: some View {
-        TabView {
-            factory.makePopularView()
-                .tabItem { Text("Popular") }
-            EmptyView()
-                .tabItem { Text("Favorites") }
-            EmptyView()
-                .tabItem { Text("All Stations") }
+        MainBackground {
+            TabView {
+                factory.makePopular()
+                    .tabItem {
+                        VStack {
+                            Text("Popular")
+                        }
+                    }
+                EmptyView()
+                    .tabItem { Text("Favorites") }
+                EmptyView()
+                    .tabItem { Text("All Stations") }
+            }
         }
     }
 }

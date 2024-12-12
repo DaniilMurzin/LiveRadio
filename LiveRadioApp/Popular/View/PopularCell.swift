@@ -10,30 +10,61 @@ import SwiftUI
 struct PopularCell: View {
     private enum Drawing {
         static let titleSize: CGFloat = 30
+        static let playButton = CGSize(width: 37, height: 37)
+        static let favoritesButton = CGSize(width: 15, height: 12)
+        static let votesText = CGSize(width: 50, height: 12)
+        static let favoriteButtonPadding: CGFloat = -8
     }
     
-    let station: Station
+    var station: Station
     
-    init(_ station: Station) { self.station = station }
+    init(_ station: Station) {
+        self.station = station }
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(station.title)
-                .font(.system(size: Drawing.titleSize))
-                .foregroundStyle(Color.white)
-                .padding()
+            HStack {
+                Button(action: {})
+                {
+                    Image(.playButton)
+                        .foregroundStyle(Color.red)
+                        .frame(width: Drawing.playButton.width, height: Drawing.playButton.height)
+                }
+        //TODO: прокинуть локализацию")
+                Text("Votes \(Int(station.votes))")
+                    .foregroundStyle(.white)
+                    .applyFonts(for: .votes)
+                    .frame(width: Drawing.votesText.width, height: Drawing.votesText.height)
+                    
+
+                Button(action: {}) {
+                    Image(.favoriteButton)
+                        .frame(width: Drawing.favoritesButton.width, height: Drawing.favoritesButton.height)
+                }
+                .padding(.leading, Drawing.favoriteButtonPadding)
+            }
             
+            Text(station.name)
+                .applyFonts(for: .subtitle)
+                .foregroundStyle(Color.white)
+            Text(station.tags)
+                .applyFonts(for: .regular)
+            Image(.cell)
+                .padding(.top)
         }
+        .frame(width: 119, height: 119)
+        .padding()
         .background(
             Color.white.opacity(0.3),
-            in: RoundedRectangle(cornerRadius: 15).stroke()
+            in: RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 2)
         )
     }
+    
 }
 
 #Preview {
     ZStack {
         Color.mainBg
-        PopularCell(.preview[0])
+        PopularCell(Station.mock)
     }
 }

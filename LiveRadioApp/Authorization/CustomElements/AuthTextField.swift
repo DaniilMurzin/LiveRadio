@@ -4,11 +4,10 @@
 //
 //  Created by Daniil Murzin on 04.09.2024.
 //
-#warning("Не знаю, как от вложенности избавиться")
-#warning("Ошибки в консоль по нажатию на показать пароль")
+
 import SwiftUI
 
-struct CustomAuthTextField: View {
+struct AuthTextField: View {
     
     @Binding var text: String
     var placeholder: String
@@ -41,6 +40,7 @@ struct CustomAuthTextField: View {
                         if isPasswordHide {
                             SecureField("", text: $text)
                                 .padding()
+                                
                         } else {
                             TextField("", text: $text)
                                 .padding()
@@ -57,12 +57,12 @@ struct CustomAuthTextField: View {
                     .cornerRadius(5)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.ellipse8, lineWidth: 2)
-                            .shadow(color: .ellipse8, radius: 5, x: 2, y: 2)
+                            .stroke(Color.eclipse8, lineWidth: 2)
+                            .shadow(color: .eclipse8, radius: 5, x: 2, y: 2)
                     )
                     .applyFonts(for: .textFiledText)
                     .foregroundColor(Color.white.opacity(0.5))
-                    .shadow(color: .ellipse8, radius: 10, x: 4, y: 4)
+                    .shadow(color: .eclipse8, radius: 10, x: 4, y: 4)
                     .frame(width: 330, height: 53)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
@@ -73,34 +73,28 @@ struct CustomAuthTextField: View {
                         .cornerRadius(5)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.ellipse8, lineWidth: 2)
-                                .shadow(color: .ellipse8, radius: 5, x: 2, y: 2)
+                                .stroke(Color.eclipse8, lineWidth: 2)
+                                .shadow(color: .eclipse8, radius: 5, x: 2, y: 2)
+                                
                         )
                         .applyFonts(for: .textFiledText)
                         .foregroundColor(Color.white.opacity(0.5))
-                        .shadow(color: .ellipse8, radius: 10, x: 4, y: 4)
+                        .shadow(color: .eclipse8, radius: 10, x: 4, y: 4)
                         .frame(width: 330, height: 53)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        
                 }
-
             }
         }
     }
-    
-#warning("Почему превью только так работает?")
-
 }
 
 struct CustomAuthTextField_Previews: PreviewProvider {
     static var previews: some View {
         @State var emailText = ""
         
-        CustomAuthTextField(text: $emailText, placeholder: "Your Email", labelText: "Email", isSecured: true)
+        AuthTextField(text: $emailText, placeholder: "Your Email", labelText: "Email", isSecured: true)
             .background(Color.mainBg)
     }
 }
-//#Preview {
-//    @State var emailText = "Email"
-//    CustomAuthTextField(text: $emailText, placeholder: "Your Email")
-//}

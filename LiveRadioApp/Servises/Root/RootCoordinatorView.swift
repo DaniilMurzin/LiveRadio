@@ -2,7 +2,7 @@
 //  RootCoordinatorView.swift
 //  LiveRadioApp
 //
-//  Created by Шаповалов Илья on 30.08.2024.
+//  Created by Daniil Murzin on 30.08.2024.
 //
 
 import SwiftUI
@@ -28,14 +28,18 @@ struct RootCoordinatorView: View {
             
             case .onboarding:
                 factory.makeOnboarding()
-    
                     .transition(.move(edge: .leading))
+                
             case .authorization:
-                factory.makeAuthorization()
+                factory.makeAuthorization(coordinator: coordinator)
                     .transition(.move(edge: .leading))
             
             case .tabbar:
                 factory.makeTabBar()
+                    .transition(.move(edge: .leading))
+                
+            case .details:
+                factory.makeDetails()
                     .transition(.move(edge: .leading))
             }
         }

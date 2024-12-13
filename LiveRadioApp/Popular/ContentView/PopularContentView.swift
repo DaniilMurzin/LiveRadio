@@ -9,24 +9,23 @@ import SwiftUI
 
 struct PopularContentView: View {
     
-    //MARK: - Properties
     @StateObject var viewModel: PopularViewModel
     
-    //MARK: - init(_:)
     init(_ viewModel: PopularViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-    
-    //MARK: - body
+    #warning("Обращаюсь к avPlayer через viewModel?")
     var body: some View {
         PopularView(
             name: $viewModel.name,
             volume: $viewModel.volume,
-            didTapbackButton: {},
-            didTapBackwardButton: {},
-            didTapForwardButton: {},
+            selectedStation: $viewModel.selectedStation,
+            didTapbackButton: { viewModel.avPlayer.playPreviousStation() },
+            didTapPlayButton: { viewModel.avPlayer.isPlaying ? viewModel.avPlayer.pauseStation() : viewModel.avPlayer.resumeStation() },
+            didTapBackwardButton: { viewModel.avPlayer.playPreviousStation() },
+            didTapForwardButton: { viewModel.avPlayer.playNextStation() },
             didTapCell: { station in
-                viewModel.play(station: station)
+                viewModel.handleSelection(station)
             },
             stations: viewModel.fetchedStations
         )
@@ -35,3 +34,4 @@ struct PopularContentView: View {
         }
     }
 }
+

@@ -41,10 +41,3 @@ struct VolumeSlider: View {
         VolumeSlider(volume: .constant(65))
     }
 }
-
-
-#Preview {
-    MainBackground {
-        VolumeSlider(volume: .constant(65))
-    }
-}

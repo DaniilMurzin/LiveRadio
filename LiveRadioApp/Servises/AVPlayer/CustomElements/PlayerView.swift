@@ -20,7 +20,8 @@ struct PlayerView: View {
                 action: backwardButtonAction,
                 direction: .backward)
               
-            PlayButtonView(action: playButtonAction)
+            PlayButtonView(
+                action: playButtonAction)
             
             TrackButtonsView(
                 action: forwardButtonAction,

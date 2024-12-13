@@ -55,9 +55,11 @@ extension DetailsView {
 }
 
 #Preview {
-    DetailsView(localization: .develop,
-                didTapbackButton: {} ,
-                didTapBackwardButton: {},
-                didTapForwardButton: {},
-                didTapPlayButton: {})
+    DetailsView(
+        localization: .develop,
+        didTapbackButton: {} ,
+        didTapBackwardButton: {},
+        didTapForwardButton: {},
+        didTapPlayButton: {}
+    )
 }

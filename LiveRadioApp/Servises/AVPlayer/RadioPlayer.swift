@@ -9,31 +9,21 @@ import Foundation
 import AVFoundation
 
 final class RadioPlayer: ObservableObject {
-    
     @Published var avPlayer: AVPlayer?
     @Published var isPlaying: Bool = false
     @Published var currentStation: Station?
     @Published var currentStationIndex: Int?
-    private var stations: [Station] = []
-    
-    var onStationChange: ((Station?) -> Void)?
-    
-    func setStations(_ stations: [Station]) {
-        self.stations = stations
-    }
     
     func playStation(_ station: Station) {
         guard let url = URL(string: station.url) else {
             print("Ошибка: некорректный URL \(station.url)")
             return
         }
-        let playerItem = AVPlayerItem(url: url)
-        self.avPlayer = AVPlayer(playerItem: playerItem)
+        
+        self.avPlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
         self.avPlayer?.play()
         self.isPlaying = true
         self.currentStation = station
-        self.currentStationIndex = stations.firstIndex(where: { $0.stationuuid == station.stationuuid })
-        onStationChange?(station)
     }
     
     func pauseStation() {
@@ -45,26 +35,27 @@ final class RadioPlayer: ObservableObject {
         self.avPlayer?.play()
         self.isPlaying = true
     }
-    
-    func playNextStation() {
+
+    func playNextStation(from stations: [Station]) {
         guard let currentIndex = currentStationIndex, currentIndex < stations.count - 1 else { return }
         let nextStation = stations[currentIndex + 1]
         playStation(nextStation)
+        currentStationIndex = currentIndex + 1
     }
     
-    func playPreviousStation() {
+    func playPreviousStation(from stations: [Station]) {
         guard let currentIndex = currentStationIndex, currentIndex > 0 else { return }
         let previousStation = stations[currentIndex - 1]
         playStation(previousStation)
+        currentStationIndex = currentIndex - 1
     }
     
-    func handleSelection(_ station: Station) {
+    func handleSelection(_ station: Station, in stations: [Station]) {
         if currentStation == station {
             isPlaying ? pauseStation() : resumeStation()
         } else {
             playStation(station)
+            currentStationIndex = stations.firstIndex(where: { $0.stationuuid == station.stationuuid })
         }
     }
 }
-
-

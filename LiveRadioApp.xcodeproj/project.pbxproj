@@ -22,6 +22,8 @@
 		927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927482A42CBFBC2000291908 /* TabBarBackground.swift */; };
 		9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */; };
 		9281A45F2CB190C900F42612 /* Button+AsyncAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */; };
+		9293BBFF2D0C287300F67044 /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293BBFE2D0C287300F67044 /* PlayButtonView.swift */; };
+		9293BC012D0C288B00F67044 /* TrackButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293BC002D0C288B00F67044 /* TrackButtonsView.swift */; };
 		92A66F362CA599E700ACD36C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A66F352CA599E700ACD36C /* Models.swift */; };
 		92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF412CAFF4F800DC3C34 /* NetworkService.swift */; };
 		92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */; };
@@ -40,7 +42,6 @@
 		92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1C2C86109000B59386 /* PopularContentView.swift */; };
 		92E07D2D2C86109000B59386 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1D2C86109000B59386 /* PopularView.swift */; };
 		92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1F2C86109000B59386 /* PopularViewModel.swift */; };
-		92E07D2F2C86109000B59386 /* StationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D202C86109000B59386 /* StationTest.swift */; };
 		92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D302C8610BE00B59386 /* CustomFontModifier.swift */; };
 		92E07D362C884D6900B59386 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D352C884D6900B59386 /* AuthTextField.swift */; };
 		92E07D3A2C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */; };
@@ -87,6 +88,8 @@
 		927482A42CBFBC2000291908 /* TabBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackground.swift; sourceTree = "<group>"; };
 		9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWithView.swift; sourceTree = "<group>"; };
 		9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+AsyncAction.swift"; sourceTree = "<group>"; };
+		9293BBFE2D0C287300F67044 /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
+		9293BC002D0C288B00F67044 /* TrackButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackButtonsView.swift; sourceTree = "<group>"; };
 		92A66F352CA599E700ACD36C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		92BACF412CAFF4F800DC3C34 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpy.swift; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 		92E07D1C2C86109000B59386 /* PopularContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularContentView.swift; sourceTree = "<group>"; };
 		92E07D1D2C86109000B59386 /* PopularView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularView.swift; sourceTree = "<group>"; };
 		92E07D1F2C86109000B59386 /* PopularViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
-		92E07D202C86109000B59386 /* StationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTest.swift; sourceTree = "<group>"; };
 		92E07D302C8610BE00B59386 /* CustomFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFontModifier.swift; sourceTree = "<group>"; };
 		92E07D352C884D6900B59386 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		924DE1552D0B166E0063D0AD /* AVPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				92E07DEB2C9B194700B59386 /* CustomElements */,
 				924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */,
 			);
 			path = AVPlayer;
@@ -321,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				92E07D1F2C86109000B59386 /* PopularViewModel.swift */,
-				92E07D202C86109000B59386 /* StationTest.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -434,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				92E07DDF2C98600D00B59386 /* TabBarView.swift */,
-				92E07DEB2C9B194700B59386 /* CustomElements */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -453,6 +454,8 @@
 			isa = PBXGroup;
 			children = (
 				92E07DEC2C9B1C8900B59386 /* PlayerView.swift */,
+				9293BBFE2D0C287300F67044 /* PlayButtonView.swift */,
+				9293BC002D0C288B00F67044 /* TrackButtonsView.swift */,
 				92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */,
 			);
 			path = CustomElements;
@@ -592,10 +595,10 @@
 				9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
 				92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */,
+				9293BBFF2D0C287300F67044 /* PlayButtonView.swift in Sources */,
 				92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */,
 				923D56662CBD5F3200797F67 /* Station.swift in Sources */,
 				9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */,
-				92E07D2F2C86109000B59386 /* StationTest.swift in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
 				926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */,
 				92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */,
@@ -617,6 +620,7 @@
 				92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */,
 				92E07D3E2C888FCF00B59386 /* ButtonAuth.swift in Sources */,
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
+				9293BC012D0C288B00F67044 /* TrackButtonsView.swift in Sources */,
 				92E07D402C8AE96700B59386 /* TestView.swift in Sources */,
 				EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */,
 				92E07DED2C9B1C8900B59386 /* PlayerView.swift in Sources */,

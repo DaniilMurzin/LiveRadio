@@ -13,15 +13,15 @@ struct PopularView: View {
         static let titleSize: CGFloat = 30
         static let headerHorizontalPadding: CGFloat = 16
         static let scrollViewSpacing: CGFloat = 30
-        static let lazyVGridSpacing: CGFloat = 20
-        static let columnSpacing: CGFloat = 10
-        static let playerViewTrailingPadding: CGFloat = 16
+        static let gridItemDimensions: CGFloat = 139
+        static let columnSpacing: CGFloat = 15
     }
     
     typealias Action = () -> Void
     @Binding var name: String
     @Binding var volume: Double
     @Binding var selectedStation: Station?
+    @Binding var isPlaying: Bool
     let didTapbackButton: Action
     let didTapPlayButton: Action
     let didTapBackwardButton: Action
@@ -31,9 +31,16 @@ struct PopularView: View {
     let stations: [Station]
     
     private let columns = [
-        GridItem(.flexible(), spacing: Drawing.columnSpacing),
-        GridItem(.flexible(), spacing: Drawing.columnSpacing)
-    ]
+        GridItem(
+            .flexible(
+                minimum: Drawing.gridItemDimensions,
+                maximum: Drawing.gridItemDimensions),
+                spacing: Drawing.columnSpacing),
+        GridItem(
+            .flexible(
+                minimum: Drawing.gridItemDimensions,
+                maximum: Drawing.gridItemDimensions),
+                spacing: Drawing.columnSpacing)]
     
     var body: some View {
         TabBarBackground {
@@ -43,6 +50,7 @@ struct PopularView: View {
                 
                 HStack {
                     VolumeSlider(volume: $volume)
+                        .frame(width: 27, height: 253)
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: Drawing.scrollViewSpacing) {
@@ -51,23 +59,23 @@ struct PopularView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, Drawing.headerHorizontalPadding)
                             
-                            LazyVGrid(columns: columns, spacing: Drawing.lazyVGridSpacing) {
+                            LazyVGrid(columns: columns, spacing: 20) {
                                 ForEach(stations, id: \.stationuuid) { station in
                                     PopularCell(
                                         station,
-                                        isSelected: station == selectedStation
-                                    ) {
-                                        didTapCell(station)
-                                    }
-                                    didTapFavorites: {}
+                                        isSelected: station == selectedStation)
+                                        { didTapCell(station) }
+                                        didTapFavorites: {}
                                 }
                             }
                         }
+                        .padding()
                     }
+                    .padding(.trailing, 30)
                 }
-                .padding(.trailing, Drawing.playerViewTrailingPadding)
                 
                 PlayerView(
+                    isPlaying: $isPlaying,
                     backwardButtonAction: didTapbackButton,
                     forwardButtonAction: didTapForwardButton,
                     playButtonAction: didTapPlayButton
@@ -80,8 +88,9 @@ struct PopularView: View {
 #Preview {
     PopularView(
         name: .constant("Mark"),
-        volume: .constant(30),
+        volume: .constant(0.3),
         selectedStation: .constant(nil),
+        isPlaying: .constant(true),
         didTapbackButton: {},
         didTapPlayButton: {},
         didTapBackwardButton: {},

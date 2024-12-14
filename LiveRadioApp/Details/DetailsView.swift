@@ -30,11 +30,12 @@ struct DetailsView: View {
                       .frame(width: 45, height: 45)
               }
             
-            PlayerView(
-                backwardButtonAction: didTapBackwardButton,
-                forwardButtonAction: didTapForwardButton,
-                playButtonAction: didTapPlayButton
-            )
+//            PlayerView(
+//                isPlaying: $isPlaying,
+//                backwardButtonAction: didTapBackwardButton,
+//                forwardButtonAction: didTapForwardButton,
+//                playButtonAction: didTapPlayButton
+//            )
         }
     }
 }

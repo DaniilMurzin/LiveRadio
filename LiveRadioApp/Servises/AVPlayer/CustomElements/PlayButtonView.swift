@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlayButtonView: View {
-    
+    @Binding var isPlaying: Bool
     let action: () -> Void
 
     var body: some View {
@@ -28,7 +28,7 @@ struct PlayButtonView: View {
                     .fill(.eclipse8)
                     .frame(width: 89, height: 89)
                 #warning("хз как пробрасывать, через биндинги не получается")
-                Image(.playButton)
+                Image(isPlaying ? .pauseButton : .playButton)
                     .resizable()
                     .frame(width: 37, height: 37)
                     .foregroundColor(.white)

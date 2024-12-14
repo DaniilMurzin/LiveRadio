@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayerView: View {
     typealias Action = () -> Void
-    
+    @Binding var isPlaying: Bool
     let backwardButtonAction: Action
     let forwardButtonAction: Action
     let playButtonAction: Action
@@ -20,8 +20,7 @@ struct PlayerView: View {
                 action: backwardButtonAction,
                 direction: .backward)
               
-            PlayButtonView(
-                action: playButtonAction)
+            PlayButtonView(isPlaying: $isPlaying, action: playButtonAction)
             
             TrackButtonsView(
                 action: forwardButtonAction,
@@ -32,6 +31,7 @@ struct PlayerView: View {
 
 #Preview {
         PlayerView(
+            isPlaying: .constant(true),
             backwardButtonAction: {},
             forwardButtonAction: {},
             playButtonAction: {})

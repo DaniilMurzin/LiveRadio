@@ -16,8 +16,8 @@ struct PopularCell: View {
         static let textOpacitySelected: CGFloat = 1.0
         static let textOpacityUnselected: CGFloat = 0.2
         static let imageTopPadding: CGFloat = 10
-        static let cellWidth: CGFloat = 139
-        static let cellHeight: CGFloat = 139
+        static let cellWidth: CGFloat = 129
+        static let cellHeight: CGFloat = 129
         static let cellPadding: CGFloat = 8
     }
     

@@ -10,9 +10,14 @@ import AVFoundation
 
 final class RadioPlayer: ObservableObject {
     @Published var avPlayer: AVPlayer?
-    @Published var isPlaying: Bool = false
+    @Published var isPlaying: Bool = false 
     @Published var currentStation: Station?
     @Published var currentStationIndex: Int?
+    @Published var volume: Double = 0.5 {
+           didSet {
+               avPlayer?.volume = Float(volume)
+           }
+       }
     
     func playStation(_ station: Station) {
         guard let url = URL(string: station.url) else {
@@ -24,6 +29,7 @@ final class RadioPlayer: ObservableObject {
         self.avPlayer?.play()
         self.isPlaying = true
         self.currentStation = station
+        self.avPlayer?.volume = Float(volume)
     }
     
     func pauseStation() {

@@ -9,14 +9,18 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
+
 final class PopularViewModel: ObservableObject {
     let networkService: StationDataService
     @ObservedObject var avPlayer: RadioPlayer
     @Published var fetchedStations: [Station] = []
     @Published var name: String = "Daniil"
-    @Published var volume: Double = 50.0
     @Published var selectedStation: Station?
-    
+    @Published var volume: Double = 0.5 {
+           didSet {
+               avPlayer.volume = volume
+           }
+       }
     init(networkService: StationDataService, avPlayer: RadioPlayer) {
         self.networkService = networkService
         self.avPlayer = avPlayer

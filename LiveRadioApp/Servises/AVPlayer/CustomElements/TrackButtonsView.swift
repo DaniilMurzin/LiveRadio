@@ -20,7 +20,7 @@ struct TrackButtonsView: View {
         Button(action: action) {
             ZStack {
                 PlayerButtonsShape()
-                    .fill(.eclipse1)
+                    .fill(.eclipse2)
                     .frame(width: 46, height: 48)
                 Image(systemName: direction == .forward ? "forward.fill" : "backward.fill")
                     .resizable()

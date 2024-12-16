@@ -51,6 +51,7 @@ struct PopularView: View {
                 HStack {
                     VolumeSlider(volume: $volume)
                         .frame(width: 27, height: 253)
+                        .padding(.leading, 15)
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: Drawing.scrollViewSpacing) {
@@ -80,6 +81,7 @@ struct PopularView: View {
                     forwardButtonAction: didTapForwardButton,
                     playButtonAction: didTapPlayButton
                 )
+                .frame(width: 225, height: 127)
             }
         }
     }

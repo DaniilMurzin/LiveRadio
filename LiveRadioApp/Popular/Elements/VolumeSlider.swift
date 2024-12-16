@@ -16,6 +16,7 @@ struct VolumeSlider: View {
             Text("\(Int(volume * 100))%")
                 .font(.system(size: 12))
                 .foregroundStyle(.white)
+                .lineLimit(1)
 
             GeometryReader { geometry in
                 ZStack {
@@ -53,7 +54,7 @@ struct VolumeSlider: View {
                 .frame(width: 18, height: 18)
                 .foregroundColor(.gray)
         }
-        .frame(width: 28, height: 253)
+        .frame(width: 35, height: 253)
     }
 }
 

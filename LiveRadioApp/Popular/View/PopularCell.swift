@@ -65,9 +65,10 @@ struct PopularCell: View {
                     .foregroundStyle(Color.white)
                     .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                 
-                Image(.cell)
-                    .padding(.top, Drawing.imageTopPadding)
-                    .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                SingleWaveView()
+//                    .padding(.top, Drawing.imageTopPadding)
+//                    .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                    .frame(width: 87)
             }
             .frame(width: Drawing.cellWidth, height: Drawing.cellHeight)
             .padding(.all, Drawing.cellPadding)

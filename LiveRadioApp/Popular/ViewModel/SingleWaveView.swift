@@ -1,17 +1,4 @@
-//
-//  File.swift
-//  LiveRadioApp
-//
-//  Created by Daniil Murzin on 15.12.2024.
-//
-
-
-
-
-
-
 import SwiftUI
-
 
 ///Синусоида строится с помощью функции:
 
@@ -31,20 +18,45 @@ import SwiftUI
 /// Фаза (𝜙) = 0 (без сдвига).
 /// Центр (𝐶) = половина высоты экрана.
 
-
-
-import SwiftUI
-
 struct SingleWaveView: View {
+    
+
+    
     var body: some View {
         ZStack {
             Color.mainBg
-            WaveShape(amplitudes: [5, -10, 30, -10, 10, -20, 10, -10, 0])
-                .stroke(Color.white, lineWidth: 3)
-                .padding()
-                .frame(width: 87, height: 34)
+            HStack {
+                
+                Circle()
+                    .stroke(Color.eclipse8, lineWidth: 1) // Обводка белым цветом
+                    .background(Circle().fill(Color.eclipse8))
+                    .frame(width: 8, height: 9)
+                    .position(x: 25 , y: 18)
+                    
+                WaveShape(amplitudes: [2, -2, 9, -5, 5, -10, 5, -5, 0])
+                    .stroke(Color.white, lineWidth: 2)
+                    .frame(width: 87, height: 34)
+                Circle()
+                    .stroke(Color.eclipse8, lineWidth: 1) // Обводка белым цветом
+                    .background(Circle().fill(Color.eclipse8))
+                    .frame(width: 8, height: 9)
+                    .position(x: -25 , y: 18)
+                    
+                    
+            }
         }
                 .frame(width: 87, height: 34)
+    }
+}
+
+
+struct PointOneView: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let width = rect.size.width
+        let height = rect.size.height
+        path.addArc(center: CGPoint(x: 0.00308*width, y: 0.33542*height), radius: 5, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 360), clockwise: true)
+        return path
     }
 }
 
@@ -85,5 +97,5 @@ struct WaveShape: Shape {
 
 #Preview {
     SingleWaveView()
-        .frame(width: 300, height: 150)
+        .frame(width: 87, height: 34)
 }

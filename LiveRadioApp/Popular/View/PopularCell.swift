@@ -25,6 +25,7 @@ struct PopularCell: View {
     private let didTapCell: () -> Void
     private let didTapFavorites: () -> Void
     private var isSelected: Bool
+//    private var didChangeAmplitude: CGFloat
     
     init(_ station: Station,
          isSelected: Bool = false,
@@ -38,11 +39,13 @@ struct PopularCell: View {
     
     var body: some View {
         CellBackground(isSelected: isSelected) {
+           
             VStack {
                 HStack(spacing: Drawing.hStackSpacing) {
                     Image(isSelected ? .playButton : .empty)
                         .resizable()
                         .frame(width: Drawing.playButton.width, height: Drawing.playButton.height)
+                        .padding(.top, 4)
                     
                     Text("Votes \(Int(station.votes))")
                         .foregroundStyle(.white)
@@ -65,10 +68,8 @@ struct PopularCell: View {
                     .foregroundStyle(Color.white)
                     .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                 
-                SingleWaveView()
-//                    .padding(.top, Drawing.imageTopPadding)
-//                    .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
-                    .frame(width: 87)
+                SingleWaveView(isSelected: isSelected/*, amplitude: didChangeAmplitude*/ )
+                    .padding(.top, Drawing.imageTopPadding)
             }
             .frame(width: Drawing.cellWidth, height: Drawing.cellHeight)
             .padding(.all, Drawing.cellPadding)

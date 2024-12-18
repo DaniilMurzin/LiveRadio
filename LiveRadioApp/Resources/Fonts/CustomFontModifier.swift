@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-//struct Fonts {
-//    static let largeTitle = Font.system(size: 52, weight: .bold)
-//    static let bodyText = Font.system(size: 16, weight: .regular)
-//    static let buttonText = Font.system(size: 20, weight: .bold)
-//}
-#warning("Ревью")
 struct CustomFontModifier: ViewModifier {
     
     enum AppFonts {

@@ -82,7 +82,7 @@ extension Station {
             state: "California",
             language: "English",
             languagecodes: "en",
-            votes: 100,
+            votes: 1000,
             lastchangetime: "2024-01-01T12:00:00Z",
             codec: "mp3",
             bitrate: 128,
@@ -117,7 +117,21 @@ extension Station {
                 name: "Jazz & Blues",
                 url: "https://example3.com",
                 votes: 150
-            )
+            ),
+            Station(
+                changeuuid: "22223",
+                stationuuid: "bbbb",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
+            Station(
+                changeuuid: "22222",
+                stationuuid: "bbbb",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
         ]
     }
 }

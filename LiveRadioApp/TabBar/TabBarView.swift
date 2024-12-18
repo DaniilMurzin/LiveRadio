@@ -12,12 +12,17 @@ struct TabBarView: View {
     let factory: RootFactory
     
     var body: some View {
-        MainBackground {
+        
             TabView {
                 factory.makePopular()
                     .tabItem {
                         VStack {
                             Text("Popular")
+                            Circle()
+                                .stroke(.eclipse6, lineWidth: 1)
+                                .background(Circle().fill(.eclipse8))
+                                .frame(width: 8, height: 8)
+
                         }
                     }
                 EmptyView()
@@ -26,7 +31,7 @@ struct TabBarView: View {
                     .tabItem { Text("All Stations") }
             }
         }
-    }
+    
 }
 
 #Preview {

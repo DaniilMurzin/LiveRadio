@@ -9,57 +9,80 @@ import SwiftUI
 
 struct PopularView: View {
     
-    //MARK: - Drawing
     private enum Drawing {
         static let titleSize: CGFloat = 30
+        static let headerHorizontalPadding: CGFloat = 16
+        static let scrollViewSpacing: CGFloat = 30
+        static let gridItemDimensions: CGFloat = 139
+        static let columnSpacing: CGFloat = 15
     }
     
-    //MARK: - Properties
     typealias Action = () -> Void
     @Binding var name: String
     @Binding var volume: Double
+    @Binding var selectedStation: Station?
+    @Binding var isPlaying: Bool
+//    @Binding var amplitude: CGFloat
     let didTapbackButton: Action
+    let didTapPlayButton: Action
     let didTapBackwardButton: Action
     let didTapForwardButton: Action
-    let didTapPlayButton: Action
+    let didTapCell: (Station) -> Void
     
     let stations: [Station]
     
     private let columns = [
-        GridItem(.flexible(), spacing: 20),
-        GridItem(.flexible(), spacing: 20)
-    ]
+        GridItem(
+            .flexible(
+                minimum: Drawing.gridItemDimensions,
+                maximum: Drawing.gridItemDimensions),
+                spacing: Drawing.columnSpacing),
+        GridItem(
+            .flexible(
+                minimum: Drawing.gridItemDimensions,
+                maximum: Drawing.gridItemDimensions),
+                spacing: Drawing.columnSpacing)]
     
-    //MARK: - Body
     var body: some View {
         TabBarBackground {
             VStack {
                 HeaderView(name: $name)
-                    .padding(.horizontal)
+                    .padding(.horizontal, Drawing.headerHorizontalPadding)
+                
                 HStack {
                     VolumeSlider(volume: $volume)
+                        .frame(width: 27, height: 253)
+                        .padding(.leading, 15)
+                    
                     ScrollView {
-                        VStack(alignment: .leading, spacing: 30) {
-                            
+                        VStack(alignment: .leading, spacing: Drawing.scrollViewSpacing) {
                             Text("Popular")
                                 .applyFonts(for: .subtitle)
                                 .foregroundColor(.white)
-                                .padding(.horizontal)
+                                .padding(.horizontal, Drawing.headerHorizontalPadding)
                             
                             LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(stations, id: \.self) { station in
-                                    PopularCell(station)
+                                ForEach(stations, id: \.stationuuid) { station in
+                                    PopularCell(
+                                        station,
+                                        isSelected: station == selectedStation)
+                                        { didTapCell(station) }
+                                        didTapFavorites: {}
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding(.trailing)
+                    .padding(.trailing, 30)
                 }
+                
                 PlayerView(
+                    isPlaying: $isPlaying,
                     backwardButtonAction: didTapbackButton,
                     forwardButtonAction: didTapForwardButton,
                     playButtonAction: didTapPlayButton
                 )
+                .frame(width: 225, height: 127)
             }
         }
     }
@@ -68,11 +91,16 @@ struct PopularView: View {
 #Preview {
     PopularView(
         name: .constant("Mark"),
-        volume: .constant(30),
+        volume: .constant(0.3),
+        selectedStation: .constant(nil),
+        isPlaying: .constant(true),
+//        amplitude:.constant(5),
         didTapbackButton: {},
+        didTapPlayButton: {},
         didTapBackwardButton: {},
         didTapForwardButton: {},
-        didTapPlayButton: {},
+        didTapCell: {_ in },
         stations: Station.mockList
     )
 }
+

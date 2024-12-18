@@ -14,12 +14,17 @@
 		92360FD12CA0191D009BAFF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD02CA0191D009BAFF6 /* FirebaseAuth */; };
 		92360FD32CA0191D009BAFF6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD22CA0191D009BAFF6 /* FirebaseFirestore */; };
 		92360FD52CA01A77009BAFF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92360FD42CA01A77009BAFF6 /* GoogleService-Info.plist */; };
+		9239ACE52D119AEA009B8688 /* SingleWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239ACE42D119AEA009B8688 /* SingleWaveView.swift */; };
 		923D56662CBD5F3200797F67 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D56652CBD5F3200797F67 /* Station.swift */; };
 		923D56692CBD6D4E00797F67 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D56682CBD6D4E00797F67 /* NetworkError.swift */; };
 		923D566B2CBD6FCC00797F67 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D566A2CBD6FCC00797F67 /* Endpoint.swift */; };
+		924DE1572D0B16FB0063D0AD /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */; };
+		926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926FCD962D0B413A00D43DA4 /* CellBackground.swift */; };
 		927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927482A42CBFBC2000291908 /* TabBarBackground.swift */; };
 		9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */; };
 		9281A45F2CB190C900F42612 /* Button+AsyncAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */; };
+		9293BBFF2D0C287300F67044 /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293BBFE2D0C287300F67044 /* PlayButtonView.swift */; };
+		9293BC012D0C288B00F67044 /* TrackButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293BC002D0C288B00F67044 /* TrackButtonsView.swift */; };
 		92A66F362CA599E700ACD36C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A66F352CA599E700ACD36C /* Models.swift */; };
 		92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF412CAFF4F800DC3C34 /* NetworkService.swift */; };
 		92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */; };
@@ -38,7 +43,6 @@
 		92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1C2C86109000B59386 /* PopularContentView.swift */; };
 		92E07D2D2C86109000B59386 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1D2C86109000B59386 /* PopularView.swift */; };
 		92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D1F2C86109000B59386 /* PopularViewModel.swift */; };
-		92E07D2F2C86109000B59386 /* StationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D202C86109000B59386 /* StationTest.swift */; };
 		92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D302C8610BE00B59386 /* CustomFontModifier.swift */; };
 		92E07D362C884D6900B59386 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E07D352C884D6900B59386 /* AuthTextField.swift */; };
 		92E07D3A2C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */; };
@@ -77,12 +81,17 @@
 		9233C0702D097D6100C93F79 /* Extension + Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Result.swift"; sourceTree = "<group>"; };
 		92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButtonsShape.swift; sourceTree = "<group>"; };
 		92360FD42CA01A77009BAFF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9239ACE42D119AEA009B8688 /* SingleWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleWaveView.swift; sourceTree = "<group>"; };
 		923D56652CBD5F3200797F67 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		923D56682CBD6D4E00797F67 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		923D566A2CBD6FCC00797F67 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
+		926FCD962D0B413A00D43DA4 /* CellBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackground.swift; sourceTree = "<group>"; };
 		927482A42CBFBC2000291908 /* TabBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackground.swift; sourceTree = "<group>"; };
 		9281A45B2CB18EDC00F42612 /* ConnectWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWithView.swift; sourceTree = "<group>"; };
 		9281A45E2CB190C900F42612 /* Button+AsyncAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+AsyncAction.swift"; sourceTree = "<group>"; };
+		9293BBFE2D0C287300F67044 /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
+		9293BC002D0C288B00F67044 /* TrackButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackButtonsView.swift; sourceTree = "<group>"; };
 		92A66F352CA599E700ACD36C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		92BACF412CAFF4F800DC3C34 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpy.swift; sourceTree = "<group>"; };
@@ -103,7 +112,6 @@
 		92E07D1C2C86109000B59386 /* PopularContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularContentView.swift; sourceTree = "<group>"; };
 		92E07D1D2C86109000B59386 /* PopularView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularView.swift; sourceTree = "<group>"; };
 		92E07D1F2C86109000B59386 /* PopularViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularViewModel.swift; sourceTree = "<group>"; };
-		92E07D202C86109000B59386 /* StationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTest.swift; sourceTree = "<group>"; };
 		92E07D302C8610BE00B59386 /* CustomFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFontModifier.swift; sourceTree = "<group>"; };
 		92E07D352C884D6900B59386 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		92E07D382C8888DD00B59386 /* Montserrat-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -154,6 +162,7 @@
 		922906D32CFB27D600A4C59E /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				926FCD962D0B413A00D43DA4 /* CellBackground.swift */,
 				922906D42CFB27F200A4C59E /* HeaderView.swift */,
 				922906D62CFB3C0E00A4C59E /* VolumeSlider.swift */,
 			);
@@ -178,6 +187,15 @@
 				92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */,
 			);
 			path = FactorySpy;
+			sourceTree = "<group>";
+		};
+		924DE1552D0B166E0063D0AD /* AVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				92E07DEB2C9B194700B59386 /* CustomElements */,
+				924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */,
+			);
+			path = AVPlayer;
 			sourceTree = "<group>";
 		};
 		927482A32CBF94E900291908 /* ContentView */ = {
@@ -207,6 +225,7 @@
 		92BACF402CAFF4C300DC3C34 /* Servises */ = {
 			isa = PBXGroup;
 			children = (
+				924DE1552D0B166E0063D0AD /* AVPlayer */,
 				92E07D182C86109000B59386 /* Root */,
 				923D56642CBD5EAC00797F67 /* NetworkService */,
 				923D566E2CBD70C000797F67 /* FactorySpy */,
@@ -306,8 +325,8 @@
 		92E07D212C86109000B59386 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9239ACE42D119AEA009B8688 /* SingleWaveView.swift */,
 				92E07D1F2C86109000B59386 /* PopularViewModel.swift */,
-				92E07D202C86109000B59386 /* StationTest.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -420,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				92E07DDF2C98600D00B59386 /* TabBarView.swift */,
-				92E07DEB2C9B194700B59386 /* CustomElements */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -439,6 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				92E07DEC2C9B1C8900B59386 /* PlayerView.swift */,
+				9293BBFE2D0C287300F67044 /* PlayButtonView.swift */,
+				9293BC002D0C288B00F67044 /* TrackButtonsView.swift */,
 				92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */,
 			);
 			path = CustomElements;
@@ -570,6 +590,7 @@
 				92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */,
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
 				92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */,
+				9239ACE52D119AEA009B8688 /* SingleWaveView.swift in Sources */,
 				922906D72CFB3C0E00A4C59E /* VolumeSlider.swift in Sources */,
 				922906D52CFB27F200A4C59E /* HeaderView.swift in Sources */,
 				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
@@ -578,11 +599,12 @@
 				9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
 				92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */,
+				9293BBFF2D0C287300F67044 /* PlayButtonView.swift in Sources */,
 				92E07D452C8B2CB300B59386 /* ForgotPasswordView.swift in Sources */,
 				923D56662CBD5F3200797F67 /* Station.swift in Sources */,
 				9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */,
-				92E07D2F2C86109000B59386 /* StationTest.swift in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
+				926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */,
 				92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */,
 				92E07D482C8B35E700B59386 /* BackButton.swift in Sources */,
 				92E07DA22C8DFDDC00B59386 /* AuthorizationContentView.swift in Sources */,
@@ -590,6 +612,7 @@
 				92E07D432C8B077C00B59386 /* SignUpView.swift in Sources */,
 				92E07D232C86109000B59386 /* BackgroundView.swift in Sources */,
 				92E07D262C86109000B59386 /* OnboardingViewModel.swift in Sources */,
+				924DE1572D0B16FB0063D0AD /* RadioPlayer.swift in Sources */,
 				927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */,
 				92E07D2B2C86109000B59386 /* PopularCell.swift in Sources */,
 				92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */,
@@ -601,6 +624,7 @@
 				92E07D242C86109000B59386 /* OnboardingContentView.swift in Sources */,
 				92E07D3E2C888FCF00B59386 /* ButtonAuth.swift in Sources */,
 				92E07D272C86109000B59386 /* RootCoordinator.swift in Sources */,
+				9293BC012D0C288B00F67044 /* TrackButtonsView.swift in Sources */,
 				92E07D402C8AE96700B59386 /* TestView.swift in Sources */,
 				EEECC6C82C91FADB00BA6EB4 /* MainBackground.swift in Sources */,
 				92E07DED2C9B1C8900B59386 /* PlayerView.swift in Sources */,

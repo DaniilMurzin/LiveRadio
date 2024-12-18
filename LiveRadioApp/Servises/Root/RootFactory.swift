@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 protocol RootFactory {
     func makeOnboarding() -> OnboardingContentView
@@ -49,7 +50,7 @@ extension FRoot: RootFactory {
     }
     
     func makePopular() -> PopularContentView {
-        let viewModel = PopularViewModel(networkService: networkService)
+        let viewModel = PopularViewModel(networkService: networkService, avPlayer: RadioPlayer())
         return PopularContentView(viewModel)
     }
     

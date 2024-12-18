@@ -11,40 +11,55 @@ struct VolumeSlider: View {
     @Binding var volume: Double
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("\(Int(volume))%")
-                .font(.system(size: 10, weight: .regular))
-                .foregroundColor(.white)
+        VStack {
+            
+            Text("\(Int(volume * 100))%")
+                .font(.system(size: 12))
+                .foregroundStyle(.white)
+                .lineLimit(1)
 
-            ZStack {
-                Capsule()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(width: 6, height: 170)
+            GeometryReader { geometry in
+                ZStack {
+                    
+                    ZStack(alignment: .bottom) {
+                        RoundedRectangle(cornerRadius: .infinity)
+                            .foregroundStyle(
+                                Color.gray.opacity(0.2))
+                        RoundedRectangle(cornerRadius: .infinity)
+                            .foregroundStyle(.eclipse1)
+                            .frame(height: geometry.size.height * CGFloat(volume))
+                    }
+                    .frame(width: 4)
 
-                Slider(value: $volume, in: 0...100)
-                    .rotationEffect(.degrees(-90))
-                    .frame(width: 170)
-                    .tint(.eclipse6)
+                    Circle()
+                        .foregroundStyle(.eclipse1)
+                        .frame(width: 10, height: 10)
+                        .position(
+                            x: geometry.size.width / 2,
+                            y: geometry.size.height - (geometry.size.height * CGFloat(volume))
+                        )
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+
+                                    let newVolume = 1 - min(max(0, value.location.y / geometry.size.height), 1)
+                                    volume = newVolume
+                                }
+                        )
+                }
             }
-
-            Image(systemName: volume == 0 ? "speaker.slash.fill" : "speaker.wave.3.fill")
+            .frame(width: 10, height: 170)
+            Image(systemName: volume == 0 ? "speaker.slash" : "speaker.wave.2")
+                .resizable()
+                .frame(width: 18, height: 18)
                 .foregroundColor(.gray)
-                .padding(.top, 8)
         }
-        .padding(.vertical, 16)
-        .frame(width: 25, height: 320)
+        .frame(width: 35, height: 253)
     }
 }
 
 #Preview {
-    MainBackground {
-        VolumeSlider(volume: .constant(65))
-    }
+    VolumeSlider(volume: .constant(0.5))
 }
 
 
-#Preview {
-    MainBackground {
-        VolumeSlider(volume: .constant(65))
-    }
-}

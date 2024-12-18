@@ -21,7 +21,8 @@ struct DetailsContentView: View {
                     didTapbackButton: coordinator.showTabBar,
                     didTapBackwardButton: viewModel.didTapBackwardButton,
                     didTapForwardButton: viewModel.didTapForwardButton,
-                    didTapPlayButton: viewModel.didTapPlayButton)
+                    didTapPlayButton: viewModel.didTapPlayButton
+                    )
     }
     
 }

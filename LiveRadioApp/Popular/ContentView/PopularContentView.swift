@@ -20,6 +20,7 @@ struct PopularContentView: View {
             volume: $viewModel.volume,
             selectedStation: $viewModel.selectedStation,
             isPlaying: $viewModel.avPlayer.isPlaying,
+//            amplitude: $viewModel.avPlayer.amplitude,
             didTapbackButton: { viewModel.playPreviousStation() },
             didTapPlayButton: {
                 viewModel.avPlayer.isPlaying ?

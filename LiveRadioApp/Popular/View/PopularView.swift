@@ -22,6 +22,7 @@ struct PopularView: View {
     @Binding var volume: Double
     @Binding var selectedStation: Station?
     @Binding var isPlaying: Bool
+//    @Binding var amplitude: CGFloat
     let didTapbackButton: Action
     let didTapPlayButton: Action
     let didTapBackwardButton: Action
@@ -93,6 +94,7 @@ struct PopularView: View {
         volume: .constant(0.3),
         selectedStation: .constant(nil),
         isPlaying: .constant(true),
+//        amplitude:.constant(5),
         didTapbackButton: {},
         didTapPlayButton: {},
         didTapBackwardButton: {},

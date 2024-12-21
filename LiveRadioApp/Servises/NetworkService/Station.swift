@@ -126,8 +126,29 @@ extension Station {
                 votes: 300
             ),
             Station(
+                changeuuid: "2222332",
+                stationuuid: "bbb2232b",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
+            Station(
                 changeuuid: "22222",
-                stationuuid: "bbbb",
+                stationuuid: "bbb3232b",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
+            Station(
+                changeuuid: "22222",
+                stationuuid: "bb2332bb",
+                name: "Rock Classics",
+                url: "https://example2.com",
+                votes: 300
+            ),
+            Station(
+                changeuuid: "223322222",
+                stationuuid: "bb2332bb",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300

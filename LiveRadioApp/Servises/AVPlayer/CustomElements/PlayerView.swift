@@ -26,6 +26,7 @@ struct PlayerView: View {
                 action: forwardButtonAction,
                 direction: .forward)
         }
+        .background(.clear)
     }
 }
 

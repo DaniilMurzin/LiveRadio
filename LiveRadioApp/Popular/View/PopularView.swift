@@ -11,7 +11,7 @@ struct PopularView: View {
     
     private enum Drawing {
         static let titleSize: CGFloat = 30
-        static let headerHorizontalPadding: CGFloat = 16
+        static let headerHorizontalPadding: CGFloat = 20
         static let scrollViewSpacing: CGFloat = 30
         static let gridItemDimensions: CGFloat = 139
         static let columnSpacing: CGFloat = 15
@@ -22,7 +22,7 @@ struct PopularView: View {
     @Binding var volume: Double
     @Binding var selectedStation: Station?
     @Binding var isPlaying: Bool
-//    @Binding var amplitude: CGFloat
+    //    @Binding var amplitude: CGFloat
     let didTapbackButton: Action
     let didTapPlayButton: Action
     let didTapBackwardButton: Action
@@ -36,71 +36,72 @@ struct PopularView: View {
             .flexible(
                 minimum: Drawing.gridItemDimensions,
                 maximum: Drawing.gridItemDimensions),
-                spacing: Drawing.columnSpacing),
+            spacing: Drawing.columnSpacing),
         GridItem(
             .flexible(
                 minimum: Drawing.gridItemDimensions,
                 maximum: Drawing.gridItemDimensions),
-                spacing: Drawing.columnSpacing)]
+            spacing: Drawing.columnSpacing)]
     
     var body: some View {
-        TabBarBackground {
-            VStack {
-                HeaderView(name: $name)
-                    .padding(.horizontal, Drawing.headerHorizontalPadding)
-                
-                HStack {
-                    VolumeSlider(volume: $volume)
-                        .frame(width: 27, height: 253)
-                        .padding(.leading, 15)
-                    
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: Drawing.scrollViewSpacing) {
-                            Text("Popular")
-                                .applyFonts(for: .subtitle)
-                                .foregroundColor(.white)
-                                .padding(.horizontal, Drawing.headerHorizontalPadding)
-                            
-                            LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(stations, id: \.stationuuid) { station in
-                                    PopularCell(
-                                        station,
-                                        isSelected: station == selectedStation)
-                                        { didTapCell(station) }
-                                        didTapFavorites: {}
-                                }
-                            }
+        
+        HeaderView(name: $name)
+            .padding(.horizontal, Drawing.headerHorizontalPadding)
+            .padding(.bottom, -10)
+        
+        HStack {
+            VolumeSlider(volume: $volume)
+                .padding(.leading, 15)
+                .frame(width: 48)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("Popular")
+                        .applyFonts(for: .subtitle)
+                        .foregroundColor(.white)
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(stations, id: \.stationuuid) { station in
+                            PopularCell(
+                                station,
+                                isSelected: station == selectedStation)
+                            { didTapCell(station) }
+                            didTapFavorites: {}
                         }
-                        .padding()
                     }
-                    .padding(.trailing, 30)
                 }
-                
+                .padding()
+            }
+        }
+        .overlay {
+            VStack {
+                Spacer()
                 PlayerView(
                     isPlaying: $isPlaying,
                     backwardButtonAction: didTapbackButton,
                     forwardButtonAction: didTapForwardButton,
                     playButtonAction: didTapPlayButton
                 )
-                .frame(width: 225, height: 127)
+                .frame(width: 190, height: 90)
+                .padding(.bottom, 30)
+                .background(Color.clear)
             }
         }
     }
 }
 
 #Preview {
-    PopularView(
-        name: .constant("Mark"),
-        volume: .constant(0.3),
-        selectedStation: .constant(nil),
-        isPlaying: .constant(true),
-//        amplitude:.constant(5),
-        didTapbackButton: {},
-        didTapPlayButton: {},
-        didTapBackwardButton: {},
-        didTapForwardButton: {},
-        didTapCell: {_ in },
-        stations: Station.mockList
-    )
+    TabBarBackground {
+        PopularView(
+            name: .constant("Mark"),
+            volume: .constant(0.3),
+            selectedStation: .constant(nil),
+            isPlaying: .constant(true),
+            didTapbackButton: {},
+            didTapPlayButton: {},
+            didTapBackwardButton: {},
+            didTapForwardButton: {},
+            didTapCell: {_ in },
+            stations: Station.mockList
+        )
+    }
 }
 

@@ -16,11 +16,12 @@ struct TabBarBackground<V: View>: View {
     }
     
     var body: some View {
-        ZStack {
-            Color(.mainBg)
-                .ignoresSafeArea()
-            content()
-        }
+            ZStack {
+                VStack(alignment: .leading) {
+                    content()
+                }
+            }
+            .background(Color(.mainBg))
     }
 }
 

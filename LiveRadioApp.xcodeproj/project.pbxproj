@@ -189,13 +189,13 @@
 			path = FactorySpy;
 			sourceTree = "<group>";
 		};
-		924DE1552D0B166E0063D0AD /* AVPlayer */ = {
+		924DE1552D0B166E0063D0AD /* RadioPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				92E07DEB2C9B194700B59386 /* CustomElements */,
 				924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */,
 			);
-			path = AVPlayer;
+			path = RadioPlayer;
 			sourceTree = "<group>";
 		};
 		927482A32CBF94E900291908 /* ContentView */ = {
@@ -225,7 +225,7 @@
 		92BACF402CAFF4C300DC3C34 /* Servises */ = {
 			isa = PBXGroup;
 			children = (
-				924DE1552D0B166E0063D0AD /* AVPlayer */,
+				924DE1552D0B166E0063D0AD /* RadioPlayer */,
 				92E07D182C86109000B59386 /* Root */,
 				923D56642CBD5EAC00797F67 /* NetworkService */,
 				923D566E2CBD70C000797F67 /* FactorySpy */,

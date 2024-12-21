@@ -23,7 +23,7 @@ struct MainBackground<V: View>: View {
                 .ignoresSafeArea()
             VStack(alignment: .leading, content: content)
         }
-        .background(Color.mainBg)
+        .background(.mainBg)
     }
 }
 

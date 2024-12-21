@@ -9,29 +9,61 @@ import SwiftUI
 
 struct TabBarView: View {
     
+    //MARK: - Properties
     let factory: RootFactory
+    @State private var selectedTab: Tabs = .popular
     
     var body: some View {
-        
-            TabView {
-                factory.makePopular()
-                    .tabItem {
-                        VStack {
-                            Text("Popular")
-                            Circle()
-                                .stroke(.eclipse6, lineWidth: 1)
-                                .background(Circle().fill(.eclipse8))
-                                .frame(width: 8, height: 8)
-
-                        }
-                    }
-                EmptyView()
-                    .tabItem { Text("Favorites") }
-                EmptyView()
-                    .tabItem { Text("All Stations") }
+        TabBarBackground {
+                switch selectedTab {
+                case .popular:
+                    factory.makePopular()
+                case .favorites:
+                    factory.makePopular()
+                case .allStations:
+                    factory.makePopular()
+                }
+            
+            HStack {
+                makeTabBarButton(text: "Popular", tab: .popular)
+                Spacer()
+                makeTabBarButton(text: "Favorites", tab: .favorites)
+                Spacer()
+                makeTabBarButton(text: "All Stations", tab: .allStations)
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+    
+    //MARK: - Methods
+    private func makeTabBarButton(text: String, tab: Tabs) -> some View {
+       
+        Button {
+                selectedTab = tab
+        } label: {
+            VStack {
+                Text(text)
+                    .font(.system(size: 20, weight: .medium))
+                    .opacity(selectedTab == tab ? 1 : 0.2)
+                    .foregroundColor(.white)
+                Circle()
+                    .fill(.eclipse6)
+                    .frame(width: 15, height: 15)
+                    .scaleEffect(selectedTab == tab ? 1 : 0.5)
+                    .opacity(selectedTab == tab ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3), value: selectedTab == tab)
             }
         }
-    
+        .background(.clear)
+    }
+}
+
+extension TabBarView {
+    enum Tabs: Int {
+        case popular
+        case favorites
+        case allStations
+    }
 }
 
 #Preview {

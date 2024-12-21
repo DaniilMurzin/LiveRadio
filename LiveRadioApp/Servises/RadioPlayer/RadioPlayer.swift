@@ -10,14 +10,28 @@ import AVFoundation
 
 final class RadioPlayer: ObservableObject {
     @Published var avPlayer: AVPlayer?
-    @Published var isPlaying: Bool = false 
-    @Published var currentStation: Station?
+    @Published var currentStation: Station? {
+        didSet {
+            if let station = currentStation {
+                playStation(station)
+            }
+        }
+    }
     @Published var currentStationIndex: Int?
+    @Published var isPlaying: Bool = false {
+        didSet {
+            if isPlaying {
+                avPlayer?.play()
+            } else {
+                avPlayer?.pause()
+            }
+        }
+    }
     @Published var volume: Double = 0.5 {
-           didSet {
-               avPlayer?.volume = Float(volume)
-           }
-       }
+        didSet {
+            avPlayer?.volume = Float(volume)
+        }
+    }
     
     func playStation(_ station: Station) {
         guard let url = URL(string: station.url) else {
@@ -25,42 +39,41 @@ final class RadioPlayer: ObservableObject {
             return
         }
         
-        self.avPlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
-        self.avPlayer?.play()
-        self.isPlaying = true
-        self.currentStation = station
-        self.avPlayer?.volume = Float(volume)
+        avPlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
+        avPlayer?.volume = Float(volume)
+        avPlayer?.play()
+        isPlaying = true
     }
     
     func pauseStation() {
-        self.avPlayer?.pause()
-        self.isPlaying = false
+        avPlayer?.pause()
+        isPlaying = false
     }
     
     func resumeStation() {
-        self.avPlayer?.play()
-        self.isPlaying = true
+        avPlayer?.play()
+        isPlaying = true
     }
-
+    
     func playNextStation(from stations: [Station]) {
         guard let currentIndex = currentStationIndex, currentIndex < stations.count - 1 else { return }
         let nextStation = stations[currentIndex + 1]
-        playStation(nextStation)
+        currentStation = nextStation
         currentStationIndex = currentIndex + 1
     }
     
     func playPreviousStation(from stations: [Station]) {
         guard let currentIndex = currentStationIndex, currentIndex > 0 else { return }
         let previousStation = stations[currentIndex - 1]
-        playStation(previousStation)
+        currentStation = previousStation
         currentStationIndex = currentIndex - 1
     }
     
     func handleSelection(_ station: Station, in stations: [Station]) {
         if currentStation == station {
-            isPlaying ? pauseStation() : resumeStation()
+            isPlaying.toggle()
         } else {
-            playStation(station)
+            currentStation = station
             currentStationIndex = stations.firstIndex(where: { $0.stationuuid == station.stationuuid })
         }
     }

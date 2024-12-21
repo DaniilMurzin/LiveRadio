@@ -29,7 +29,7 @@ enum Endpoint {
         switch self {
         case .popular:
             components.queryItems = [
-                URLQueryItem(name: "limit", value: "6"),
+                URLQueryItem(name: "limit", value: "12"),
                 URLQueryItem(name: "hidebroken", value: "true")
             ]
         }

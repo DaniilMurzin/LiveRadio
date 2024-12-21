@@ -22,13 +22,15 @@ struct PopularContentView: View {
             isPlaying: $viewModel.avPlayer.isPlaying,
             didTapbackButton: { viewModel.playPreviousStation() },
             didTapPlayButton: {
-                viewModel.avPlayer.isPlaying ?
-                viewModel.avPlayer.pauseStation() :
-                viewModel.avPlayer.resumeStation()
+                if let selectedStation = viewModel.selectedStation {
+                    viewModel.handleSelection(selectedStation)
+                }
             },
             didTapBackwardButton: { viewModel.playPreviousStation() },
             didTapForwardButton: { viewModel.playNextStation() },
-            didTapCell: { station in viewModel.handleSelection(station)},
+            didTapCell: { station in
+                viewModel.handleSelection(station)
+            },
             stations: viewModel.fetchedStations
         )
         .onAppear {
@@ -36,3 +38,4 @@ struct PopularContentView: View {
         }
     }
 }
+

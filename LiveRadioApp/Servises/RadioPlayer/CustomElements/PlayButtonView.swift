@@ -27,7 +27,7 @@ struct PlayButtonView: View {
                 PlayerButtonsShape()
                     .fill(.eclipse8)
                     .frame(width: 89, height: 89)
-                #warning("хз как пробрасывать, через биндинги не получается")
+                
                 Image(isPlaying ? .pauseButton : .playButton)
                     .resizable()
                     .frame(width: 37, height: 37)

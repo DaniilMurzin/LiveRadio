@@ -67,7 +67,6 @@ extension NetworkService: StationDataService {
     }
 }
 
-
 //MARK: - NetworkService + AuthorizationService
 extension NetworkService: AuthorizationService {
     

@@ -11,16 +11,16 @@ struct VolumeSlider: View {
     @Binding var volume: Double
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             
             Text("\(Int(volume * 100))%")
                 .font(.system(size: 12))
                 .foregroundStyle(.white)
                 .lineLimit(1)
+                .padding(.bottom)
 
             GeometryReader { geometry in
                 ZStack {
-                    
                     ZStack(alignment: .bottom) {
                         RoundedRectangle(cornerRadius: .infinity)
                             .foregroundStyle(
@@ -29,8 +29,7 @@ struct VolumeSlider: View {
                             .foregroundStyle(.eclipse1)
                             .frame(height: geometry.size.height * CGFloat(volume))
                     }
-                    .frame(width: 4)
-
+                    
                     Circle()
                         .foregroundStyle(.eclipse1)
                         .frame(width: 10, height: 10)
@@ -48,18 +47,20 @@ struct VolumeSlider: View {
                         )
                 }
             }
-            .frame(width: 10, height: 170)
+            .frame(width: 5, height: 230)
             Image(systemName: volume == 0 ? "speaker.slash" : "speaker.wave.2")
                 .resizable()
-                .frame(width: 18, height: 18)
+                .frame(width: 18, height: 16)
                 .foregroundColor(.gray)
+                .padding(.top)
         }
-        .frame(width: 35, height: 253)
     }
 }
 
 #Preview {
-    VolumeSlider(volume: .constant(0.5))
+    MainBackground {
+        VolumeSlider(volume: .constant(0.5))
+    }
 }
 
 

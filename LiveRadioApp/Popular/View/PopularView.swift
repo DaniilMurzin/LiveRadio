@@ -60,11 +60,15 @@ struct PopularView: View {
                         .foregroundColor(.white)
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(stations, id: \.stationuuid) { station in
+                            let isSelected = station == selectedStation
+                            
                             PopularCell(
                                 station,
-                                isSelected: station == selectedStation)
-                            { didTapCell(station) }
-                            didTapFavorites: {}
+                                isSelected: isSelected,
+                                didTapPlayButton: { didTapCell(station) },
+                                didTapFavorites: {},
+                                isPlaying: isPlaying
+                              )
                         }
                     }
                 }

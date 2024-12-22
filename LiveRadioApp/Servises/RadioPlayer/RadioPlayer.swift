@@ -9,6 +9,9 @@ import Foundation
 import AVFoundation
 
 final class RadioPlayer: ObservableObject {
+    
+    //MARK: - Properties
+    @Published var currentStationIndex: Int?
     @Published var avPlayer: AVPlayer?
     @Published var currentStation: Station? {
         didSet {
@@ -17,7 +20,6 @@ final class RadioPlayer: ObservableObject {
             }
         }
     }
-    @Published var currentStationIndex: Int?
     @Published var isPlaying: Bool = false {
         didSet {
             if isPlaying {
@@ -33,6 +35,8 @@ final class RadioPlayer: ObservableObject {
         }
     }
     
+    
+    //MARK: - Methods
     func playStation(_ station: Station) {
         guard let url = URL(string: station.url) else {
             print("Ошибка: некорректный URL \(station.url)")
@@ -41,22 +45,13 @@ final class RadioPlayer: ObservableObject {
         
         avPlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
         avPlayer?.volume = Float(volume)
-        avPlayer?.play()
-        isPlaying = true
-    }
-    
-    func pauseStation() {
-        avPlayer?.pause()
-        isPlaying = false
-    }
-    
-    func resumeStation() {
-        avPlayer?.play()
         isPlaying = true
     }
     
     func playNextStation(from stations: [Station]) {
-        guard let currentIndex = currentStationIndex, currentIndex < stations.count - 1 else { return }
+        guard let currentIndex = currentStationIndex,
+                  currentIndex < stations.count - 1 else { return }
+        
         let nextStation = stations[currentIndex + 1]
         currentStation = nextStation
         currentStationIndex = currentIndex + 1
@@ -74,7 +69,9 @@ final class RadioPlayer: ObservableObject {
             isPlaying.toggle()
         } else {
             currentStation = station
-            currentStationIndex = stations.firstIndex(where: { $0.stationuuid == station.stationuuid })
+            currentStationIndex = stations.firstIndex(
+                where: { $0.stationuuid == station.stationuuid }
+            )
         }
     }
 }

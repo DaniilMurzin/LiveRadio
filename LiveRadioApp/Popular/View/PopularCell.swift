@@ -25,16 +25,19 @@ struct PopularCell: View {
     private let didTapCell: () -> Void
     private let didTapFavorites: () -> Void
     private var isSelected: Bool
+    private var isPlaying: Bool
 //    private var didChangeAmplitude: CGFloat
-    
+#warning("test is selected")
     init(_ station: Station,
          isSelected: Bool = false,
          didTapPlayButton: @escaping () -> Void,
-         didTapFavorites: @escaping () -> Void) {
+         didTapFavorites: @escaping () -> Void,
+         isPlaying: Bool) {
         self.station = station
         self.isSelected = isSelected
         self.didTapCell = didTapPlayButton
         self.didTapFavorites = didTapFavorites
+        self.isPlaying = isPlaying
     }
     
     var body: some View {
@@ -68,7 +71,7 @@ struct PopularCell: View {
                     .foregroundStyle(Color.white)
                     .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                 
-                SingleWaveView(isSelected: isSelected/*, amplitude: didChangeAmplitude*/ )
+                SingleWaveView(isSelected: isSelected, isPlaying: isPlaying/*, amplitude: didChangeAmplitude*/ )
                     .padding(.top, Drawing.imageTopPadding)
             }
             .frame(width: Drawing.cellWidth, height: Drawing.cellHeight)
@@ -81,5 +84,10 @@ struct PopularCell: View {
 }
 
 #Preview {
-        PopularCell(Station.mock) {} didTapFavorites: {}
+    PopularCell(
+        Station.mock,
+        didTapPlayButton: {},
+        didTapFavorites: {},
+        isPlaying: true
+        )
 }

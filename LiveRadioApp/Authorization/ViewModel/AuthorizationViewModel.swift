@@ -23,7 +23,6 @@ final class AuthorizationViewModel: ObservableObject {
     private let coordinator: AppCoordinator
     
     @Published var state: State = .signIn
-    
     @Published var email: String = .init()
     @Published var password: String = .init()
     @Published var name: String = .init()

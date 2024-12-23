@@ -19,7 +19,7 @@ struct TabBarView: View {
                 case .popular:
                     factory.makePopular()
                 case .favorites:
-                    factory.makePopular()
+                    factory.makeFavorites()
                 case .allStations:
                     factory.makePopular()
                 }

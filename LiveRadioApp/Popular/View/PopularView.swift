@@ -62,12 +62,13 @@ struct PopularView: View {
                         ForEach(stations, id: \.stationuuid) { station in
                             let isSelected = station == selectedStation
                             
-                            PopularCell(
+                            TabBarCell(
                                 station,
                                 isSelected: isSelected,
                                 didTapPlayButton: { didTapCell(station) },
                                 didTapFavorites: {},
-                                isPlaying: isPlaying
+                                isPlaying: isPlaying,
+                                type: .popular
                               )
                         }
                     }

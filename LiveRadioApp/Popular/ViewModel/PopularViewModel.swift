@@ -5,14 +5,12 @@
 //  Created by Daniil Murzin on 30.08.2024.
 //
 
-import Foundation
-import AVFoundation
 import SwiftUI
 
 
 final class PopularViewModel: ObservableObject {
-    let networkService: StationDataService
-    @ObservedObject var avPlayer: RadioPlayer
+    private let networkService: StationDataService
+    var avPlayer: RadioPlayer
     @Published var fetchedStations: [Station] = []
     @Published var name: String = "Daniil"
     @Published var selectedStation: Station?
@@ -53,11 +51,4 @@ final class PopularViewModel: ObservableObject {
         avPlayer.playPreviousStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
-    
-    func bindingForIsPlaying() -> Binding<Bool> {
-           Binding(
-               get: { self.avPlayer.isPlaying },
-               set: { self.avPlayer.isPlaying = $0 }
-           )
-       }
 }

@@ -13,6 +13,7 @@ protocol RootFactory {
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
     func makePopular() -> PopularContentView
     func makeDetails() -> DetailsContentView
+    func makeFavorites() -> FavoritesContentView
     func makeTabBar() -> TabBarView
 }
 
@@ -31,7 +32,7 @@ final class FRoot {
 
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
-    
+   
     func makeTabBar() -> TabBarView {
         TabBarView(factory: self)
     }
@@ -39,6 +40,11 @@ extension FRoot: RootFactory {
     func makeOnboarding() -> OnboardingContentView {
         let viewModel = OnboardingViewModel(repository: spy)
         return OnboardingContentView(viewModel)
+    }
+    
+    func makeFavorites() -> FavoritesContentView {
+       let viewModel = FavoritesViewModel()
+        return FavoritesContentView(viewModel)
     }
     
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {

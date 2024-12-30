@@ -18,7 +18,7 @@ struct PopularView: View {
     }
     
     typealias Action = () -> Void
-    @Binding var name: String
+    let name: String
     @Binding var volume: Double
     @Binding var selectedStation: Station?
     @Binding var isPlaying: Bool
@@ -44,8 +44,8 @@ struct PopularView: View {
             spacing: Drawing.columnSpacing)]
     
     var body: some View {
-        
-        HeaderView(name: $name)
+        let _ = Self._printChanges()
+        HeaderView(name: name)
             .padding(.horizontal, Drawing.headerHorizontalPadding)
             .padding(.bottom, -10)
         
@@ -96,7 +96,7 @@ struct PopularView: View {
 #Preview {
     TabBarBackground {
         PopularView(
-            name: .constant("Mark"),
+            name: "Mark",
             volume: .constant(0.3),
             selectedStation: .constant(nil),
             isPlaying: .constant(true),

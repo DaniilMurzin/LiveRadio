@@ -8,6 +8,13 @@
 import Foundation
 import AVFoundation
 
+struct PlayerDeck {
+    private(set) var stations: [Station]
+    private var currentIndex: Int
+    var current: Station?  { stations[safe: currentIndex] }
+}
+
+
 final class RadioPlayer: ObservableObject {
     
     //MARK: - Properties
@@ -38,12 +45,9 @@ final class RadioPlayer: ObservableObject {
     
     //MARK: - Methods
     func playStation(_ station: Station) {
-        guard let url = URL(string: station.url) else {
-            print("Ошибка: некорректный URL \(station.url)")
-            return
-        }
+        guard let item = AVPlayerItem.parse(station: station) else { return }
         
-        avPlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
+        avPlayer = AVPlayer(playerItem: item)
         avPlayer?.volume = Float(volume)
         isPlaying = true
     }
@@ -73,5 +77,15 @@ final class RadioPlayer: ObservableObject {
                 where: { $0.stationuuid == station.stationuuid }
             )
         }
+    }
+    
+    func play(stations: [Station], selected: (Station) -> Bool) {
+        
+    }
+}
+
+extension AVPlayerItem {
+    static func parse(station: Station) -> AVPlayerItem? {
+        URL(string: station.url).map(AVPlayerItem.init)
     }
 }

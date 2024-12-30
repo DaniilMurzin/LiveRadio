@@ -37,6 +37,15 @@ struct Password: Equatable {
 struct Credentials: Equatable {
     let email: Email
     let password: Password
+    
+    init?(email: String, password: String) {
+        guard let email = Email(email),
+              let password = Password(password)
+        else { return nil }
+        
+        self.email = email
+        self.password = password
+    }
 }
 
 struct User: Equatable {

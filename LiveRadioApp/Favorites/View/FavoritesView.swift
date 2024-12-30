@@ -17,7 +17,7 @@ struct FavoritesView: View {
     
     var body: some View {
         TabBarBackground {
-            HeaderView(name: $name)
+            HeaderView(name: name)
                 
             HStack {
                 VolumeSlider(volume: $volume)

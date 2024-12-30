@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeaderView: View {
     
-    @Binding var name: String
+    let name: String
     
     var body: some View {
         HStack {
@@ -33,7 +33,7 @@ struct HeaderView: View {
 
 #Preview {
     MainBackground {
-        HeaderView(name: .constant("Mark"))
+        HeaderView(name: "Mark")
     }
     
 }

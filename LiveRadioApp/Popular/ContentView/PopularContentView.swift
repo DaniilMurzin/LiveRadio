@@ -35,6 +35,9 @@ struct PopularContentView: View {
         )
         .onAppear {
             viewModel.fetchPopularStations()
+            if let currentStation = viewModel.avPlayer.currentStation {
+                   viewModel.selectedStation = currentStation
+               }
         }
     }
 }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 final class PopularViewModel: ObservableObject {
     private let networkService: StationDataService
     var avPlayer: RadioPlayer
@@ -19,6 +18,7 @@ final class PopularViewModel: ObservableObject {
                avPlayer.volume = volume
            }
        }
+    
     init(networkService: StationDataService, avPlayer: RadioPlayer) {
         self.networkService = networkService
         self.avPlayer = avPlayer
@@ -38,17 +38,23 @@ final class PopularViewModel: ObservableObject {
     }
     
     func handleSelection(_ station: Station) {
-        avPlayer.handleSelection(station, in: fetchedStations)
+        if avPlayer.currentStation == station {
+            avPlayer.isPlaying.toggle()
+        } else {
+            avPlayer.play(stations: fetchedStations) { $0 == station }
+        }
         selectedStation = avPlayer.currentStation
     }
 
     func playNextStation() {
-        avPlayer.playNextStation(from: fetchedStations)
+        avPlayer.playNext()
+//        avPlayer.playNextStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
 
     func playPreviousStation() {
-        avPlayer.playPreviousStation(from: fetchedStations)
+        avPlayer.playPrevious()
+//        avPlayer.playPreviousStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
 }

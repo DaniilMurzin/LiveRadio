@@ -8,33 +8,17 @@
 import Foundation
 import AVFoundation
 
-struct PlayerDeck {
-    private(set) var stations: [Station]
-    private var currentIndex: Int
-    var current: Station?  { stations[safe: currentIndex] }
-}
-
-
 final class RadioPlayer: ObservableObject {
+    typealias PlayerDeck = Zipper<Station>
     
     //MARK: - Properties
-    @Published var currentStationIndex: Int?
-    @Published var avPlayer: AVPlayer?
-    @Published var currentStation: Station? {
-        didSet {
-            if let station = currentStation {
-                playStation(station)
-            }
-        }
-    }
-    @Published var isPlaying: Bool = false {
-        didSet {
-            if isPlaying {
-                avPlayer?.play()
-            } else {
-                avPlayer?.pause()
-            }
-        }
+    @Published private var avPlayer: AVPlayer?
+    @Published private var playerDeck: PlayerDeck?
+    
+    var currentStation: Station? { playerDeck?.current }
+    var isPlaying: Bool {
+        get { avPlayer?.isPlaying ?? false }
+        set { avPlayer?.rate = newValue ? 1 : 0 }
     }
     @Published var volume: Double = 0.5 {
         didSet {
@@ -42,50 +26,44 @@ final class RadioPlayer: ObservableObject {
         }
     }
     
-    
     //MARK: - Methods
-    func playStation(_ station: Station) {
-        guard let item = AVPlayerItem.parse(station: station) else { return }
+    private func playStation(_ station: Station) -> Bool {
+        guard let item = AVPlayerItem.parse(station: station) else {
+            return false
+        }
         
         avPlayer = AVPlayer(playerItem: item)
         avPlayer?.volume = Float(volume)
-        isPlaying = true
+        avPlayer?.play()
+        return isPlaying
+    }
+ 
+    @discardableResult
+    func play(stations: [Station], selected: (Station) -> Bool) -> Bool {
+        playerDeck = PlayerDeck(stations)
+        playerDeck?.move(to: selected)
+        return playerDeck?.current.map(playStation) ?? false
     }
     
-    func playNextStation(from stations: [Station]) {
-        guard let currentIndex = currentStationIndex,
-                  currentIndex < stations.count - 1 else { return }
-        
-        let nextStation = stations[currentIndex + 1]
-        currentStation = nextStation
-        currentStationIndex = currentIndex + 1
+    @discardableResult
+    func play(where predicate: (Station) -> Bool) -> Bool {
+        playerDeck?.move(to: predicate)
+        return playerDeck?.current.map(playStation) ?? false
     }
     
-    func playPreviousStation(from stations: [Station]) {
-        guard let currentIndex = currentStationIndex, currentIndex > 0 else { return }
-        let previousStation = stations[currentIndex - 1]
-        currentStation = previousStation
-        currentStationIndex = currentIndex - 1
+    func setStations(_ stations: [Station]) {
+        playerDeck = PlayerDeck(stations)
     }
     
-    func handleSelection(_ station: Station, in stations: [Station]) {
-        if currentStation == station {
-            isPlaying.toggle()
-        } else {
-            currentStation = station
-            currentStationIndex = stations.firstIndex(
-                where: { $0.stationuuid == station.stationuuid }
-            )
-        }
+    @discardableResult
+    func playNext() -> Bool {
+        playerDeck?.forward()
+        return playerDeck?.current.map(playStation) ?? false
     }
     
-    func play(stations: [Station], selected: (Station) -> Bool) {
-        
-    }
-}
-
-extension AVPlayerItem {
-    static func parse(station: Station) -> AVPlayerItem? {
-        URL(string: station.url).map(AVPlayerItem.init)
+    @discardableResult
+    func playPrevious() -> Bool {
+        playerDeck?.backward()
+        return playerDeck?.current.map(playStation) ?? false
     }
 }

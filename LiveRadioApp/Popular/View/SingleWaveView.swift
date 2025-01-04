@@ -8,23 +8,29 @@
 import SwiftUI
 
 struct SingleWaveView: View {
+    
+    //MARK: - Properties
     private static let colors: [Color] = [.eclipse2, .eclipse6, .eclipseGreen, .eclipseYellow, .eclipsePurple, .eclipseMulberry, .eclipseRed, .googleIcon]
+    
     @State private var waveColor = colors.randomElement() ?? .eclipse8
     @State private var amplitudes: [CGFloat] = [0, 0, 6, -10, 8, -6, 8, -2, 0, 0]
     @State private var targetAmplitudes: [CGFloat] = [0, 0, 6, -10, 8, -6, 8, -2, 0, 0]
+    
     private let timer = Timer.publish(every: 0.185, on: .main, in: .common).autoconnect()
 
     let isSelected: Bool
+    let isPlaying: Bool
 
+    //MARK: - Body
     var body: some View {
         ZStack {
             // Волна
             WaveShape(amplitudes: amplitudes)
-                .stroke(Color.white, lineWidth: 2)
+                .stroke(.white, lineWidth: 2)
                 .frame(width: 97, height: 34)
                 .opacity(isSelected ? 1.0 : 0.2)
                 .onReceive(timer) { _ in
-                    if isSelected {
+                    if isSelected && isPlaying{
                         updateAmplitudes()
                     }
                 }
@@ -47,6 +53,7 @@ struct SingleWaveView: View {
         .frame(width: 97, height: 34)
     }
     
+    //MARK: - Methods
     private func updateAmplitudes() {
         let middleAmplitudes = Array(targetAmplitudes[2..<targetAmplitudes.count - 2])
         let shiftedAmplitudes: [CGFloat] = Array(middleAmplitudes.dropFirst()) + [middleAmplitudes.first ?? 0]
@@ -94,11 +101,11 @@ struct WaveShape: Shape {
 
 #Preview {
     VStack {
-        SingleWaveView(isSelected: true)
+        SingleWaveView(isSelected: true, isPlaying: true)
             .frame(width: 150, height: 50)
             .background(Color.black)
             .cornerRadius(10)
-        SingleWaveView(isSelected: false)
+        SingleWaveView(isSelected: false, isPlaying: true)
             .frame(width: 150, height: 50)
             .background(Color.gray)
             .cornerRadius(10)

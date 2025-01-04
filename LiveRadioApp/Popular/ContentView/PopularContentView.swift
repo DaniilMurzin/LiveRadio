@@ -16,7 +16,7 @@ struct PopularContentView: View {
     
     var body: some View {
         PopularView(
-            name: $viewModel.name,
+            name: viewModel.name,
             volume: $viewModel.volume,
             selectedStation: $viewModel.selectedStation,
             isPlaying: $viewModel.avPlayer.isPlaying,
@@ -35,7 +35,9 @@ struct PopularContentView: View {
         )
         .onAppear {
             viewModel.fetchPopularStations()
+            if let currentStation = viewModel.avPlayer.currentStation {
+                   viewModel.selectedStation = currentStation
+               }
         }
     }
 }
-

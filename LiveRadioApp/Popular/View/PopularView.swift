@@ -18,11 +18,10 @@ struct PopularView: View {
     }
     
     typealias Action = () -> Void
-    @Binding var name: String
+    let name: String
     @Binding var volume: Double
     @Binding var selectedStation: Station?
     @Binding var isPlaying: Bool
-    //    @Binding var amplitude: CGFloat
     let didTapbackButton: Action
     let didTapPlayButton: Action
     let didTapBackwardButton: Action
@@ -44,8 +43,8 @@ struct PopularView: View {
             spacing: Drawing.columnSpacing)]
     
     var body: some View {
-        
-        HeaderView(name: $name)
+        let _ = Self._printChanges()
+        HeaderView(name: name)
             .padding(.horizontal, Drawing.headerHorizontalPadding)
             .padding(.bottom, -10)
         
@@ -60,11 +59,16 @@ struct PopularView: View {
                         .foregroundColor(.white)
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(stations, id: \.stationuuid) { station in
-                            PopularCell(
+                            let isSelected = station == selectedStation
+                            
+                            TabBarCell(
                                 station,
-                                isSelected: station == selectedStation)
-                            { didTapCell(station) }
-                            didTapFavorites: {}
+                                isSelected: isSelected,
+                                didTapPlayButton: { didTapCell(station) },
+                                didTapFavorites: {},
+                                isPlaying: isPlaying,
+                                type: .popular
+                              )
                         }
                     }
                 }
@@ -91,7 +95,7 @@ struct PopularView: View {
 #Preview {
     TabBarBackground {
         PopularView(
-            name: .constant("Mark"),
+            name: "Mark",
             volume: .constant(0.3),
             selectedStation: .constant(nil),
             isPlaying: .constant(true),
@@ -104,4 +108,3 @@ struct PopularView: View {
         )
     }
 }
-

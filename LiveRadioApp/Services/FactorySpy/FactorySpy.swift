@@ -18,6 +18,12 @@ struct FactorySpy {
 
 // MARK: - FactorySpy + RootFactory
 extension FactorySpy: RootFactory {
+    
+    func makeFavorites() -> FavoritesContentView {
+        logger.trace(#function)
+        return factory.makeFavorites()
+    }
+    
     func makeDetails() -> DetailsContentView {
         logger.trace(#function)
         return factory.makeDetails()

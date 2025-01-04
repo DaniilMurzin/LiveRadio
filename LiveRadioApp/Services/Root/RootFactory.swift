@@ -13,12 +13,14 @@ protocol RootFactory {
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
     func makePopular() -> PopularContentView
     func makeDetails() -> DetailsContentView
+    func makeFavorites() -> FavoritesContentView
     func makeTabBar() -> TabBarView
 }
 
 final class FRoot {
     private let repository = AppRepository()
     private let networkService = NetworkService()
+    private let player = RadioPlayer()
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -31,7 +33,7 @@ final class FRoot {
 
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
-    
+   
     func makeTabBar() -> TabBarView {
         TabBarView(factory: self)
     }
@@ -39,6 +41,11 @@ extension FRoot: RootFactory {
     func makeOnboarding() -> OnboardingContentView {
         let viewModel = OnboardingViewModel(repository: spy)
         return OnboardingContentView(viewModel)
+    }
+    
+    func makeFavorites() -> FavoritesContentView {
+        let viewModel = FavoritesViewModel(avPlayer: player)
+        return FavoritesContentView(viewModel)
     }
     
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
@@ -50,7 +57,7 @@ extension FRoot: RootFactory {
     }
     
     func makePopular() -> PopularContentView {
-        let viewModel = PopularViewModel(networkService: networkService, avPlayer: RadioPlayer())
+        let viewModel = PopularViewModel(networkService: networkService, avPlayer: player)
         return PopularContentView(viewModel)
     }
     

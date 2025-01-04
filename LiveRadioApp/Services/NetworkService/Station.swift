@@ -106,7 +106,7 @@ extension Station {
             ),
             Station(
                 changeuuid: "2222",
-                stationuuid: "bbbb",
+                stationuuid: "bb223bb",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300
@@ -120,35 +120,35 @@ extension Station {
             ),
             Station(
                 changeuuid: "22223",
-                stationuuid: "bbbb",
+                stationuuid: "bb3213bb",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300
             ),
             Station(
                 changeuuid: "2222332",
-                stationuuid: "bbb2232b",
+                stationuuid: "bb12b2232b",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300
             ),
             Station(
                 changeuuid: "22222",
-                stationuuid: "bbb3232b",
+                stationuuid: "bbb43433232b",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300
             ),
             Station(
                 changeuuid: "22222",
-                stationuuid: "bb2332bb",
+                stationuuid: "bb12212332bb",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300
             ),
             Station(
                 changeuuid: "223322222",
-                stationuuid: "bb2332bb",
+                stationuuid: "bb332332bb",
                 name: "Rock Classics",
                 url: "https://example2.com",
                 votes: 300

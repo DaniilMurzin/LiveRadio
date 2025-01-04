@@ -23,11 +23,11 @@ final class AuthorizationViewModel: ObservableObject {
     private let coordinator: AppCoordinator
     
     @Published var state: State = .signIn
-    
     @Published var email: String = .init()
     @Published var password: String = .init()
     @Published var name: String = .init()
     
+//TODO: вычисляемое свой-во Credential
     //MARK: - Authentication properties
     var signInActive: Bool {
         email.contains("@")
@@ -52,14 +52,9 @@ final class AuthorizationViewModel: ObservableObject {
     
     //MARK: - Navigation methods
     func signIn() async {
-        guard
-            let email = Email(email),
-            let password = Password(password)
-        else {
-            return
-        }
         
-        let credentials = Credentials(email: email, password: password)
+        guard let credentials = Credentials(email: email, password: password) else { return }
+        
         let result = await authorizationService.signIn(with: credentials)
         
         await MainActor.run {
@@ -74,14 +69,8 @@ final class AuthorizationViewModel: ObservableObject {
     }
     
     func signUp() async {
-        guard
-        let email = Email(email),
-        let password = Password(password)
-    else {
-        return
-    }
+        guard let credentials = Credentials(email: email, password: password) else { return }
     
-    let credentials = Credentials(email: email, password: password)
     let result = await authorizationService.signUp(with: credentials)
     
     await MainActor.run {

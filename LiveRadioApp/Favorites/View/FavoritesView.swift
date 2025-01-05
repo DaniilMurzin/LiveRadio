@@ -34,6 +34,20 @@ struct FavoritesView: View {
                 }
             }
         }
+        .overlay {
+            VStack {
+                Spacer()
+                PlayerView(
+                    isPlaying: $isPlaying,
+                    backwardButtonAction: {},
+                    forwardButtonAction: {},
+                    playButtonAction: {}
+                )
+                .frame(width: 190, height: 90)
+                .padding(.bottom, 30)
+                .background(Color.clear)
+            }
+        }
     }
 }
 

@@ -14,30 +14,19 @@ final class RadioPlayer: ObservableObject {
     //MARK: - Properties
     @Published private var avPlayer: AVPlayer?
     @Published private var playerDeck: PlayerDeck?
-    
-    var currentStation: Station? { playerDeck?.current }
-    var isPlaying: Bool {
-        get { avPlayer?.isPlaying ?? false }
-        set { avPlayer?.rate = newValue ? 1 : 0 }
-    }
     @Published var volume: Double = 0.5 {
         didSet {
             avPlayer?.volume = Float(volume)
         }
     }
     
-    //MARK: - Methods
-    private func playStation(_ station: Station) -> Bool {
-        guard let item = AVPlayerItem.parse(station: station) else {
-            return false
-        }
-        
-        avPlayer = AVPlayer(playerItem: item)
-        avPlayer?.volume = Float(volume)
-        avPlayer?.play()
-        return isPlaying
+    var currentStation: Station? { playerDeck?.current }
+    var isPlaying: Bool {
+        get { avPlayer?.isPlaying ?? false }
+        set { avPlayer?.rate = newValue ? 1 : 0 }
     }
- 
+    
+    //MARK: - Methods
     @discardableResult
     func play(stations: [Station], selected: (Station) -> Bool) -> Bool {
         playerDeck = PlayerDeck(stations)
@@ -65,5 +54,20 @@ final class RadioPlayer: ObservableObject {
     func playPrevious() -> Bool {
         playerDeck?.backward()
         return playerDeck?.current.map(playStation) ?? false
+    }
+}
+
+//MARK: - Private methods
+private extension RadioPlayer {
+    
+    func playStation(_ station: Station) -> Bool {
+        guard let item = AVPlayerItem.parse(station: station) else {
+            return false
+        }
+        
+        avPlayer = AVPlayer(playerItem: item)
+        avPlayer?.volume = Float(volume)
+        avPlayer?.play()
+        return isPlaying
     }
 }

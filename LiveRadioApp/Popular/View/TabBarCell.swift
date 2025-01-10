@@ -87,21 +87,18 @@ struct TabBarCell: View {
                         Text(station.name)
                             .applyFonts(for: .subtitle)
                             .foregroundStyle(Color.white)
-                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                    
                         Text(station.tags)
                             .applyFonts(for: .regular)
                             .foregroundStyle(Color.white)
-                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                         
-                        
-                        SingleWaveView(isSelected: isSelected, isPlaying: isPlaying/*, amplitude: didChangeAmplitude*/ )
+                        SingleWaveView(isSelected: false, isPlaying: isPlaying)
                             .padding(.top, Drawing.imageTopPadding)
                         
                     }
                     Spacer()
                     Button(action: didTapFavorites) {
-                        Image(.favoriteButtonEmpty)
+                        Image(.favoritesButtonFill)
                             .resizable()
                             .frame(width: 61, height: 53)
                     }

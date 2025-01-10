@@ -5,7 +5,6 @@
 //  Created by Daniil Murzin on 30.12.2024.
 //
 
-
 struct Zipper<Element> {
     private(set) var elements: [Element]
     private var currentIndex: Int

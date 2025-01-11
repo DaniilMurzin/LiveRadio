@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		922906D52CFB27F200A4C59E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922906D42CFB27F200A4C59E /* HeaderView.swift */; };
 		922906D72CFB3C0E00A4C59E /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922906D62CFB3C0E00A4C59E /* VolumeSlider.swift */; };
-		9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C0702D097D6100C93F79 /* Extension + Result.swift */; };
+		9233C0712D097D6100C93F79 /* Result+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C0702D097D6100C93F79 /* Result+Async.swift */; };
 		92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */; };
 		92360FD12CA0191D009BAFF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD02CA0191D009BAFF6 /* FirebaseAuth */; };
 		92360FD32CA0191D009BAFF6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 92360FD22CA0191D009BAFF6 /* FirebaseFirestore */; };
@@ -86,7 +86,7 @@
 		920A01652CFEE8280068EDD0 /* NetworkServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		922906D42CFB27F200A4C59E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		922906D62CFB3C0E00A4C59E /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
-		9233C0702D097D6100C93F79 /* Extension + Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Result.swift"; sourceTree = "<group>"; };
+		9233C0702D097D6100C93F79 /* Result+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Async.swift"; sourceTree = "<group>"; };
 		92360FCD2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButtonsShape.swift; sourceTree = "<group>"; };
 		92360FD42CA01A77009BAFF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9239ACE42D119AEA009B8688 /* SingleWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleWaveView.swift; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		923D56642CBD5EAC00797F67 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9233C0702D097D6100C93F79 /* Extension + Result.swift */,
+				925A7DE92D32AD3100DDA3D8 /* Helpers */,
 				92BACF412CAFF4F800DC3C34 /* NetworkService.swift */,
 				923D566A2CBD6FCC00797F67 /* Endpoint.swift */,
 				923D56652CBD5F3200797F67 /* Station.swift */,
@@ -231,6 +231,14 @@
 				925A7DE02D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld */,
 			);
 			path = DataService;
+			sourceTree = "<group>";
+		};
+		925A7DE92D32AD3100DDA3D8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9233C0702D097D6100C93F79 /* Result+Async.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		927482A32CBF94E900291908 /* ContentView */ = {
@@ -668,7 +676,7 @@
 				92E07DE02C98600D00B59386 /* TabBarView.swift in Sources */,
 				92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */,
 				92E07D2E2C86109000B59386 /* PopularViewModel.swift in Sources */,
-				9233C0712D097D6100C93F79 /* Extension + Result.swift in Sources */,
+				9233C0712D097D6100C93F79 /* Result+Async.swift in Sources */,
 				92E07D322C8610BE00B59386 /* CustomFontModifier.swift in Sources */,
 				92E07DDD2C9842F200B59386 /* ArrowButton.swift in Sources */,
 				9293BBFF2D0C287300F67044 /* PlayButtonView.swift in Sources */,
@@ -903,7 +911,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"LiveRadioApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4YW4KD9KAN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -945,7 +953,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"LiveRadioApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4YW4KD9KAN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

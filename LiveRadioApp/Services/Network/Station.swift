@@ -14,7 +14,7 @@ struct Station: Codable, Sendable, Hashable {
     let url: String
     let urlResolved: String?
     let homepage: String
-    let favicon: String
+    let favicon: String?
     let tags: String
     let country: String
     let countrycode: String

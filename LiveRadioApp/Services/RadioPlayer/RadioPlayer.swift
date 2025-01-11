@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
 
 final class RadioPlayer: ObservableObject {
     typealias PlayerDeck = Zipper<Station>
@@ -25,6 +26,10 @@ final class RadioPlayer: ObservableObject {
         get { avPlayer?.isPlaying ?? false }
         set { avPlayer?.rate = newValue ? 1 : 0 }
     }
+    
+    init() {
+            setupRemoteCommandCenter()
+        }
     
     //MARK: - Methods
     @discardableResult
@@ -65,9 +70,93 @@ private extension RadioPlayer {
             return false
         }
         
+        configureAudioSession()
+        updateNowPlayingInfo(station: station)
         avPlayer = AVPlayer(playerItem: item)
         avPlayer?.volume = Float(volume)
         avPlayer?.play()
         return isPlaying
     }
+}
+
+//MARK: - MediaPlayer setup
+private extension RadioPlayer {
+   
+    func configureAudioSession() {
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: [])
+            try session.setActive(true, options: [])
+        } catch {
+            print("Failed to configure audio session: \(error)")
+        }
+    }
+    
+    func updateNowPlayingInfo(station: Station) {
+            Task {
+                var localNowPlayingInfo: [String: Any] = [
+                    MPMediaItemPropertyTitle: station.name,
+                    MPMediaItemPropertyArtist: station.tags
+                ]
+                
+                if let faviconURLString = station.favicon,
+                   let faviconURL = URL(string: faviconURLString) {
+                    do {
+                        let (data, _) = try await URLSession.shared.data(from: faviconURL)
+                        if let image = UIImage(data: data) {
+                            let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+                            localNowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+                        }
+                    } catch {
+                        print("Failed to load favicon: \(error)")
+                    }
+                }
+                
+                await updateNowPlayingInfoOnMainThread(localNowPlayingInfo)
+            }
+        }
+        
+        @MainActor
+        func updateNowPlayingInfoOnMainThread(_ nowPlayingInfo: [String: Any]) {
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        }
+
+    func setupRemoteCommandCenter() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
+            
+            if let currentStation = self.currentStation {
+                _ = self.play(where: { $0 == currentStation })
+                return .success
+            }
+            return .commandFailed
+        }
+        
+        commandCenter.pauseCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
+            self.isPlaying = false
+            return .success
+        }
+        
+        commandCenter.nextTrackCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
+            
+            if self.playNext() {
+                return .success
+            }
+            return .commandFailed
+        }
+        
+        commandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
+            
+            if self.playPrevious() {
+                return .success
+            }
+            return .commandFailed
+        }
+    }
+
 }

@@ -16,8 +16,7 @@ final class FavoritesDataService: ObservableObject {
     private let entityName: String = "FavoriteStationEntity"
     
     @Published private var savedEntities: [FavoriteStationEntity] = []
-    
-    
+     
     //MARK: - Init
     init() {
         container = NSPersistentContainer(name: containerName)
@@ -25,12 +24,18 @@ final class FavoritesDataService: ObservableObject {
             if let error {
                 fatalError("Failed to load persistent stores: \(error)")
             }
-            
         }
+        fetchFavorites()
     }
     
     //MARK: - Methods
-
+    func toggleFavorite(station: Station) {
+        guard let entity = savedEntities.first(where: { $0.id == station.stationuuid }) else {
+            add(station: station)
+            return
+        }
+        delete(entity: entity)
+    }
 }
 
 private extension FavoritesDataService {
@@ -42,11 +47,30 @@ private extension FavoritesDataService {
         } catch let error {
             print("Failed to fetch favorites: \(error)")
         }
-        
     }
     
     func add(station: Station) {
         let entity = FavoriteStationEntity(context: container.viewContext)
         entity.id = station.stationuuid
+        entity.isFavorite = true
+        applyChanges()
+    }
+    
+    func save() {
+        do {
+           try container.viewContext.save()
+        } catch let error {
+            print("Failed to save favorites: \(error)")
+        }
+    }
+    
+    func delete(entity: FavoriteStationEntity) {
+           container.viewContext.delete(entity)
+           applyChanges()
+       }
+    
+    func applyChanges() {
+        save()
+        fetchFavorites()
     }
 }

@@ -8,6 +8,24 @@
 import Foundation
 import CoreData
 
+//protocol PersistenceManager1 {
+//    @discardableResult
+//    func saveStations(_ stations: Station...) -> [Station]
+//    
+//    @discardableResult
+//    func updateStations(_ stations: Station...) -> [Station]
+//    
+//    @discardableResult
+//    func removeStations(_ stations: Station...) -> [Station]
+//    
+//    func loadStations(_ predicate: (Station) -> Bool) -> [Station]
+//}
+
+protocol PersistenceManager {
+    var savedEntities: [FavoriteStationEntity] { get }
+    func toggleFavorite(station: Station)
+}
+
 final class FavoritesDataService: ObservableObject {
     
     //MARK: - Properties
@@ -15,7 +33,7 @@ final class FavoritesDataService: ObservableObject {
     private let containerName = "FavoriteStationContainer"
     private let entityName: String = "FavoriteStationEntity"
     
-    @Published private var savedEntities: [FavoriteStationEntity] = []
+    @Published internal var savedEntities: [FavoriteStationEntity] = []
      
     //MARK: - Init
     init() {
@@ -53,6 +71,15 @@ private extension FavoritesDataService {
         let entity = FavoriteStationEntity(context: container.viewContext)
         entity.id = station.stationuuid
         entity.isFavorite = true
+        entity.name =  station.name
+        entity.url = station.url
+        entity.urlResolved = station.urlResolved
+        entity.homepage = station.homepage
+        entity.favicon = station.favicon
+        entity.tags = station.tags
+        entity.country = station.country
+        entity.language = station.language
+        print("Added to favorites: \(station.name) (\(station.stationuuid))")
         applyChanges()
     }
     
@@ -74,3 +101,5 @@ private extension FavoritesDataService {
         fetchFavorites()
     }
 }
+
+extension FavoritesDataService: PersistenceManager {}

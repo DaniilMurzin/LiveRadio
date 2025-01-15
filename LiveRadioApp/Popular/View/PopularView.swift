@@ -27,6 +27,7 @@ struct PopularView: View {
     let didTapBackwardButton: Action
     let didTapForwardButton: Action
     let didTapCell: (Station) -> Void
+    let didTapFavoriteButton: (Station) -> Void
     
     let stations: [Station]
     
@@ -65,7 +66,7 @@ struct PopularView: View {
                                 station,
                                 isSelected: isSelected,
                                 didTapPlayButton: { didTapCell(station) },
-                                didTapFavorites: {},
+                                didTapFavorites: { didTapFavoriteButton(station)},
                                 isPlaying: isPlaying,
                                 type: .popular
                               )
@@ -104,6 +105,7 @@ struct PopularView: View {
             didTapBackwardButton: {},
             didTapForwardButton: {},
             didTapCell: {_ in },
+            didTapFavoriteButton: {_ in },
             stations: Station.mockList
         )
     }

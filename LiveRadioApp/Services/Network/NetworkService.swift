@@ -120,14 +120,14 @@ private extension NetworkService {
     }
 }
 
-      func checkResponse(_ response: URLResponse) throws {
-          guard let httpResponse = response as? HTTPURLResponse else {
-              throw NetworkError.invalidResponse(response)
-          }
-          if let error  = NetworkError(statusCode: httpResponse.statusCode) {
-              throw error
-          }
-      }
+func checkResponse(_ response: URLResponse) throws {
+    guard let httpResponse = response as? HTTPURLResponse else {
+        throw NetworkError.invalidResponse(response)
+    }
+    if let error  = NetworkError(statusCode: httpResponse.statusCode) {
+        throw error
+    }
+}
 
 fileprivate extension User {
     init(_ firebaseUser: FirebaseAuth.User) {

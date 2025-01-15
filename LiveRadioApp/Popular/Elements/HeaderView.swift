@@ -27,7 +27,6 @@ struct HeaderView: View {
                 .frame(width: 65, height: 70)
                 .clipShape(Circle())
         }
-        
     }
 }
 
@@ -35,5 +34,4 @@ struct HeaderView: View {
     MainBackground {
         HeaderView(name: "Mark")
     }
-    
 }

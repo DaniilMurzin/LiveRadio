@@ -17,7 +17,8 @@ struct FavoritesContentView: View  {
     
     var body: some View {
         FavoritesView(
-            stations: Station.mockList,
+            stations: viewModel.fetchedStations,
+            didTapFavoriteButton: { station in viewModel.toggleFavorite(for: station)},
             volume: $viewModel.volume,
             name: $viewModel.name,
             isPlaying: $viewModel.isPlaying,

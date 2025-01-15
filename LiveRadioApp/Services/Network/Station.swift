@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Station: Codable, Sendable, Hashable {
-    let changeuuid: String
+    
     let stationuuid: String
     let name: String
     let url: String
@@ -17,20 +17,19 @@ struct Station: Codable, Sendable, Hashable {
     let favicon: String?
     let tags: String
     let country: String
-    let countrycode: String
-    let state: String
+//    let countrycode: String
+//    let state: String
     let language: String
-    let languagecodes: String
+//    let languagecodes: String
     let votes: Int
-    let lastchangetime: String
-    let codec: String
-    let bitrate: Int
-    let hls: Int
-    let lastcheckok: Int
-    let lastchecktime: String
-    let lastlocalchecktime: String
-    let geoLat: Double?
-    let geoLong: Double?
+//    let lastchangetime: String
+//    let bitrate: Int
+//    let hls: Int
+//    let lastcheckok: Int
+//    let lastchecktime: String
+//    let lastlocalchecktime: String
+//    let geoLat: Double?
+//    let geoLong: Double?
 }
 
 // Mock for preview/tests
@@ -42,7 +41,7 @@ extension Station {
             votes: Int
     ) {
         self.init(
-            changeuuid: changeuuid,
+//            changeuuid: changeuuid,
             stationuuid: stationuuid,
             name: name,
             url: url,
@@ -51,25 +50,25 @@ extension Station {
             favicon: "",
             tags: "",
             country: "",
-            countrycode: "",
-            state: "",
+//            countrycode: "",
+//            state: "",
             language: "",
-            languagecodes: "",
-            votes: votes,
-            lastchangetime: "",
-            codec: "",
-            bitrate: 0,
-            hls: 0,
-            lastcheckok: 0,
-            lastchecktime: "",
-            lastlocalchecktime: "",
-            geoLat: nil,
-            geoLong: nil
+//            languagecodes: "",
+            votes: votes
+//            lastchangetime: "",
+//            codec: "",
+//            bitrate: 0,
+//            hls: 0,
+//            lastcheckok: 0,
+//            lastchecktime: "",
+//            lastlocalchecktime: "",
+//            geoLat: nil,
+//            geoLong: nil
         )
     }
     static var mock: Station {
         return Station(
-            changeuuid: "1234",
+//            changeuuid: "1234",
             stationuuid: "5678",
             name: "Test Station",
             url: "https://example.com",
@@ -78,20 +77,20 @@ extension Station {
             favicon: "https://example.com/favicon.png",
             tags: "pop, rock",
             country: "USA",
-            countrycode: "US",
-            state: "California",
+//            countrycode: "US",
+//            state: "California",
             language: "English",
-            languagecodes: "en",
-            votes: 1000,
-            lastchangetime: "2024-01-01T12:00:00Z",
-            codec: "mp3",
-            bitrate: 128,
-            hls: 1,
-            lastcheckok: 1,
-            lastchecktime: "2024-01-01T12:00:00Z",
-            lastlocalchecktime: "2024-01-01T12:00:00Z",
-            geoLat: 37.7749,
-            geoLong: -122.4194
+//            languagecodes: "en",
+            votes: 1000
+//            lastchangetime: "2024-01-01T12:00:00Z",
+//            codec: "mp3",
+//            bitrate: 128,
+//            hls: 1,
+//            lastcheckok: 1,
+//            lastchecktime: "2024-01-01T12:00:00Z",
+//            lastlocalchecktime: "2024-01-01T12:00:00Z",
+//            geoLat: 37.7749,
+//            geoLong: -122.4194
         )
     }
     

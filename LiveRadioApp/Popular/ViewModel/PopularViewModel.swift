@@ -8,8 +8,11 @@
 import SwiftUI
 
 final class PopularViewModel: ObservableObject {
+    
     private let networkService: StationDataService
     var avPlayer: RadioPlayer
+    let persistenceManager: PersistenceManager
+
     @Published var fetchedStations: [Station] = []
     @Published var name: String = "Daniil"
     @Published var selectedStation: Station?
@@ -19,9 +22,13 @@ final class PopularViewModel: ObservableObject {
            }
        }
     
-    init(networkService: StationDataService, avPlayer: RadioPlayer) {
+    init(
+        networkService: StationDataService,
+        avPlayer: RadioPlayer,
+        persistenceManager: PersistenceManager) {
         self.networkService = networkService
         self.avPlayer = avPlayer
+        self.persistenceManager = persistenceManager
     }
 
     func fetchPopularStations() {
@@ -48,13 +55,15 @@ final class PopularViewModel: ObservableObject {
 
     func playNextStation() {
         avPlayer.playNext()
-//        avPlayer.playNextStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
 
     func playPreviousStation() {
         avPlayer.playPrevious()
-//        avPlayer.playPreviousStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
+    }
+    
+    func toggleFavorite(for station: Station) {
+        persistenceManager.toggleFavorite(station: station)
     }
 }

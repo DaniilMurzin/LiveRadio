@@ -19,6 +19,7 @@ protocol RootFactory {
 
 final class FRoot {
     private let repository = AppRepository()
+    private let favoritesDataService = FavoritesDataService()
     private let networkService = NetworkService()
     private let player = RadioPlayer()
     private(set) lazy var spy = FactorySpy(
@@ -44,7 +45,7 @@ extension FRoot: RootFactory {
     }
     
     func makeFavorites() -> FavoritesContentView {
-        let viewModel = FavoritesViewModel(avPlayer: player)
+        let viewModel = FavoritesViewModel(avPlayer: player, persistenceManager: favoritesDataService)
         return FavoritesContentView(viewModel)
     }
     
@@ -57,7 +58,11 @@ extension FRoot: RootFactory {
     }
     
     func makePopular() -> PopularContentView {
-        let viewModel = PopularViewModel(networkService: networkService, avPlayer: player)
+        let viewModel = PopularViewModel(
+            networkService: networkService,
+            avPlayer: player,
+            persistenceManager: favoritesDataService
+        )
         return PopularContentView(viewModel)
     }
     

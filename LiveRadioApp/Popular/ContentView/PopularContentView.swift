@@ -31,6 +31,7 @@ struct PopularContentView: View {
             didTapCell: { station in
                 viewModel.handleSelection(station)
             },
+            didTapFavoriteButton: { station in viewModel.toggleFavorite(for: station)},
             stations: viewModel.fetchedStations
         )
         .onAppear {

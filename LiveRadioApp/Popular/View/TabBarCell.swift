@@ -24,7 +24,7 @@ struct TabBarCell: View {
     private let type: CellType
     private var station: Station
     private let didTapCell: () -> Void
-    private let didTapFavorites: () -> Void
+    private let didTapFavorites: () async -> Void
     private var isSelected: Bool
     private var isPlaying: Bool
 //    private var didChangeAmplitude: CGFloat
@@ -32,7 +32,7 @@ struct TabBarCell: View {
     init(_ station: Station,
          isSelected: Bool,
          didTapPlayButton: @escaping () -> Void,
-         didTapFavorites: @escaping () -> Void,
+         didTapFavorites: @escaping () async -> Void,
          isPlaying: Bool,
          type: CellType) {
         self.station = station
@@ -59,7 +59,7 @@ struct TabBarCell: View {
                             .applyFonts(for: .votes)
                             .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                         
-                        Button(action: didTapFavorites) {
+                        Button(asyncAction: didTapFavorites) {
                             Image(.favoriteButtonEmpty)
                                 .resizable()
                                 .frame(width: Drawing.favoritesButton.width, height: Drawing.favoritesButton.height)
@@ -97,7 +97,7 @@ struct TabBarCell: View {
                         
                     }
                     Spacer()
-                    Button(action: didTapFavorites) {
+                    Button(asyncAction: didTapFavorites) {
                         Image(.favoritesButtonFill)
                             .resizable()
                             .frame(width: 61, height: 53)

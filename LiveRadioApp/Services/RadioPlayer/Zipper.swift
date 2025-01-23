@@ -44,3 +44,19 @@ struct Zipper<Element> {
         currentIndex = newSelected
     }
 }
+
+//extension Zipper: Equatable {
+//    
+//}
+//
+//extension Zipper: Comparable {
+//    
+//}
+
+//extension Zipper: Sequence {
+//
+//}
+
+//extension Zipper: Collection {
+//    
+//}

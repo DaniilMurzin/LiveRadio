@@ -22,6 +22,7 @@ final class FRoot {
     private let favoritesDataService = FavoritesDataService()
     private let networkService = NetworkService()
     private let player = RadioPlayer()
+    private let storageManager = CoreDateManager()
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -61,7 +62,7 @@ extension FRoot: RootFactory {
         let viewModel = PopularViewModel(
             networkService: networkService,
             avPlayer: player,
-            persistenceManager: favoritesDataService
+            storageManager: storageManager
         )
         return PopularContentView(viewModel)
     }

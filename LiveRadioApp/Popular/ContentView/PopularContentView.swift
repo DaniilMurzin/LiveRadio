@@ -31,11 +31,11 @@ struct PopularContentView: View {
             didTapCell: { station in
                 viewModel.handleSelection(station)
             },
-            didTapFavoriteButton: { station in viewModel.toggleFavorite(for: station)},
+            didTapFavoriteButton: viewModel.toggleFavorite,
             stations: viewModel.fetchedStations
         )
+        .task(viewModel.fetchPopularStations)
         .onAppear {
-            viewModel.fetchPopularStations()
             if let currentStation = viewModel.avPlayer.currentStation {
                    viewModel.selectedStation = currentStation
                }

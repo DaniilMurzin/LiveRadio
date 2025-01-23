@@ -21,7 +21,7 @@
 		924DE1572D0B16FB0063D0AD /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */; };
 		9252EFD72D22F35100A8A382 /* Array + subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252EFD62D22F35100A8A382 /* Array + subscript.swift */; };
 		9252EFD92D22F43400A8A382 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252EFD82D22F43400A8A382 /* Zipper.swift */; };
-		925A7DDC2D31732C00DDA3D8 /* FavoritesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925A7DDB2D31732C00DDA3D8 /* FavoritesDataService.swift */; };
+		925A7DDC2D31732C00DDA3D8 /* CoreDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925A7DDB2D31732C00DDA3D8 /* CoreDateManager.swift */; };
 		925A7DE22D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 925A7DE02D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld */; };
 		926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926FCD962D0B413A00D43DA4 /* CellBackground.swift */; };
 		927482A52CBFBC2000291908 /* TabBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927482A42CBFBC2000291908 /* TabBarBackground.swift */; };
@@ -96,7 +96,7 @@
 		924DE1562D0B16FB0063D0AD /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		9252EFD62D22F35100A8A382 /* Array + subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + subscript.swift"; sourceTree = "<group>"; };
 		9252EFD82D22F43400A8A382 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
-		925A7DDB2D31732C00DDA3D8 /* FavoritesDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataService.swift; sourceTree = "<group>"; };
+		925A7DDB2D31732C00DDA3D8 /* CoreDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateManager.swift; sourceTree = "<group>"; };
 		925A7DE12D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteStationContainer.xcdatamodel; sourceTree = "<group>"; };
 		926FCD962D0B413A00D43DA4 /* CellBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackground.swift; sourceTree = "<group>"; };
 		927482A42CBFBC2000291908 /* TabBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackground.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		92BB02E62D1846070054CA75 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContentView.swift; sourceTree = "<group>"; };
-		92E07CFE2C86101400B59386 /* LiveRadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveRadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92E07CFE2C86101400B59386 /* RadioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E07D012C86101400B59386 /* LiveRadioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRadioAppApp.swift; sourceTree = "<group>"; };
 		92E07D052C86101500B59386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92E07D072C86101500B59386 /* LiveRadioApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiveRadioApp.entitlements; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		925A7DDF2D3173B500DDA3D8 /* DataService */ = {
 			isa = PBXGroup;
 			children = (
-				925A7DDB2D31732C00DDA3D8 /* FavoritesDataService.swift */,
+				925A7DDB2D31732C00DDA3D8 /* CoreDateManager.swift */,
 				925A7DE02D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld */,
 			);
 			path = DataService;
@@ -323,7 +323,7 @@
 		92E07CFF2C86101400B59386 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92E07CFE2C86101400B59386 /* LiveRadioApp.app */,
+				92E07CFE2C86101400B59386 /* RadioApp.app */,
 				920A01652CFEE8280068EDD0 /* NetworkServiceTests.xctest */,
 			);
 			name = Products;
@@ -570,9 +570,9 @@
 			productReference = 920A01652CFEE8280068EDD0 /* NetworkServiceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92E07CFD2C86101400B59386 /* LiveRadioApp */ = {
+		92E07CFD2C86101400B59386 /* RadioApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92E07D0D2C86101500B59386 /* Build configuration list for PBXNativeTarget "LiveRadioApp" */;
+			buildConfigurationList = 92E07D0D2C86101500B59386 /* Build configuration list for PBXNativeTarget "RadioApp" */;
 			buildPhases = (
 				92E07CFA2C86101400B59386 /* Sources */,
 				92E07CFB2C86101400B59386 /* Frameworks */,
@@ -582,13 +582,13 @@
 			);
 			dependencies = (
 			);
-			name = LiveRadioApp;
+			name = RadioApp;
 			packageProductDependencies = (
 				92360FD02CA0191D009BAFF6 /* FirebaseAuth */,
 				92360FD22CA0191D009BAFF6 /* FirebaseFirestore */,
 			);
 			productName = LiveRadioApp;
-			productReference = 92E07CFE2C86101400B59386 /* LiveRadioApp.app */;
+			productReference = 92E07CFE2C86101400B59386 /* RadioApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -610,7 +610,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92E07CF92C86101400B59386 /* Build configuration list for PBXProject "LiveRadioApp" */;
+			buildConfigurationList = 92E07CF92C86101400B59386 /* Build configuration list for PBXProject "RadioApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -626,7 +626,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92E07CFD2C86101400B59386 /* LiveRadioApp */,
+				92E07CFD2C86101400B59386 /* RadioApp */,
 				920A01642CFEE8280068EDD0 /* NetworkServiceTests */,
 			);
 		};
@@ -686,7 +686,7 @@
 				925A7DE22D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
 				926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */,
-				925A7DDC2D31732C00DDA3D8 /* FavoritesDataService.swift in Sources */,
+				925A7DDC2D31732C00DDA3D8 /* CoreDateManager.swift in Sources */,
 				92E07D4C2C8B39D600B59386 /* ForgotPasswordView2.swift in Sources */,
 				92802C622D29553800F4A047 /* AVPlayer.swift in Sources */,
 				92E07D482C8B35E700B59386 /* BackButton.swift in Sources */,
@@ -730,7 +730,7 @@
 /* Begin PBXTargetDependency section */
 		920A016A2CFEE8280068EDD0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92E07CFD2C86101400B59386 /* LiveRadioApp */;
+			target = 92E07CFD2C86101400B59386 /* RadioApp */;
 			targetProxy = 920A01692CFEE8280068EDD0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -756,7 +756,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveRadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LiveRadioApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RadioApp";
 			};
 			name = Debug;
 		};
@@ -780,7 +780,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveRadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LiveRadioApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RadioApp";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -997,7 +997,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92E07CF92C86101400B59386 /* Build configuration list for PBXProject "LiveRadioApp" */ = {
+		92E07CF92C86101400B59386 /* Build configuration list for PBXProject "RadioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92E07D0B2C86101500B59386 /* Debug */,
@@ -1006,7 +1006,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92E07D0D2C86101500B59386 /* Build configuration list for PBXNativeTarget "LiveRadioApp" */ = {
+		92E07D0D2C86101500B59386 /* Build configuration list for PBXNativeTarget "RadioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92E07D0E2C86101500B59386 /* Debug */,

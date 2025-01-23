@@ -19,7 +19,6 @@ protocol RootFactory {
 
 final class FRoot {
     private let repository = AppRepository()
-    private let favoritesDataService = FavoritesDataService()
     private let networkService = NetworkService()
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
@@ -46,7 +45,7 @@ extension FRoot: RootFactory {
     }
     
     func makeFavorites() -> FavoritesContentView {
-        let viewModel = FavoritesViewModel(avPlayer: player, persistenceManager: favoritesDataService)
+        let viewModel = FavoritesViewModel(avPlayer: player, storageManager: storageManager)
         return FavoritesContentView(viewModel)
     }
     

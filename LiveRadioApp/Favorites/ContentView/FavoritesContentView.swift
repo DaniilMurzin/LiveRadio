@@ -18,10 +18,12 @@ struct FavoritesContentView: View  {
     var body: some View {
         FavoritesView(
             stations: viewModel.fetchedStations,
-            didTapFavoriteButton: { station in viewModel.toggleFavorite(for: station)},
+            didTapFavoriteButton: {_ in },
             volume: $viewModel.volume,
             name: $viewModel.name,
             isPlaying: $viewModel.isPlaying,
-            isSelected: $viewModel.isFavorite)
+            isSelected: $viewModel.isFavorite
+        )
+        .onAppear { Task {await viewModel.fetchFavoriteStations() }}
     }
 }

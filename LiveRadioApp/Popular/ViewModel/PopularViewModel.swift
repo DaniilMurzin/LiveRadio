@@ -12,7 +12,6 @@ final class PopularViewModel: ObservableObject {
     private let networkService: StationDataService
     private let storageManager: StorageManager
     var avPlayer: RadioPlayer
-//    let persistenceManager: PersistenceManager
 
     @Published var fetchedStations: [Station] = []
     @Published var name: String = "Daniil"
@@ -25,18 +24,16 @@ final class PopularViewModel: ObservableObject {
     init(
         networkService: StationDataService,
         avPlayer: RadioPlayer,
-//        persistenceManager: PersistenceManager,
         storageManager: StorageManager
     ) {
         self.networkService = networkService
         self.avPlayer = avPlayer
-//        self.persistenceManager = persistenceManager
+
         self.storageManager = storageManager
     }
 
     @Sendable
     func fetchPopularStations() async {
-//        Task {
             do {
                 let stations = try await networkService.fetchTop()
                 await MainActor.run {
@@ -45,7 +42,6 @@ final class PopularViewModel: ObservableObject {
             } catch {
                 print("Ошибка загрузки станций: \(error.localizedDescription)")
             }
-//        }
     }
     
     func handleSelection(_ station: Station) {
@@ -71,22 +67,41 @@ final class PopularViewModel: ObservableObject {
     
     func toggleFavorite(for station: Station) async {
         do {
+            // Проверяем, есть ли станция в избранных
             let contains = try await storageManager.contains(station)
-            defer {
-                var station = station
-//                station.isFavorite = !contains
-                if let index = fetchedStations.firstIndex(of: station) {
-                    fetchedStations[index] = station                    
-                }
-            }
+
             if contains {
+                // Удаляем станцию из Core Data
                 try await storageManager.removeStation(station)
-                return
+            } else {
+                // Добавляем станцию в Core Data
+                try await storageManager.saveStation(station)
             }
-            try await storageManager.saveStation(station)
         } catch {
-            
+            print("Ошибка при переключении избранного: \(error.localizedDescription)")
         }
-//        persistenceManager.toggleFavorite(station: station)
     }
+
+
+    
+//    func toggleFavorite(for station: Station) async {
+//        do {
+//            let contains = try await storageManager.contains(station)
+//            defer {
+//                var station = station
+////                station.isFavorite = !contains
+//                if let index = fetchedStations.firstIndex(of: station) {
+//                    fetchedStations[index] = station                    
+//                }
+//            }
+//            if contains {
+//                try await storageManager.removeStation(station)
+//                return
+//            }
+//            try await storageManager.saveStation(station)
+//        } catch {
+//            
+//        }
+////        persistenceManager.toggleFavorite(station: station)
+//    }
 }

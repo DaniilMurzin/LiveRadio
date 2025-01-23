@@ -82,11 +82,11 @@ extension CoreDateManager: StorageManager {
 
     func loadStations(_ predicate: NSPredicate? = nil) async throws -> [Station] {
         try await container.performBackgroundTask { [entityName] context in
-            let request = FetchRequest(entityName: entityName)
+            let request = NSFetchRequest<FavoriteStationEntity>(entityName: entityName)
             request.predicate = predicate
-            return try context
-                .fetch(request)
-                .map(Station.init)
+            let results = try context.fetch(request)
+            print("Найдено \(results.count) записей в Core Data")
+            return try results.map(Station.init)
         }
     }
     

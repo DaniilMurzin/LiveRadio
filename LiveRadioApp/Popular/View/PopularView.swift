@@ -20,16 +20,16 @@ struct PopularView: View {
     typealias Action = () -> Void
     let name: String
     @Binding var volume: Double
-    @Binding var selectedStation: Station?
+    @Binding var selectedStation: LocalStation?
     @Binding var isPlaying: Bool
     let didTapbackButton: Action
     let didTapPlayButton: Action
     let didTapBackwardButton: Action
     let didTapForwardButton: Action
-    let didTapCell: (Station) -> Void
-    let didTapFavoriteButton: (Station) async -> Void
+    let didTapCell: (LocalStation) -> Void
+    let didTapFavoriteButton: (LocalStation) async -> Void
     
-    let stations: [Station]
+    let stations: [LocalStation]
     
     private let columns = [
         GridItem(
@@ -106,7 +106,7 @@ struct PopularView: View {
             didTapForwardButton: {},
             didTapCell: {_ in },
             didTapFavoriteButton: {_ in },
-            stations: Station.mockList
+            stations: []
         )
     }
 }

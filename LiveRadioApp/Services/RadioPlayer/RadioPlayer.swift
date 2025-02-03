@@ -10,7 +10,7 @@ import AVFoundation
 import MediaPlayer
 
 final class RadioPlayer: ObservableObject {
-    typealias PlayerDeck = Zipper<Station>
+    typealias PlayerDeck = Zipper<LocalStation>
     
     //MARK: - Properties
     @Published private var avPlayer: AVPlayer?
@@ -21,7 +21,7 @@ final class RadioPlayer: ObservableObject {
         }
     }
     
-    var currentStation: Station? { playerDeck?.current }
+    var currentStation: LocalStation? { playerDeck?.current }
     var isPlaying: Bool {
         get { avPlayer?.isPlaying ?? false }
         set { avPlayer?.rate = newValue ? 1 : 0 }
@@ -33,19 +33,19 @@ final class RadioPlayer: ObservableObject {
     
     //MARK: - Methods
     @discardableResult
-    func play(stations: [Station], selected: (Station) -> Bool) -> Bool {
+    func play(stations: [LocalStation], selected: (LocalStation) -> Bool) -> Bool {
         playerDeck = PlayerDeck(stations)
         playerDeck?.move(to: selected)
         return playerDeck?.current.map(playStation) ?? false
     }
     
     @discardableResult
-    func play(where predicate: (Station) -> Bool) -> Bool {
+    func play(where predicate: (LocalStation) -> Bool) -> Bool {
         playerDeck?.move(to: predicate)
         return playerDeck?.current.map(playStation) ?? false
     }
     
-    func setStations(_ stations: [Station]) {
+    func setStations(_ stations: [LocalStation]) {
         playerDeck = PlayerDeck(stations)
     }
     
@@ -65,7 +65,7 @@ final class RadioPlayer: ObservableObject {
 //MARK: - Private methods
 private extension RadioPlayer {
     
-    func playStation(_ station: Station) -> Bool {
+    func playStation(_ station: LocalStation) -> Bool {
         guard let item = AVPlayerItem.parse(station: station) else {
             return false
         }
@@ -92,7 +92,7 @@ private extension RadioPlayer {
         }
     }
     
-    func updateNowPlayingInfo(station: Station) {
+    func updateNowPlayingInfo(station: LocalStation) {
             Task {
                 var localNowPlayingInfo: [String: Any] = [
                     MPMediaItemPropertyTitle: station.name,

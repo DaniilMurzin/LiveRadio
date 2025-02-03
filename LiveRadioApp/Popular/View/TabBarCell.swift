@@ -22,14 +22,14 @@ struct TabBarCell: View {
     }
     
     private let type: CellType
-    private var station: Station
+    private var station: LocalStation
     private let didTapCell: () -> Void
     private let didTapFavorites: () async -> Void
     private var isSelected: Bool
     private var isPlaying: Bool
 //    private var didChangeAmplitude: CGFloat
     
-    init(_ station: Station,
+    init(_ station: LocalStation,
          isSelected: Bool,
          didTapPlayButton: @escaping () -> Void,
          didTapFavorites: @escaping () async -> Void,
@@ -105,9 +105,7 @@ struct TabBarCell: View {
                 }
                 .frame(width: 293, height: 123)
                 .padding()
-                
             }
-        
         }
         .onTapGesture {
             didTapCell()
@@ -121,16 +119,4 @@ extension TabBarCell {
         case favorites
 //        case allStations
     }
-}
-
-#Preview {
-    TabBarCell(
-        Station.mock,
-        isSelected: false,
-        didTapPlayButton: {},
-        didTapFavorites: {},
-        isPlaying: true,
-        type: .favorites
-        )
-    .frame(width: 293, height: 123)
 }

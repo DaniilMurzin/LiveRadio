@@ -13,9 +13,9 @@ final class PopularViewModel: ObservableObject {
     private let storageManager: StorageManager
     var avPlayer: RadioPlayer
 
-    @Published var fetchedStations: [Station] = []
+    @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
-    @Published var selectedStation: Station?
+    @Published var selectedStation: LocalStation?
     
     @Published var volume: Double = 0.5 {
            didSet { avPlayer.volume = volume }
@@ -31,20 +31,28 @@ final class PopularViewModel: ObservableObject {
 
         self.storageManager = storageManager
     }
-
+#warning("Ревью + LocalStation model + AsyncMap TaskGroup есть смысл использовать?")
     @Sendable
     func fetchPopularStations() async {
-            do {
-                let stations = try await networkService.fetchTop()
-                await MainActor.run {
-                    self.fetchedStations = stations
-                }
-            } catch {
-                print("Ошибка загрузки станций: \(error.localizedDescription)")
+        do {
+            let stations = try await networkService.fetchTop()
+            
+            let localStations = try await stations.asyncMap {
+                LocalStation(
+                    dto: $0,
+                    isFavorite: try await storageManager.contains($0)
+                )
             }
+            
+            await MainActor.run { self.fetchedStations = localStations }
+            
+        } catch {
+            print("Ошибка загрузки станций: \(error.localizedDescription)")
+        }
     }
+
     
-    func handleSelection(_ station: Station) {
+    func handleSelection(_ station: LocalStation) {
         defer {
             selectedStation = avPlayer.currentStation
         }
@@ -65,43 +73,30 @@ final class PopularViewModel: ObservableObject {
         selectedStation = avPlayer.currentStation
     }
     
-    func toggleFavorite(for station: Station) async {
+    func toggleFavorite(for station: LocalStation) async {
         do {
-            // Проверяем, есть ли станция в избранных
             let contains = try await storageManager.contains(station)
 
+            await MainActor.run {
+                if let index = fetchedStations.firstIndex(of: station) {
+                    fetchedStations[index].isFavorite.toggle()
+                }
+            }
+
             if contains {
-                // Удаляем станцию из Core Data
                 try await storageManager.removeStation(station)
             } else {
-                // Добавляем станцию в Core Data
                 try await storageManager.saveStation(station)
             }
+            
         } catch {
             print("Ошибка при переключении избранного: \(error.localizedDescription)")
         }
     }
 
-
     
-//    func toggleFavorite(for station: Station) async {
-//        do {
-//            let contains = try await storageManager.contains(station)
-//            defer {
-//                var station = station
-////                station.isFavorite = !contains
-//                if let index = fetchedStations.firstIndex(of: station) {
-//                    fetchedStations[index] = station                    
-//                }
-//            }
-//            if contains {
-//                try await storageManager.removeStation(station)
-//                return
-//            }
-//            try await storageManager.saveStation(station)
-//        } catch {
-//            
-//        }
-////        persistenceManager.toggleFavorite(station: station)
-//    }
-}
+    func onAppear()  {
+        guard let currentStation = avPlayer.currentStation  else { return }
+               selectedStation = currentStation
+           }
+    }

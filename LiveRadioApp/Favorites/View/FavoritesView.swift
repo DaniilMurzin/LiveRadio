@@ -10,9 +10,9 @@ import SwiftUI
 struct FavoritesView: View {
     typealias Action = () -> Void
     
-    let stations: [Station]
+    let stations: [LocalStation]
     
-    let didTapFavoriteButton: (Station) -> Void
+    let didTapFavoriteButton: (LocalStation) -> Void
     @Binding var volume: Double
     @Binding var name: String
     @Binding var isPlaying: Bool
@@ -56,7 +56,7 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView(
-        stations: Station.mockList,
+        stations: [],
         didTapFavoriteButton: {_ in },
         volume: .constant(0.5),
         name: .constant("Daniil"),

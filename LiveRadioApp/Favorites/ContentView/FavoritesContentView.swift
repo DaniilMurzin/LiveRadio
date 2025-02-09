@@ -24,6 +24,6 @@ struct FavoritesContentView: View  {
             isPlaying: $viewModel.isPlaying,
             isSelected: $viewModel.isFavorite
         )
-        .onAppear { Task {await viewModel.fetchFavoriteStations() }}
+        .task { await viewModel.fetchFavoriteStations() }
     }
 }

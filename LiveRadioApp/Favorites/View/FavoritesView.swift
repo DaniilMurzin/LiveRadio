@@ -31,7 +31,8 @@ struct FavoritesView: View {
                                    didTapPlayButton: {},
                                    didTapFavorites: {didTapFavoriteButton(station)},
                                    isPlaying: isPlaying,
-                                   type: .favorites
+                                   type: .favorites,
+                                   isFavorite: true
                         )
                     }
                 }

@@ -21,12 +21,7 @@ struct PopularContentView: View {
             selectedStation: $viewModel.selectedStation,
             isPlaying: $viewModel.avPlayer.isPlaying,
             didTapbackButton: viewModel.playPreviousStation,
-            // TODO: вынести в отдельный метод 
-            didTapPlayButton: {
-                if let selectedStation = viewModel.selectedStation {
-                    viewModel.handleSelection(selectedStation)
-                }
-            },
+            didTapPlayButton: viewModel.didTapPlayButton,
             didTapBackwardButton: viewModel.playPreviousStation ,
             didTapForwardButton: viewModel.playNextStation ,
             didTapCell: viewModel.handleSelection,

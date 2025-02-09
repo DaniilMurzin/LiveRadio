@@ -27,20 +27,22 @@ struct TabBarCell: View {
     private let didTapFavorites: () async -> Void
     private var isSelected: Bool
     private var isPlaying: Bool
-//    private var didChangeAmplitude: CGFloat
+    private var isFavorite: Bool
     
     init(_ station: LocalStation,
          isSelected: Bool,
          didTapPlayButton: @escaping () -> Void,
          didTapFavorites: @escaping () async -> Void,
          isPlaying: Bool,
-         type: CellType) {
+         type: CellType,
+         isFavorite: Bool) {
         self.station = station
         self.isSelected = isSelected
         self.didTapCell = didTapPlayButton
         self.didTapFavorites = didTapFavorites
         self.isPlaying = isPlaying
         self.type = type
+        self.isFavorite = isFavorite
     }
     
     var body: some View {
@@ -60,11 +62,12 @@ struct TabBarCell: View {
                             .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                         
                         Button(asyncAction: didTapFavorites) {
-                            Image(.favoriteButtonEmpty)
+                            Image(isFavorite ? .favoriteButtonFill : .favoriteButtonEmpty)
                                 .resizable()
                                 .frame(width: Drawing.favoritesButton.width, height: Drawing.favoritesButton.height)
                         }
                     }
+                    
                     Text(station.name)
                         .applyFonts(for: .subtitle)
                         .foregroundStyle(Color.white)

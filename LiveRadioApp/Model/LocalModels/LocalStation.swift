@@ -20,7 +20,7 @@ struct LocalStation: Hashable, Sendable{
     let votes: Int
     var isFavorite: Bool
     
-    init(dto: Station, isFavorite: Bool = false) {
+    init(dto: Station, isFavorite: Bool ) {
         stationuuid = dto.stationuuid
         name = dto.name
         url = dto.url

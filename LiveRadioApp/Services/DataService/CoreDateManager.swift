@@ -97,9 +97,14 @@ extension CoreDateManager: StorageManager {
     
     func removeStations(_ stations: [LocalStation]) async throws -> [LocalStation] {
         try await container.performBackgroundTask { context in
-            stations
-                .map { FavoriteStationEntity($0, in: context) }
+            try stations
+                .compactMap { station in
+                    let request = NSFetchRequest<FavoriteStationEntity>(entityName: self.entityName)
+                    request.predicate = NSPredicate(format: "id == %@", station.stationuuid)
+                    return try context.fetch(request).first
+                }
                 .forEach(context.delete(_:))
+
             try context.save()
             return stations
         }

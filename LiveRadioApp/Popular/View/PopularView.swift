@@ -68,7 +68,8 @@ struct PopularView: View {
                                 didTapPlayButton: { didTapCell(station) },
                                 didTapFavorites: { await didTapFavoriteButton(station) },
                                 isPlaying: isPlaying,
-                                type: .popular
+                                type: .popular,
+                                isFavorite: station.isFavorite
                               )
                         }
                     }
@@ -76,6 +77,7 @@ struct PopularView: View {
                 .padding()
             }
         }
+        
         .overlay {
             VStack {
                 Spacer()

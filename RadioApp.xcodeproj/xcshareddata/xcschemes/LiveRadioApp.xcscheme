@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92E07CFD2C86101400B59386"
-               BuildableName = "LiveRadioApp.app"
-               BlueprintName = "LiveRadioApp"
-               ReferencedContainer = "container:LiveRadioApp.xcodeproj">
+               BuildableName = "RadioApp.app"
+               BlueprintName = "RadioApp"
+               ReferencedContainer = "container:RadioApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -38,7 +38,7 @@
                BlueprintIdentifier = "920A01642CFEE8280068EDD0"
                BuildableName = "NetworkServiceTests.xctest"
                BlueprintName = "NetworkServiceTests"
-               ReferencedContainer = "container:LiveRadioApp.xcodeproj">
+               ReferencedContainer = "container:RadioApp.xcodeproj">
             </BuildableReference>
             <SkippedTests>
                <Test
@@ -63,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92E07CFD2C86101400B59386"
-            BuildableName = "LiveRadioApp.app"
-            BlueprintName = "LiveRadioApp"
-            ReferencedContainer = "container:LiveRadioApp.xcodeproj">
+            BuildableName = "RadioApp.app"
+            BlueprintName = "RadioApp"
+            ReferencedContainer = "container:RadioApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92E07CFD2C86101400B59386"
-            BuildableName = "LiveRadioApp.app"
-            BlueprintName = "LiveRadioApp"
-            ReferencedContainer = "container:LiveRadioApp.xcodeproj">
+            BuildableName = "RadioApp.app"
+            BlueprintName = "RadioApp"
+            ReferencedContainer = "container:RadioApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

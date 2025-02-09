@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    typealias Action = () -> Void
     
-    let stations: [Station]
+    let stations: [LocalStation]
+    
+    let didTapFavoriteButton: (LocalStation) -> Void
     @Binding var volume: Double
     @Binding var name: String
     @Binding var isPlaying: Bool
@@ -26,12 +29,27 @@ struct FavoritesView: View {
                         TabBarCell(station,
                                    isSelected: isSelected,
                                    didTapPlayButton: {},
-                                   didTapFavorites: {},
+                                   didTapFavorites: {didTapFavoriteButton(station)},
                                    isPlaying: isPlaying,
-                                   type: .favorites
+                                   type: .favorites,
+                                   isFavorite: true
                         )
                     }
                 }
+            }
+        }
+        .overlay {
+            VStack {
+                Spacer()
+                PlayerView(
+                    isPlaying: $isPlaying,
+                    backwardButtonAction: {},
+                    forwardButtonAction: {},
+                    playButtonAction: {}
+                )
+                .frame(width: 190, height: 90)
+                .padding(.bottom, 30)
+                .background(Color.clear)
             }
         }
     }
@@ -39,7 +57,8 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView(
-        stations: Station.mockList,
+        stations: [],
+        didTapFavoriteButton: {_ in },
         volume: .constant(0.5),
         name: .constant("Daniil"),
         isPlaying: .constant(false),

@@ -17,10 +17,13 @@ struct FavoritesContentView: View  {
     
     var body: some View {
         FavoritesView(
-            stations: Station.mockList,
+            stations: viewModel.fetchedStations,
+            didTapFavoriteButton: {_ in },
             volume: $viewModel.volume,
             name: $viewModel.name,
             isPlaying: $viewModel.isPlaying,
-            isSelected: $viewModel.isFavorite)
+            isSelected: $viewModel.isFavorite
+        )
+        .task { await viewModel.fetchFavoriteStations() }
     }
 }

@@ -12,7 +12,7 @@ extension AVPlayer {
 }
 
 extension AVPlayerItem {
-    static func parse(station: Station) -> AVPlayerItem? {
+    static func parse(station: LocalStation) -> AVPlayerItem? {
         URL(string: station.url).map(AVPlayerItem.init)
     }
 }

@@ -22,25 +22,27 @@ struct TabBarCell: View {
     }
     
     private let type: CellType
-    private var station: Station
+    private var station: LocalStation
     private let didTapCell: () -> Void
-    private let didTapFavorites: () -> Void
+    private let didTapFavorites: () async -> Void
     private var isSelected: Bool
     private var isPlaying: Bool
-//    private var didChangeAmplitude: CGFloat
+    private var isFavorite: Bool
     
-    init(_ station: Station,
+    init(_ station: LocalStation,
          isSelected: Bool,
          didTapPlayButton: @escaping () -> Void,
-         didTapFavorites: @escaping () -> Void,
+         didTapFavorites: @escaping () async -> Void,
          isPlaying: Bool,
-         type: CellType) {
+         type: CellType,
+         isFavorite: Bool) {
         self.station = station
         self.isSelected = isSelected
         self.didTapCell = didTapPlayButton
         self.didTapFavorites = didTapFavorites
         self.isPlaying = isPlaying
         self.type = type
+        self.isFavorite = isFavorite
     }
     
     var body: some View {
@@ -59,12 +61,13 @@ struct TabBarCell: View {
                             .applyFonts(for: .votes)
                             .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                         
-                        Button(action: didTapFavorites) {
-                            Image(.favoriteButtonEmpty)
+                        Button(asyncAction: didTapFavorites) {
+                            Image(isFavorite ? .favoriteButtonFill : .favoriteButtonEmpty)
                                 .resizable()
                                 .frame(width: Drawing.favoritesButton.width, height: Drawing.favoritesButton.height)
                         }
                     }
+                    
                     Text(station.name)
                         .applyFonts(for: .subtitle)
                         .foregroundStyle(Color.white)
@@ -87,30 +90,25 @@ struct TabBarCell: View {
                         Text(station.name)
                             .applyFonts(for: .subtitle)
                             .foregroundStyle(Color.white)
-                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                    
                         Text(station.tags)
                             .applyFonts(for: .regular)
                             .foregroundStyle(Color.white)
-                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                         
-                        
-                        SingleWaveView(isSelected: isSelected, isPlaying: isPlaying/*, amplitude: didChangeAmplitude*/ )
+                        SingleWaveView(isSelected: false, isPlaying: isPlaying)
                             .padding(.top, Drawing.imageTopPadding)
                         
                     }
                     Spacer()
-                    Button(action: didTapFavorites) {
-                        Image(.favoriteButtonEmpty)
+                    Button(asyncAction: didTapFavorites) {
+                        Image(.favoritesButtonFill)
                             .resizable()
                             .frame(width: 61, height: 53)
                     }
                 }
                 .frame(width: 293, height: 123)
                 .padding()
-                
             }
-        
         }
         .onTapGesture {
             didTapCell()
@@ -124,16 +122,4 @@ extension TabBarCell {
         case favorites
 //        case allStations
     }
-}
-
-#Preview {
-    TabBarCell(
-        Station.mock,
-        isSelected: false,
-        didTapPlayButton: {},
-        didTapFavorites: {},
-        isPlaying: true,
-        type: .favorites
-        )
-    .frame(width: 293, height: 123)
 }

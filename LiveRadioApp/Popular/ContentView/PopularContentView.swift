@@ -13,31 +13,22 @@ struct PopularContentView: View {
     init(_ viewModel: PopularViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+    #warning("DidTapPlayButton")
     var body: some View {
         PopularView(
             name: viewModel.name,
             volume: $viewModel.volume,
             selectedStation: $viewModel.selectedStation,
             isPlaying: $viewModel.avPlayer.isPlaying,
-            didTapbackButton: { viewModel.playPreviousStation() },
-            didTapPlayButton: {
-                if let selectedStation = viewModel.selectedStation {
-                    viewModel.handleSelection(selectedStation)
-                }
-            },
-            didTapBackwardButton: { viewModel.playPreviousStation() },
-            didTapForwardButton: { viewModel.playNextStation() },
-            didTapCell: { station in
-                viewModel.handleSelection(station)
-            },
+            didTapbackButton: viewModel.playPreviousStation,
+            didTapPlayButton: viewModel.didTapPlayButton,
+            didTapBackwardButton: viewModel.playPreviousStation ,
+            didTapForwardButton: viewModel.playNextStation ,
+            didTapCell: viewModel.handleSelection,
+            didTapFavoriteButton: viewModel.toggleFavorite,
             stations: viewModel.fetchedStations
         )
-        .onAppear {
-            viewModel.fetchPopularStations()
-            if let currentStation = viewModel.avPlayer.currentStation {
-                   viewModel.selectedStation = currentStation
-               }
-        }
+        .task(viewModel.fetchPopularStations)
+        .onAppear(perform: viewModel.onAppear)
     }
 }

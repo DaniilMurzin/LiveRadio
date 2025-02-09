@@ -8,53 +8,101 @@
 import SwiftUI
 
 final class PopularViewModel: ObservableObject {
+    
     private let networkService: StationDataService
+    private let storageManager: StorageManager
     var avPlayer: RadioPlayer
-    @Published var fetchedStations: [Station] = []
+
+    @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
-    @Published var selectedStation: Station?
+    @Published var selectedStation: LocalStation?
+    @Published var isFavorite: Bool = false
+    
     @Published var volume: Double = 0.5 {
-           didSet {
-               avPlayer.volume = volume
-           }
+           didSet { avPlayer.volume = volume }
        }
     
-    init(networkService: StationDataService, avPlayer: RadioPlayer) {
+    init(
+        networkService: StationDataService,
+        avPlayer: RadioPlayer,
+        storageManager: StorageManager
+    ) {
         self.networkService = networkService
         self.avPlayer = avPlayer
+
+        self.storageManager = storageManager
+    }
+#warning("Ревью + LocalStation model + AsyncMap TaskGroup есть смысл использовать?")
+    @Sendable
+    func fetchPopularStations() async {
+        do {
+            let stations = try await networkService.fetchTop()
+            
+            let localStations = try await stations.asyncMap {
+                LocalStation(
+                    dto: $0,
+                    isFavorite: try await storageManager.contains($0)
+                )
+            }
+            
+            await MainActor.run { self.fetchedStations = localStations }
+            
+        } catch {
+            print("Ошибка загрузки станций: \(error.localizedDescription)")
+        }
     }
 
-    func fetchPopularStations() {
-        Task {
-            do {
-                let stations = try await networkService.fetchTop()
-                await MainActor.run {
-                    self.fetchedStations = stations
-                }
-            } catch {
-                print("Ошибка загрузки станций: \(error.localizedDescription)")
-            }
-        }
-    }
     
-    func handleSelection(_ station: Station) {
+    func handleSelection(_ station: LocalStation) {
+        defer {
+            selectedStation = avPlayer.currentStation
+        }
         if avPlayer.currentStation == station {
             avPlayer.isPlaying.toggle()
-        } else {
-            avPlayer.play(stations: fetchedStations) { $0 == station }
+            return
         }
-        selectedStation = avPlayer.currentStation
+        avPlayer.play(stations: fetchedStations) { $0 == station }
     }
 
     func playNextStation() {
         avPlayer.playNext()
-//        avPlayer.playNextStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
 
     func playPreviousStation() {
         avPlayer.playPrevious()
-//        avPlayer.playPreviousStation(from: fetchedStations)
         selectedStation = avPlayer.currentStation
     }
-}
+    
+    func toggleFavorite(for station: LocalStation) async {
+            do {
+                let contains = try await storageManager.contains(station)
+
+                await MainActor.run {
+                    if let index = fetchedStations.firstIndex(of: station) {
+                        fetchedStations[index].isFavorite.toggle()
+                    }
+                }
+
+                if contains {
+                    try await storageManager.removeStation(station)
+                } else {
+                    try await storageManager.saveStation(station)
+                }
+                
+            } catch {
+                print("Ошибка при переключении избранного: \(error.localizedDescription)")
+            }
+        }
+
+    func didTapPlayButton() {
+        if let selectedStation = selectedStation {
+            handleSelection(selectedStation)
+        }
+    }
+    
+    func onAppear()  {
+        guard let currentStation = avPlayer.currentStation  else { return }
+               selectedStation = currentStation
+           }
+    }

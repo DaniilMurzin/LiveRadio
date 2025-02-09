@@ -24,6 +24,7 @@ struct ZipperTests {
         //then
         #expect(sut.current == elements[1])
     }
+    
     @Test
     func backward_atStart_doesNotCrash() {
         // given

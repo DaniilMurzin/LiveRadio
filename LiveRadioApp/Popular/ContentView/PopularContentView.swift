@@ -13,7 +13,7 @@ struct PopularContentView: View {
     init(_ viewModel: PopularViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-    #warning("DidTapPlayButton")
+    
     var body: some View {
         PopularView(
             name: viewModel.name,

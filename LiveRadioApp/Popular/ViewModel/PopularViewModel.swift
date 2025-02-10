@@ -16,7 +16,6 @@ final class PopularViewModel: ObservableObject {
     @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
     @Published var selectedStation: LocalStation?
-    @Published var isFavorite: Bool = false
     
     @Published var volume: Double = 0.5 {
            didSet { avPlayer.volume = volume }
@@ -74,14 +73,12 @@ final class PopularViewModel: ObservableObject {
         selectedStation = avPlayer.currentStation
     }
     
+    @MainActor
     func toggleFavorite(for station: LocalStation) async {
             do {
                 let contains = try await storageManager.contains(station)
-
-                await MainActor.run {
-                    if let index = fetchedStations.firstIndex(of: station) {
-                        fetchedStations[index].isFavorite.toggle()
-                    }
+                if let index = fetchedStations.firstIndex(of: station) {
+                    fetchedStations[index].isFavorite.toggle()
                 }
 
                 if contains {

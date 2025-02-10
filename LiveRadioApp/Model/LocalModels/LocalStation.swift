@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocalStation: Hashable, Sendable{
+struct LocalStation: Hashable, Sendable {
     let stationuuid: String
     let name: String
     let tags: String
@@ -31,6 +31,31 @@ struct LocalStation: Hashable, Sendable{
         country = dto.country
         language = dto.language
         votes = dto.votes
+        self.isFavorite = isFavorite
+    }
+    
+    init(stationuuid: String = "testUUID",
+         name: String = "Test Station",
+         tags: String = "Rock, Pop",
+         url: String = "https://example.com/stream",
+         urlResolved: String? = nil,
+         homepage: String = "https://example.com",
+         favicon: String? = nil,
+         country: String = "USA",
+         language: String = "English",
+         votes: Int = 100,
+         isFavorite: Bool = false
+    ) {
+        self.stationuuid = stationuuid
+        self.name = name
+        self.tags = tags
+        self.url = url
+        self.urlResolved = urlResolved
+        self.homepage = homepage
+        self.favicon = favicon
+        self.country = country
+        self.language = language
+        self.votes = votes
         self.isFavorite = isFavorite
     }
 }

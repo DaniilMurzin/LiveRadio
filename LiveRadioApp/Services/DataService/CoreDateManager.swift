@@ -86,7 +86,6 @@ extension CoreDateManager: StorageManager {
             let request = NSFetchRequest<FavoriteStationEntity>(entityName: entityName)
             request.predicate = predicate
             let results = try context.fetch(request)
-            print("Найдено \(results.count) записей в Core Data")
             return try results.map(LocalStation.init)
         }
     }

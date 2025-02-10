@@ -18,12 +18,18 @@ struct FavoritesContentView: View  {
     var body: some View {
         FavoritesView(
             stations: viewModel.fetchedStations,
-            didTapFavoriteButton: {_ in },
+            name: viewModel.name,
             volume: $viewModel.volume,
-            name: $viewModel.name,
-            isPlaying: $viewModel.isPlaying,
-            isSelected: $viewModel.isFavorite
+            selectedStation: $viewModel.selectedStation,
+            isPlaying: $viewModel.avPlayer.isPlaying,
+            didTapbackButton: viewModel.playPreviousStation,
+            didTapPlayButton: viewModel.didTapPlayButton,
+            didTapBackwardButton: viewModel.playPreviousStation ,
+            didTapForwardButton: viewModel.playNextStation ,
+            didTapCell: viewModel.handleSelection,
+            didTapFavoriteButton: viewModel.toggleFavorite
         )
         .task { await viewModel.fetchFavoriteStations() }
+        .onAppear(perform: viewModel.onAppear)
     }
 }

@@ -15,6 +15,12 @@ struct PopularView: View {
         static let scrollViewSpacing: CGFloat = 30
         static let gridItemDimensions: CGFloat = 139
         static let columnSpacing: CGFloat = 15
+        static let bottomPadding: CGFloat = -10
+        static let volumeSliderLeadingPadding: CGFloat = 15
+        static let volumeSliderWidth: CGFloat = 48
+        static let textPadding: CGFloat = 16
+        static let lazyVGridSpacing: CGFloat = 20
+        static let playerBottomPadding: CGFloat = 30
     }
     
     typealias Action = () -> Void
@@ -44,21 +50,23 @@ struct PopularView: View {
             spacing: Drawing.columnSpacing)]
     
     var body: some View {
-        let _ = Self._printChanges()
         HeaderView(name: name)
             .padding(.horizontal, Drawing.headerHorizontalPadding)
-            .padding(.bottom, -10)
+            .padding(.bottom, Drawing.bottomPadding)
         
         HStack {
             VolumeSlider(volume: $volume)
-                .padding(.leading, 15)
-                .frame(width: 48)
+                .padding(.leading, Drawing.volumeSliderLeadingPadding)
+                .frame(width: Drawing.volumeSliderWidth)
+            
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("Popular")
                         .applyFonts(for: .subtitle)
                         .foregroundColor(.white)
-                    LazyVGrid(columns: columns, spacing: 20) {
+                        .padding(Drawing.textPadding)
+                    
+                    LazyVGrid(columns: columns, spacing: Drawing.lazyVGridSpacing) {
                         ForEach(stations, id: \.stationuuid) { station in
                             let isSelected = station == selectedStation
                             
@@ -70,14 +78,13 @@ struct PopularView: View {
                                 isPlaying: isPlaying,
                                 type: .popular,
                                 isFavorite: station.isFavorite
-                              )
+                            )
                         }
                     }
                 }
                 .padding()
             }
         }
-        
         .overlay {
             VStack {
                 Spacer()
@@ -87,8 +94,7 @@ struct PopularView: View {
                     forwardButtonAction: didTapForwardButton,
                     playButtonAction: didTapPlayButton
                 )
-                .frame(width: 190, height: 90)
-                .padding(.bottom, 30)
+                .padding(.bottom, Drawing.playerBottomPadding)
                 .background(Color.clear)
             }
         }
@@ -112,3 +118,4 @@ struct PopularView: View {
         )
     }
 }
+

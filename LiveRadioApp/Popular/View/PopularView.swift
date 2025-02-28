@@ -15,7 +15,7 @@ struct PopularView: View {
         static let scrollViewSpacing: CGFloat = 30
         static let gridItemDimensions: CGFloat = 139
         static let columnSpacing: CGFloat = 15
-        static let bottomPadding: CGFloat = -10
+        static let headerBottomPadding: CGFloat = -10
         static let volumeSliderLeadingPadding: CGFloat = 15
         static let volumeSliderWidth: CGFloat = 48
         static let textPadding: CGFloat = 16
@@ -52,7 +52,7 @@ struct PopularView: View {
     var body: some View {
         HeaderView(name: name)
             .padding(.horizontal, Drawing.headerHorizontalPadding)
-            .padding(.bottom, Drawing.bottomPadding)
+            .padding(.bottom, Drawing.headerBottomPadding)
         
         HStack {
             VolumeSlider(volume: $volume)

@@ -11,7 +11,7 @@ final class PopularViewModel: ObservableObject {
     
     private let networkService: StationDataService
     private let storageManager: StorageManager
-    var avPlayer: RadioPlayer
+    private let avPlayer: RadioPlayer
 
     @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
@@ -20,6 +20,13 @@ final class PopularViewModel: ObservableObject {
     @Published var volume: Double = 0.5 {
            didSet { avPlayer.volume = volume }
        }
+    
+    var isPlaying: Binding<Bool> {
+        Binding (
+            get: { self.avPlayer.isPlaying },
+            set: { self.avPlayer.isPlaying = $0}
+        )
+    }
     
     init(
         networkService: StationDataService,
@@ -31,18 +38,14 @@ final class PopularViewModel: ObservableObject {
 
         self.storageManager = storageManager
     }
-#warning("Ревью + LocalStation model + AsyncMap TaskGroup есть смысл использовать?")
+
     @Sendable
     func fetchPopularStations() async {
         do {
-            let stations = try await networkService.fetchTop()
+            async let stations = try await networkService.fetchTop()
+            async let stored = try await storageManager.loadAllStations()
             
-            let localStations = try await stations.asyncMap {
-                LocalStation(
-                    dto: $0,
-                    isFavorite: try await storageManager.contains($0)
-                )
-            }
+            let localStations = try await [LocalStation](fetched: stations, stored: stored)
             
             await MainActor.run { self.fetchedStations = localStations }
             
@@ -51,7 +54,6 @@ final class PopularViewModel: ObservableObject {
         }
     }
 
-    
     func handleSelection(_ station: LocalStation) {
         defer {
             selectedStation = avPlayer.currentStation

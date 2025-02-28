@@ -51,6 +51,7 @@ struct TabBarCell: View {
     
     var body: some View {
         CellBackground(isSelected: isSelected) {
+            
             switch type {
             case .popular:
                 VStack {
@@ -114,6 +115,41 @@ struct TabBarCell: View {
                 }
                 .frame(width: Drawing.favoriteCellSize.width, height: Drawing.favoriteCellSize.height)
                 .padding(.horizontal, Drawing.favoriteCellHorizontalPadding)
+            
+            case .allStations:
+                HStack {
+                    VStack {
+                        Text(station.name)
+                            .applyFonts(for: .subtitle)
+                            .foregroundStyle(.white)
+                        
+                        Text(station.tags)
+                            .applyFonts(for: .regular)
+                            .foregroundStyle(.white)
+                        Text("Playing now")
+                            .applyFonts(for: .votes)
+                            .foregroundStyle(Color.eclipseMulberry)
+                    }
+            
+                    VStack {
+                        HStack {
+                            Text("Votes \(Int(station.votes))")
+                                .foregroundStyle(.white)
+                                .applyFonts(for: .votes)
+                                .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                            
+                            Button(asyncAction: didTapFavorites) {
+                                Image(isFavorite ? .favoriteButtonFill : .favoriteButtonEmpty)
+                                    .resizable()
+                                    .frame(width: Drawing.favoritesButtonSize.width, height: Drawing.favoritesButtonSize.height)
+                            }
+                        }
+                        SingleWaveView(isSelected: isSelected, isPlaying: isPlaying)
+                            .padding(.top, Drawing.imageTopPadding)
+                    }
+                }
+                .frame(width: Drawing.favoriteCellSize.width, height: Drawing.favoriteCellSize.height)
+                .padding(.horizontal, Drawing.favoriteCellHorizontalPadding)
             }
         }
         .onTapGesture {
@@ -126,6 +162,7 @@ extension TabBarCell {
     enum CellType {
         case popular
         case favorites
+        case allStations
     }
 }
 
@@ -149,7 +186,7 @@ extension TabBarCell {
             didTapPlayButton: {},
             didTapFavorites: {},
             isPlaying: false,
-            type: .favorites,
+            type: .allStations,
             isFavorite: false
         )
     }

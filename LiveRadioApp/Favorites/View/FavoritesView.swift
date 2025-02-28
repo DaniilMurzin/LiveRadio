@@ -18,6 +18,7 @@ struct FavoritesView: View {
         static let emptyStateTopPadding: CGFloat = 50
         static let tabBarCellHeight: CGFloat = 123
         static let playerBottomPadding: CGFloat = 30
+        static let favoritesLabelPadding: CGFloat = 25
     }
     
     typealias Action = () -> Void
@@ -50,6 +51,7 @@ struct FavoritesView: View {
                         Text("Favorites")
                             .applyFonts(for: .subtitle)
                             .foregroundColor(.white)
+                            .padding(.bottom, Drawing.favoritesLabelPadding)
 
                         if stations.isEmpty {
                             Text("Add favorite stations")
@@ -111,4 +113,3 @@ struct FavoritesView: View {
         )
     }
 }
-

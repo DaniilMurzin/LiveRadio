@@ -16,6 +16,7 @@ final class AllStationsViewModel: ObservableObject {
     @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
     @Published var selectedStation: LocalStation?
+    @Published var searchText: String = ""
     
     @Published var volume: Double = 0.5 {
         didSet { avPlayer.volume = volume }

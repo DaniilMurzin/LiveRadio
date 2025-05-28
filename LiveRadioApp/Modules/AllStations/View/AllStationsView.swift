@@ -35,33 +35,39 @@ struct AllStationsView: View {
     let didTapForwardButton: Action
     let didTapCell: (LocalStation) -> Void
     let didTapFavoriteButton: (LocalStation) async -> Void
+    @Binding var searchFieldText: String
     
     var body: some View {
-        HeaderView(name: name)
-            .padding(.horizontal, Drawing.headerHorizontalPadding)
-            .padding(.bottom, Drawing.headerBottomPadding)
-        VStack {
-            HStack {
-                VolumeSlider(volume: $volume)
-                    .padding(.leading, Drawing.volumeSliderLeadingPadding)
-                    .frame(width: Drawing.volumeSliderWidth)
+            HeaderView(name: name)
+                .padding(.horizontal, Drawing.headerHorizontalPadding)
+                .padding(.bottom, Drawing.headerBottomPadding)
+            SearchBarView(searchText: $searchFieldText)
+            VStack {
+                HStack {
+                    VolumeSlider(volume: $volume)
+                        .padding(.leading, Drawing.volumeSliderLeadingPadding)
+                        .frame(width: Drawing.volumeSliderWidth)
+                }
+                Spacer()
             }
-        }
     }
 }
-
+    
 #Preview {
-    AllStationsView(
-        stations: [LocalStation()],
-        name: "Daniil",
-        volume: .constant(0.5),
-        selectedStation: .constant(.none),
-        isPlaying: .constant(false),
-        didTapbackButton: {},
-        didTapPlayButton: {},
-        didTapBackwardButton: {},
-        didTapForwardButton: {},
-        didTapCell: {_ in },
-        didTapFavoriteButton: {_ in }
-    )
+    TabBarBackground {
+        AllStationsView(
+            stations: [LocalStation()],
+            name: "Daniil",
+            volume: .constant(0.5),
+            selectedStation: .constant(.none),
+            isPlaying: .constant(false),
+            didTapbackButton: {},
+            didTapPlayButton: {},
+            didTapBackwardButton: {},
+            didTapForwardButton: {},
+            didTapCell: {_ in },
+            didTapFavoriteButton: {_ in },
+            searchFieldText: .constant("Search")
+        )
+    }
 }

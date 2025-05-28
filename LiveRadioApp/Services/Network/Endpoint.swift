@@ -10,8 +10,8 @@ import Foundation
 enum Endpoint {
     case popular
     
-    private var scheme: String { "https" }
-    private var host: String { "nl1.api.radio-browser.info" }
+    private var scheme: String { "http" }
+    private var host: String { "162.55.180.156" }
     
     var path: String {
         switch self {

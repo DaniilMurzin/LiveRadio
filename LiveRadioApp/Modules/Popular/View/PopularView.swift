@@ -95,7 +95,6 @@ struct PopularView: View {
                     playButtonAction: didTapPlayButton
                 )
                 .padding(.bottom, Drawing.playerBottomPadding)
-                .background(Color.clear)
             }
         }
     }

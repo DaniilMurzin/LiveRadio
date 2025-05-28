@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabBarCell: View {
+    
     private enum Drawing {
         static let titleSize: CGFloat = 30
         static let playButtonSize = CGSize(width: 20, height: 20)

@@ -21,7 +21,7 @@ struct FavoritesContentView: View  {
             name: viewModel.name,
             volume: $viewModel.volume,
             selectedStation: $viewModel.selectedStation,
-            isPlaying: $viewModel.avPlayer.isPlaying,
+            isPlaying: viewModel.isPlaying,
             didTapbackButton: viewModel.playPreviousStation,
             didTapPlayButton: viewModel.didTapPlayButton,
             didTapBackwardButton: viewModel.playPreviousStation ,

@@ -21,7 +21,7 @@ struct TabBarView: View {
                 case .favorites:
                     factory.makeFavorites()
                 case .allStations:
-                    factory.makePopular()
+                    factory.makeAllStations()
                 }
             
             HStack {

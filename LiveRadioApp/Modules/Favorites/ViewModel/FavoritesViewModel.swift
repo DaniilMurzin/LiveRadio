@@ -5,18 +5,25 @@
 //  Created by Daniil Murzin on 23.12.2024.
 //
 
-import Foundation
+import SwiftUI
 
 final class FavoritesViewModel: ObservableObject {
     
-    var avPlayer: RadioPlayer
-    let storageManager: StorageManager
+    private let avPlayer: RadioPlayer
+    private let storageManager: StorageManager
     
     @Published var name: String = "Daniil"
     @Published var fetchedStations: [LocalStation] = []
     @Published var selectedStation: LocalStation?
     @Published var volume: Double = 0.5 {
         didSet { avPlayer.volume = volume }
+    }
+    
+    var isPlaying: Binding<Bool> {
+        Binding (
+            get: { self.avPlayer.isPlaying },
+            set: { self.avPlayer.isPlaying = $0}
+        )
     }
     
     init(avPlayer: RadioPlayer, storageManager: StorageManager) {

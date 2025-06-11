@@ -10,6 +10,7 @@ import FirebaseAuth
 
 protocol StationDataService {
     func fetchTop() async throws -> [Station]
+    func searchByName(name: String) async throws -> [Station]
 }
 
 final class NetworkService {
@@ -61,6 +62,13 @@ extension NetworkService: StationDataService {
     
     func fetchTop() async throws -> [Station] {
         guard let url = Endpoint.popular.createURL() else {
+            throw NetworkError.invalidURL
+        }
+        return try await makeRequest(for: url)
+    }
+    
+    func searchByName(name: String) async throws -> [Station] {
+        guard let url = Endpoint.searchByName(name).createURL() else {
             throw NetworkError.invalidURL
         }
         return try await makeRequest(for: url)

@@ -9,6 +9,7 @@ import Foundation
 
 enum Endpoint {
     case popular
+    case searchByName(String)
     
     private var scheme: String { "http" }
     private var host: String { "162.55.180.156" }
@@ -17,6 +18,9 @@ enum Endpoint {
         switch self {
         case .popular:
             return "/json/stations/topvote"
+            
+        case .searchByName:
+            return "/json/stations/search"
         }
     }
     
@@ -29,8 +33,14 @@ enum Endpoint {
         switch self {
         case .popular:
             components.queryItems = [
-                URLQueryItem(name: "limit", value: "12"),
+                URLQueryItem(name: "limit", value: "15"),
                 URLQueryItem(name: "hidebroken", value: "true")
+            ]
+        case .searchByName(let name):
+            components.queryItems = [
+                URLQueryItem(name: "limit", value: "25"),
+                URLQueryItem(name: "hidebroken", value: "true"),
+                URLQueryItem(name: "name", value: name)
             ]
         }
         return components.url

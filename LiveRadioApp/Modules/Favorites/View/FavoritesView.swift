@@ -36,7 +36,6 @@ struct FavoritesView: View {
     let didTapFavoriteButton: (LocalStation) async -> Void
 
     var body: some View {
-        VStack {
             HeaderView(name: name)
                 .padding(.horizontal, Drawing.headerHorizontalPadding)
                 .padding(.bottom, Drawing.headerBottomPadding)
@@ -79,7 +78,7 @@ struct FavoritesView: View {
                     .padding()
                 }
             }
-        }
+        
         .overlay(
             VStack {
                 Spacer()

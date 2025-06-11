@@ -4,11 +4,11 @@
 //
 //  Created by Daniil Murzin on 05.01.2025.
 //
-#warning("Ревью")
+
 import Testing
 import Foundation
 
-@testable import LiveRadioApp
+@testable import RadioApp
 
 struct ZipperTests {
     let elements = [1,2,4,5,9]

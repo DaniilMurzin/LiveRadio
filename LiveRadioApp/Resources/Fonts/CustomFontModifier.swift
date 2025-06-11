@@ -21,6 +21,8 @@ struct CustomFontModifier: ViewModifier {
         case votes
         case header
         case textField
+        case cellHeader
+        case regularBold
     }
     
     var font: AppFonts
@@ -28,7 +30,6 @@ struct CustomFontModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(selectFont(for: font))
-            .foregroundStyle(.white)
     }
     
     private func selectFont(for font: AppFonts) -> Font {
@@ -55,6 +56,10 @@ struct CustomFontModifier: ViewModifier {
             Font.system(size: 25, weight: .medium)
         case .textField:
             Font.system(size: 14, weight: .regular)
+        case .cellHeader:
+            Font.system(size: 30, weight: .bold)
+        case .regularBold:
+            Font.system(size: 14, weight: .bold)
         }
     }
 }

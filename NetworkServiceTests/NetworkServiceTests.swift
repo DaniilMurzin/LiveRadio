@@ -8,7 +8,7 @@
 import Testing
 import Foundation
 
-@testable import LiveRadioApp
+@testable import RadioApp
 
 struct NetworkServiceTests {
     

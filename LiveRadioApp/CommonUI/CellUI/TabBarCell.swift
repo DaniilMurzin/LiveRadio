@@ -20,6 +20,7 @@ struct TabBarCell: View {
         static let popularCellSize = CGSize(width: 129, height: 129)
         static let favoriteCellSize = CGSize(width: 183, height: 100)
         static let cellPadding: CGFloat = 8
+        static let allStationCellSize = CGSize(width: 130, height: 131)
         static let favoriteTextFrame = CGSize(width: 140, height: 80)
         static let spacerMinLength: CGFloat = 50
         static let favoritesButtonFrame = CGSize(width: 61, height: 53)
@@ -75,13 +76,14 @@ struct TabBarCell: View {
                     }
                     
                     Text(station.name)
-                        .applyFonts(for: .subtitle)
-                        .foregroundStyle(Color.white)
+                        .applyFonts(for: .cellHeader)
+                        .foregroundStyle(.white)
                         .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                     
                     Text(station.tags)
                         .applyFonts(for: .regular)
-                        .foregroundStyle(Color.white)
+                        .lineLimit(1)
+                        .foregroundStyle(.white)
                         .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
                     
                     SingleWaveView(isSelected: isSelected, isPlaying: isPlaying)
@@ -95,16 +97,19 @@ struct TabBarCell: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(station.name)
                             .applyFonts(for: .subtitle)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(.white)
                         
                         Text(station.tags)
                             .applyFonts(for: .regular)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(.white)
 
                         SingleWaveView(isSelected: isSelected, isPlaying: isPlaying)
                             .padding(.top, Drawing.imageTopPadding)
                     }
-                    .frame(width: Drawing.favoriteTextFrame.width, height: Drawing.favoriteTextFrame.height)
+                    .frame(
+                        width: Drawing.favoriteTextFrame.width,
+                        height: Drawing.favoriteTextFrame.height
+                    )
                     
                     Spacer(minLength: Drawing.spacerMinLength)
                     
@@ -118,39 +123,62 @@ struct TabBarCell: View {
                 .padding(.horizontal, Drawing.favoriteCellHorizontalPadding)
             
             case .allStations:
+               
                 HStack {
                     VStack {
                         Text(station.name)
-                            .applyFonts(for: .subtitle)
+                            .applyFonts(for: .cellHeader)
                             .foregroundStyle(.white)
-                        
+                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                        Spacer()
                         Text(station.tags)
                             .applyFonts(for: .regular)
                             .foregroundStyle(.white)
-                        Text("Playing now")
-                            .applyFonts(for: .votes)
-                            .foregroundStyle(Color.eclipseMulberry)
+                            .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                        Spacer()
+                        Text(isSelected ? "Playing now" : "")
+                            .applyFonts(for: .regularBold)
+                            .foregroundStyle(.eclipseMulberry)
+                        
                     }
-            
+                    .frame(
+                        width: Drawing.favoriteTextFrame.width,
+                        height: Drawing.favoriteTextFrame.height
+                    )
+                    
+                    Spacer(minLength: Drawing.spacerMinLength)
+                    
                     VStack {
-                        HStack {
+                        HStack(spacing: 6) {
                             Text("Votes \(Int(station.votes))")
                                 .foregroundStyle(.white)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .minimumScaleFactor(0.5)
                                 .applyFonts(for: .votes)
-                                .opacity(isSelected ? Drawing.textOpacitySelected : Drawing.textOpacityUnselected)
+                                .opacity(isSelected ?
+                                         Drawing.textOpacitySelected :
+                                            Drawing.textOpacityUnselected)
+                                .frame(width: 68, alignment: .leading)
+                            
                             
                             Button(asyncAction: didTapFavorites) {
                                 Image(isFavorite ? .favoriteButtonFill : .favoriteButtonEmpty)
                                     .resizable()
-                                    .frame(width: Drawing.favoritesButtonSize.width, height: Drawing.favoritesButtonSize.height)
+                                    .frame(
+                                        width: Drawing.favoritesButtonSize.width,
+                                        height: Drawing.favoritesButtonSize.height
+                                    )
                             }
                         }
                         SingleWaveView(isSelected: isSelected, isPlaying: isPlaying)
                             .padding(.top, Drawing.imageTopPadding)
                     }
                 }
-                .frame(width: Drawing.favoriteCellSize.width, height: Drawing.favoriteCellSize.height)
-                .padding(.horizontal, Drawing.favoriteCellHorizontalPadding)
+                .frame(
+                    width: Drawing.allStationCellSize.width,
+                    height: Drawing.allStationCellSize.height
+                )
             }
         }
         .onTapGesture {
@@ -173,7 +201,7 @@ extension TabBarCell {
             LocalStation(
                 stationuuid: "123456",
                 name: "Test Station",
-                tags: "Rock, Pop",
+                tags: "Rock, Pop, dsadsa, dsadsa",
                 url: "https://example.com/stream",
                 urlResolved: nil,
                 homepage: "https://example.com",
@@ -183,7 +211,7 @@ extension TabBarCell {
                 votes: 100,
                 isFavorite: false
             ),
-            isSelected: false,
+            isSelected: true,
             didTapPlayButton: {},
             didTapFavorites: {},
             isPlaying: false,

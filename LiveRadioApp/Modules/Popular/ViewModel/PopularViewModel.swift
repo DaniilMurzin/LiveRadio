@@ -9,6 +9,7 @@ import SwiftUI
 
 final class PopularViewModel: ObservableObject {
     
+    //MARK: - Properties
     private let networkService: StationDataService
     private let storageManager: StorageManager
     private let avPlayer: RadioPlayer
@@ -28,6 +29,7 @@ final class PopularViewModel: ObservableObject {
         )
     }
     
+    //MARK: - Init
     init(
         networkService: StationDataService,
         avPlayer: RadioPlayer,
@@ -39,6 +41,7 @@ final class PopularViewModel: ObservableObject {
         self.storageManager = storageManager
     }
 
+    //MARK: - Network Methods
     @Sendable
     func fetchPopularStations() async {
         do {
@@ -54,6 +57,7 @@ final class PopularViewModel: ObservableObject {
         }
     }
 
+    //MARK: - Player Logic methods
     func handleSelection(_ station: LocalStation) {
         defer {
             selectedStation = avPlayer.currentStation

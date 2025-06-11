@@ -18,6 +18,7 @@ struct HeaderView: View {
                 .frame(width: 35, height: 35)
             Text("Hello")
                 .applyFonts(for: .header)
+                .foregroundStyle(.white)
             Text(name)
                 .font(.system(size: 30, weight: .medium))
                 .foregroundStyle(.eclipse8)

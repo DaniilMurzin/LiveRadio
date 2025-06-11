@@ -17,17 +17,26 @@ struct AllStationsContentView: View {
     
     var body: some View {
         AllStationsView(
-            stations: [],
+            stations: viewModel.fetchedStations,
             name: "Daniil",
             volume: $viewModel.volume,
             selectedStation: $viewModel.selectedStation,
             isPlaying: viewModel.isPlaying,
-            didTapbackButton: {},
-            didTapPlayButton: {},
-            didTapBackwardButton: {},
-            didTapForwardButton: {},
-            didTapCell: {_ in },
-            didTapFavoriteButton: {_ in },
-            searchFieldText: $viewModel.searchText)
+            searchFieldText: $viewModel.searchText,
+            didTapPlayButton: viewModel.didTapPlayButton,
+            didTapBackwardButton: viewModel.playPreviousStation,
+            didTapForwardButton: viewModel.playNextStation,
+            didTapCell: viewModel.handleSelection,
+            didTapFavoriteButton: viewModel.toggleFavorite
+        )
+
+        .onAppear(perform: viewModel.onAppear)
+        .onChange(of: viewModel.searchText) { newValue in
+            Task {
+                if !newValue.isEmpty && newValue.count > 2 {
+                    await viewModel.searchByName()
+                }
+            }
+        }
     }
 }

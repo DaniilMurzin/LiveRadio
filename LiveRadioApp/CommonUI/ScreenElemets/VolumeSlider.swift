@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VolumeSlider: View {
     @Binding var volume: Double
+    var onVolumeChanged: ((Double) -> Void)?
 
     var body: some View {
         VStack(alignment: .center) {
@@ -43,6 +44,7 @@ struct VolumeSlider: View {
 
                                     let newVolume = 1 - min(max(0, value.location.y / geometry.size.height), 1)
                                     volume = newVolume
+                                    onVolumeChanged?(newVolume)
                                 }
                         )
                 }

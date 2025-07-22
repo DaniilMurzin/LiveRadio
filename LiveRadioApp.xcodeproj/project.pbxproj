@@ -736,7 +736,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92E07CF92C86101400B59386 /* Build configuration list for PBXProject "RadioApp" */;
+			buildConfigurationList = 92E07CF92C86101400B59386 /* Build configuration list for PBXProject "LiveRadioApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1131,7 +1131,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92E07CF92C86101400B59386 /* Build configuration list for PBXProject "RadioApp" */ = {
+		92E07CF92C86101400B59386 /* Build configuration list for PBXProject "LiveRadioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92E07D0B2C86101500B59386 /* Debug */,

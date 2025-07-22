@@ -26,6 +26,7 @@ struct PopularContentView: View {
             didTapForwardButton: viewModel.playNextStation ,
             didTapCell: viewModel.handleSelection,
             didTapFavoriteButton: viewModel.toggleFavorite,
+            setVolume: viewModel.setVolume,
             stations: viewModel.fetchedStations
         )
         .task(viewModel.fetchPopularStations)

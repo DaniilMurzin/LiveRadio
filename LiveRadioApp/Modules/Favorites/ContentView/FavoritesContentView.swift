@@ -27,7 +27,8 @@ struct FavoritesContentView: View  {
             didTapBackwardButton: viewModel.playPreviousStation ,
             didTapForwardButton: viewModel.playNextStation ,
             didTapCell: viewModel.handleSelection,
-            didTapFavoriteButton: viewModel.toggleFavorite
+            didTapFavoriteButton: viewModel.toggleFavorite,
+            setVolume: viewModel.setVolume
         )
         .task { await viewModel.fetchFavoriteStations() }
         .onAppear(perform: viewModel.onAppear)

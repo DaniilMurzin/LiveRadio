@@ -18,10 +18,7 @@ final class AllStationsViewModel: ObservableObject {
     @Published var name: String = "Daniil"
     @Published var selectedStation: LocalStation?
     @Published var searchText: String = ""
-    
-    @Published var volume: Double = 0.5 {
-        didSet { avPlayer.volume = volume }
-    }
+    @Published var volume: Double
     
     var isPlaying: Binding<Bool> {
         Binding (
@@ -38,25 +35,11 @@ final class AllStationsViewModel: ObservableObject {
     ) {
         self.networkService = networkService
         self.avPlayer = avPlayer
+        self.volume = avPlayer.volume
         self.storageManager = storageManager
     }
     
     //MARK: - Network Methods
-    @Sendable
-    func fetchPopularStations() async {
-        do {
-            async let stations = try await networkService.fetchTop()
-            async let stored = try await storageManager.loadAllStations()
-            
-            let localStations = try await [LocalStation](fetched: stations, stored: stored)
-            
-            await MainActor.run { self.fetchedStations = localStations }
-            
-        } catch {
-            print("Ошибка загрузки станций: \(error.localizedDescription)")
-        }
-    }
-    
     @Sendable
     func searchByName() async {
         do {
@@ -85,9 +68,8 @@ final class AllStationsViewModel: ObservableObject {
     }
     
     func didTapPlayButton() {
-        if let selectedStation = selectedStation {
-            handleSelection(selectedStation)
-        }
+        guard let selectedStation else { return }
+        handleSelection(selectedStation)
     }
     
     func playNextStation() {
@@ -105,19 +87,25 @@ final class AllStationsViewModel: ObservableObject {
         selectedStation = currentStation
     }
     
+    func setVolume(_ value: Double) {
+        volume = value
+        avPlayer.volume = value
+    }
+    
     //MARK: - Favorites logic
     @MainActor
     func toggleFavorite(for station: LocalStation) async {
             do {
                 let contains = try await storageManager.contains(station)
-                if let index = fetchedStations.firstIndex(of: station) {
-                    fetchedStations[index].isFavorite.toggle()
-                }
-
+               
                 if contains {
                     try await storageManager.removeStation(station)
                 } else {
                     try await storageManager.saveStation(station)
+                }
+                
+                if let index = fetchedStations.firstIndex(of: station) {
+                    fetchedStations[index].isFavorite.toggle()
                 }
                 
             } catch {

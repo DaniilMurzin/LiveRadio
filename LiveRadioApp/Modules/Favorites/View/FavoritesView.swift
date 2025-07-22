@@ -34,6 +34,7 @@ struct FavoritesView: View {
     let didTapForwardButton: Action
     let didTapCell: (LocalStation) -> Void
     let didTapFavoriteButton: (LocalStation) async -> Void
+    let setVolume: (Double) -> Void
 
     var body: some View {
             HeaderView(name: name)
@@ -41,7 +42,7 @@ struct FavoritesView: View {
                 .padding(.bottom, Drawing.headerBottomPadding)
 
             HStack {
-                VolumeSlider(volume: $volume)
+                VolumeSlider(volume: $volume, onVolumeChanged: setVolume)
                     .padding(.leading, Drawing.volumeSliderLeadingPadding)
                     .frame(width: Drawing.volumeSliderWidth)
 
@@ -108,7 +109,8 @@ struct FavoritesView: View {
             didTapBackwardButton: {},
             didTapForwardButton: {},
             didTapCell: {_ in },
-            didTapFavoriteButton: {_ in}
+            didTapFavoriteButton: {_ in},
+            setVolume: {_ in}
         )
     }
 }

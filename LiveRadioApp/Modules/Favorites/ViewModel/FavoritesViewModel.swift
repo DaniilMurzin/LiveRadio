@@ -15,9 +15,7 @@ final class FavoritesViewModel: ObservableObject {
     @Published var name: String = "Daniil"
     @Published var fetchedStations: [LocalStation] = []
     @Published var selectedStation: LocalStation?
-    @Published var volume: Double = 0.5 {
-        didSet { avPlayer.volume = volume }
-    }
+    @Published var volume: Double
     
     var isPlaying: Binding<Bool> {
         Binding (
@@ -29,6 +27,7 @@ final class FavoritesViewModel: ObservableObject {
     init(avPlayer: RadioPlayer, storageManager: StorageManager) {
         self.avPlayer = avPlayer
         self.storageManager = storageManager
+        self.volume = avPlayer.volume
     }
     
     func handleSelection(_ station: LocalStation) {
@@ -58,6 +57,11 @@ final class FavoritesViewModel: ObservableObject {
         }
     }
     
+    func setVolume(_ value: Double) {
+        volume = value
+        avPlayer.volume = value
+    }
+    
     func onAppear()  {
         guard let currentStation = avPlayer.currentStation  else { return }
         selectedStation = currentStation
@@ -70,8 +74,6 @@ final class FavoritesViewModel: ObservableObject {
             if let index = fetchedStations.firstIndex(of: station) {
                         fetchedStations.remove(at: index)
                     }
-#warning("??")
-//            fetchedStations.removeAll { $0 == station }
         } catch {
             print("Ошибка при переключении избранного: \(error.localizedDescription)")
         }

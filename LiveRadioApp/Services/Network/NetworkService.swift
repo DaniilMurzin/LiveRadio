@@ -24,8 +24,15 @@ final class NetworkService {
         
         static var live: Self {
             
+            let config = URLSessionConfiguration.default
+            config.urlCache = URLCache(
+                memoryCapacity: 1024 * 20,
+                diskCapacity: 1024 * 20
+            )
+            let session = URLSession(configuration: config)
+            
             return Dependencies(
-                request: URLSession.shared.data,
+                request: session.data,
                 createUser: { email, password in
                     try await Result {
                         try await Auth.auth().createUser(withEmail: email, password: password)

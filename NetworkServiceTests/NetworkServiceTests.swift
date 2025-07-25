@@ -8,7 +8,7 @@
 import Testing
 import Foundation
 
-@testable import LiveRadioApp
+@testable import RadioApp
 
 struct NetworkServiceTests {
     
@@ -108,7 +108,15 @@ struct NetworkServiceTests {
             httpVersion: nil,
             headerFields: nil
         )!
+ 
     }
+    
+    @Test func endpointTopVotes() async throws {
+        let sut = try URLComponents.topVotes().unwrapURL()
+        let expected = "http://162.55.180.156/json/stations/topvote?limit=25&hidebroken=true"
+        #expect(sut.absoluteString == expected)
+    }
+    
     
 //    @Test
 //    func createUser() async throws {

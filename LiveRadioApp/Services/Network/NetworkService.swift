@@ -10,6 +10,7 @@ import FirebaseAuth
 
 protocol StationDataService {
     func fetchTop() async throws -> [Station]
+    func searchByName(name: String) async throws -> [Station]
 }
 
 final class NetworkService {
@@ -23,8 +24,15 @@ final class NetworkService {
         
         static var live: Self {
             
+            let config = URLSessionConfiguration.default
+            config.urlCache = URLCache(
+                memoryCapacity: 1024 * 20,
+                diskCapacity: 1024 * 20
+            )
+            let session = URLSession(configuration: config)
+            
             return Dependencies(
-                request: URLSession.shared.data,
+                request: session.data,
                 createUser: { email, password in
                     try await Result {
                         try await Auth.auth().createUser(withEmail: email, password: password)
@@ -60,9 +68,16 @@ final class NetworkService {
 extension NetworkService: StationDataService {
     
     func fetchTop() async throws -> [Station] {
-        guard let url = Endpoint.popular.createURL() else {
-            throw NetworkError.invalidURL
-        }
+        let url =  try URLComponents
+            .topVotes()
+            .unwrapURL()
+        return try await makeRequest(for: url)
+    }
+    
+    func searchByName(name: String) async throws -> [Station] {
+       let url =  try URLComponents
+            .search(name)
+            .unwrapURL()
         return try await makeRequest(for: url)
     }
 }
@@ -91,32 +106,22 @@ extension NetworkService: AuthorizationService {
 
 private extension NetworkService {
     //MARK: - Private methods
-    
     func makeRequest<T:Codable>(for url: URL, maxRetries: Int = 3) async throws -> T {
         
-        var retries = 0
-        
-        while retries < maxRetries {
-            do {
-                let request = URLRequest(url: url)
-                let (data, response) = try await dependencies.request(request)
-                
-                guard !data.isEmpty else {
-                    throw NetworkError.noData
-                }
-                
-                try checkResponse(response)
-                return try decoder.decode(T.self, from: data)
-                
-            } catch NetworkError.serviceUnavailable where retries < maxRetries {
-                retries += 1
-                print("Service unavailable, retrying... (\(retries)/\(maxRetries))")
-                try await Task.sleep(nanoseconds: 2_000_000_000)
-            } catch {
-                throw error
-            }
+        do  {
+            let request = URLRequest(url: url)
+            let (data, response) = try await dependencies.request(request)
+            guard !data.isEmpty else { throw NetworkError.noData }
+            try checkResponse(response)
+            return try decoder.decode(T.self, from: data)
         }
-        throw NetworkError.serviceUnavailable
+        catch  NetworkError.serviceUnavailable where maxRetries > 0 {
+            try await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
+            return try await makeRequest(for: url, maxRetries: maxRetries - 1)
+        }
+        catch {
+            throw error
+        }
     }
 }
 

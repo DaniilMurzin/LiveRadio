@@ -27,6 +27,8 @@ protocol StorageManager {
     func loadStations(_ predicate: (LocalStation) -> Bool) async throws -> [LocalStation]
     func loadStations(_ predicate: NSPredicate?) async throws -> [LocalStation]
     
+    func loadAllStations() async throws -> [Station] 
+    
     func contains(_ station: LocalStation) async throws -> Bool
     func contains(_ station: Station) async throws -> Bool
     func contains(where predicate: (LocalStation) -> Bool) async throws -> Bool
@@ -128,6 +130,15 @@ extension CoreDateManager: StorageManager {
     func contains(where predicate: (LocalStation) -> Bool) async throws -> Bool {
         try await contains(with: NSPredicate(format: "id == %@", "invalid"))
     }
+    
+    func loadAllStations() async throws -> [Station] {
+        try await container.performBackgroundTask { context -> [Station] in
+            let request = FetchRequest(entityName: self.entityName)
+            return try context
+                .fetch(request)
+                .map(Station.init)
+        }
+    }
 }
 
 
@@ -180,6 +191,42 @@ extension LocalStation {
         self.votes = Int(entity.votes)
     }
 }
+
+extension Station {
+    init(entity: FavoriteStationEntity) throws {
+        guard
+            let stationuuid = entity.id,
+            let name = entity.name,
+            let url = entity.url,
+            let homepage = entity.homepage,
+            let tags = entity.tags,
+            let country = entity.country,
+            let language = entity.language
+        else {
+            throw DecodingError.valueNotFound(
+                Station.self,
+                DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "Ошибка: одно из обязательных полей в CoreData nil"
+                )
+            )
+        }
+
+        self.init(
+            stationuuid: stationuuid,
+            name: name,
+            url: url,
+            urlResolved: entity.urlResolved,
+            homepage: homepage,
+            favicon: entity.favicon,
+            tags: tags,
+            country: country,
+            language: language,
+            votes: Int(entity.votes)
+        )
+    }
+}
+
 
 //protocol PersistenceManager {
 //    var savedEntities: [FavoriteStationEntity] { get }

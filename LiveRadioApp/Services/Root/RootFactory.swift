@@ -15,6 +15,7 @@ protocol RootFactory {
     func makeDetails() -> DetailsContentView
     func makeFavorites() -> FavoritesContentView
     func makeTabBar() -> TabBarView
+    func makeAllStations() -> AllStationsContentView
 }
 
 final class FRoot {
@@ -69,6 +70,15 @@ extension FRoot: RootFactory {
     func makeDetails() -> DetailsContentView {
         let viewModel = DetailsViewModel()
         return DetailsContentView(viewModel)
+    }
+    
+    func makeAllStations() -> AllStationsContentView {
+        let viewModel = AllStationsViewModel(
+            networkService: networkService,
+            avPlayer: player,
+            storageManager: storageManager
+        )
+        return AllStationsContentView(viewModel)
     }
 }
 

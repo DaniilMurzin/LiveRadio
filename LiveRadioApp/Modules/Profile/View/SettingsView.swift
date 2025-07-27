@@ -59,7 +59,7 @@ struct SettingsView: View {
 
                             SettingsItemRow(
                                 title: "Legal and Policies",
-                                icon: "shield.fill"
+                                icon: "shield.fill", action: {}
                             )
 
                             Divider()
@@ -89,5 +89,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(toggleNotification: .constant(true))
+    SettingsView(didTapLanguage: {}, didTapLogout: {}, didTapNotification: {}, toggleNotification: true)
 }

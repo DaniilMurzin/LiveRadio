@@ -11,7 +11,7 @@ struct CellBackground<Content: View>: View {
     var isSelected: Bool
     let content: Content
 
-    init(isSelected: Bool = false, @ViewBuilder content: () -> Content) {
+    init(isSelected: Bool, @ViewBuilder content: () -> Content) {
         self.isSelected = isSelected
         self.content = content()
     }

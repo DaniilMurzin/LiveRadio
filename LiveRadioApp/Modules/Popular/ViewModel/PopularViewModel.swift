@@ -28,6 +28,8 @@ final class PopularViewModel: ObservableObject {
 //               set: { self.avPlayer.volume = $0 }
 //           )
 //       }
+    
+    // test 
     var isPlaying: Binding<Bool> {
         Binding (
             get: { self.avPlayer.isPlaying },

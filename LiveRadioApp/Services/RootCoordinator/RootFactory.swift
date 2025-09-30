@@ -16,6 +16,7 @@ protocol RootFactory {
     func makeFavorites() -> FavoritesContentView
     func makeTabBar() -> TabBarView
     func makeAllStations() -> AllStationsContentView
+    func makeProfile() -> ProfileContentView
 }
 
 final class FRoot {
@@ -23,6 +24,7 @@ final class FRoot {
     private let networkService = NetworkService()
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
+    private let userManager = UserManager()
     private(set) lazy var spy = FactorySpy(
         factory: self,
         repository: repository
@@ -35,6 +37,16 @@ final class FRoot {
 
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
+    
+    func makeProfile() -> ProfileContentView {
+        let viewModel = ProfileViewModel(
+            networkService: networkService,
+            storageManager: storageManager,
+            authorizationService: networkService,
+            userManager: userManager)
+        return ProfileContentView(viewModel)
+    }
+    
    
     func makeTabBar() -> TabBarView {
         TabBarView(factory: self)
@@ -53,7 +65,8 @@ extension FRoot: RootFactory {
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
         let viewModel = AuthorizationViewModel(
             authorizationService: networkService,
-            coordinator: coordinator
+            coordinator: coordinator,
+            userManager: userManager
         )
         return AuthorizationContentView(viewModel)
     }

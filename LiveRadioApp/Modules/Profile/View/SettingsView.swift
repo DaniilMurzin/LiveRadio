@@ -14,7 +14,7 @@ struct SettingsView: View {
     let didTapLanguage: () -> Void
     let didTapLogout: () -> Void
     let didTapNotification: () -> Void
-    @Binding var toggleNotification: Bool
+    @Binding var isNotificationOn: Bool
 
     var body: some View {
         MainBackground {
@@ -32,7 +32,7 @@ struct SettingsView: View {
                                 .foregroundColor(.white)
                                 .applyFonts(for: .bodyText)
 
-                            NotificationToggle(isOn: $toggleNotification)
+                            NotificationToggle(isOn: $isNotificationOn)
 
                             Divider()
                                 .background(Color.white.opacity(0.2))
@@ -67,7 +67,7 @@ struct SettingsView: View {
 
                             SettingsItemRow(
                                 title: "About Us",
-                                icon: "info.circle"
+                                icon: "info.circle", action: {}
                             )
                         }
                         .padding()
@@ -89,5 +89,11 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(didTapLanguage: {}, didTapLogout: {}, didTapNotification: {}, toggleNotification: true)
+    SettingsView(
+        didTapLanguage: {
+        },
+        didTapLogout: {},
+        didTapNotification: {},
+        isNotificationOn: .constant(false)
+    )
 }

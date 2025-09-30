@@ -84,7 +84,41 @@ extension NetworkService: StationDataService {
 
 //MARK: - NetworkService + AuthorizationService
 extension NetworkService: AuthorizationService {
+#warning("""
+1) пытался через Result по стилю
+2) Вынести Сервис из протокола в отдельный менеджер? 
+""")
+//    func getCurrentUser() -> Result<User, Error> {
+//        Auth.auth().currentUser
+//            .map(User.init)
+//            .map(Result.success)
+//        ?? .failure(AuthServiceError.noCurrentUser)
+//    }
+    func getCurrentUser() throws -> User {
+        guard let fb = Auth.auth().currentUser else
+        { throw AuthServiceError.noCurrentUser }
+        return User(fb)
+    }
     
+    func updatePassword(password: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw AuthServiceError.noCurrentUser
+        }
+        try await user.updatePassword(to: password)
+    }
+    
+    func updateEmail(email: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw AuthServiceError.noCurrentUser
+        }
+        
+        try await user.sendEmailVerification()
+    }
+    
+    func resetPassword(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+
     func signUp(with credentials: Credentials) async -> Result<User, Error> {
         await Result<Credentials, Error>
             .success(credentials)
@@ -101,6 +135,10 @@ extension NetworkService: AuthorizationService {
             .asyncTryMap(Auth.auth().signIn(withEmail:password:))
             .map(\.user)
             .map(User.init)
+    }
+    
+    func signOut() throws   {
+       try Auth.auth().signOut()
     }
 }
 
@@ -138,7 +176,9 @@ fileprivate extension User {
     init(_ firebaseUser: FirebaseAuth.User) {
         self.init(
             id: firebaseUser.uid,
-            email: firebaseUser.email ?? ""
+            email: firebaseUser.email ?? "",
+            name: firebaseUser.displayName ?? "" ,
+            photoURL: firebaseUser.photoURL?.absoluteString ?? ""
         )
     }
 }

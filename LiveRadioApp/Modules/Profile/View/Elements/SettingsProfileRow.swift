@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SettingsProfileRow: View {
+    
     var body: some View {
         HStack(spacing: 16) {
             Image(.profilePhoto)

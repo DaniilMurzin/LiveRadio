@@ -87,11 +87,6 @@ final class AllStationsViewModel: ObservableObject {
         selectedStation = currentStation
     }
     
-    func setVolume(_ value: Double) {
-        volume = value
-        avPlayer.volume = value
-    }
-    
     //MARK: - Favorites logic
     @MainActor
     func toggleFavorite(for station: LocalStation) async {

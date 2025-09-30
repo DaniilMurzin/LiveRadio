@@ -27,8 +27,7 @@ struct AllStationsContentView: View {
             didTapBackwardButton: viewModel.playPreviousStation,
             didTapForwardButton: viewModel.playNextStation,
             didTapCell: viewModel.handleSelection,
-            didTapFavoriteButton: viewModel.toggleFavorite,
-            setVolume: viewModel.setVolume
+            didTapFavoriteButton: viewModel.toggleFavorite
         )
 
         .onAppear(perform: viewModel.onAppear)

@@ -49,13 +49,17 @@ struct Credentials: Equatable {
 }
 
 struct User: Equatable {
-    init(id: String, email: String) {
+    init(id: String, email: String, name: String, photoURL: String) {
         self.id = id
         self.email = email
+        self.name = name
+        self.photoURL = photoURL
     }
     
     let id: String
-    let email: String
+    let email: String?
+    let name: String?
+    let photoURL: String?
 }
 
 enum EmailError: Error {

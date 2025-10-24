@@ -17,21 +17,24 @@ final class PopularViewModel: ObservableObject {
     @Published var fetchedStations: [LocalStation] = []
     @Published var name: String = "Daniil"
     @Published var selectedStation: LocalStation?
-    @Published var volume: Double
-#warning("Костыли с биндингами")
-//    @Published var volume: Double = 0.5 {
-//           didSet { avPlayer.volume = volume }
-//       }
-//    var volume: Binding<Double> {
-//           Binding(
-//               get: { self.avPlayer.volume },
-//               set: { self.avPlayer.volume = $0 }
-//           )
-//       }
+
+    var volume: Binding<Double> {
+           Binding(
+               get: { self.avPlayer.volume },
+               set: {
+                   self.avPlayer.volume = $0
+                   self.objectWillChange.send()
+               }
+           )
+       }
+    
     var isPlaying: Binding<Bool> {
         Binding (
             get: { self.avPlayer.isPlaying },
-            set: { self.avPlayer.isPlaying = $0}
+            set: {
+                self.avPlayer.isPlaying = $0
+                self.objectWillChange.send()
+            }
         )
     }
     
@@ -43,7 +46,6 @@ final class PopularViewModel: ObservableObject {
     ) {
         self.networkService = networkService
         self.avPlayer = avPlayer
-        self.volume = avPlayer.volume
         self.storageManager = storageManager
     }
 
@@ -83,11 +85,6 @@ final class PopularViewModel: ObservableObject {
     func playPreviousStation() {
         avPlayer.playPrevious()
         selectedStation = avPlayer.currentStation
-    }
-    
-    func setVolume(_ value: Double) {
-        volume = value
-        avPlayer.volume = value
     }
     
     @MainActor

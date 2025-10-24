@@ -10,6 +10,10 @@ import Foundation
 protocol AuthorizationService {
     func signIn(with: Credentials) async -> Result<User, Error>
     func signUp(with: Credentials) async -> Result<User, Error>
+    func getCurrentUser() -> Result<User, AuthServiceError> 
+    func signOut() throws
+    func resetPassword(email: String) async throws
+    func updatePassword(password: String) async -> Result<String, Error>
 }
 
 protocol AppCoordinator {
@@ -21,6 +25,7 @@ final class AuthorizationViewModel: ObservableObject {
     //MARK: - Properties
     private let authorizationService: AuthorizationService
     private let coordinator: AppCoordinator
+    private let userManager: UserRepository
     
     @Published var state: State = .signIn
     @Published var email: String = .init()
@@ -44,10 +49,12 @@ final class AuthorizationViewModel: ObservableObject {
     //MARK: - Init
     init(
         authorizationService: AuthorizationService,
-        coordinator: AppCoordinator
+        coordinator: AppCoordinator,
+        userManager: UserRepository
     ) {
         self.authorizationService = authorizationService
         self.coordinator = coordinator
+        self.userManager = userManager
     }
     
     //MARK: - Navigation methods
@@ -68,20 +75,43 @@ final class AuthorizationViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func signUp() async {
-        guard let credentials = Credentials(email: email, password: password) else { return }
-    
-    let result = await authorizationService.signUp(with: credentials)
-    
-    await MainActor.run {
-        switch result {
-        case .success(let user):
-            coordinator.goTabbar(user)
+        let signUpResult = await Credentials
+            .parce(email: email, password: password)
+            .asyncFlatMap(authorizationService.signUp(with:))
+            .asyncFlatMap(userManager.newUserResult(user:))
+        
+        switch signUpResult {
             
-        case .failure(let error):
-            state = .error(error)
+        case let .success(user):
+            coordinator.goTabbar(user)
+        case let .failure(failure):
+            state = .error(failure)
         }
-    }
+        
+//        guard let credentials = Credentials(email: email, password: password) else { return }
+//        let result = await authorizationService.signUp(with: credentials)
+//        
+//        switch result {
+//        case .success(let user):
+//            do {
+//                let DBUser =  DBUser(user)
+//                try await userManager.createNewUser(DBUser)
+//                await MainActor.run {
+//                    coordinator.goTabbar(user)
+//                }
+//            } catch {
+//                await MainActor.run {
+//                    state = .error(error)
+//                }
+//            }
+//            
+//        case .failure(let error):
+//            await MainActor.run {
+//                state = .error(error)
+//            }
+//        }
     }
     
     func showSignIn() {

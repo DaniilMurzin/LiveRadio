@@ -34,8 +34,6 @@ struct PopularView: View {
     let didTapForwardButton: Action
     let didTapCell: (LocalStation) -> Void
     let didTapFavoriteButton: (LocalStation) async -> Void
-    let setVolume: (Double) -> Void
-    
     let stations: [LocalStation]
     
     private let columns = [
@@ -56,7 +54,7 @@ struct PopularView: View {
             .padding(.bottom, Drawing.headerBottomPadding)
         
         HStack {
-            VolumeSlider(volume: $volume, onVolumeChanged: setVolume)
+            VolumeSlider(volume: $volume)
                 .padding(.leading, Drawing.volumeSliderLeadingPadding)
                 .frame(width: Drawing.volumeSliderWidth)
             
@@ -114,7 +112,6 @@ struct PopularView: View {
             didTapForwardButton: {},
             didTapCell: {_ in },
             didTapFavoriteButton: {_ in },
-            setVolume: {_ in },
             stations: []
         )
     }

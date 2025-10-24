@@ -36,7 +36,6 @@ struct AllStationsView: View {
     let didTapForwardButton: Action
     let didTapCell: (LocalStation) -> Void
     let didTapFavoriteButton: (LocalStation) async -> Void
-    let setVolume: (Double) -> Void
     
     var body: some View {
         HeaderView(name: name)
@@ -44,7 +43,7 @@ struct AllStationsView: View {
             .padding(.bottom, Drawing.headerBottomPadding)
         SearchBarView(searchText: $searchFieldText)
         HStack {
-            VolumeSlider(volume: $volume, onVolumeChanged: setVolume)
+            VolumeSlider(volume: $volume)
                 .padding(.leading, Drawing.volumeSliderLeadingPadding)
                 .frame(width: Drawing.volumeSliderWidth)
             
@@ -96,8 +95,7 @@ struct AllStationsView: View {
             didTapBackwardButton: {},
             didTapForwardButton: {},
             didTapCell: {_ in },
-            didTapFavoriteButton: {_ in },
-            setVolume: { _ in }
+            didTapFavoriteButton: {_ in }
         )
     }
 }

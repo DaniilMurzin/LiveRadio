@@ -13,15 +13,15 @@ struct LiveRadioAppApp: App {
     let coordinator: RootCoordinator
     
     init() {
-        coordinator = FRoot.makeRootCoordinator()
         FirebaseApp.configure()
+        coordinator = FRoot.makeRootCoordinator()
     }
     
     var body: some Scene {
         WindowGroup {
             RootCoordinatorView(factory: coordinator.factory)
                 .environmentObject(coordinator)
-                .onAppear(perform: coordinator.showTabBar)
+                .onAppear(perform: coordinator.showAuthorization)
         }
     }
 }

@@ -56,12 +56,7 @@ final class FavoritesViewModel: ObservableObject {
             handleSelection(selectedStation)
         }
     }
-    
-    func setVolume(_ value: Double) {
-        volume = value
-        avPlayer.volume = value
-    }
-    
+
     func onAppear()  {
         guard let currentStation = avPlayer.currentStation  else { return }
         selectedStation = currentStation

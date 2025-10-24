@@ -17,7 +17,7 @@ struct PopularContentView: View {
     var body: some View {
         PopularView(
             name: viewModel.name,
-            volume: $viewModel.volume,
+            volume: viewModel.volume,
             selectedStation: $viewModel.selectedStation,
             isPlaying: viewModel.isPlaying,
             didTapbackButton: viewModel.playPreviousStation,
@@ -26,7 +26,6 @@ struct PopularContentView: View {
             didTapForwardButton: viewModel.playNextStation ,
             didTapCell: viewModel.handleSelection,
             didTapFavoriteButton: viewModel.toggleFavorite,
-            setVolume: viewModel.setVolume,
             stations: viewModel.fetchedStations
         )
         .task(viewModel.fetchPopularStations)

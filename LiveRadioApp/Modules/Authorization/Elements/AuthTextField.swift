@@ -15,7 +15,12 @@ struct AuthTextField: View {
     var isSecured: Bool = true
     @State private var isPasswordHide: Bool = true
     
-    init(text: Binding<String>, placeholder: String, labelText: String, isSecured: Bool = false ) {
+    init(
+        text: Binding<String>,
+        placeholder: String,
+        labelText: String,
+        isSecured: Bool = false
+    ) {
         self._text = text
         self.placeholder = placeholder
         self.labelText = labelText

@@ -5,6 +5,7 @@
 //  Created by Daniil Murzin on 11.12.2024.
 //
 
+
 extension Result where Failure == Error {
     @inlinable
     init(asyncCatch: () async throws -> Success) async {
@@ -29,6 +30,30 @@ extension Result {
             }
         case .failure(let failure):
             return .failure(failure)
+        }
+    }
+}
+
+extension Result {
+    func asyncFlatMap<NewSuccess>(
+        _ transform: (Success) async -> Result<NewSuccess, Failure>) async -> Result<NewSuccess, Failure> {
+        switch self {
+        case .success(let success):
+            return await transform(success)
+        case .failure(let failure):
+            return .failure(failure)
+        }
+    }
+}
+
+extension Result {
+    static func zip<Other>(
+        _ lhs: Result<Success, Failure>,
+        _ rhs: Result<Other, Failure>
+    ) -> Result<(Success, Other), Failure> {
+        
+        lhs.flatMap { frst in
+            rhs.map { (frst, $0) }
         }
     }
 }

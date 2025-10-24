@@ -10,9 +10,10 @@ import Foundation
 protocol AuthorizationService {
     func signIn(with: Credentials) async -> Result<User, Error>
     func signUp(with: Credentials) async -> Result<User, Error>
-    func getCurrentUser() throws -> User
+    func getCurrentUser() -> Result<User, AuthServiceError> 
     func signOut() throws
     func resetPassword(email: String) async throws
+    func updatePassword(password: String) async -> Result<String, Error>
 }
 
 protocol AppCoordinator {
@@ -74,40 +75,43 @@ final class AuthorizationViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func signUp() async {
-        guard let credentials = Credentials(email: email, password: password) else { return }
-        let result = await authorizationService.signUp(with: credentials)
+        let signUpResult = await Credentials
+            .parce(email: email, password: password)
+            .asyncFlatMap(authorizationService.signUp(with:))
+            .asyncFlatMap(userManager.newUserResult(user:))
         
-        //    await MainActor.run {
-        //        switch result {
+        switch signUpResult {
+            
+        case let .success(user):
+            coordinator.goTabbar(user)
+        case let .failure(failure):
+            state = .error(failure)
+        }
+        
+//        guard let credentials = Credentials(email: email, password: password) else { return }
+//        let result = await authorizationService.signUp(with: credentials)
+//        
+//        switch result {
 //        case .success(let user):
-//            coordinator.goTabbar(user)
-//            userManager.createNewUser(user)
+//            do {
+//                let DBUser =  DBUser(user)
+//                try await userManager.createNewUser(DBUser)
+//                await MainActor.run {
+//                    coordinator.goTabbar(user)
+//                }
+//            } catch {
+//                await MainActor.run {
+//                    state = .error(error)
+//                }
+//            }
 //            
 //        case .failure(let error):
-//            state = .error(error)
+//            await MainActor.run {
+//                state = .error(error)
+//            }
 //        }
-//    }
-#warning("Ревью")
-        switch result {
-        case .success(let user):
-            do {
-                let DBUser =  DBUser(user)
-                try await userManager.createNewUser(DBUser)
-                await MainActor.run {
-                    coordinator.goTabbar(user)
-                }
-            } catch {
-                await MainActor.run {
-                    state = .error(error)
-                }
-            }
-            
-        case .failure(let error):
-            await MainActor.run {
-                state = .error(error)
-            }
-        }
     }
     
     func showSignIn() {

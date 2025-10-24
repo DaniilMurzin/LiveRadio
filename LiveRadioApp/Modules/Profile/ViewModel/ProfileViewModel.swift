@@ -14,25 +14,35 @@ final class ProfileViewModel: ObservableObject {
     private let storageManager: StorageManager
     private let userManager: UserRepository
     
-    @Published private(set) var user: DBUser?
+    @Published private(set) var user: User
+    @Published private(set) var error: Error?
     @Published var notificationEnabled: Bool = false
     
     
     init(
+        user: User,
         networkService: StationDataService,
         storageManager: StorageManager,
         authorizationService: AuthorizationService,
         userManager: UserRepository
     ) {
+        self.user = user
         self.networkService = networkService
         self.storageManager = storageManager
         self.authorizationService = authorizationService
         self.userManager = userManager
     }
-#warning("Ревью")
-    func loadCurrentUser() async throws {
-        let authDataResult = try authorizationService.getCurrentUser()
-        self.user = try await userManager.getUser(userId: authDataResult.id)
+
+    func loadCurrentUser() async  {
+        
+        let currentUser =  await Result(catching:authorizationService.getCurrentUser)
+        
+        do {
+            let authDataResult = authorizationService.getCurrentUser()
+        } catch {
+            //TODO: show banner/retry/
+            self.error = error
+        }
     }
     
     func signOut() throws {
@@ -44,11 +54,6 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func changeUserName(_ newName: String) async throws {
-        guard let user else { return }
-        _ = user.name ?? ""
-        Task {
-            try await userManager.updateUsersName(newName, userId: user.userId)
-            self.user = try await userManager.getUser(userId: user.userId)
-        }
+        try await userManager.updateUsersName(newName, id: user.userId)
     }
 }

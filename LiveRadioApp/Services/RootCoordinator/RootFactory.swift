@@ -16,7 +16,7 @@ protocol RootFactory {
     func makeFavorites() -> FavoritesContentView
     func makeTabBar() -> TabBarView
     func makeAllStations() -> AllStationsContentView
-    func makeProfile() -> ProfileContentView
+    func makeProfile(user: User) -> ProfileContentView
 }
 
 final class FRoot {
@@ -38,8 +38,9 @@ final class FRoot {
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
     
-    func makeProfile() -> ProfileContentView {
+    func makeProfile(user: User) -> ProfileContentView {
         let viewModel = ProfileViewModel(
+            user: user,
             networkService: networkService,
             storageManager: storageManager,
             authorizationService: networkService,

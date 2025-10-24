@@ -23,7 +23,6 @@ final class ProfileContentView: View {
             didTapNotification: {},
             isNotificationOn: $viewModel.notificationEnabled
         )
-        .task { try? await self.viewModel.loadCurrentUser() }
+        .task { await self.viewModel.loadCurrentUser() }
     }
-        
 }

@@ -50,6 +50,7 @@
 		92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF412CAFF4F800DC3C34 /* NetworkService.swift */; };
 		92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */; };
 		92BB02E72D1846070054CA75 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB02E62D1846070054CA75 /* FavoritesView.swift */; };
+		92C94A852EACB2DA00CA9CD0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */; };
 		92D14A3A2D197BAE00E56BDE /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */; };
 		92D14A3F2D197DA000E56BDE /* FavoritesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */; };
 		92DDC8F82E547C710085F5AA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */; };
@@ -149,6 +150,7 @@
 		92BACF412CAFF4F800DC3C34 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpy.swift; sourceTree = "<group>"; };
 		92BB02E62D1846070054CA75 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContentView.swift; sourceTree = "<group>"; };
 		92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -221,10 +223,8 @@
 		923D56642CBD5EAC00797F67 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				925A7DE92D32AD3100DDA3D8 /* Helpers */,
 				92BACF412CAFF4F800DC3C34 /* NetworkService.swift */,
 				923D566A2CBD6FCC00797F67 /* Endpoint.swift */,
-				92DDC8F92E56057A0085F5AA /* AuthServiceError.swift */,
 				923D56682CBD6D4E00797F67 /* NetworkError.swift */,
 			);
 			path = NetworkService;
@@ -269,13 +269,6 @@
 				925A7DE02D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld */,
 			);
 			path = DataManager;
-			sourceTree = "<group>";
-		};
-		925A7DE92D32AD3100DDA3D8 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		9269B5D12D50E55A00FDFC9E /* Model */ = {
@@ -459,6 +452,7 @@
 		92BACF402CAFF4C300DC3C34 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				92C94A862EACB2F100CA9CD0 /* AuthorizationManager */,
 				92DDC8FE2E656E050085F5AA /* UserManager */,
 				925A7DDF2D3173B500DDA3D8 /* DataManager */,
 				924DE1552D0B166E0063D0AD /* RadioPlayer */,
@@ -477,6 +471,15 @@
 				92D14A3C2D197CDD00E56BDE /* ViewModel */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		92C94A862EACB2F100CA9CD0 /* AuthorizationManager */ = {
+			isa = PBXGroup;
+			children = (
+				92DDC8F92E56057A0085F5AA /* AuthServiceError.swift */,
+				92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */,
+			);
+			path = AuthorizationManager;
 			sourceTree = "<group>";
 		};
 		92D14A3B2D197CD600E56BDE /* View */ = {
@@ -955,6 +958,7 @@
 				9252EFD72D22F35100A8A382 /* Array + subscript.swift in Sources */,
 				92786FA72E3634C10092F87C /* SettingsProfileRow.swift in Sources */,
 				920A07312DE743A600FB6BBF /* View + placeholder.swift in Sources */,
+				92C94A852EACB2DA00CA9CD0 /* AuthorizationManager.swift in Sources */,
 				9252EFD92D22F43400A8A382 /* Zipper.swift in Sources */,
 				9281A45F2CB190C900F42612 /* Button+AsyncAction.swift in Sources */,
 				92E07D282C86109000B59386 /* RootCoordinatorView.swift in Sources */,

@@ -22,6 +22,7 @@ protocol RootFactory {
 final class FRoot {
     private let repository = AppRepository()
     private let networkService = NetworkService()
+    private let authorizationService = AuthorizationManager()
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
     private let userManager = UserManager()
@@ -43,7 +44,7 @@ extension FRoot: RootFactory {
             user: user,
             networkService: networkService,
             storageManager: storageManager,
-            authorizationService: networkService,
+            authorizationService: authorizationService,
             userManager: userManager)
         return ProfileContentView(viewModel)
     }
@@ -65,7 +66,7 @@ extension FRoot: RootFactory {
     
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
         let viewModel = AuthorizationViewModel(
-            authorizationService: networkService,
+            authorizationService: authorizationService,
             coordinator: coordinator,
             userManager: userManager
         )

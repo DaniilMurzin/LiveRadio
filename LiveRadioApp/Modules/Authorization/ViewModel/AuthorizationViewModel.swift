@@ -7,15 +7,6 @@
 
 import Foundation
 
-protocol AuthorizationService {
-    func signIn(with: Credentials) async -> Result<User, Error>
-    func signUp(with: Credentials) async -> Result<User, Error>
-    func getCurrentUser() -> Result<User, AuthServiceError> 
-    func signOut() throws
-    func resetPassword(email: String) async throws
-    func updatePassword(password: String) async -> Result<String, Error>
-}
-
 protocol AppCoordinator {
     func goTabbar(_ user: User)
 }

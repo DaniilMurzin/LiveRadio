@@ -82,79 +82,6 @@ extension NetworkService: StationDataService {
     }
 }
 
-//MARK: - NetworkService + AuthorizationService
-extension NetworkService: AuthorizationService {
-    
-    var dbUser: FirebaseAuth.User? { Auth.auth().currentUser }
-#warning("Вынести Сервис из протокола в отдельный менеджер?")
-    
-//    func getCurrentUser() throws -> User {
-//        guard let user = dbUser else
-//        { throw AuthServiceError.noCurrentUser }
-//        return User(user)
-//    }
-    
-    func getCurrentUser() -> Result<User, AuthServiceError> {
-        Result {
-            guard let user = dbUser else {
-                throw AuthServiceError.noCurrentUser
-            }
-            return user
-        }
-        .map(User.init)
-        .mapError { $0 as! AuthServiceError }
-    }
-    
-//    func updatePassword(password: String) async throws {
-//        guard let user = dbUser else {
-//            throw AuthServiceError.noCurrentUser
-//        }
-//        try await user.updatePassword(to: password)
-//    }
-    
-    func updatePassword(password: String) async -> Result<String, Error> {
-        await Result<String, Error> {
-            guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
-            try await user.updatePassword(to: password)
-            return password
-        }
-    }
-    
-    func updateEmail(email: String) async throws {
-        guard let user = Auth.auth().currentUser else {
-            throw AuthServiceError.noCurrentUser
-        }
-        
-        try await user.sendEmailVerification()
-    }
-    
-    func resetPassword(email: String) async throws {
-        try await Auth.auth().sendPasswordReset(withEmail: email)
-    }
-
-    func signUp(with credentials: Credentials) async -> Result<User, Error> {
-        await Result<Credentials, Error>
-            .success(credentials)
-            .map(\.credentials)
-            .asyncTryMap(Auth.auth().createUser)
-            .map(\.user)
-            .map(User.init)
-    }
-    
-    func signIn(with credentials: Credentials) async -> Result<User, Error> {
-        await Result<Credentials, Error>
-            .success(credentials)
-            .map(\.credentials)
-            .asyncTryMap(Auth.auth().signIn(withEmail:password:))
-            .map(\.user)
-            .map(User.init)
-    }
-    
-    func signOut() throws   {
-       try Auth.auth().signOut()
-    }
-}
-
 private extension NetworkService {
     //MARK: - Private methods
     func makeRequest<T:Codable>(for url: URL, maxRetries: Int = 3) async throws -> T {
@@ -182,22 +109,5 @@ func checkResponse(_ response: URLResponse) throws {
     }
     if let error  = NetworkError(statusCode: httpResponse.statusCode) {
         throw error
-    }
-}
-
-fileprivate extension User {
-    init(_ firebaseUser: FirebaseAuth.User) {
-        self.init(
-            id: firebaseUser.uid,
-            email: firebaseUser.email ?? "",
-            name: firebaseUser.displayName ?? "" ,
-            photoURL: firebaseUser.photoURL?.absoluteString ?? ""
-        )
-    }
-}
-
-fileprivate extension Credentials {
-    var credentials: (email: String, password: String) {
-        (email.wrapped, password.wrapped)
     }
 }

@@ -9,5 +9,4 @@
 enum AuthServiceError: Error {
     case noCurrentUser
     case badDataResponse
-    
 }

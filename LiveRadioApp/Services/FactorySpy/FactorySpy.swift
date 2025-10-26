@@ -18,7 +18,7 @@ struct FactorySpy {
 
 // MARK: - FactorySpy + RootFactory
 extension FactorySpy: RootFactory {
-    func makeProfile(user: User) -> ProfileContentView {
+    func makeProfile(user: LocalUser) -> ProfileContentView {
         logger.trace(#function)
         return factory.makeProfile(user: user)
     }

@@ -14,13 +14,13 @@ final class ProfileViewModel: ObservableObject {
     private let storageManager: StorageManager
     private let userManager: UserRepository
     
-    @Published private(set) var user: User
+    @Published private(set) var user: LocalUser
     @Published private(set) var error: Error?
     @Published var notificationEnabled: Bool = false
     
     
     init(
-        user: User,
+        user: LocalUser,
         networkService: StationDataService,
         storageManager: StorageManager,
         authorizationService: AuthorizationService,
@@ -54,6 +54,6 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func changeUserName(_ newName: String) async throws {
-        try await userManager.updateUsersName(newName, id: user.userId)
+        try await userManager.updateUsersName(newName, id: user.dbUserId)
     }
 }

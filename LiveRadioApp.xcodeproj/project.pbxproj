@@ -51,6 +51,9 @@
 		92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */; };
 		92BB02E72D1846070054CA75 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB02E62D1846070054CA75 /* FavoritesView.swift */; };
 		92C94A852EACB2DA00CA9CD0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */; };
+		92C94A982EACB90B00CA9CD0 /* User + FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */; };
+		92C94A9A2EACB95900CA9CD0 /* Credentials + wrapped .swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */; };
+		92C94A9C2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A9B2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift */; };
 		92D14A3A2D197BAE00E56BDE /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */; };
 		92D14A3F2D197DA000E56BDE /* FavoritesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */; };
 		92DDC8F82E547C710085F5AA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */; };
@@ -151,6 +154,9 @@
 		92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpy.swift; sourceTree = "<group>"; };
 		92BB02E62D1846070054CA75 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User + FirebaseAuth.swift"; sourceTree = "<group>"; };
+		92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Credentials + wrapped .swift"; sourceTree = "<group>"; };
+		92C94A9B2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStation +FavoriteStationEntity .swift"; sourceTree = "<group>"; };
 		92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContentView.swift; sourceTree = "<group>"; };
 		92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 		9252EFD52D22F34600A8A382 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */,
+				92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */,
 				9233C0702D097D6100C93F79 /* Result+Async.swift */,
 				92802C612D29553800F4A047 /* AVPlayer.swift */,
 				9252EFD62D22F35100A8A382 /* Array + subscript.swift */,
@@ -284,6 +292,8 @@
 		9269B5D22D50E56800FDFC9E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				92643E572E9291C400E7E6C6 /* DBUser.swift */,
+				92C94A9B2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift */,
 				923D56652CBD5F3200797F67 /* Station.swift */,
 			);
 			path = DTO;
@@ -292,7 +302,6 @@
 		9269B5D32D50E56E00FDFC9E /* LocalModels */ = {
 			isa = PBXGroup;
 			children = (
-				92643E572E9291C400E7E6C6 /* DBUser.swift */,
 				9269B5D42D50E64100FDFC9E /* LocalStation.swift */,
 			);
 			path = LocalModels;
@@ -891,6 +900,7 @@
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,
 				92E07DE62C9AF98F00B59386 /* DetailsView.swift in Sources */,
 				92786FAB2E3651F60092F87C /* CustomToggleStyle.swift in Sources */,
+				92C94A9C2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift in Sources */,
 				9239ACE52D119AEA009B8688 /* SingleWaveView.swift in Sources */,
 				929864442D5BD68C0029D08F /* AllStationsView.swift in Sources */,
 				922906D72CFB3C0E00A4C59E /* VolumeSlider.swift in Sources */,
@@ -923,6 +933,7 @@
 				92DDC8FD2E5B469A0085F5AA /* ProfileContentView.swift in Sources */,
 				92E07DA22C8DFDDC00B59386 /* AuthorizationContentView.swift in Sources */,
 				92E07D2D2C86109000B59386 /* PopularView.swift in Sources */,
+				92C94A9A2EACB95900CA9CD0 /* Credentials + wrapped .swift in Sources */,
 				92E07D432C8B077C00B59386 /* SignUpView.swift in Sources */,
 				92643E5A2E9294F400E7E6C6 /* Identifier + Protocols.swift in Sources */,
 				92E07D232C86109000B59386 /* BackgroundView.swift in Sources */,
@@ -935,6 +946,7 @@
 				92D14A3A2D197BAE00E56BDE /* FavoritesViewModel.swift in Sources */,
 				92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
+				92C94A982EACB90B00CA9CD0 /* User + FirebaseAuth.swift in Sources */,
 				9269B5D52D50E64100FDFC9E /* LocalStation.swift in Sources */,
 				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
 				92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */,

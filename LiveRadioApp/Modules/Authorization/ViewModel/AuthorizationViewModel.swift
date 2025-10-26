@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AppCoordinator {
-    func goTabbar(_ user: User)
+    func goTabbar(_ user: LocalUser)
 }
 
 final class AuthorizationViewModel: ObservableObject {

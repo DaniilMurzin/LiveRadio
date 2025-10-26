@@ -91,17 +91,18 @@ struct Credentials: Equatable {
     }
 }
 
-    struct User: Equatable {
+    struct LocalUser: Equatable {
         
-        let id: String
+        typealias ID = Identifier<LocalUser, String>
+        
+        let id: ID
         let email: String?
         let name: String?
         let photoURL: String?
-        
-        var userId: DBUser.ID  { DBUser.ID(rawValue: id	)}
+        var dbUserId: DBUser.ID  { DBUser.ID(rawValue: id.rawValue)}
         
         init(
-            id: String,
+            id: ID,
             email: String?,
             name: String?,
             photoURL: String?
@@ -114,7 +115,7 @@ struct Credentials: Equatable {
         
         init(db: DBUser) {
             self.init(
-                id: db.userId.rawValue,
+                id: ID(rawValue: db.userId.rawValue),
                 email: db.email,
                 name: db.name,
                 photoURL: db.photoURL

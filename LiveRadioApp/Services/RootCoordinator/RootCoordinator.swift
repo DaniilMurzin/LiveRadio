@@ -35,7 +35,7 @@ final class RootCoordinator: ObservableObject {
 }
 
 extension RootCoordinator: AppCoordinator {
-    func goTabbar(_ user: User) {
+    func goTabbar(_ user: LocalUser) {
         showTabBar()
     }
     

@@ -13,8 +13,8 @@ protocol UserRepository {
     func getUser(_ id: DBUser.ID ) async throws -> DBUser
     func updateUser(_ user: DBUser) async throws
     func updateUsersName(_ newName: String, id: DBUser.ID) async throws
-    func newUserResult(user: User) async -> Result<User, Error>
-    func currentUserResult(_ id: DBUser.ID) async throws -> Result<User, Error>
+    func newUserResult(user: LocalUser) async -> Result<LocalUser, Error>
+    func currentUserResult(_ id: DBUser.ID) async throws -> Result<LocalUser, Error>
 }
 
 final class UserManager: UserRepository {
@@ -31,7 +31,7 @@ final class UserManager: UserRepository {
         try userDocument(user.userId).setData(from: user, merge: false)
     }
     
-    func newUserResult(user: User) async -> Result<User, Error> {
+    func newUserResult(user: LocalUser) async -> Result<LocalUser, Error> {
         await Result {
             let dbUser = DBUser(user)
             try await createNewUser(dbUser)
@@ -43,11 +43,11 @@ final class UserManager: UserRepository {
         try await userDocument(id).getDocument(as: DBUser.self)
     }
     
-    func currentUserResult(_ id: DBUser.ID) async throws -> Result<User, Error> {
+    func currentUserResult(_ id: DBUser.ID) async throws -> Result<LocalUser, Error> {
         await Result<DBUser.ID,Error>
             .success(id)
             .asyncTryMap(getUser(_:))
-            .map(User.init)
+            .map(LocalUser.init)
     }
     
     func updateUser(_ user: DBUser) async throws {

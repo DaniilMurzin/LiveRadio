@@ -19,8 +19,8 @@ final class NetworkService {
     //MARK: - Dependencies
     struct Dependencies {
         var request: (URLRequest) async throws -> (Data, URLResponse)
-        var createUser: (String, String) async throws -> User
-        var signIn: (String, String) async throws -> User
+        var createUser: (String, String) async throws -> LocalUser
+        var signIn: (String, String) async throws -> LocalUser
         
         static var live: Self {
             
@@ -38,7 +38,7 @@ final class NetworkService {
                         try await Auth.auth().createUser(withEmail: email, password: password)
                     }
                     .map(\.user)
-                    .map(User.init)
+                    .map(LocalUser.init)
                     .get()
                 },
                 signIn: { email, password in
@@ -46,7 +46,7 @@ final class NetworkService {
                         try await Auth.auth().signIn(withEmail: email, password: password)
                     }
                     .map(\.user)
-                    .map(User.init)
+                    .map(LocalUser.init)
                     .get()
                 }
             )

@@ -29,7 +29,7 @@ struct DBUser: Codable  {
         self.email = user.email?.wrapped
         self.name = user.name?.wrapped
         self.dateCreated = Date()
-        self.photoURL = user.photoURL
+        self.photoURL = user.photoURL?.absoluteString
     }
     
     init(

@@ -20,18 +20,10 @@ protocol AuthorizationService {
 final class AuthorizationManager: AuthorizationService {
     
     var dbUser: FirebaseAuth.User? { Auth.auth().currentUser }
-
-//    func getCurrentUser() throws -> User {
-//        guard let user = dbUser else
-//        { throw AuthServiceError.noCurrentUser }
-//        return User(user)
-//    }
     
     func getCurrentUser() -> Result<LocalUser, AuthServiceError> {
         Result {
-            guard let user = dbUser else {
-                throw AuthServiceError.noCurrentUser
-            }
+            guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
             return user
         }
         .map(LocalUser.init)
@@ -44,13 +36,20 @@ final class AuthorizationManager: AuthorizationService {
 //        }
 //        try await user.updatePassword(to: password)
 //    }
-    
+#warning(" Поменять стринг на Void? как еще истинность проверить? Сильный тип добавить? ")
     func updatePassword(password: String) async -> Result<String, Error> {
-        await Result<String, Error> {
+        await Result  {
             guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
             try await user.updatePassword(to: password)
             return password
         }
+    }
+    
+    func resetPassword(email: Email) async -> Result<Void, Error> {
+        await Result {
+            try await Auth.auth().sendPasswordReset(withEmail: email.wrapped)
+             return ()
+         }
     }
     
     func updateEmail(email: String) async throws {

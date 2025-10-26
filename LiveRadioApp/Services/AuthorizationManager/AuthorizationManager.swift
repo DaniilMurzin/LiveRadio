@@ -9,9 +9,9 @@ import Foundation
 import FirebaseAuth
 
 protocol AuthorizationService {
-    func signIn(with: Credentials) async -> Result<User, Error>
-    func signUp(with: Credentials) async -> Result<User, Error>
-    func getCurrentUser() -> Result<User, AuthServiceError>
+    func signIn(with: Credentials) async -> Result<LocalUser, Error>
+    func signUp(with: Credentials) async -> Result<LocalUser, Error>
+    func getCurrentUser() -> Result<LocalUser, AuthServiceError>
     func signOut() throws
     func resetPassword(email: String) async throws
     func updatePassword(password: String) async -> Result<String, Error>
@@ -27,14 +27,14 @@ final class AuthorizationManager: AuthorizationService {
 //        return User(user)
 //    }
     
-    func getCurrentUser() -> Result<User, AuthServiceError> {
+    func getCurrentUser() -> Result<LocalUser, AuthServiceError> {
         Result {
             guard let user = dbUser else {
                 throw AuthServiceError.noCurrentUser
             }
             return user
         }
-        .map(User.init)
+        .map(LocalUser.init)
         .mapError { $0 as! AuthServiceError }
     }
     
@@ -65,43 +65,25 @@ final class AuthorizationManager: AuthorizationService {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
 
-    func signUp(with credentials: Credentials) async -> Result<User, Error> {
+    func signUp(with credentials: Credentials) async -> Result<LocalUser, Error> {
         await Result<Credentials, Error>
             .success(credentials)
             .map(\.credentials)
             .asyncTryMap(Auth.auth().createUser)
             .map(\.user)
-            .map(User.init)
+            .map(LocalUser.init)
     }
     
-    func signIn(with credentials: Credentials) async -> Result<User, Error> {
+    func signIn(with credentials: Credentials) async -> Result<LocalUser, Error> {
         await Result<Credentials, Error>
             .success(credentials)
             .map(\.credentials)
             .asyncTryMap(Auth.auth().signIn(withEmail:password:))
             .map(\.user)
-            .map(User.init)
+            .map(LocalUser.init)
     }
     
     func signOut() throws   {
        try Auth.auth().signOut()
-    }
-}
-
-
-extension User {
-    init(_ firebaseUser: FirebaseAuth.User) {
-        self.init(
-            id: firebaseUser.uid,
-            email: firebaseUser.email ?? "",
-            name: firebaseUser.displayName ?? "" ,
-            photoURL: firebaseUser.photoURL?.absoluteString ?? ""
-        )
-    }
-}
-
-extension Credentials {
-    var credentials: (email: String, password: String) {
-        (email.wrapped, password.wrapped)
     }
 }

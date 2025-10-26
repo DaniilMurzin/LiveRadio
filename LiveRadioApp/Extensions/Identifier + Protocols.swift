@@ -14,6 +14,8 @@ struct Identifier<Root, RawValue> {
     }
 }
 
+let ad = Identifier<String, String>(rawValue: "ad")
+
 extension Identifier: Equatable where RawValue: Equatable {}
 extension Identifier: Hashable where RawValue: Hashable {}
 extension Identifier: Sendable where RawValue: Sendable {}

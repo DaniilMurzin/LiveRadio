@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AppCoordinator {
-    func goTabbar(_ user: User)
+    func goTabbar(_ user: LocalUser)
 }
 
 final class AuthorizationViewModel: ObservableObject {
@@ -69,7 +69,7 @@ final class AuthorizationViewModel: ObservableObject {
     @MainActor
     func signUp() async {
         let signUpResult = await Credentials
-            .parce(email: email, password: password)
+            .parse(email: email, password: password)
             .asyncFlatMap(authorizationService.signUp(with:))
             .asyncFlatMap(userManager.newUserResult(user:))
         
@@ -80,29 +80,6 @@ final class AuthorizationViewModel: ObservableObject {
         case let .failure(failure):
             state = .error(failure)
         }
-        
-//        guard let credentials = Credentials(email: email, password: password) else { return }
-//        let result = await authorizationService.signUp(with: credentials)
-//        
-//        switch result {
-//        case .success(let user):
-//            do {
-//                let DBUser =  DBUser(user)
-//                try await userManager.createNewUser(DBUser)
-//                await MainActor.run {
-//                    coordinator.goTabbar(user)
-//                }
-//            } catch {
-//                await MainActor.run {
-//                    state = .error(error)
-//                }
-//            }
-//            
-//        case .failure(let error):
-//            await MainActor.run {
-//                state = .error(error)
-//            }
-//        }
     }
     
     func showSignIn() {

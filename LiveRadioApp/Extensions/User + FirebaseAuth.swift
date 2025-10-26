@@ -11,8 +11,8 @@ extension LocalUser {
     init(_ firebaseUser: FirebaseAuth.User) {
         self.init(
             id: ID(rawValue: firebaseUser.uid),
-            email: firebaseUser.email ?? "",
-            name: firebaseUser.displayName ?? "" ,
+            email: firebaseUser.email.flatMap(Email.init),
+            name: firebaseUser.displayName.flatMap(UserName.init),
             photoURL: firebaseUser.photoURL?.absoluteString ?? ""
         )
     }

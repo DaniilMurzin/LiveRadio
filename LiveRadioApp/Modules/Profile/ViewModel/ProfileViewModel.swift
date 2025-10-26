@@ -36,7 +36,6 @@ final class ProfileViewModel: ObservableObject {
     func loadCurrentUser() async  {
         
         let currentUser =  await Result(catching:authorizationService.getCurrentUser)
-        
         do {
             let authDataResult = authorizationService.getCurrentUser()
         } catch {

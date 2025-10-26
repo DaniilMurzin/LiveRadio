@@ -54,6 +54,7 @@
 		92C94A982EACB90B00CA9CD0 /* User + FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */; };
 		92C94A9A2EACB95900CA9CD0 /* Credentials + wrapped .swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */; };
 		92C94A9C2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A9B2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift */; };
+		92C94A9F2EAE3E7000CA9CD0 /* ModelErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A9E2EAE3E7000CA9CD0 /* ModelErrors.swift */; };
 		92D14A3A2D197BAE00E56BDE /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */; };
 		92D14A3F2D197DA000E56BDE /* FavoritesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */; };
 		92DDC8F82E547C710085F5AA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */; };
@@ -157,6 +158,7 @@
 		92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User + FirebaseAuth.swift"; sourceTree = "<group>"; };
 		92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Credentials + wrapped .swift"; sourceTree = "<group>"; };
 		92C94A9B2EAE0D6600CA9CD0 /* LocalStation +FavoriteStationEntity .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStation +FavoriteStationEntity .swift"; sourceTree = "<group>"; };
+		92C94A9E2EAE3E7000CA9CD0 /* ModelErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelErrors.swift; sourceTree = "<group>"; };
 		92D14A392D197BAE00E56BDE /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		92D14A3E2D197DA000E56BDE /* FavoritesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContentView.swift; sourceTree = "<group>"; };
 		92DDC8F72E547C710085F5AA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 		92A66F332CA5994F00ACD36C /* AuthorizationModels */ = {
 			isa = PBXGroup;
 			children = (
+				92C94A9E2EAE3E7000CA9CD0 /* ModelErrors.swift */,
 				92A66F352CA599E700ACD36C /* AuthModels.swift */,
 			);
 			path = AuthorizationModels;
@@ -895,6 +898,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C94A9F2EAE3E7000CA9CD0 /* ModelErrors.swift in Sources */,
 				92A66F362CA599E700ACD36C /* AuthModels.swift in Sources */,
 				92360FCE2C9C4BC4009BAFF6 /* PlayerButtonsShape.swift in Sources */,
 				92E07D9F2C8DFD1400B59386 /* AuthorizationViewModel.swift in Sources */,

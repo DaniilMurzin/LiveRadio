@@ -11,7 +11,7 @@
 //
 //  Created by Daniil Murzin on 05.10.2025.
 //
-
+#warning("LocalUser, DBuser - review")
 import Foundation
 
 struct DBUser: Codable  {
@@ -26,8 +26,8 @@ struct DBUser: Codable  {
     
     init(_ user: LocalUser) {
         self.userId = ID(rawValue: user.id.rawValue)
-        self.email = user.email
-        self.name = user.name
+        self.email = user.email?.wrapped
+        self.name = user.name?.wrapped
         self.dateCreated = Date()
         self.photoURL = user.photoURL
     }
@@ -69,17 +69,4 @@ struct DBUser: Codable  {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(email, forKey: .email)
     }
-    
-//    func changeUserName(_ newName: String) -> DBUser {
-//        return DBUser(
-//            dbUserId: dbUserId,
-//            dateCreated: dateCreated,
-//            name: newName,
-//            email: email,
-//            photoURL: photoURL
-//        )
-//    }
-//    mutating func changeUserName(_ newName: String) {
-//        name = newName
-//    }
 }

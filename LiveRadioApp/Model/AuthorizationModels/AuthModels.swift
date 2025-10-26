@@ -7,6 +7,25 @@
 
 import Foundation
 
+#warning("Гарды через фейлебл инит или истинность через функцию parse")
+
+struct UserName: Equatable {
+    let wrapped: String
+    
+    init?(_ name: String) { self.wrapped = name }
+    
+    private init(wrapped: String) { self.wrapped = wrapped}
+    
+    static func parse(_ name: String) -> Result<UserName, Error> {
+        
+        Result {
+            guard name.count > 3 else { throw NameError.tooShort }
+            
+            return UserName(wrapped: name)
+        }
+    }
+}
+
 struct Email: Equatable {
     let wrapped: String
     
@@ -15,13 +34,10 @@ struct Email: Equatable {
     }
     
     init?(_ email: String) {
-        guard email.contains("@") && email.count > 7 else {
-            return nil
-        }
         self.wrapped = email
     }
     
-    static func parce(_ email: String) -> Result<Email, Error> {
+    static func parse(_ email: String) -> Result<Email, Error> {
         
         Result {
             guard email.contains("@") else {
@@ -45,13 +61,10 @@ struct Password: Equatable {
     }
     
     init?(_ password: String) {
-        guard password.count > 8 else {
-            return nil
-        }
         self.wrapped = password
     }
     
-    static func parce(_ password: String) -> Result<Password, Error> {
+    static func parse(_ password: String) -> Result<Password, Error> {
         Result {
             guard password.count > 8 else {
                 throw NSError(domain: "Auth", code: 404)
@@ -79,51 +92,46 @@ struct Credentials: Equatable {
         self.password = password
     }
     
-    static func parce(
+    static func parse(
         email: String,
         password: String
     ) -> Result<Credentials, Error> {
         Result.zip(
-            Email.parce(email),
-            Password.parce(password)
+            Email.parse(email),
+            Password.parse(password)
         )
         .map(Credentials.init)
     }
 }
 
-    struct LocalUser: Equatable {
-        
-        typealias ID = Identifier<LocalUser, String>
-        
-        let id: ID
-        let email: String?
-        let name: String?
-        let photoURL: String?
-        var dbUserId: DBUser.ID  { DBUser.ID(rawValue: id.rawValue)}
-        
-        init(
-            id: ID,
-            email: String?,
-            name: String?,
-            photoURL: String?
-        ) {
-            self.id = id
-            self.email = email
-            self.name = name
-            self.photoURL = photoURL
-        }
-        
-        init(db: DBUser) {
-            self.init(
-                id: ID(rawValue: db.userId.rawValue),
-                email: db.email,
-                name: db.name,
-                photoURL: db.photoURL
-            )
-        }
+struct LocalUser: Equatable {
+    
+    typealias ID = Identifier<LocalUser, String>
+    
+    let id: ID
+    let email: Email?
+    let name: UserName?
+    let photoURL: URL?
+    var dbUserId: DBUser.ID  { DBUser.ID(rawValue: id.rawValue)}
+    
+    init(
+        id: ID,
+        email: Email?,
+        name: UserName?,
+        photoURL: URL?
+    ) {
+        self.id = id
+        self.email = email
+        self.name = name
+        self.photoURL = photoURL
     }
     
-    enum EmailError: Error {
-        case tooShort
-        case nonEmail
+    init(db: DBUser) {
+        self.init(
+            id: ID(rawValue: db.userId.rawValue),
+            email: db.email.flatMap(Email.init),
+            name: db.name.flatMap(UserName.init),
+            photoURL: db.photoURL.flatMap(URL.init)
+        )
     }
+}

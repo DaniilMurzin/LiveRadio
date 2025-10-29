@@ -53,6 +53,6 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func changeUserName(_ newName: String) async throws {
-        try await userManager.updateUsersName(newName, id: user.dbUserId)
+        try await userManager.updateUsersName(newName, id: user.id)
     }
 }

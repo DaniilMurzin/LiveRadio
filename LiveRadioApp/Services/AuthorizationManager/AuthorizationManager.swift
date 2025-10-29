@@ -14,7 +14,7 @@ protocol AuthorizationService {
     func getCurrentUser() -> Result<LocalUser, AuthServiceError>
     func signOut() throws
     func resetPassword(email: String) async throws
-    func updatePassword(password: String) async -> Result<String, Error>
+    func updatePassword(_ password: String) async -> Result<String, Error>
 }
 
 final class AuthorizationManager: AuthorizationService {
@@ -30,14 +30,7 @@ final class AuthorizationManager: AuthorizationService {
         .mapError { $0 as! AuthServiceError }
     }
     
-//    func updatePassword(password: String) async throws {
-//        guard let user = dbUser else {
-//            throw AuthServiceError.noCurrentUser
-//        }
-//        try await user.updatePassword(to: password)
-//    }
-#warning(" Поменять стринг на Void? как еще истинность проверить? Сильный тип добавить? ")
-    func updatePassword(password: String) async -> Result<String, Error> {
+    func updatePassword(_ password: String) async -> Result<String, Error> {
         await Result  {
             guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
             try await user.updatePassword(to: password)

@@ -7,19 +7,25 @@
 
 import Foundation
 
-#warning("Гарды через фейлебл инит или истинность через функцию parse")
-
 struct UserName: Equatable {
     let wrapped: String
     
-    init?(_ name: String) { self.wrapped = name }
+    init?(_ name: String) {
+        guard name.trimmingCharacters(in: .whitespacesAndNewlines).count > 3 else { return nil }
+        self.wrapped = name
+    }
+    
+    init(from name: String) throws {
+        guard name.trimmingCharacters(in: .whitespacesAndNewlines).count > 3 else { throw AuthError.tooShort }
+        self.wrapped = name
+    }
     
     private init(wrapped: String) { self.wrapped = wrapped}
     
     static func parse(_ name: String) -> Result<UserName, Error> {
         
         Result {
-            guard name.count > 3 else { throw NameError.tooShort }
+            guard name.count > 3 else { throw AuthError.tooShort }
             
             return UserName(wrapped: name)
         }
@@ -34,19 +40,22 @@ struct Email: Equatable {
     }
     
     init?(_ email: String) {
+        guard email.contains("@") else { return nil }
+        guard email.count > 7 else { return nil }
+        self.wrapped = email
+    }
+    
+    init(from email: String) throws {
+        guard email.contains("@") else { throw AuthError.nonEmail }
+        guard email.count > 7 else { throw AuthError.tooShort }
         self.wrapped = email
     }
     
     static func parse(_ email: String) -> Result<Email, Error> {
         
         Result {
-            guard email.contains("@") else {
-                throw EmailError.nonEmail
-            }
-            
-            guard email.count > 7 else {
-                throw EmailError.tooShort
-            }
+            guard email.contains("@") else { throw AuthError.nonEmail }
+            guard email.count > 7 else { throw AuthError.tooShort }
             
             return Email(wrapped: email)
         }
@@ -61,6 +70,12 @@ struct Password: Equatable {
     }
     
     init?(_ password: String) {
+        guard password.count > 8 else { return nil }
+        self.wrapped = password
+    }
+    
+    init(from password: String) throws {
+        guard password.count > 8 else { throw AuthError.tooShort }
         self.wrapped = password
     }
     
@@ -92,6 +107,15 @@ struct Credentials: Equatable {
         self.password = password
     }
     
+    init(from email: String, from password: String) throws {
+        guard let email = Email(email),
+              let password = Password(password)
+        else { throw AuthError.wrongCredentials  }
+        
+        self.email = email
+        self.password = password
+    }
+    
     static func parse(
         email: String,
         password: String
@@ -104,34 +128,4 @@ struct Credentials: Equatable {
     }
 }
 
-struct LocalUser: Equatable {
-    
-    typealias ID = Identifier<LocalUser, String>
-    
-    let id: ID
-    let email: Email?
-    let name: UserName?
-    let photoURL: URL?
-    var dbUserId: DBUser.ID  { DBUser.ID(rawValue: id.rawValue)}
-    
-    init(
-        id: ID,
-        email: Email?,
-        name: UserName?,
-        photoURL: URL?
-    ) {
-        self.id = id
-        self.email = email
-        self.name = name
-        self.photoURL = photoURL
-    }
-    
-    init(db: DBUser) {
-        self.init(
-            id: ID(rawValue: db.userId.rawValue),
-            email: db.email.flatMap(Email.init),
-            name: db.name.flatMap(UserName.init),
-            photoURL: db.photoURL.flatMap(URL.init)
-        )
-    }
-}
+

@@ -11,12 +11,12 @@
 //
 //  Created by Daniil Murzin on 05.10.2025.
 //
-#warning("LocalUser, DBuser - review")
+
 import Foundation
 
 struct DBUser: Codable  {
     
-    typealias ID = Identifier<DBUser, String>
+    typealias ID = AppUser.ID
     
     let userId: ID
     let dateCreated: Date?

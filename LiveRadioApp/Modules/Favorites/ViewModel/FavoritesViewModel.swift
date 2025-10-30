@@ -10,7 +10,7 @@ import SwiftUI
 final class FavoritesViewModel: ObservableObject {
     
     private let avPlayer: RadioPlayer
-    private let storageManager: StorageManager
+    private let storageManager: StorageService
     
     @Published var name: String = "Daniil"
     @Published var fetchedStations: [LocalStation] = []
@@ -24,7 +24,7 @@ final class FavoritesViewModel: ObservableObject {
         )
     }
     
-    init(avPlayer: RadioPlayer, storageManager: StorageManager) {
+    init(avPlayer: RadioPlayer, storageManager: StorageService) {
         self.avPlayer = avPlayer
         self.storageManager = storageManager
         self.volume = avPlayer.volume

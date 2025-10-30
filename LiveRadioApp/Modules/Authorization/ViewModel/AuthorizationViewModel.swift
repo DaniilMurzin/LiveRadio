@@ -14,7 +14,7 @@ protocol AppCoordinator {
 final class AuthorizationViewModel: ObservableObject {
     
     //MARK: - Properties
-    private let authorizationService: AuthorizationService
+    private let authorizationManager: AuthorizationService
     private let coordinator: AppCoordinator
     private let userManager: UserRepository
     
@@ -39,11 +39,11 @@ final class AuthorizationViewModel: ObservableObject {
     }
     //MARK: - Init
     init(
-        authorizationService: AuthorizationService,
+        authorizationManager: AuthorizationService,
         coordinator: AppCoordinator,
         userManager: UserRepository
     ) {
-        self.authorizationService = authorizationService
+        self.authorizationManager = authorizationManager
         self.coordinator = coordinator
         self.userManager = userManager
     }
@@ -53,7 +53,7 @@ final class AuthorizationViewModel: ObservableObject {
         
         guard let credentials = Credentials(email: email, password: password) else { return }
         
-        let result = await authorizationService.signIn(with: credentials)
+        let result = await authorizationManager.signIn(with: credentials)
         
         await MainActor.run {
             switch result {
@@ -70,7 +70,7 @@ final class AuthorizationViewModel: ObservableObject {
     func signUp() async {
         let signUpResult = await Credentials
             .parse(email: email, password: password)
-            .asyncFlatMap(authorizationService.signUp(with:))
+            .asyncFlatMap(authorizationManager.signUp(with:))
             .asyncFlatMap(userManager.newUserResult(user:))
         
         switch signUpResult {

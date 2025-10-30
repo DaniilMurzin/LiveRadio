@@ -21,8 +21,8 @@ protocol RootFactory {
 
 final class FRoot {
     private let repository = AppRepository()
-    private let networkService = NetworkService()
-    private let authorizationService = AuthorizationManager()
+    private let networkManager = NetworkManager()
+    private let authorizationManager = AuthorizationManager()
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
     private let userManager = UserManager()
@@ -42,9 +42,8 @@ extension FRoot: RootFactory {
     func makeProfile(user: LocalUser) -> ProfileContentView {
         let viewModel = ProfileViewModel(
             user: user,
-            networkService: networkService,
             storageManager: storageManager,
-            authorizationService: authorizationService,
+            authorizationService: authorizationManager,
             userManager: userManager)
         return ProfileContentView(viewModel)
     }
@@ -66,7 +65,7 @@ extension FRoot: RootFactory {
     
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
         let viewModel = AuthorizationViewModel(
-            authorizationService: authorizationService,
+            authorizationManager: authorizationManager,
             coordinator: coordinator,
             userManager: userManager
         )
@@ -75,7 +74,7 @@ extension FRoot: RootFactory {
     
     func makePopular() -> PopularContentView {
         let viewModel = PopularViewModel(
-            networkService: networkService,
+            networkService: networkManager,
             avPlayer: player,
             storageManager: storageManager
         )
@@ -89,7 +88,7 @@ extension FRoot: RootFactory {
     
     func makeAllStations() -> AllStationsContentView {
         let viewModel = AllStationsViewModel(
-            networkService: networkService,
+            networkService: networkManager,
             avPlayer: player,
             storageManager: storageManager
         )

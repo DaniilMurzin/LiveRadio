@@ -47,7 +47,7 @@
 		929864462D5BE7830029D08F /* AllStationsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929864452D5BE7830029D08F /* AllStationsContentView.swift */; };
 		929864482D5BE7E20029D08F /* AllStationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929864472D5BE7E20029D08F /* AllStationsViewModel.swift */; };
 		92A66F362CA599E700ACD36C /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A66F352CA599E700ACD36C /* AuthModels.swift */; };
-		92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF412CAFF4F800DC3C34 /* NetworkService.swift */; };
+		92BACF422CAFF4F800DC3C34 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF412CAFF4F800DC3C34 /* NetworkManager.swift */; };
 		92BACF442CAFF52B00DC3C34 /* FactorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */; };
 		92BB02E72D1846070054CA75 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB02E62D1846070054CA75 /* FavoritesView.swift */; };
 		92C94A852EACB2DA00CA9CD0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */; };
@@ -153,7 +153,7 @@
 		929864452D5BE7830029D08F /* AllStationsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsContentView.swift; sourceTree = "<group>"; };
 		929864472D5BE7E20029D08F /* AllStationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsViewModel.swift; sourceTree = "<group>"; };
 		92A66F352CA599E700ACD36C /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
-		92BACF412CAFF4F800DC3C34 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		92BACF412CAFF4F800DC3C34 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		92BACF432CAFF52B00DC3C34 /* FactorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactorySpy.swift; sourceTree = "<group>"; };
 		92BB02E62D1846070054CA75 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		92C94A842EACB2DA00CA9CD0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -232,14 +232,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		923D56642CBD5EAC00797F67 /* NetworkService */ = {
+		923D56642CBD5EAC00797F67 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				92BACF412CAFF4F800DC3C34 /* NetworkService.swift */,
+				92BACF412CAFF4F800DC3C34 /* NetworkManager.swift */,
 				923D566A2CBD6FCC00797F67 /* Endpoint.swift */,
 				923D56682CBD6D4E00797F67 /* NetworkError.swift */,
 			);
-			path = NetworkService;
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		923D566E2CBD70C000797F67 /* FactorySpy */ = {
@@ -475,7 +475,7 @@
 				925A7DDF2D3173B500DDA3D8 /* DataManager */,
 				924DE1552D0B166E0063D0AD /* RadioPlayer */,
 				92E07D182C86109000B59386 /* RootCoordinator */,
-				923D56642CBD5EAC00797F67 /* NetworkService */,
+				923D56642CBD5EAC00797F67 /* NetworkManager */,
 				923D566E2CBD70C000797F67 /* FactorySpy */,
 			);
 			path = Services;
@@ -960,7 +960,7 @@
 				92C94A982EACB90B00CA9CD0 /* User + FirebaseAuth.swift in Sources */,
 				9269B5D52D50E64100FDFC9E /* LocalStation.swift in Sources */,
 				92E07D252C86109000B59386 /* OnboardingView.swift in Sources */,
-				92BACF422CAFF4F800DC3C34 /* NetworkService.swift in Sources */,
+				92BACF422CAFF4F800DC3C34 /* NetworkManager.swift in Sources */,
 				92E07DE82C9AFAB900B59386 /* DetailsContentView.swift in Sources */,
 				92E07D362C884D6900B59386 /* AuthTextField.swift in Sources */,
 				92786FA92E363EC60092F87C /* NotificationToggle.swift in Sources */,

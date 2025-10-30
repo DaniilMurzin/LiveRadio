@@ -9,9 +9,8 @@ import Foundation
 
 final class ProfileViewModel: ObservableObject {
     
-    private let networkService: StationDataService
-    private let authorizationService: AuthorizationService
-    private let storageManager: StorageManager
+    private let authorizationManager: AuthorizationService
+    private let storageManager: StorageService
     private let userManager: UserRepository
     
     @Published private(set) var user: LocalUser
@@ -21,23 +20,21 @@ final class ProfileViewModel: ObservableObject {
     
     init(
         user: LocalUser,
-        networkService: StationDataService,
-        storageManager: StorageManager,
+        storageManager: StorageService,
         authorizationService: AuthorizationService,
         userManager: UserRepository
     ) {
         self.user = user
-        self.networkService = networkService
         self.storageManager = storageManager
-        self.authorizationService = authorizationService
+        self.authorizationManager = authorizationService
         self.userManager = userManager
     }
 
     func loadCurrentUser() async  {
         
-        let currentUser =  await Result(catching:authorizationService.getCurrentUser)
+        let currentUser =  await Result(catching:authorizationManager.getCurrentUser)
         do {
-            let authDataResult = authorizationService.getCurrentUser()
+            let authDataResult = authorizationManager.getCurrentUser()
         } catch {
             //TODO: show banner/retry/
             self.error = error
@@ -45,7 +42,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func signOut() throws {
-        try authorizationService.signOut()
+        try authorizationManager.signOut()
     }
     
     func toggleNotifications() {

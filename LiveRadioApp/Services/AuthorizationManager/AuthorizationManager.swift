@@ -14,7 +14,7 @@ protocol AuthorizationService {
     func getCurrentUser() -> Result<LocalUser, AuthServiceError>
     func signOut() throws
     func resetPassword(email: String) async throws
-    func updatePassword(_ password: String) async -> Result<String, Error>
+    func updatePassword(_ password: Password) async -> Result<String, Error>
 }
 
 final class AuthorizationManager: AuthorizationService {
@@ -30,11 +30,11 @@ final class AuthorizationManager: AuthorizationService {
         .mapError { $0 as! AuthServiceError }
     }
     
-    func updatePassword(_ password: String) async -> Result<String, Error> {
+    func updatePassword(_ password: Password) async -> Result<String, Error> {
         await Result  {
             guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
-            try await user.updatePassword(to: password)
-            return password
+            try await user.updatePassword(to: password.wrapped)
+            return password.wrapped
         }
     }
     
@@ -45,7 +45,7 @@ final class AuthorizationManager: AuthorizationService {
          }
     }
     
-    func updateEmail(email: String) async throws {
+    func updateEmail(email: Email) async throws {
         guard let user = Auth.auth().currentUser else {
             throw AuthServiceError.noCurrentUser
         }

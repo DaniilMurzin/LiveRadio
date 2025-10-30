@@ -11,7 +11,7 @@ final class AllStationsViewModel: ObservableObject {
     
     //MARK: - Properties
     private let networkService: StationDataService
-    private let storageManager: StorageManager
+    private let storageManager: StorageService
     private let avPlayer: RadioPlayer
     
     @Published var fetchedStations: [LocalStation] = []
@@ -31,7 +31,7 @@ final class AllStationsViewModel: ObservableObject {
     init(
         networkService: StationDataService,
         avPlayer: RadioPlayer,
-        storageManager: StorageManager
+        storageManager: StorageService
     ) {
         self.networkService = networkService
         self.avPlayer = avPlayer

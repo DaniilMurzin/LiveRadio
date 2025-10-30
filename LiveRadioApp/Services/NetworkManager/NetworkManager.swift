@@ -13,7 +13,7 @@ protocol StationDataService {
     func searchByName(name: String) async throws -> [Station]
 }
 
-final class NetworkService {
+final class NetworkManager {
     typealias NetworkRequest = (URLRequest) async throws -> (Data, URLResponse)
     
     //MARK: - Dependencies
@@ -65,7 +65,7 @@ final class NetworkService {
 }
 
 //MARK: - NetworkService + StationDataService
-extension NetworkService: StationDataService {
+extension NetworkManager: StationDataService {
     
     func fetchTop() async throws -> [Station] {
         let url =  try URLComponents
@@ -82,7 +82,7 @@ extension NetworkService: StationDataService {
     }
 }
 
-private extension NetworkService {
+private extension NetworkManager {
     //MARK: - Private methods
     func makeRequest<T:Codable>(for url: URL, maxRetries: Int = 3) async throws -> T {
         

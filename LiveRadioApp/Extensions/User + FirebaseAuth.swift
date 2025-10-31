@@ -13,7 +13,7 @@ extension LocalUser {
             id: ID(rawValue: firebaseUser.uid),
             email: firebaseUser.email.flatMap(Email.init),
             name: firebaseUser.displayName.flatMap(UserName.init),
-            photoURL: firebaseUser.photoURL?.absoluteString ?? ""
+            photoURL: firebaseUser.photoURL
         )
     }
 }

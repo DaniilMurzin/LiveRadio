@@ -11,12 +11,12 @@
 //
 //  Created by Daniil Murzin on 05.10.2025.
 //
-#warning("LocalUser, DBuser - review")
+
 import Foundation
 
 struct DBUser: Codable  {
     
-    typealias ID = Identifier<DBUser, String>
+    typealias ID = AppUser.ID
     
     let userId: ID
     let dateCreated: Date?
@@ -29,7 +29,7 @@ struct DBUser: Codable  {
         self.email = user.email?.wrapped
         self.name = user.name?.wrapped
         self.dateCreated = Date()
-        self.photoURL = user.photoURL
+        self.photoURL = user.photoURL?.absoluteString
     }
     
     init(

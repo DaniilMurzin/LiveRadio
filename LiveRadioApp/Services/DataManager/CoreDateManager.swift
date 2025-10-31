@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol StorageManager {
+protocol StorageService {
     @discardableResult
     func saveStations(_ stations: [LocalStation]) async throws -> [LocalStation]
     
@@ -35,7 +35,7 @@ protocol StorageManager {
     func contains(with predicate: NSPredicate) async throws -> Bool
 }
 
-extension StorageManager {
+extension StorageService {
     @discardableResult
     func saveStation(_ station: LocalStation) async throws -> [LocalStation] {
         try await saveStations([station])
@@ -64,7 +64,7 @@ final class CoreDateManager {
     }
 }
 
-extension CoreDateManager: StorageManager {
+extension CoreDateManager: StorageService {
     typealias FetchRequest = NSFetchRequest<FavoriteStationEntity>
     
     func saveStations(_ stations: [LocalStation]) async throws -> [LocalStation] {

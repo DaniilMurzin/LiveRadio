@@ -25,13 +25,13 @@ struct NetworkServiceTests {
         let expected = [Station.mock]
         let data = try JSONEncoder().encode(expected)
         
-        let dependencies = NetworkService.Dependencies(
+        let dependencies = NetworkManager.Dependencies(
             request: { req in (data, makeResponse(req)) },
             createUser: { _, _ in fatalError("Not implemented") },
             signIn: { _, _ in fatalError("Not implemented") }
         )
         
-        let sut = NetworkService(dependencies)
+        let sut = NetworkManager(dependencies)
         
         // when - взаимодействие
         let stations = try await sut.fetchTop()
@@ -45,13 +45,13 @@ struct NetworkServiceTests {
         // given - дано
         let expected = [Station.mock]
         let data = try JSONEncoder().encode(expected)
-        let dependencies = NetworkService.Dependencies(
+        let dependencies = NetworkManager.Dependencies(
             request: { req in (data, makeResponse(req, statusCode: 503)) },
             createUser: { _, _ in fatalError("Not implemented") },
             signIn: { _, _ in fatalError("Not implemented") }
         )
         
-        let sut = NetworkService(dependencies)
+        let sut = NetworkManager(dependencies)
         
         // when - проверка
         await #expect(performing: sut.fetchTop, throws: { error in
@@ -66,13 +66,13 @@ struct NetworkServiceTests {
     @Test
     func fetchTop_emptyData() async throws {
         // given - дано
-        let dependencies = NetworkService.Dependencies(
+        let dependencies = NetworkManager.Dependencies(
             request: { req in (Data(), makeResponse(req)) },
             createUser: { _, _ in fatalError("Not implemented") },
             signIn: { _, _ in fatalError("Not implemented") }
         )
         
-        let sut = NetworkService(dependencies)
+        let sut = NetworkManager(dependencies)
         
         // when - взаимодействие
         await #expect(performing: sut.fetchTop, throws: { error in
@@ -87,13 +87,13 @@ struct NetworkServiceTests {
     @Test
     func fetchTop_requestThrowError() async throws {
         // given - дано
-        let dependencies = NetworkService.Dependencies(
+        let dependencies = NetworkManager.Dependencies(
             request: { _ in throw URLError(.badURL) },
             createUser: { _, _ in fatalError("Not implemented") },
             signIn: { _, _ in fatalError("Not implemented") }
         )
         
-        let sut = NetworkService(dependencies)
+        let sut = NetworkManager(dependencies)
         
         // when - взаимодействие
         await #expect(performing: sut.fetchTop, throws: { error in
@@ -148,7 +148,7 @@ struct NetworkServiceTests {
     func loginUser() async throws {
         // given
         let expected = NetworkServiceTests.user
-        let sut = NetworkService(
+        let sut = NetworkManager(
             .init(request: { _ in
                 fatalError("Not implemented")
             }, createUser: { _, _ in

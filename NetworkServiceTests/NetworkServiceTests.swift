@@ -12,7 +12,12 @@ import Foundation
 
 struct NetworkServiceTests {
     
-    static let user = LocalUser(id: "123", email: "test12@example.com")
+    static let user = LocalUser(
+        id: LocalUser.ID(rawValue: "222"),
+        email: Email("test12@example.com"),
+        name: UserName("Daniil"),
+        photoURL: URL(string: "w")
+    )
     static let credentials = Credentials(
         email: "test12@example.com",
         password: "pasword123"

@@ -24,6 +24,7 @@ final class FRoot {
     private let networkManager = NetworkManager()
     private let authorizationManager = AuthorizationManager()
     private let player = RadioPlayer()
+    private let serviceLocator  = ServiceLocator()
     private let storageManager = CoreDateManager()
     private let userManager = UserManager()
     private(set) lazy var spy = FactorySpy(
@@ -41,7 +42,8 @@ extension FRoot: RootFactory {
     
     func makeProfile(user: LocalUser) -> ProfileContentView {
         let viewModel = ProfileViewModel(
-            user: user,
+            user: user, serviceLocator: <#any Services#>,
+            serviceLocator: ,
             storageManager: storageManager,
             authorizationService: authorizationManager,
             userManager: userManager)

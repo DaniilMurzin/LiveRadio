@@ -20,35 +20,47 @@ protocol RootFactory {
 }
 
 final class FRoot {
+    private let serviceLocator = ServiceLocator()
     private let repository = AppRepository()
     private let networkManager = NetworkManager()
     private let authorizationManager = AuthorizationManager()
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
     private let userManager = UserManager()
-    private(set) lazy var spy = FactorySpy(
-        factory: self,
-        repository: repository
-    )
+    private(set) lazy var spy = FactorySpy(factory: self, repository: repository)
     
     static func makeRootCoordinator() -> RootCoordinator {
         return RootCoordinator(factory: FRoot().spy)
     }
+    
+    init() {
+        serviceLocator.register(AuthorizationManager.self)
+        serviceLocator.register(CoreDateManager.self)
+        serviceLocator.register(UserManager.self)
+    }
 }
-
+#warning("Ревью")
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
     
     func makeProfile(user: LocalUser) -> ProfileContentView {
+        
+        let auth: AuthorizationService = serviceLocator.resolve(AuthorizationManager.self)
+        let userRepo: UserRepository = serviceLocator.resolve(UserManager.self)
+        let storage: StorageService = serviceLocator.resolve(CoreDateManager.self)
+        
+        let deps = ProfileViewModel.Dependencies(
+            authorizationManager: auth,
+            storageManager: storage,
+            userManager: userRepo
+        )
         let viewModel = ProfileViewModel(
             user: user,
-            storageManager: storageManager,
-            authorizationService: authorizationManager,
-            userManager: userManager)
+            dependancies: deps
+        )
         return ProfileContentView(viewModel)
     }
     
-   
     func makeTabBar() -> TabBarView {
         TabBarView(factory: self)
     }
@@ -59,7 +71,10 @@ extension FRoot: RootFactory {
     }
     
     func makeFavorites() -> FavoritesContentView {
-        let viewModel = FavoritesViewModel(avPlayer: player, storageManager: storageManager)
+        let viewModel = FavoritesViewModel(
+            avPlayer: player,
+            storageManager: storageManager
+        )
         return FavoritesContentView(viewModel)
     }
     

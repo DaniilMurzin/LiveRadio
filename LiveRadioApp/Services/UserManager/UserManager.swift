@@ -17,16 +17,18 @@ protocol UserRepository {
     func currentUserResult(_ id: DBUser.ID) async throws -> Result<LocalUser, Error>
 }
 
-final class UserManager: UserRepository {
+final class UserManager {
     
     private let userCollection = Firestore.firestore().collection("users")
-    
-    init() {}
     
     private func userDocument(_ id: DBUser.ID) -> DocumentReference {
         userCollection.document(id.rawValue)
     }
     
+    init() {}
+}
+
+extension UserManager: UserRepository {
     func createNewUser(_ user: DBUser) async throws {
         try userDocument(user.userId).setData(from: user, merge: false)
     }
@@ -60,3 +62,5 @@ final class UserManager: UserRepository {
         try await userDocument(id).updateData(data)
     }
 }
+
+extension UserManager: Dependency { }

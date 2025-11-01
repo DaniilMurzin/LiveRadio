@@ -15,12 +15,15 @@ protocol AuthorizationService {
     func signOut() throws
     func resetPassword(email: String) async throws
     func updatePassword(_ password: Password) async -> Result<String, Error>
+    func updateEmail(email: Email) async throws
 }
 
-final class AuthorizationManager: AuthorizationService {
-    
+final class AuthorizationManager  {
     var dbUser: FirebaseAuth.User? { Auth.auth().currentUser }
-    
+}
+
+extension AuthorizationManager: AuthorizationService {
+   
     func getCurrentUser() -> Result<LocalUser, AuthServiceError> {
         Result {
             guard let user = dbUser else { throw AuthServiceError.noCurrentUser }
@@ -79,3 +82,5 @@ final class AuthorizationManager: AuthorizationService {
        try Auth.auth().signOut()
     }
 }
+
+extension AuthorizationManager: Dependency {}

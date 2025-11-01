@@ -23,10 +23,8 @@ struct UserName: Equatable {
     private init(wrapped: String) { self.wrapped = wrapped}
     
     static func parse(_ name: String) -> Result<UserName, Error> {
-        
         Result {
             guard name.count > 3 else { throw AuthError.tooShort }
-            
             return UserName(wrapped: name)
         }
     }
@@ -39,26 +37,18 @@ struct Email: Equatable {
         self.wrapped = wrapped
     }
     
-    init?(_ email: String) {
-        guard email.contains("@") else { return nil }
-        guard email.count > 7 else { return nil }
-        self.wrapped = email
-    }
-    
     init(from email: String) throws {
         guard email.contains("@") else { throw AuthError.nonEmail }
         guard email.count > 7 else { throw AuthError.tooShort }
         self.wrapped = email
     }
     
+    init?(_ email: String) {
+        try? self.init(from: email)
+    }
+
     static func parse(_ email: String) -> Result<Email, Error> {
-        
-        Result {
-            guard email.contains("@") else { throw AuthError.nonEmail }
-            guard email.count > 7 else { throw AuthError.tooShort }
-            
-            return Email(wrapped: email)
-        }
+        Result { try Email(from: email) }
     }
 }
 
@@ -69,23 +59,17 @@ struct Password: Equatable {
         self.wrapped = wrapped
     }
     
-    init?(_ password: String) {
-        guard password.count > 8 else { return nil }
-        self.wrapped = password
-    }
-    
     init(from password: String) throws {
         guard password.count > 8 else { throw AuthError.tooShort }
         self.wrapped = password
     }
     
+    init?(_ password: String) {
+        try? self.init(from: password)
+    }
+    
     static func parse(_ password: String) -> Result<Password, Error> {
-        Result {
-            guard password.count > 8 else {
-                throw NSError(domain: "Auth", code: 404)
-            }
-            return Password(wrapped: password)
-        }
+        Result  { try Password(from: password) }
     }
 }
 
@@ -94,15 +78,6 @@ struct Credentials: Equatable {
     let password: Password
     
     private init (email: Email, password: Password) {
-        self.email = email
-        self.password = password
-    }
-    
-    init?(email: String, password: String) {
-        guard let email = Email(email),
-              let password = Password(password)
-        else { return nil }
-        
         self.email = email
         self.password = password
     }
@@ -116,6 +91,10 @@ struct Credentials: Equatable {
         self.password = password
     }
     
+    init?(email: String, password: String) {
+        try? self.init(from: email, from: password)
+    }
+    
     static func parse(
         email: String,
         password: String
@@ -127,5 +106,3 @@ struct Credentials: Equatable {
         .map(Credentials.init)
     }
 }
-
-

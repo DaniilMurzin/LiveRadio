@@ -7,11 +7,11 @@
 
 import Foundation
 
+#warning("ревью")
 final class ProfileViewModel: ObservableObject {
     
-    private let authorizationManager: AuthorizationService
-    private let storageManager: StorageService
-    private let userManager: UserRepository
+//    private let serviceLocator: Services
+    private let dependancies: Dependencies
     
     @Published private(set) var user: LocalUser
     @Published private(set) var error: Error?
@@ -20,21 +20,17 @@ final class ProfileViewModel: ObservableObject {
     
     init(
         user: LocalUser,
-        storageManager: StorageService,
-        authorizationService: AuthorizationService,
-        userManager: UserRepository
+        dependancies: Dependencies
     ) {
         self.user = user
-        self.storageManager = storageManager
-        self.authorizationManager = authorizationService
-        self.userManager = userManager
+        self.dependancies = dependancies
     }
 
     func loadCurrentUser() async  {
         
-        let currentUser =  await Result(catching:authorizationManager.getCurrentUser)
+        let currentUser =  await Result(catching: dependancies.getCurrentUser)
         do {
-            let authDataResult = authorizationManager.getCurrentUser()
+            let authDataResult = dependancies.getCurrentUser()
         } catch {
             //TODO: show banner/retry/
             self.error = error
@@ -42,7 +38,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func signOut() throws {
-        try authorizationManager.signOut()
+        try dependancies.signOut()
     }
     
     func toggleNotifications() {
@@ -50,6 +46,60 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func changeUserName(_ newName: String) async throws {
-        try await userManager.updateUsersName(newName, id: user.id)
+        try await dependancies.updateUsersName(newName, user.id)
     }
 }
+
+extension ProfileViewModel {
+    struct Dependencies {
+        var getCurrentUser: () -> Result<LocalUser, AuthServiceError>
+        var signOut: () throws -> Void
+        var updateUsersName: (String, DBUser.ID) async throws -> Void
+        
+        init(
+            getCurrentUser: @escaping () -> Result<LocalUser, AuthServiceError>,
+            signOut: @escaping () throws -> Void,
+            updateUsersName: @escaping (String, DBUser.ID) async  throws -> Void
+        ) {
+            self.getCurrentUser = getCurrentUser
+            self.signOut = signOut
+            self.updateUsersName = updateUsersName
+        }
+        
+        init(
+            authorizationManager: AuthorizationService,
+            storageManager: StorageService,
+            userManager: UserRepository
+        ) {
+            self.init(
+                getCurrentUser: authorizationManager.getCurrentUser,
+                signOut: authorizationManager.signOut,
+                updateUsersName: userManager.updateUsersName
+            )
+        }
+    }
+}
+
+//
+//protocol Services  {
+//    var authorizationManager: AuthorizationService { get }
+//    var storageManager: StorageService { get }
+//    var userManager: UserRepository { get }
+//    
+//    func getCurrentUser() -> Result<LocalUser, AuthServiceError>
+//    func signOut() throws
+//    func updateUsersName(_ newName: String, id: DBUser.ID) async throws
+//}
+//
+//extension Services {
+//    func getCurrentUser() -> Result<LocalUser, AuthServiceError> {
+//        authorizationManager.getCurrentUser()
+//    }
+//    func signOut() throws {
+//        try authorizationManager.signOut()
+//    }
+//    
+//    func updateUsersName(_ newName: String, id: DBUser.ID) async throws {
+//        try await userManager.updateUsersName(newName, id: id)
+//    }
+//}

@@ -141,6 +141,7 @@ extension CoreDateManager: StorageService {
     }
 }
 
+extension CoreDateManager: Dependency {}
 
 //protocol PersistenceManager {
 //    var savedEntities: [FavoriteStationEntity] { get }

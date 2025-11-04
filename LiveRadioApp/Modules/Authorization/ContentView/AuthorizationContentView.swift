@@ -29,7 +29,6 @@ extension Localization {
 
 struct AuthorizationContentView: View {
     @StateObject var viewModel: AuthorizationViewModel
-    @EnvironmentObject var coordinator: RootCoordinator
 //    @EnvironmentObject var localization: Localization
     
     init(_ viewModel: AuthorizationViewModel) {
@@ -62,7 +61,7 @@ struct AuthorizationContentView: View {
                     ? .available(viewModel.signUp)
                     : .unavailable,
                     didTapSignInButton: viewModel.showSignIn,
-                    localization: .develop //localization.signUpScreen()
+                    localization: .develop
                 )
                 .transition(.slide)
                 
@@ -78,11 +77,11 @@ struct AuthorizationContentView: View {
                 ForgotPasswordView2(
                     password: $viewModel.password,
                     confirmPassword: $viewModel.password,
-                    didTapChangePasswordButton: coordinator.showTabBar
+                    didTapChangePasswordButton: viewModel.showSignIn
                 )
                 .transition(.slide)
                 
-            case .error(let error):
+            case .error(_):
                 EmptyView()
             }
         }

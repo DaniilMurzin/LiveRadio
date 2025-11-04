@@ -18,7 +18,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var notificationEnabled: Bool = false
     
     
-    init(
+        init(
         user: LocalUser,
         dependancies: Dependencies
     ) {

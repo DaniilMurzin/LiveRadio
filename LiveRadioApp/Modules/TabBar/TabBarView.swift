@@ -9,19 +9,17 @@ import SwiftUI
 
 struct TabBarView: View {
     
-    //MARK: - Properties
-    let factory: RootFactory
-    @State private var selectedTab: Tabs = .popular
+    @Binding var selectedTab: Tabs
+    let popular: () -> PopularContentView
+    let favorites: () -> FavoritesContentView
+    let allStations: () -> AllStationsContentView
     
     var body: some View {
         TabBarBackground {
                 switch selectedTab {
-                case .popular:
-                    factory.makePopular()
-                case .favorites:
-                    factory.makeFavorites()
-                case .allStations:
-                    factory.makeAllStations()
+                case .popular: popular()
+                case .favorites: favorites()
+                case .allStations: allStations()
                 }
             
             HStack {
@@ -64,8 +62,4 @@ extension TabBarView {
         case favorites
         case allStations
     }
-}
-
-#Preview {
-    TabBarView(factory: FRoot())
 }

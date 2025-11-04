@@ -31,8 +31,8 @@ struct RootCoordinatorView: View {
             case .authorization:
                 factory.makeAuthorization(coordinator: coordinator)
             
-            case .tabbar:
-                factory.makeTabBar()
+            case .tabbar(let user):
+                factory.makeTabBar(user: user, coordinator: coordinator)
                 
             case .details:
                 factory.makeDetails()

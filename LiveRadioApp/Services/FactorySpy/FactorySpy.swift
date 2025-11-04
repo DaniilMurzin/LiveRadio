@@ -44,9 +44,9 @@ extension FactorySpy: RootFactory {
     }
     
     
-    func makeTabBar() -> TabBarView {
+    func makeTabBar(user: LocalUser, coordinator: AppCoordinator) -> TabBarContentView {
         logger.trace(#function)
-        return factory.makeTabBar()
+        return factory.makeTabBar(user: user, coordinator: coordinator)
     }
     
     func makeOnboarding() -> OnboardingContentView {

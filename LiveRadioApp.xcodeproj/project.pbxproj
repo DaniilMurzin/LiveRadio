@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92057A2B2EBA17FF00B6F9D5 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92057A2A2EBA17FF00B6F9D5 /* TabBarViewModel.swift */; };
+		92057A2E2EBA1AC200B6F9D5 /* TabBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92057A2D2EBA1AC200B6F9D5 /* TabBarContentView.swift */; };
+		92057A302EBA236900B6F9D5 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92057A2F2EBA236900B6F9D5 /* Action.swift */; };
 		9207FE5B2D71D71000751FA0 /* Array+LocalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9207FE5A2D71D71000751FA0 /* Array+LocalStation.swift */; };
 		920A072D2DE446A100FB6BBF /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A072C2DE446A100FB6BBF /* SearchBarView.swift */; };
 		920A07312DE743A600FB6BBF /* View + placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A07302DE743A600FB6BBF /* View + placeholder.swift */; };
@@ -114,6 +117,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92057A2A2EBA17FF00B6F9D5 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		92057A2D2EBA1AC200B6F9D5 /* TabBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentView.swift; sourceTree = "<group>"; };
+		92057A2F2EBA236900B6F9D5 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		9207FE5A2D71D71000751FA0 /* Array+LocalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+LocalStation.swift"; sourceTree = "<group>"; };
 		920A01652CFEE8280068EDD0 /* NetworkServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920A072C2DE446A100FB6BBF /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -236,6 +242,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92057A292EBA15E500B6F9D5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92057A2A2EBA17FF00B6F9D5 /* TabBarViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		92057A2C2EBA1A9300B6F9D5 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				92057A2D2EBA1AC200B6F9D5 /* TabBarContentView.swift */,
+			);
+			path = ContentView;
+			sourceTree = "<group>";
+		};
 		923D56642CBD5EAC00797F67 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +289,7 @@
 		9252EFD52D22F34600A8A382 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				92057A2F2EBA236900B6F9D5 /* Action.swift */,
 				92C94A992EACB95900CA9CD0 /* Credentials + wrapped .swift */,
 				92C94A972EACB90B00CA9CD0 /* User + FirebaseAuth.swift */,
 				9233C0702D097D6100C93F79 /* Result+Async.swift */,
@@ -448,6 +471,7 @@
 		929BD6E72DA11EB3006C4BA0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				92E07DDE2C985FFA00B59386 /* TabBar */,
 				92786FA32E361A520092F87C /* Profile */,
 				92E07DE42C9AD51200B59386 /* Details */,
 				9298643E2D5BD5E60029D08F /* AllStations */,
@@ -600,7 +624,6 @@
 				9252EFD52D22F34600A8A382 /* Extensions */,
 				92360FD42CA01A77009BAFF6 /* GoogleService-Info.plist */,
 				92E07D3C2C888A6300B59386 /* Info.plist */,
-				92E07DDE2C985FFA00B59386 /* TabBar */,
 				92E07D372C8888C600B59386 /* Resources */,
 				92E07D082C86101500B59386 /* Preview Content */,
 			);
@@ -768,6 +791,8 @@
 		92E07DDE2C985FFA00B59386 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				92057A2C2EBA1A9300B6F9D5 /* ContentView */,
+				92057A292EBA15E500B6F9D5 /* ViewModel */,
 				92E07DDF2C98600D00B59386 /* TabBarView.swift */,
 			);
 			path = TabBar;
@@ -942,6 +967,7 @@
 				923D56662CBD5F3200797F67 /* Station.swift in Sources */,
 				92786FA52E361B150092F87C /* ProfileHeader.swift in Sources */,
 				9281A45C2CB18EDC00F42612 /* ConnectWithView.swift in Sources */,
+				92057A2B2EBA17FF00B6F9D5 /* TabBarViewModel.swift in Sources */,
 				925A7DE22D31756200DDA3D8 /* FavoriteStationContainer.xcdatamodeld in Sources */,
 				92E07D2C2C86109000B59386 /* PopularContentView.swift in Sources */,
 				926FCD972D0B413A00D43DA4 /* CellBackground.swift in Sources */,
@@ -970,6 +996,7 @@
 				92E07D2B2C86109000B59386 /* TabBarCell.swift in Sources */,
 				92D14A3A2D197BAE00E56BDE /* FavoritesViewModel.swift in Sources */,
 				92E07DEA2C9AFAC600B59386 /* DetailsViewModel.swift in Sources */,
+				92057A302EBA236900B6F9D5 /* Action.swift in Sources */,
 				92E07D022C86101400B59386 /* LiveRadioAppApp.swift in Sources */,
 				92C94A982EACB90B00CA9CD0 /* User + FirebaseAuth.swift in Sources */,
 				92C94ABF2EB4F9D000CA9CD0 /* ServiceLocator.swift in Sources */,
@@ -993,6 +1020,7 @@
 				92C94B292EB7A2EC00CA9CD0 /* AuthHeader .swift in Sources */,
 				92786FAF2E3657D60092F87C /* SettingsItemRow.swift in Sources */,
 				92E07D2A2C86109000B59386 /* SignInView.swift in Sources */,
+				92057A2E2EBA1AC200B6F9D5 /* TabBarContentView.swift in Sources */,
 				923D56692CBD6D4E00797F67 /* NetworkError.swift in Sources */,
 				9252EFD72D22F35100A8A382 /* Array + subscript.swift in Sources */,
 				92786FA72E3634C10092F87C /* SettingsProfileRow.swift in Sources */,

@@ -46,6 +46,8 @@ struct AuthHeader: View {
 }
 
 #Preview("Forgot") {
-    AuthHeader(style: .forgotPassword(title: "Forgot password", onBack: {}))
+    AuthHeader(
+        style: .forgotPassword(title: "Forgot password", onBack: {})
+    )
 }
 

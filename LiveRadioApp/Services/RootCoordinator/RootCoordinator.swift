@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+#warning("Зачем два координатора? какая ответственность у каждого?")
 final class RootCoordinator: ObservableObject {
     let factory: RootFactory
     
@@ -25,8 +25,8 @@ final class RootCoordinator: ObservableObject {
         state = .authorization
     }
     
-    func showTabBar() {
-        state = .tabbar
+    func showTabBar(user: LocalUser) {
+        state = .tabbar(user)
     }
     
     func showDetails() {
@@ -35,10 +35,21 @@ final class RootCoordinator: ObservableObject {
 }
 
 extension RootCoordinator: AppCoordinator {
-    func goTabbar(_ user: LocalUser) {
-        showTabBar()
+    func goToPopular() {
+        
     }
     
+    func goToAllStations() {
+        
+    }
+    
+    func goToFavorites() {
+        
+    }
+    
+    func goTabbar(_ user: LocalUser) {
+        showTabBar(user: user)
+    }
 }
 
 extension RootCoordinator {
@@ -47,7 +58,7 @@ extension RootCoordinator {
         case error
         case onboarding
         case authorization
-        case tabbar
+        case tabbar(LocalUser)
         case details
     }
 }

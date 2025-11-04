@@ -23,7 +23,6 @@ struct PopularView: View {
         static let playerBottomPadding: CGFloat = 30
     }
     
-    typealias Action = () -> Void
     let name: String
     @Binding var volume: Double
     @Binding var selectedStation: LocalStation?

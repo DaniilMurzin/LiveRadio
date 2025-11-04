@@ -15,14 +15,15 @@ struct DetailsContentView: View {
     init(_ viewModel: DetailsViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
-    //TODO: Убрать таб бар
+    
     var body: some View {
-        DetailsView(localization: .develop,
-                    didTapbackButton: coordinator.showTabBar,
-                    didTapBackwardButton: viewModel.didTapBackwardButton,
-                    didTapForwardButton: viewModel.didTapForwardButton,
-                    didTapPlayButton: viewModel.didTapPlayButton
-                    )
+        DetailsView(
+            localization: .develop,
+            didTapbackButton: {},
+            didTapBackwardButton: {},
+            didTapForwardButton: {},
+            didTapPlayButton: {}
+        )
     }
     
 }

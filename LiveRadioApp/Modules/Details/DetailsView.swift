@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DetailsView: View {
-    typealias Action = () -> Void
     
     //MARK: - Properties
     let localization: Localization

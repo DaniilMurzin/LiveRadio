@@ -14,7 +14,7 @@ protocol RootFactory {
     func makePopular() -> PopularContentView
     func makeDetails() -> DetailsContentView
     func makeFavorites() -> FavoritesContentView
-    func makeTabBar() -> TabBarView
+    func makeTabBar(user: LocalUser, coordinator: AppCoordinator) -> TabBarContentView
     func makeAllStations() -> AllStationsContentView
     func makeProfile(user: LocalUser) -> ProfileContentView
 }
@@ -39,7 +39,7 @@ final class FRoot {
         serviceLocator.register(UserManager.self)
     }
 }
-#warning("Ревью")
+#warning("Ревью func makeProfile(user: LocalUser) -> ProfileContentView")
 // MARK: - FRoot + RootFactory
 extension FRoot: RootFactory {
     
@@ -61,8 +61,13 @@ extension FRoot: RootFactory {
         return ProfileContentView(viewModel)
     }
     
-    func makeTabBar() -> TabBarView {
-        TabBarView(factory: self)
+    func makeTabBar(user: LocalUser, coordinator: AppCoordinator) -> TabBarContentView  {
+        let viewModel = TabBarViewModel(
+            user: user,
+            coordinator: coordinator,
+            avPlayer: player
+        )
+        return TabBarContentView(viewModel)
     }
     
     func makeOnboarding() -> OnboardingContentView {

@@ -30,11 +30,13 @@ struct ForgotPasswordView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            BackButton(action: didTapBackButton)
-            
-            Text(Drawing.forgotPassword)
-                .applyFonts(for: .largeTitle)
-                .padding(.bottom)
+
+            AuthHeader(
+                style: .forgotPassword(
+                    title: Drawing.forgotPassword,
+                    onBack: didTapBackButton
+                )
+            )
             
             AuthTextField(
                 text: $email,

@@ -31,8 +31,13 @@ struct SignUpView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            
             VStack(alignment: .leading) {
+                AuthHeader(
+                    style: .intro(
+                        title: localization.signUp,
+                        subtitle: localization.startPlay
+                    )
+                )
                 AuthTextField(
                     text: $name,
                     placeholder: localization.yourName,
@@ -63,7 +68,6 @@ struct SignUpView: View {
             }
         }
     }
-    
     private func didTapSignUp() async {
         guard case .available(let action) = signUpAction else {
             return

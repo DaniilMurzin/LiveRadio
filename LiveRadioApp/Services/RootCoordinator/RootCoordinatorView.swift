@@ -20,7 +20,6 @@ struct RootCoordinatorView: View {
             switch coordinator.state {
             case .loading:
                 ProgressView()
-//                    .transition(.opacity)
             
             case .error:
                 Text("Ошибка")
@@ -28,22 +27,17 @@ struct RootCoordinatorView: View {
             
             case .onboarding:
                 factory.makeOnboarding()
-//                    .transition(.move(edge: .leading))
                 
             case .authorization:
                 factory.makeAuthorization(coordinator: coordinator)
-//                    .transition(.move(edge: .leading))
             
             case .tabbar:
                 factory.makeTabBar()
-//                    .transition(.move(edge: .leading))
                 
             case .details:
                 factory.makeDetails()
-//                    .transition(.move(edge: .leading))
             }
         }
-//        .animation(.easeInOut, value: coordinator.state)
     }
 }
 

@@ -31,51 +31,47 @@ struct SignInView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            
-            Image(.playLabel)
-                .resizable()
-                .frame(width: Drawing.playLabel.width,
-                    height: Drawing.playLabel.height)
-                .padding(.top)
-            
-            Text(localization.SignIn)
-                .applyFonts(for: .largeTitle)
-            Text(localization.startPlay)
-                .applyFonts(for: .buttonText)
+            VStack(alignment: .leading) {
+                AuthHeader(
+                    style: .intro(
+                        title: localization.SignIn,
+                        subtitle: localization.startPlay
+                    )
+                )
+                
+                AuthTextField(
+                    text: $email,
+                    placeholder: localization.yourEmail,
+                    labelText: localization.email
+                )
+                .keyboardType(.emailAddress)
                 .padding(.bottom)
-            
-            AuthTextField(
-                text: $email,
-                placeholder: localization.yourEmail,
-                labelText: localization.email
-            )
-            .keyboardType(.emailAddress)
-            .padding(.bottom)
-            
-            AuthTextField(
-                text: $password,
-                placeholder: localization.yourPassword,
-                labelText: localization.password,
-                isSecured: true
-            )
-            .padding(.bottom)
-            
-            Button(action: didTapForgotPassword) {
-                Text(localization.forgotPassword)
-                    .foregroundStyle(.gray)
-                    .padding(.bottom)
+                
+                AuthTextField(
+                    text: $password,
+                    placeholder: localization.yourPassword,
+                    labelText: localization.password,
+                    isSecured: true
+                )
+                .padding(.bottom)
+                
+                
+                Button(action: didTapForgotPassword) {
+                    Text(localization.forgotPassword)
+                        .foregroundStyle(.gray)
+                        .padding(.bottom)
+                }
+                
+                ConnectWithView(text: localization.connect)
+                
+                ArrowButton(asyncAction: didTapSignIn)
+                    .opacity(signInAction.isAvailable ? 1 : 0.8)
+                
+                Button(action: didTapSignUp) {
+                    Text(localization.signUp)
+                        .applyFonts(for: .lightSystemText)
+                }
             }
-            
-            ConnectWithView(text: localization.connect)
-            
-            ArrowButton(asyncAction: didTapSignIn)
-                .opacity(signInAction.isAvailable ? 1 : 0.8)
-
-            Button(action: didTapSignUp) {
-                Text(localization.signUp)
-                    .applyFonts(for: .lightSystemText)
-            }
-            .padding(.bottom, 30)
         }
     }
     

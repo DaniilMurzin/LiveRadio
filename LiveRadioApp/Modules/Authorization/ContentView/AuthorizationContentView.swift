@@ -14,7 +14,7 @@ final class Localization: ObservableObject {
 extension Localization {
     func signUpScreen() -> SignUpView.Localization {
         SignUpView.Localization(
-            SignIn: "Войти",
+            SignUp: "Войти",
             startPlay: "Начать играть",
             yourPassword: "Ваш пароль",
             yourEmail: "Ваш email",
@@ -51,7 +51,7 @@ struct AuthorizationContentView: View {
                     didTapSignUp: viewModel.showSignUp,
                     localization: .develop
                 )
-                .transition(.opacity)
+                .transition(.slide)
                 
             case .signUp:
                 SignUpView(
@@ -62,9 +62,9 @@ struct AuthorizationContentView: View {
                     ? .available(viewModel.signUp)
                     : .unavailable,
                     didTapSignInButton: viewModel.showSignIn,
-                    localization: .russianDevelop //localization.signUpScreen()
+                    localization: .develop //localization.signUpScreen()
                 )
-                .transition(.opacity)
+                .transition(.slide)
                 
             case .forgotPass:
                 ForgotPasswordView(
@@ -72,7 +72,7 @@ struct AuthorizationContentView: View {
                     password: $viewModel.password,
                     didTapBackButton: viewModel.showSignIn
                 )
-                .transition(.opacity)
+                .transition(.slide)
                 
             case .forgotPass2:
                 ForgotPasswordView2(
@@ -80,7 +80,7 @@ struct AuthorizationContentView: View {
                     confirmPassword: $viewModel.password,
                     didTapChangePasswordButton: coordinator.showTabBar
                 )
-                .transition(.opacity)
+                .transition(.slide)
                 
             case .error(let error):
                 EmptyView()

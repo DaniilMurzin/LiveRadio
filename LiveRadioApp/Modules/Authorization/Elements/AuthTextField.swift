@@ -32,6 +32,7 @@ struct AuthTextField: View {
         VStack(alignment: .leading) {
             Text(labelText)
                 .applyFonts(for: .bodyText)
+                .foregroundStyle(.white)
             
             ZStack(alignment: .leading) {
                 if text.isEmpty {
@@ -88,7 +89,6 @@ struct AuthTextField: View {
                         .frame(width: 330, height: 53)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
-                        
                 }
             }
         }

@@ -31,44 +31,35 @@ struct SignUpView: View {
     //MARK: - Body
     var body: some View {
         MainBackground {
-            Image(.playLabel)
-                .resizable()
-                .frame(
-                    width: Drawing.playIconFrame.width,
-                    height: Drawing.playIconFrame.height)
             
-            Text(localization.SignIn)
-                .applyFonts(for: .largeTitle)
-            Text(localization.startPlay)
-                .applyFonts(for: .buttonText)
+            VStack(alignment: .leading) {
+                AuthTextField(
+                    text: $name,
+                    placeholder: localization.yourName,
+                    labelText: localization.name)
                 .padding(.bottom)
-            
-            AuthTextField(
-                text: $name,
-                placeholder: localization.yourName,
-                labelText: localization.name)
-            .padding(.bottom)
-            
-            AuthTextField(
-                text: $email,
-                placeholder: localization.yourEmail,
-                labelText: localization.email)
-            .keyboardType(.emailAddress)
-            .padding(.bottom)
-            
-            AuthTextField(
-                text: $password,
-                placeholder: localization.yourPassword,
-                labelText: localization.password,
-                isSecured: true)
-            .padding(.bottom)
-            
-            ArrowButton(asyncAction: didTapSignUp)
-                .opacity(signUpAction.isAvailable ? 1 : 0.8)
-            
-            Button(action: didTapSignInButton) {
-                Text(localization.signUp)
-                    .applyFonts(for: .lightSystemText)
+                
+                AuthTextField(
+                    text: $email,
+                    placeholder: localization.yourEmail,
+                    labelText: localization.email)
+                .keyboardType(.emailAddress)
+                .padding(.bottom)
+                
+                AuthTextField(
+                    text: $password,
+                    placeholder: localization.yourPassword,
+                    labelText: localization.password,
+                    isSecured: true)
+                .padding(.bottom)
+                
+                ArrowButton(asyncAction: didTapSignUp)
+                    .opacity(signUpAction.isAvailable ? 1 : 0.8)
+                
+                Button(action: didTapSignInButton) {
+                    Text(localization.signUp)
+                        .applyFonts(for: .lightSystemText)
+                }
             }
         }
     }
@@ -83,7 +74,7 @@ struct SignUpView: View {
 //MARK: - SignUpView + Localization
 extension SignUpView {
     struct Localization {
-        let SignIn: String
+        let SignUp: String
         let startPlay: String
         let yourPassword: String
         let yourEmail: String
@@ -94,7 +85,7 @@ extension SignUpView {
         let signUp: String
         
         static let develop = Self(
-            SignIn: "Sign up",
+            SignUp: "Sign up",
             startPlay: "To start play",
             yourPassword: "Your password",
             yourEmail: "Your email",
@@ -107,7 +98,7 @@ extension SignUpView {
         )
         
         static let russianDevelop = Self(
-            SignIn: "Войти",
+            SignUp: "Войти",
             startPlay: "Начать играть",
             yourPassword: "Ваш пароль",
             yourEmail: "Ваш email", 
@@ -132,19 +123,18 @@ extension SignUpView {
             return false
         }
     }
-    
-    
-    //MARK: - Preview
-    #Preview {
-        MainBackground {
-            SignUpView(
-                name: .constant("Ivan"),
-                email: .constant("email@mail.ru"),
-                password: .constant("qwerty"),
-                signUpAction: .unavailable,
-                didTapSignInButton: {},
-                localization: .develop
-            )
-        }
+}
+
+//MARK: - Preview
+#Preview {
+    MainBackground {
+        SignUpView(
+            name: .constant("Ivan"),
+            email: .constant("email@mail.ru"),
+            password: .constant("qwerty"),
+            signUpAction: .unavailable,
+            didTapSignInButton: {},
+            localization: .develop
+        )
     }
 }

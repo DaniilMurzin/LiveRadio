@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainBackground<V: View>: View {
-    private let padding: CGFloat = 30
     
     let content: () -> V
     
@@ -22,6 +21,7 @@ struct MainBackground<V: View>: View {
                 .resizable()
                 .ignoresSafeArea()
             VStack(alignment: .leading, content: content)
+                .padding(.horizontal)
         }
         .background(.mainBg)
     }

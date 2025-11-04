@@ -23,7 +23,6 @@ final class AuthorizationViewModel: ObservableObject {
     @Published var password: String = .init()
     @Published var name: String = .init()
     
-//TODO: вычисляемое свой-во Credential
     //MARK: - Authentication properties
     var signInActive: Bool {
         email.contains("@")
@@ -74,7 +73,6 @@ final class AuthorizationViewModel: ObservableObject {
             .asyncFlatMap(userManager.newUserResult(user:))
         
         switch signUpResult {
-            
         case let .success(user):
             coordinator.goTabbar(user)
         case let .failure(failure):

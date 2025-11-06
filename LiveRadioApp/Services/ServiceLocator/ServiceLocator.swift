@@ -16,11 +16,7 @@ final class ServiceLocator {
     func register<T: Dependency> (_ type: T.Type) {
         dependencies[String(describing: type.self)] = T()
     }
-#warning("default: T() не записывается в словарь")
-    func resolveDefault<T: Dependency>(_ type: T.Type) -> T {
-        dependencies[String(describing: type.self), default: T()] as! T
-    }
-
+    
     func resolve<T: Dependency>(_ type: T.Type) -> T {
         let key = String(describing: type)
         guard let service = dependencies[key] as? T else {
@@ -30,12 +26,4 @@ final class ServiceLocator {
         }
         return service
     }
-    
-//    func resolve<T: Dependency>(_ type: T.Type) -> T {
-//        let key = String(describing: type)
-//        if let service = dependencies[key] as? T { return service }
-//        let new = T()
-//        dependencies[key] = new
-//        return new
-//    }
 }

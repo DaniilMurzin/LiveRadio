@@ -5,42 +5,42 @@
 //  Created by Daniil Murzin on 04.11.2025.
 //
 
-import Foundation
+import SwiftUI
 
 final class TabBarViewModel: ObservableObject {
  
-    @Published var selectedTab: Tab = .popular
-    @Binding var selected: Binding(
-        get: { selectedTab },
-        set: { selectedTab = $0 }
-    ),
+    @Published var selected: Tab = .popular
+//    @Binding var selected: Binding(
+//        get: { selectedTab },
+//        set: { selectedTab = $0 }
+//    ),
     @Published private(set) var user: LocalUser
-    private let coordinator: AppCoordinator
+    private let factory: AppFactory
     private let avPlayer: RadioPlayer
 
     init(
         user: LocalUser,
-        coordinator: AppCoordinator,
+        factory: AppFactory,
         avPlayer: RadioPlayer
     ) {
         self.user = user
-        self.coordinator = coordinator
+        self.factory = factory
         self.avPlayer = avPlayer
     }
     
-    func goToFavorites() {
-        selectedTab = .favorites
+    func makeTabView() -> AnyView {
+        factory.makeTabView(for: selected)
     }
     
     func goToAllStations() {
-        selectedTab = .allStations
+        selected = .allStations
     }
     
     func goToPopular() {
-        selectedTab = .popular
+        selected = .popular
         
     }
 }
-extension TabBarViewModel {
-    enum Tab: Int { case popular, favorites, allStations }
-}
+//extension TabBarViewModel {
+//    enum Tab: Int { case popular, favorites, allStations }
+//}

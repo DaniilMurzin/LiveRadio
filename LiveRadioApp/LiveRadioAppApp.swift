@@ -14,7 +14,7 @@ struct LiveRadioAppApp: App {
     
     init() {
         FirebaseApp.configure()
-        coordinator = FRoot.makeRootCoordinator()
+        coordinator = AppFactory.makeRootCoordinator()
     }
     
     var body: some Scene {

@@ -9,57 +9,77 @@ import SwiftUI
 
 struct TabBarView: View {
     
-    @Binding var selectedTab: Tabs
-    let popular: () -> PopularContentView
-    let favorites: () -> FavoritesContentView
-    let allStations: () -> AllStationsContentView
+    @Binding var selected: Tab
+    var tabs: [Tab] = Tab.allCases
+    let content: (Tab) -> AnyView
     
     var body: some View {
         TabBarBackground {
-                switch selectedTab {
-                case .popular: popular()
-                case .favorites: favorites()
-                case .allStations: allStations()
-                }
+            content(selected)
             
-            HStack {
-                makeTabBarButton(text: "Popular", tab: .popular)
-                Spacer()
-                makeTabBarButton(text: "Favorites", tab: .favorites)
-                Spacer()
-                makeTabBarButton(text: "All Stations", tab: .allStations)
-            }
-            .padding(.horizontal, 20)
-        }
-    }
-    
-    //MARK: - Methods
-    private func makeTabBarButton(text: String, tab: Tabs) -> some View {
-       
-        Button {
-                selectedTab = tab
-        } label: {
-            VStack {
-                Text(text)
-                    .font(.system(size: 20, weight: .medium))
-                    .opacity(selectedTab == tab ? 1 : 0.2)
-                    .foregroundColor(.white)
-                Circle()
-                    .fill(.eclipse6)
-                    .frame(width: 15, height: 15)
-                    .scaleEffect(selectedTab == tab ? 1 : 0.5)
-                    .opacity(selectedTab == tab ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.3), value: selectedTab == tab)
+            HStack(alignment: .bottom) {
+                ForEach(tabs, id: \.self) { tab in
+                    TabBarButton(
+                        tab: tab,
+                        title: tab.title,
+                        action: { selected = tab },
+                        isSelected: tab == selected
+                    )
+                    .equatable()
+                }
+                .padding(.horizontal, 20)
             }
         }
-        .background(.clear)
     }
 }
 
-extension TabBarView {
-    enum Tabs: Int {
-        case popular
-        case favorites
-        case allStations
+private extension TabBarView {
+    
+    struct TabBarButton: View, Equatable {
+        
+        let tab: Tab
+        let title: String
+        let action: () -> Void
+        let isSelected: Bool
+        
+        
+        static func == (
+            lhs: TabBarView.TabBarButton,
+            rhs: TabBarView.TabBarButton
+        ) -> Bool {
+            lhs.tab == rhs.tab &&
+            lhs.isSelected == rhs.isSelected
+        }
+        
+        var body: some View {
+            HStack {
+                Button(action: action) {
+                    Text(title)
+                        .font(.system(size: 20, weight: .medium))
+                        .opacity(isSelected ? 1 : 0.2)
+                        .foregroundColor(.white)
+                    Circle()
+                        .fill(.eclipse6)
+                        .frame(width: 15, height: 15)
+                        .scaleEffect(isSelected ? 1 : 0.5)
+                        .opacity(isSelected ? 1 : 0)
+                        .animation(
+                            .easeInOut(duration: 0.3),
+                            value: isSelected
+                        )
+                }
+            }
+        }
+        
+    }
+}
+
+enum Tab: String, CaseIterable {
+    case popular
+    case favorites
+    case allStations
+    
+    var title: String {
+        self.rawValue.capitalized
     }
 }

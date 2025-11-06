@@ -14,14 +14,6 @@ struct TabBarContentView: View {
     }
 
     var body: some View {
-        TabBarView(
-            selected: Binding(
-                get: { viewModel.selectedTab },
-                set: { viewModel.selectedTab = $0 }
-            ),
-            onPopular: viewModel.showPopular,
-            onFavorites: viewModel.showFavorites,
-            onAllStations: viewModel.showAllStations
-        )
+        TabBarView(selected: $viewModel.selected) { tab in viewModel.makeTabView() }
     }
 }

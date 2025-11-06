@@ -20,24 +20,20 @@ struct RootCoordinatorView: View {
             switch coordinator.state {
             case .loading:
                 ProgressView()
-            
+                
             case .error:
                 Text("Ошибка")
                     .transition(.slide)
-            
+                
             case .onboarding:
                 factory.makeOnboarding()
                 
             case .authorization:
                 factory.makeAuthorization(coordinator: coordinator)
-            
-            case .tabbar(let user):
-                factory.makeTabBar(user: user, coordinator: coordinator)
                 
-            case .details:
-                factory.makeDetails()
+            case .tabbar(let user):
+                factory.makeTabBar(user: user)
             }
         }
     }
 }
-

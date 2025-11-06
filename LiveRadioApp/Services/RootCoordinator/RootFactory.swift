@@ -11,15 +11,21 @@ import AVFoundation
 protocol RootFactory {
     func makeOnboarding() -> OnboardingContentView
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
-    func makePopular() -> PopularContentView
-    func makeDetails() -> DetailsContentView
-    func makeFavorites() -> FavoritesContentView
-    func makeTabBar(user: LocalUser, coordinator: AppCoordinator) -> TabBarContentView
-    func makeAllStations() -> AllStationsContentView
-    func makeProfile(user: LocalUser) -> ProfileContentView
+    func makeTabBar(user: LocalUser) -> TabBarContentView
+    
 }
 
-final class FRoot {
+protocol MainFlowFactory {
+    func makePopular() -> PopularContentView
+    func makeFavorites() -> FavoritesContentView
+    func makeDetails() -> DetailsContentView
+    func makeAllStations() -> AllStationsContentView
+    func makeProfile(user: LocalUser) -> ProfileContentView
+    func makeTabView(for tab: Tab) -> AnyView
+}
+
+final class AppFactory {
+    
     private let serviceLocator = ServiceLocator()
     private let repository = AppRepository()
     private let networkManager = NetworkManager()
@@ -27,10 +33,14 @@ final class FRoot {
     private let player = RadioPlayer()
     private let storageManager = CoreDateManager()
     private let userManager = UserManager()
-    private(set) lazy var spy = FactorySpy(factory: self, repository: repository)
+    private(set) lazy var spy = FactorySpy(
+        rootFactory: self,
+        mainFlowFactory: self,
+        repository: repository
+    )
     
     static func makeRootCoordinator() -> RootCoordinator {
-        return RootCoordinator(factory: FRoot().spy)
+        return RootCoordinator(factory: AppFactory().spy)
     }
     
     init() {
@@ -39,9 +49,40 @@ final class FRoot {
         serviceLocator.register(UserManager.self)
     }
 }
-#warning("Ревью func makeProfile(user: LocalUser) -> ProfileContentView")
-// MARK: - FRoot + RootFactory
-extension FRoot: RootFactory {
+
+extension AppFactory: RootFactory {
+    
+//    func makeTabBar(user: LocalUser) -> TabBarContentView  {
+//        let viewModel = TabBarViewModel(
+//            user: user,
+//            factory: self,
+//            avPlayer: player
+//        )
+//        return TabBarContentView(viewModel)
+//    }
+    
+    func makeTabBar(user: LocalUser) -> TabBarContentView  {
+        let vm = TabBarViewModel(user: user, factory: self, avPlayer: player)
+        return TabBarContentView(vm)
+    }
+    
+    func makeOnboarding() -> OnboardingContentView {
+        let viewModel = OnboardingViewModel(repository: spy)
+        return OnboardingContentView(viewModel)
+    }
+    
+    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
+        let viewModel = AuthorizationViewModel(
+            authorizationManager: authorizationManager,
+            coordinator: coordinator,
+            userManager: userManager
+        )
+        return AuthorizationContentView(viewModel)
+    }
+
+}
+
+extension AppFactory: MainFlowFactory {
     
     func makeProfile(user: LocalUser) -> ProfileContentView {
         
@@ -61,35 +102,12 @@ extension FRoot: RootFactory {
         return ProfileContentView(viewModel)
     }
     
-    func makeTabBar(user: LocalUser, coordinator: AppCoordinator) -> TabBarContentView  {
-        let viewModel = TabBarViewModel(
-            user: user,
-            coordinator: coordinator,
-            avPlayer: player
-        )
-        return TabBarContentView(viewModel)
-    }
-    
-    func makeOnboarding() -> OnboardingContentView {
-        let viewModel = OnboardingViewModel(repository: spy)
-        return OnboardingContentView(viewModel)
-    }
-    
     func makeFavorites() -> FavoritesContentView {
         let viewModel = FavoritesViewModel(
             avPlayer: player,
             storageManager: storageManager
         )
         return FavoritesContentView(viewModel)
-    }
-    
-    func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView {
-        let viewModel = AuthorizationViewModel(
-            authorizationManager: authorizationManager,
-            coordinator: coordinator,
-            userManager: userManager
-        )
-        return AuthorizationContentView(viewModel)
     }
     
     func makePopular() -> PopularContentView {
@@ -114,6 +132,15 @@ extension FRoot: RootFactory {
         )
         return AllStationsContentView(viewModel)
     }
+    
+    
+    func makeTabView(for tab: Tab) -> AnyView {
+         switch tab {
+         case .popular:     AnyView(makePopular())
+         case .favorites:   AnyView(makeFavorites())
+         case .allStations: AnyView(makeAllStations())
+         }
+     }
 }
 
 final class AppRepository: Repository {

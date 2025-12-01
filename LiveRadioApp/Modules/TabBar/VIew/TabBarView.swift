@@ -16,7 +16,6 @@ struct TabBarView: View {
     var body: some View {
         TabBarBackground {
             content(selected)
-            
             HStack(alignment: .bottom) {
                 ForEach(tabs, id: \.self) { tab in
                     TabBarButton(
@@ -30,6 +29,7 @@ struct TabBarView: View {
                 .padding(.horizontal, 20)
             }
         }
+        
     }
 }
 
@@ -52,22 +52,22 @@ private extension TabBarView {
         }
         
         var body: some View {
-            HStack {
+            VStack {
                 Button(action: action) {
                     Text(title)
                         .font(.system(size: 20, weight: .medium))
                         .opacity(isSelected ? 1 : 0.2)
                         .foregroundColor(.white)
-                    Circle()
-                        .fill(.eclipse6)
-                        .frame(width: 15, height: 15)
-                        .scaleEffect(isSelected ? 1 : 0.5)
-                        .opacity(isSelected ? 1 : 0)
-                        .animation(
-                            .easeInOut(duration: 0.3),
-                            value: isSelected
-                        )
                 }
+                Circle()
+                    .fill(.eclipse6)
+                    .frame(width: 15, height: 15)
+                    .scaleEffect(isSelected ? 1 : 0.5)
+                    .opacity(isSelected ? 1 : 0)
+                    .animation(
+                        .easeInOut(duration: 0.3),
+                        value: isSelected
+                    )
             }
         }
         

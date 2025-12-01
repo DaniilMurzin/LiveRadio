@@ -10,18 +10,19 @@ import Firebase
 
 @main
 struct LiveRadioAppApp: App {
-    let coordinator: RootCoordinator
+    let rootCoordinator: RootCoordinator
     
     init() {
         FirebaseApp.configure()
-        coordinator = AppFactory.makeRootCoordinator()
+        rootCoordinator = AppFactory.makeRootCoordinator()
     }
     
     var body: some Scene {
         WindowGroup {
-            RootCoordinatorView(factory: coordinator.factory)
-                .environmentObject(coordinator)
-                .onAppear(perform: coordinator.showAuthorization)
+#warning("Зачем доставать фабрику из координатора для использования в координатор вью?")
+            RootCoordinatorView(factory: rootCoordinator.factory)
+                .environmentObject(rootCoordinator)
+                .onAppear(perform: rootCoordinator.showAuthorization)
         }
     }
 }

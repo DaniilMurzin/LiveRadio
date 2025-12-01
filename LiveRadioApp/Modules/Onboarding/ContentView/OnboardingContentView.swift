@@ -4,9 +4,7 @@
 //
 //  Created by Шаповалов Илья on 30.08.2024.
 //
-
-
-// Отвечет на каком шаге мы находимся онбординга 
+ 
 import SwiftUI
 
 struct OnboardingContentView: View {

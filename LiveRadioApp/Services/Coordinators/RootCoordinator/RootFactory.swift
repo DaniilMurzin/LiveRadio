@@ -12,9 +12,21 @@ protocol RootFactory {
     func makeOnboarding() -> OnboardingContentView
     func makeAuthorization(coordinator: AppCoordinator) -> AuthorizationContentView
     func makeTabBar(user: LocalUser) -> TabBarContentView
-    
 }
 
+//struct AnyContentView: View {
+//    private let content: AnyView
+//
+//    init<V: View>(_ view: V) {
+//        self.content = AnyView(view)
+//    }
+//
+//    var body: some View {
+//        content
+//    }
+//}
+
+#warning("Использование AnyView? есть еще вариант AnyContentView выше ")
 protocol MainFlowFactory {
     func makePopular() -> PopularContentView
     func makeFavorites() -> FavoritesContentView
@@ -40,7 +52,11 @@ final class AppFactory {
     )
     
     static func makeRootCoordinator() -> RootCoordinator {
-        return RootCoordinator(factory: AppFactory().spy)
+        RootCoordinator(factory: AppFactory().spy)
+    }
+    
+    func makeMainFlowCoordinator() -> MainFlowCoordinator {
+        MainFlowCoordinator(factory: self)
     }
     
     init() {
@@ -62,7 +78,16 @@ extension AppFactory: RootFactory {
 //    }
     
     func makeTabBar(user: LocalUser) -> TabBarContentView  {
-        let vm = TabBarViewModel(user: user, factory: self, avPlayer: player)
+        let coordinator = self.makeMainFlowCoordinator()
+
+        let vm = TabBarViewModel(
+            user: user,
+//            factory: self,
+            avPlayer: player,
+            coordinator: coordinator
+        )
+//        let flowView = MainFlowCoordinatorView(factory: self)
+//                    .environmentObject(coordinator)
         return TabBarContentView(vm)
     }
     

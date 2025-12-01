@@ -37,6 +37,7 @@ struct AuthorizationContentView: View {
 // алерты  через OnboardingBackgroundView
     var body: some View {
         ZStack {
+            #warning("Пробросить фабрику ??")
             switch viewModel.state {
             case .signIn:
                 SignInView(

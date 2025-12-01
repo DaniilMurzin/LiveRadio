@@ -31,17 +31,6 @@ final class RootCoordinator: ObservableObject {
 }
 
 extension RootCoordinator: AppCoordinator {
-    func goToPopular() {
-        
-    }
-    
-    func goToAllStations() {
-        
-    }
-    
-    func goToFavorites() {
-        
-    }
     
     func goTabbar(_ user: LocalUser) {
         showTabBar(user: user)

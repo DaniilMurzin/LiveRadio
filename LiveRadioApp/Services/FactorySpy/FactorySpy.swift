@@ -8,8 +8,6 @@
 import SwiftUI
 import OSLog
 
-
-
 // MARK: - FactorySpy
 struct FactorySpy {
     private let logger = Logger(subsystem: "RootFactory", category: "System")

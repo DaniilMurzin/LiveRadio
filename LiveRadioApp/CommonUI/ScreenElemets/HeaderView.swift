@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     
     let name: String
+    let didTapProfileButton: Action
     
     var body: some View {
         HStack {
@@ -23,16 +24,14 @@ struct HeaderView: View {
                 .font(.system(size: 30, weight: .medium))
                 .foregroundStyle(.eclipse8)
             Spacer()
-            Image(.profilePhoto)
-                .resizable()
-                .frame(width: 65, height: 70)
-                .clipShape(Circle())
+            Button(action: {
+            }) {
+                Image(.profilePhoto)
+                    .resizable()
+                    .frame(width: 65, height: 70)
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
         }
-    }
-}
-
-#Preview {
-    MainBackground {
-        HeaderView(name: "Mark")
     }
 }

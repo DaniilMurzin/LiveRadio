@@ -9,12 +9,24 @@ import SwiftUI
 
 struct TabBarView: View {
     
+    @Binding var isPlaying: Bool
+    let didTapPlayButton: Action
+    let didTapBackwardButton: Action
+    let didTapForwardButton: Action
+    let didTapProfileButton: Action
+    let name: UserName?
     @Binding var selected: Tab
+
     var tabs: [Tab] = Tab.allCases
     let content: (Tab) -> AnyView
     
     var body: some View {
         TabBarBackground {
+            HeaderView(
+                name: name?.wrapped ?? "User",
+                didTapProfileButton: didTapProfileButton
+            )
+                .padding()
             content(selected)
             HStack(alignment: .bottom) {
                 ForEach(tabs, id: \.self) { tab in
@@ -29,6 +41,19 @@ struct TabBarView: View {
                 .padding(.horizontal, 20)
             }
         }
+        .overlay(
+            VStack {
+                Spacer()
+                PlayerView(
+                    isPlaying: $isPlaying,
+                    backwardButtonAction: didTapBackwardButton,
+                    forwardButtonAction: didTapForwardButton,
+                    playButtonAction: didTapPlayButton
+                )
+                .padding(.bottom, 30)
+                .background(Color.clear)
+            }
+        )
         
     }
 }

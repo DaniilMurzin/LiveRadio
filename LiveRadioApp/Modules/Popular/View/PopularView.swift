@@ -11,11 +11,9 @@ struct PopularView: View {
     
     private enum Drawing {
         static let titleSize: CGFloat = 30
-        static let headerHorizontalPadding: CGFloat = 20
         static let scrollViewSpacing: CGFloat = 30
         static let gridItemDimensions: CGFloat = 139
         static let columnSpacing: CGFloat = 15
-        static let headerBottomPadding: CGFloat = -10
         static let volumeSliderLeadingPadding: CGFloat = 15
         static let volumeSliderWidth: CGFloat = 48
         static let textPadding: CGFloat = 16
@@ -28,9 +26,6 @@ struct PopularView: View {
     @Binding var selectedStation: LocalStation?
     @Binding var isPlaying: Bool
     let didTapbackButton: Action
-    let didTapPlayButton: Action
-    let didTapBackwardButton: Action
-    let didTapForwardButton: Action
     let didTapCell: (LocalStation) -> Void
     let didTapFavoriteButton: (LocalStation) async -> Void
     let stations: [LocalStation]
@@ -48,10 +43,6 @@ struct PopularView: View {
             spacing: Drawing.columnSpacing)]
     
     var body: some View {
-        HeaderView(name: name)
-            .padding(.horizontal, Drawing.headerHorizontalPadding)
-            .padding(.bottom, Drawing.headerBottomPadding)
-        
         HStack {
             VolumeSlider(volume: $volume)
                 .padding(.leading, Drawing.volumeSliderLeadingPadding)
@@ -83,18 +74,6 @@ struct PopularView: View {
                 .padding()
             }
         }
-        .overlay {
-            VStack {
-                Spacer()
-                PlayerView(
-                    isPlaying: $isPlaying,
-                    backwardButtonAction: didTapbackButton,
-                    forwardButtonAction: didTapForwardButton,
-                    playButtonAction: didTapPlayButton
-                )
-                .padding(.bottom, Drawing.playerBottomPadding)
-            }
-        }
     }
 }
 
@@ -106,9 +85,6 @@ struct PopularView: View {
             selectedStation: .constant(nil),
             isPlaying: .constant(true),
             didTapbackButton: {},
-            didTapPlayButton: {},
-            didTapBackwardButton: {},
-            didTapForwardButton: {},
             didTapCell: {_ in },
             didTapFavoriteButton: {_ in },
             stations: []

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct FavoritesView: View {
     private enum Drawing {
-        static let headerHorizontalPadding: CGFloat = 20
-        static let headerBottomPadding: CGFloat = -10
         static let volumeSliderLeadingPadding: CGFloat = 15
         static let volumeSliderWidth: CGFloat = 48
         static let scrollViewSpacing: CGFloat = 10
@@ -36,10 +34,6 @@ struct FavoritesView: View {
     let didTapFavoriteButton: (LocalStation) async -> Void
 
     var body: some View {
-            HeaderView(name: name)
-                .padding(.horizontal, Drawing.headerHorizontalPadding)
-                .padding(.bottom, Drawing.headerBottomPadding)
-
             HStack {
                 VolumeSlider(volume: $volume)
                     .padding(.leading, Drawing.volumeSliderLeadingPadding)

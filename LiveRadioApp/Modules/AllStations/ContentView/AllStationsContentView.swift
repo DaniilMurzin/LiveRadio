@@ -23,9 +23,6 @@ struct AllStationsContentView: View {
             selectedStation: $viewModel.selectedStation,
             isPlaying: viewModel.isPlaying,
             searchFieldText: $viewModel.searchText,
-            didTapPlayButton: viewModel.didTapPlayButton,
-            didTapBackwardButton: viewModel.playPreviousStation,
-            didTapForwardButton: viewModel.playNextStation,
             didTapCell: viewModel.handleSelection,
             didTapFavoriteButton: viewModel.toggleFavorite
         )

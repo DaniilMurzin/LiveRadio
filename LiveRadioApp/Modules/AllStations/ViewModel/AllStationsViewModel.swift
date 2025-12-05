@@ -20,6 +20,7 @@ final class AllStationsViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var volume: Double
     
+    
     var isPlaying: Binding<Bool> {
         Binding (
             get: { self.avPlayer.isPlaying },

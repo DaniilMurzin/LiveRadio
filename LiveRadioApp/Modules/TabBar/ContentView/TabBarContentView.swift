@@ -14,7 +14,15 @@ struct TabBarContentView: View {
     }
     
     var body: some View {
-        TabBarView(selected: $viewModel.selected) { tab in
+        TabBarView(
+            isPlaying: viewModel.isPlaying,
+            didTapPlayButton: viewModel.didTapPlayButton,
+            didTapBackwardButton: viewModel.playPreviousStation,
+            didTapForwardButton: viewModel.playNextStation,
+            didTapProfileButton: {},
+            name: viewModel.user.name,
+            selected: $viewModel.selectedTab
+        ) { tab in
             viewModel.coordinator.makeContent(for: tab)
         }
     }

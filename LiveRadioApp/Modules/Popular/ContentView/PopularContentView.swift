@@ -21,9 +21,6 @@ struct PopularContentView: View {
             selectedStation: $viewModel.selectedStation,
             isPlaying: viewModel.isPlaying,
             didTapbackButton: viewModel.playPreviousStation,
-            didTapPlayButton: viewModel.didTapPlayButton,
-            didTapBackwardButton: viewModel.playPreviousStation ,
-            didTapForwardButton: viewModel.playNextStation ,
             didTapCell: viewModel.handleSelection,
             didTapFavoriteButton: viewModel.toggleFavorite,
             stations: viewModel.fetchedStations

@@ -19,7 +19,7 @@ struct SettingsView: View {
     var body: some View {
         MainBackground {
             VStack(spacing: 20) {
-                ProfileHeader(action: {})
+                
 
                 List {
                     Section {
